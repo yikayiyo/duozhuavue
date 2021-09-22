@@ -9,6 +9,13 @@ module.exports = {
 			0: "0",
 			0.5: "0.5px",
 		},
+		height: {
+			0.5: "2px",
+			7.5: "30px",
+			12: "3rem",
+			30: "7.5rem",
+			screen: "100vh",
+		},
 	},
 	variants: {
 		extend: {},

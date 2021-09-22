@@ -1,5 +1,5 @@
 <template>
-	<div class="relative min-h-screen max-w-xl m-auto bg-white">
+	<div class="relative min-h-screen max-w-xl m-auto bg-white h-screen">
 		<main-section></main-section>
 		<nav-footer></nav-footer>
 	</div>
