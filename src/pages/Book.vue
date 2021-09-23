@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-purple-600 bg-opacity-25 overflow-hidden">
+	<div class="bg-purple-600 bg-opacity-25 overflow-scroll">
 		<h1>Book page</h1>
 		<p class="h-30">this is a book</p>
 		<p class="h-30">this is a book</p>

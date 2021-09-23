@@ -8,7 +8,7 @@
 			font-medium
 			tracking-wide
 			text-gray-400
-			border-b-0.5 border-true-gray-300
+			border-t-0.5 border-b-0.5 border-true-gray-300
 		"
 	>
 		<a class="is-active" href="">
