@@ -2,7 +2,7 @@
 	<div
 		class="
 			fixed
-			max-w-xl
+			max-w-dzy
 			mx-auto
 			my-0
 			bottom-0

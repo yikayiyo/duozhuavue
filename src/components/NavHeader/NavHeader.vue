@@ -11,7 +11,7 @@
 			border-t-0.5 border-b-0.5 border-true-gray-300
 		"
 	>
-		<a class="is-active" href="">
+		<a class="is-active" href="/book">
 			<span
 				class="
 					relative
@@ -26,9 +26,9 @@
 				>图书</span
 			>
 		</a>
-		<a href=""><span>服饰</span></a>
-		<a href=""><span>电子</span></a>
-		<a href=""><span>原创商品</span></a>
+		<a href="/clothing"><span>服饰</span></a>
+		<a href="/electronics"><span>电子</span></a>
+		<a href="/original"><span>原创商品</span></a>
 	</div>
 </template>
 
