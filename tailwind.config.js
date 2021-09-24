@@ -19,6 +19,8 @@ module.exports = {
 		},
 		maxWidth: {
 			dzy: "600px",
+			"1/2": "50%",
+			"3/4": "75%",
 		},
 		height: {
 			0.5: "2px",
