@@ -1,21 +1,23 @@
 <template>
-	<div class="bg-purple-600 bg-opacity-25 overflow-scroll">
-		<h1>Book page</h1>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
-		<p class="h-30">this is a book</p>
+	<div class="overflow-scroll">
+		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
 	</div>
 </template>
 
 <script>
-export default {};
+import Search from "../components/Search/Search.vue";
+export default {
+	data() {
+		return {
+			placeholder: "搜索书名、作者、分类、ISBN",
+			link: "/search/book",
+			showIcon: true,
+		};
+	},
+	components: {
+		Search,
+	},
+};
 </script>
 
 <style></style>

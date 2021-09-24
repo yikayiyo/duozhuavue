@@ -4,11 +4,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper">
 					<a href="">
-						<img
-							src="https://img.duozhuayu.com/4cad99f45b0c11ebba7562077000b965.jpeg"
-							alt=""
-							class="rounded"
-						/>
+						<img src="/originals/wc.jpeg" alt="" class="rounded" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -34,11 +30,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper">
 					<a href="">
-						<img
-							src="https://img.duozhuayu.com/e651209e5b0c11eb84f7dea471217b7e.jpeg"
-							alt=""
-							class="rounded"
-						/>
+						<img src="/originals/bc.jpeg" alt="" class="rounded" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -64,11 +56,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper">
 					<a href="">
-						<img
-							src="https://img.duozhuayu.com/de23210249b811ebaa7246221e99f0d9.jpeg"
-							alt=""
-							class="rounded"
-						/>
+						<img src="/originals/swc.jpeg" alt="" class="rounded" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -94,11 +82,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper">
 					<a href="">
-						<img
-							src="https://img.duozhuayu.com/71d1f724499c11eb9841320fe6e1596e.jpeg"
-							alt=""
-							class="rounded"
-						/>
+						<img src="/originals/sbc.jpeg" alt="" class="rounded" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -124,11 +108,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper">
 					<a href="">
-						<img
-							src="https://img.duozhuayu.com/6ce8db3c499311eb82952a7af194b854.jpeg"
-							alt=""
-							class="rounded"
-						/>
+						<img src="/originals/bag.jpeg" alt="" class="rounded" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -154,11 +134,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper">
 					<a href="">
-						<img
-							src="https://img.duozhuayu.com/ae47be08ee8111eaae7d00163e0632e1.jpeg"
-							alt=""
-							class="rounded"
-						/>
+						<img src="/originals/paper.jpeg" alt="" class="rounded" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">

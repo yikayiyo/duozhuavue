@@ -1,16 +1,23 @@
 <template>
-	<div class="bg-purple-600 bg-opacity-25">
-		<h1>Clothing page</h1>
-		<p>this is a UT</p>
-		<p>this is a Jacket</p>
-		<p>this is a UT</p>
-		<p>this is a UT</p>
-		<p>this is a UT</p>
+	<div class="overflow-scroll">
+		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
 	</div>
 </template>
 
 <script>
-export default {};
+import Search from "../components/Search/Search.vue";
+export default {
+	data() {
+		return {
+			placeholder: "搜索服饰品牌、分类",
+			link: "/search/clothing",
+			showIcon: true,
+		};
+	},
+	components: {
+		Search,
+	},
+};
 </script>
 
 <style></style>
