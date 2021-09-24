@@ -3,11 +3,19 @@ module.exports = {
 	purge: ["./index.html", "./src/**/**/*.{vue,js,ts,jsx,tsx}"],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				"menu-active": "#18c3aa",
+				menu: "#f2f2f2",
+			},
+		},
 		borderWidth: {
 			DEFAULT: "1px",
 			0: "0",
 			0.5: "0.5px",
+		},
+		borderRadius: {
+			menu: "19px",
 		},
 		maxWidth: {
 			dzy: "600px",
@@ -20,14 +28,17 @@ module.exports = {
 			12: "3rem",
 			30: "7.5rem",
 			86: "21.5rem",
+			full: "100%",
 			screen: "100vh",
 		},
 		lineHeight: {
 			"extra-loose": "2.5",
+			cbl: "0.91",
 			4.75: "19px",
 		},
 		fontSize: {
 			xss: "10px",
+			cbl: "11px",
 			xs: ".75rem",
 			footer: "14px",
 			sm: ".875rem",
@@ -42,13 +53,23 @@ module.exports = {
 		},
 		margin: {
 			2.25: "9px",
+			2.5: "10px",
+			4: "16px",
+			4.5: "18px",
 			7.5: "30px",
 			auto: "auto",
 		},
 		padding: {
+			1.25: "5px",
+			1.5: "6px",
+			2: "8px",
+			2.25: "9px",
 			3.75: "15px",
 			4: "1rem",
+			4.5: "18px",
+			5: "20px",
 			7.5: "30px",
+			9: "36px",
 			12: "3rem",
 		},
 	},
