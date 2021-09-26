@@ -1,5 +1,5 @@
 <template>
-	<div class="search-wrapper flex pt-5 px-3.75 pb-3.75">
+	<div class="search-wrapper flex pt-5 px-3.75 pb-3.75 text-footer">
 		<div class="left flex-grow">
 			<router-link class="flex items-center relative" :to="link">
 				<div class="search-input-button p-1.5 absolute left-1" v-if="showIcon">
@@ -24,7 +24,7 @@
 					type="search"
 					readonly=""
 					:placeholder="placeholder"
-					class="w-full pl-9 py-2 border-0 rounded bg-gray-100 outline-none"
+					class="w-full pl-9 py-2.25 border-0 rounded bg-gray-100 outline-none"
 				/>
 			</router-link>
 		</div>
