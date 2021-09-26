@@ -30,7 +30,7 @@
 						pl-9
 						border-0
 						rounded
-						bg-gray-100
+						bg-search-input
 						outline-none
 					"
 					value=""

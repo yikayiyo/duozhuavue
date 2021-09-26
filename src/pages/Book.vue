@@ -1,10 +1,12 @@
 <template>
+	<nav-header></nav-header>
 	<div class="overflow-scroll">
 		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
 	</div>
 </template>
 
 <script>
+import NavHeader from "../components/NavHeader/NavHeader.vue";
 import Search from "../components/Search/Search.vue";
 export default {
 	data() {
@@ -15,6 +17,7 @@ export default {
 		};
 	},
 	components: {
+		NavHeader,
 		Search,
 	},
 };

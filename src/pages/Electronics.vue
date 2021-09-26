@@ -1,4 +1,5 @@
 <template>
+	<nav-header></nav-header>
 	<search
 		:link="searchLink"
 		:placeholder="searchPlaceholder"
@@ -121,10 +122,26 @@
 				</div>
 			</div>
 		</div>
+		<div class="footer flex justify-center text-gray-300 py-7.5 text-footer">
+			<div class="flex items-center">
+				<div class="w-10 border-t border-current"></div>
+				<svg
+					width="12"
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg"
+					class="mx-2.25 transform rotate-45"
+				>
+					<rect x="4" y="4" width="16" height="16" class=""></rect>
+				</svg>
+				<div class="w-10 border-t border-current"></div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
+import NavHeader from "../components/NavHeader/NavHeader.vue";
 import Search from "../components/Search/Search.vue";
 export default {
 	data() {
@@ -135,6 +152,7 @@ export default {
 		};
 	},
 	components: {
+		NavHeader,
 		Search,
 	},
 };

@@ -1,4 +1,5 @@
 <template>
+	<nav-header></nav-header>
 	<div class="flex flex-col pb-12">
 		<div class="pt-3.75 px-3.75 flex flex-wrap justify-between">
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
@@ -152,7 +153,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="flex justify-center text-gray-300 py-7.5 text-footer">
+		<div class="footer flex justify-center text-gray-300 py-7.5 text-footer">
 			<div class="flex items-center">
 				<div class="w-10 border-t border-current"></div>
 				<svg
@@ -171,7 +172,12 @@
 </template>
 
 <script>
-export default {};
+import NavHeader from "../components/NavHeader/NavHeader.vue";
+export default {
+	components: {
+		NavHeader,
+	},
+};
 </script>
 
 <style scoped></style>
