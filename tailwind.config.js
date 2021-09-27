@@ -5,23 +5,30 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				"back-to": "#666666f5",
 				"search-input": "#f7f7f7",
 				"menu-active": "#18c3aa",
 				menu: "#f2f2f2",
 			},
 			backgroundImage: {
-				kindle: "url('/public/electronics/kindle.png')",
-				elh: "url('/public/electronics/entry_level_headphone_v2.png')",
-				sh: "url('/public/electronics/sports_headphone_v2.png')",
-				nch: "url('/public/electronics/noise_canceling_headphone_v2.png')",
-				hrh: "url('/public/electronics/high_resolution_headphone_v2.png')",
-				switch: "url('public/electronics/switch.png')",
-				ps: "url('public/electronics/playstation.png')",
-				xbox: "url('public/electronics/xbox.png')",
-				swc: "url('/public/electronics/switch_cartridge.png')",
+				kindle: "url('/electronics/kindle.png')",
+				elh: "url('/electronics/entry_level_headphone_v2.png')",
+				sh: "url('/electronics/sports_headphone_v2.png')",
+				nch: "url('/electronics/noise_canceling_headphone_v2.png')",
+				hrh: "url('/electronics/high_resolution_headphone_v2.png')",
+				switch: "url('/electronics/switch.png')",
+				ps: "url('/electronics/playstation.png')",
+				xbox: "url('/electronics/xbox.png')",
+				swc: "url('/electronics/switch_cartridge.png')",
 			},
 			backgroundSize: {
 				"60%": "60%",
+			},
+			width: {
+				11.5: "46px",
+			},
+			inset: {
+				45: "180px",
 			},
 		},
 		borderWidth: {
@@ -31,6 +38,7 @@ module.exports = {
 		},
 		borderRadius: {
 			menu: "19px",
+			"50%": "50%",
 		},
 		maxWidth: {
 			dzy: "600px",
@@ -38,11 +46,13 @@ module.exports = {
 			"3/4": "75%",
 			elc: "95px",
 		},
+
 		height: {
 			0.5: "2px",
 			4.75: "19px",
 			5: "20px",
 			7.5: "30px",
+			11.5: "46px",
 			12: "3rem",
 			20: "80px",
 			30: "7.5rem",

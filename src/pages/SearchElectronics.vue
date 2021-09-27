@@ -272,11 +272,17 @@
 				</div>
 			</div>
 		</div>
+		<back-to backto="/electronics" />
 	</div>
 </template>
 
 <script>
-export default {};
+import BackTo from "../components/BackTo/BackTo.vue";
+export default {
+	components: {
+		BackTo,
+	},
+};
 </script>
 
 <style></style>
