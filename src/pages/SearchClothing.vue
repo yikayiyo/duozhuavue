@@ -1,6 +1,17 @@
 <template>
 	<div class="container">
-		<div class="search-wrapper pt-5 px-3.75 pb-3.75 text-footer">
+		<div
+			class="
+				search-wrapper
+				pt-5
+				px-3.75
+				pb-3.75
+				text-footer
+				sticky
+				top-0
+				bg-white
+			"
+		>
 			<div class="search w-full flex items-center relative">
 				<div class="icon-wrapper absolute p-1.5 left-1">
 					<svg
@@ -51,18 +62,17 @@
 								<div class="min-w-4 mr-1.25 font-semibold italic flex-shrink-0">
 									1
 								</div>
-								<a href="#" class="min-w-0">
-									<div
-										class="
-											font-bold
-											py-3
-											overflow-hidden overflow-ellipsis
-											whitespace-nowrap
-										"
-									>
-										飒拉
-									</div>
-								</a>
+								<div
+									class="
+										flex-1
+										font-bold
+										py-3
+										overflow-hidden overflow-ellipsis
+										whitespace-nowrap
+									"
+								>
+									<a href="#"> 飒拉 </a>
+								</div>
 							</li>
 							<li class="brand-item flex items-center">
 								<div class="min-w-4 mr-1.25 font-semibold italic flex-shrink-0">
@@ -279,13 +289,257 @@
 					展开更多热门品牌
 				</div>
 			</section>
-			<section class="categories"></section>
-		</div>
-		<div class="text flex">
-			<div class="bg-red-50 flex-auto">
-				<div class="w-20">1</div>
+			<section class="category-wrapper px-6.25 mt-8.75">
+				<h1
+					class="
+						category__name
+						text-brand-gender
+						font-bold
+						tracking-brand-gender
+						mb-1.25
+					"
+				>
+					秋冬
+				</h1>
+				<ul class="category__list flex flex-wrap text-sm font-bold">
+					<li
+						class="
+							border-b border-menu
+							category__item
+							mr-6.25
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								套头毛衣
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								毛衣开衫
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							mr-6.25
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								马甲
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								毛衣背心
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							mr-6.25
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="
+									py-3
+									overflow-hidden overflow-ellipsis
+									whitespace-nowrap
+									text-sold-out
+								"
+							>
+								春秋连衣裙
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="
+									py-3
+									overflow-hidden overflow-ellipsis
+									whitespace-nowrap
+									text-sold-out
+								"
+							>
+								冬季连衣裙
+							</div>
+						</a>
+					</li>
+				</ul>
+			</section>
+			<section class="category-wrapper px-6.25 mt-8.75">
+				<h1
+					class="
+						category__name
+						text-brand-gender
+						font-bold
+						tracking-brand-gender
+						mb-1.25
+					"
+				>
+					春夏
+				</h1>
+				<ul class="category__list flex flex-wrap text-sm font-bold">
+					<li
+						class="
+							border-b border-menu
+							category__item
+							mr-6.25
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								短袖T恤
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								背心
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							mr-6.25
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								针织背心
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="py-3 overflow-hidden overflow-ellipsis whitespace-nowrap"
+							>
+								短袖衬衫
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							mr-6.25
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="
+									py-3
+									overflow-hidden overflow-ellipsis
+									whitespace-nowrap
+									text-sold-out
+								"
+							>
+								夏季连衣裙
+							</div>
+						</a>
+					</li>
+					<li
+						class="
+							border-b border-menu
+							category__item
+							min-w-[calc((100%-25px)/2)]
+						"
+					>
+						<a href="">
+							<div
+								class="
+									py-3
+									overflow-hidden overflow-ellipsis
+									whitespace-nowrap
+									text-sold-out
+								"
+							>
+								西裤
+							</div>
+						</a>
+					</li>
+				</ul>
+			</section>
+			<div class="footer flex justify-center text-gray-300 py-7.5 text-footer">
+				<div class="flex items-center">
+					<div class="w-10 border-t border-current"></div>
+					<svg
+						width="12"
+						viewBox="0 0 24 24"
+						fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg"
+						class="mx-2.25 transform rotate-45"
+					>
+						<rect x="4" y="4" width="16" height="16" class=""></rect>
+					</svg>
+					<div class="w-10 border-t border-current"></div>
+				</div>
 			</div>
-			<div class="bg-red-100 flex-1">2</div>
 		</div>
 	</div>
 </template>

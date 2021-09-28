@@ -11,6 +11,7 @@ module.exports = {
 				menu: "#f2f2f2",
 				load: "rgb(73, 119, 73)",
 				"load-more": "rgba(73, 119, 73, 0.08)",
+				"sold-out": "rgb(170,170,170)",
 			},
 			backgroundImage: {
 				kindle: "url('/electronics/kindle.png')",
@@ -28,6 +29,9 @@ module.exports = {
 			},
 			width: {
 				11.5: "46px",
+			},
+			lineHeight: {
+				category: "1.4",
 			},
 			minWidth: {
 				4: "16px",
@@ -55,7 +59,9 @@ module.exports = {
 			"3/4": "75%",
 			elc: "95px",
 		},
-
+		minWidth: {
+			"1/2": "50%",
+		},
 		height: {
 			0.5: "2px",
 			4.75: "19px",
@@ -98,8 +104,10 @@ module.exports = {
 			3.75: "15px",
 			4: "16px",
 			4.5: "18px",
+			5: "20px",
 			6.25: "25px",
 			7.5: "30px",
+			8.75: "35px",
 			auto: "auto",
 		},
 		padding: {
