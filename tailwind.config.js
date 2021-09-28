@@ -9,6 +9,8 @@ module.exports = {
 				"search-input": "#f7f7f7",
 				"menu-active": "#18c3aa",
 				menu: "#f2f2f2",
+				load: "rgb(73, 119, 73)",
+				"load-more": "rgba(73, 119, 73, 0.08)",
 			},
 			backgroundImage: {
 				kindle: "url('/electronics/kindle.png')",
@@ -27,8 +29,14 @@ module.exports = {
 			width: {
 				11.5: "46px",
 			},
+			minWidth: {
+				4: "16px",
+			},
 			inset: {
 				45: "180px",
+			},
+			letterSpacing: {
+				"brand-gender": "2px",
 			},
 		},
 		borderWidth: {
@@ -39,6 +47,7 @@ module.exports = {
 		borderRadius: {
 			menu: "19px",
 			"50%": "50%",
+			load: "2px",
 		},
 		maxWidth: {
 			dzy: "600px",
@@ -80,6 +89,7 @@ module.exports = {
 			"4xl": "2.25rem",
 			"5xl": "3rem",
 			"6xl": "4rem",
+			"brand-gender": "28px",
 		},
 		margin: {
 			1.25: "5px",
@@ -88,6 +98,7 @@ module.exports = {
 			3.75: "15px",
 			4: "16px",
 			4.5: "18px",
+			6.25: "25px",
 			7.5: "30px",
 			auto: "auto",
 		},
@@ -98,10 +109,12 @@ module.exports = {
 			2: "8px",
 			2.25: "9px",
 			2.5: "10px",
+			3: "12px",
 			3.75: "15px",
 			4: "1rem",
 			4.5: "18px",
 			5: "20px",
+			6.25: "25px",
 			7.5: "30px",
 			9: "36px",
 			12: "3rem",
