@@ -38,10 +38,10 @@
 			<oc-list-item></oc-list-item>
 			<oc-list-item></oc-list-item>
 		</div>
-		<div class="feed-content-wrapper mx-3.75">
+		<div class="feed-content-wrapper">
 			<div class="feed-section">
-				<div class="title">
-					<h2>猜你喜欢</h2>
+				<div class="title p-3.75 relative bg-white">
+					<h2 class="text-xl font-medium leading-hsh">猜你喜欢</h2>
 				</div>
 				<div class="book-list-wrapper">
 					<book-list-item></book-list-item>
