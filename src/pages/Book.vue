@@ -2,6 +2,7 @@
 	<nav-header></nav-header>
 	<div class="overflow-scroll">
 		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
+		<home-section></home-section>
 	</div>
 	<nav-footer></nav-footer>
 </template>
@@ -10,6 +11,7 @@
 import NavHeader from "../components/NavHeader/NavHeader.vue";
 import NavFooter from "../components/NavFooter/NavFooter.vue";
 import Search from "../components/Search/Search.vue";
+import HomeSection from "../components/Home/HomeSection.vue";
 export default {
 	data() {
 		return {
@@ -21,6 +23,7 @@ export default {
 	components: {
 		NavHeader,
 		Search,
+		HomeSection,
 		NavFooter,
 	},
 };

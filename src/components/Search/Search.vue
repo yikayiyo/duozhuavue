@@ -44,6 +44,7 @@
 						rounded
 						bg-search-input
 						outline-none
+						leading-search-input
 					"
 				/>
 			</router-link>
