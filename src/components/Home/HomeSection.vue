@@ -38,12 +38,20 @@
 			<oc-list-item></oc-list-item>
 			<oc-list-item></oc-list-item>
 		</div>
-		<div class="feed-content-wrapper">
-			<div class="feed-section">
-				<div class="title p-3.75 relative bg-white">
-					<h2 class="text-xl font-medium leading-hsh">猜你喜欢</h2>
+		<div class="feed-content-wrapper mt-2.5">
+			<div class="feed-section relative">
+				<div class="title p-3.75 bg-white">
+					<h2 class="text-xl font-medium leading-hsh sticky top-0">猜你喜欢</h2>
 				</div>
 				<div class="book-list-wrapper -mt-3.75">
+					<book-list-item></book-list-item>
+					<book-list-item></book-list-item>
+					<book-list-item></book-list-item>
+					<book-list-item></book-list-item>
+					<book-list-item></book-list-item>
+					<book-list-item></book-list-item>
+					<book-list-item></book-list-item>
+					<book-list-item></book-list-item>
 					<book-list-item></book-list-item>
 				</div>
 			</div>

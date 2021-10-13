@@ -7,6 +7,8 @@ module.exports = {
 			colors: {
 				"back-to": "#666666f5",
 				"search-input": "#f7f7f7",
+				dbr: "rgb(214, 186, 140)",
+				label: "rgb(242, 129, 129)",
 				"menu-active": "#18c3aa",
 				menu: "#f2f2f2",
 				load: "rgb(73, 119, 73)",
@@ -31,9 +33,13 @@ module.exports = {
 			backgroundSize: {
 				"60%": "60%",
 			},
+			boxShadow: {
+				"book-list-item-image": "rgb(0 0 0 / 10%) 0px 0px 8px 0px",
+			},
 			width: {
 				hicon: "1.4em",
 				7.5: "30px",
+				11.25: "45px",
 				11.5: "46px",
 				20: "80px",
 				"oc-item": "132px",
@@ -52,18 +58,18 @@ module.exports = {
 			letterSpacing: {
 				"brand-gender": "2px",
 			},
+			borderRadius: {
+				menu: "19px",
+				"50%": "50%",
+				99: "99px",
+				load: "2px",
+				"oc-item": "5px",
+			},
 		},
 		borderWidth: {
 			DEFAULT: "1px",
 			0: "0",
 			0.5: "0.5px",
-		},
-		borderRadius: {
-			menu: "19px",
-			"50%": "50%",
-			99: "99px",
-			load: "2px",
-			"oc-item": "5px",
 		},
 		maxWidth: {
 			dzy: "600px",
@@ -80,6 +86,7 @@ module.exports = {
 			4.75: "19px",
 			5: "20px",
 			7.5: "30px",
+			11.25: "45px",
 			11.5: "46px",
 			12: "3rem",
 			20: "80px",
@@ -114,12 +121,16 @@ module.exports = {
 			"brand-gender": "28px",
 		},
 		margin: {
+			"bk-list-item-title": "-0.1em",
 			"oc-title": "1.5px",
+			0.75: "3px",
+			1: "4px",
 			1.25: "5px",
 			1.5: "6px",
 			2.25: "9px",
 			2.5: "10px",
 			2.625: "10.5px",
+			3: "12px",
 			3.75: "15px",
 			"-3.75": "-15px",
 			4: "16px",
