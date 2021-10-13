@@ -35,6 +35,7 @@ module.exports = {
 				hicon: "1.4em",
 				7.5: "30px",
 				11.5: "46px",
+				20: "80px",
 				"oc-item": "132px",
 			},
 			lineHeight: {
@@ -120,6 +121,7 @@ module.exports = {
 			2.5: "10px",
 			2.625: "10.5px",
 			3.75: "15px",
+			"-3.75": "-15px",
 			4: "16px",
 			4.5: "18px",
 			5: "20px",

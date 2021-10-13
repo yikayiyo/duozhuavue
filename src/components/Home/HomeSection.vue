@@ -43,7 +43,7 @@
 				<div class="title p-3.75 relative bg-white">
 					<h2 class="text-xl font-medium leading-hsh">猜你喜欢</h2>
 				</div>
-				<div class="book-list-wrapper">
+				<div class="book-list-wrapper -mt-3.75">
 					<book-list-item></book-list-item>
 				</div>
 			</div>
