@@ -1,6 +1,6 @@
 <template>
 	<nav-header></nav-header>
-	<div class="overflow-scroll">
+	<div class="">
 		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
 		<home-section></home-section>
 	</div>

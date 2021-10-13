@@ -10,6 +10,7 @@
 			sticky
 			top-0
 			bg-white
+			z-20
 		"
 	>
 		<div class="left flex-grow">

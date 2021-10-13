@@ -53,6 +53,7 @@ module.exports = {
 				4: "16px",
 			},
 			inset: {
+				ct: "67px",
 				45: "180px",
 			},
 			letterSpacing: {
