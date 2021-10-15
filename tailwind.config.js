@@ -5,6 +5,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				"is-active": "rgb(51,51,51)",
 				"back-to": "#666666f5",
 				"search-input": "#f7f7f7",
 				dbr: "rgb(214, 186, 140)",
@@ -162,6 +163,7 @@ module.exports = {
 			4.5: "18px",
 			5: "20px",
 			6.25: "25px",
+			6.5: "26px",
 			7.5: "30px",
 			8.75: "35px",
 			9: "36px",
