@@ -10,6 +10,7 @@
 			rounded-oc-item
 			text-hsh
 		"
+		:style="styleObj"
 	>
 		<a href="" class="inner block box-border p-3 relative h-full">
 			<h3 class="title mb-oc-title leading-oc-title text-lg font-medium">
@@ -66,21 +67,23 @@
 export default {
 	name: "OcListItem",
 	props: ["collection"],
+	computed: {
+		styleObj() {
+			return {
+				background: `linear-gradient(to top, ${
+					this.collection?.maskColor + "CC"
+				} 0%, ${this.collection?.maskColor + "4D"} 35%, ${
+					this.collection?.maskColor
+				} 89%) center top / auto no-repeat, url(${
+					this.collection?.image
+				})center center / cover no-repeat`,
+			};
+		},
+	},
 };
 </script>
 
 <style scoped>
-.oc-item-wrapper {
-	background: linear-gradient(
-				to top,
-				rgba(203, 150, 37, 0.8) 0%,
-				rgba(203, 150, 37, 0.3) 35%,
-				rgb(203, 150, 37) 59%
-			)
-			center top / auto no-repeat,
-		url("https://img.duozhuayu.com/d497a1f82a5e11ecaeab327963c9d23b.jpeg?x-oss-process=image/resize,w_450/quality,Q_80")
-			center center / cover no-repeat;
-}
 h3.title {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
