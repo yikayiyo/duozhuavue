@@ -13,9 +13,13 @@
 	>
 		<a href="" class="inner block box-border p-3 relative h-full">
 			<h3 class="title mb-oc-title leading-oc-title text-lg font-medium">
-				这些新出版的好书，想推荐给你看看 | 2021.10
+				{{ collection?.name }}
 			</h3>
-			<span class="text-cbl align-middle font-light">5人推荐17本书</span>
+			<span class="text-cbl align-middle font-light"
+				>{{ collection?.contributors.length }}人推荐了{{
+					collection?.items.length
+				}}本书</span
+			>
 			<div class="media flex items-center absolute bottom-4 max-w-full">
 				<span
 					class="
@@ -30,8 +34,9 @@
 					"
 				>
 					<img
-						src="https://img.duozhuayu.com/e082b6a63db011eb98982a2adea97218.jpeg"
-						alt=""
+						:src="collection?.proposer.avatar"
+						alt="user avatar
+					"
 						class="w-full"
 					/>
 				</span>
@@ -48,7 +53,7 @@
 							text-footer
 						"
 					>
-						摇滚死兔子(˶‾᷄ །། ‾᷅˵)
+						{{ collection?.proposer.name }}
 					</div>
 					<div class="desc text-xss font-light">客座鱼编</div>
 				</div>
@@ -58,7 +63,10 @@
 </template>
 
 <script>
-export default {};
+export default {
+	name: "OcListItem",
+	props: ["collection"],
+};
 </script>
 
 <style scoped>

@@ -32,11 +32,8 @@
 			</div>
 		</a>
 		<div class="oc-list-wrapper mx-3.75 flex overflow-x-auto pb-8.75 -mb-8.75">
-			<oc-list-item></oc-list-item>
-			<oc-list-item></oc-list-item>
-			<oc-list-item></oc-list-item>
-			<oc-list-item></oc-list-item>
-			<oc-list-item></oc-list-item>
+			<!-- <oc-list-item></oc-list-item> -->
+			<oc-list-item :collection="collections[0]"></oc-list-item>
 		</div>
 		<div class="feed-content-wrapper mt-2.5 bg-menu">
 			<div class="feed-section relative mb-4 bg-white">
@@ -90,10 +87,38 @@
 <script>
 import OcListItem from "./OcListItem.vue";
 import BookListItem from "./BookListItem.vue";
+import gql from "graphql-tag";
+
 export default {
+	data() {
+		return {
+			collections: [],
+		};
+	},
 	components: {
 		OcListItem,
 		BookListItem,
+	},
+	apollo: {
+		collections: gql`
+			query Query {
+				collections {
+					name
+					items {
+						title
+					}
+					contributors {
+						name
+					}
+					proposer {
+						name
+						avatar
+					}
+					image
+					maskColor
+				}
+			}
+		`,
 	},
 };
 </script>
