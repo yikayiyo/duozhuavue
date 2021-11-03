@@ -1,6 +1,6 @@
 <template>
 	<div class="home-section-wrapper">
-		<a href="/open-collections?from=home" class="home-section-header-wrapper">
+		<router-link to="/open-collections" class="home-section-header-wrapper">
 			<div class="home-section-header flex items-center p-3.75">
 				<div class="home-section-header-title flex-grow">
 					<h2 class="text-xl font-medium leading-hsh">书单</h2>
@@ -30,7 +30,7 @@
 					</svg>
 				</div>
 			</div>
-		</a>
+		</router-link>
 		<div class="oc-list-wrapper mx-3.75 flex overflow-x-auto pb-8.75 -mb-8.75">
 			<!-- <oc-list-item></oc-list-item> -->
 			<oc-list-item :collection="collections[0]"></oc-list-item>
@@ -103,6 +103,7 @@ export default {
 		collections: gql`
 			query Query {
 				collections {
+					id
 					name
 					items {
 						title

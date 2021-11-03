@@ -6,6 +6,7 @@ import Original from "../pages/Original.vue";
 import SearchBook from "../pages/SearchBook.vue";
 import SearchElectronics from "../pages/SearchElectronics.vue";
 import SearchClothing from "../pages/SearchClothing.vue";
+import OpenCollections from "../pages/OpenCollections.vue";
 import OpenCollection from "../pages/OpenCollection.vue";
 
 const routes = [
@@ -29,6 +30,10 @@ const routes = [
 	{
 		path: "/search",
 		redirect: "/search/book",
+	},
+	{
+		path: "/open-collections",
+		component: OpenCollections,
 	},
 	{
 		path: "/open-collections/:id",

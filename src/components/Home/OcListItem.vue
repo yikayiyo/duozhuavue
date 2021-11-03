@@ -12,7 +12,10 @@
 		"
 		:style="styleObj"
 	>
-		<a href="" class="inner block box-border p-3 relative h-full">
+		<router-link
+			:to="linkTo"
+			class="inner block box-border p-3 relative h-full"
+		>
 			<h3 class="title mb-oc-title leading-oc-title text-lg font-medium">
 				{{ collection?.name }}
 			</h3>
@@ -59,7 +62,7 @@
 					<div class="desc text-xss font-light">客座鱼编</div>
 				</div>
 			</div>
-		</a>
+		</router-link>
 	</div>
 </template>
 
@@ -78,6 +81,9 @@ export default {
 					this.collection?.image
 				})center center / cover no-repeat`,
 			};
+		},
+		linkTo() {
+			return "/open-collections/" + this.collection?.id;
 		},
 	},
 };

@@ -28,13 +28,13 @@
 						>
 							<img
 								alt=""
-								src="https://img.duozhuayu.com/e082b6a63db011eb98982a2adea97218.jpeg"
+								:src="collection?.proposer?.avatar"
 								class="jsx-280654375"
 							/>
 						</span>
 						<div class="ml-2.5">
 							<div class="name flex text-base font-medium">
-								摇滚死兔子(˶‾᷄ །། ‾᷅˵)
+								{{ collection.proposer?.name }}
 								<img
 									alt="客座鱼编"
 									src="https://asset.duozhuayu.com/oc/proposer_badge.png"
@@ -46,12 +46,15 @@
 					</div>
 				</a>
 				<h1 class="mb-4 text-3xl font-medium">
-					这些新出版的好书，想推荐给你看看 | 2021.10
+					{{ collection?.name }}
 				</h1>
-				<span class="leading-1.6">十月金秋买好书</span>
+				<span class="leading-1.6">{{ collection?.description }}</span>
 			</div>
 			<div class="bottom mb-7.5">
-				<span>7人推荐了20本书</span>
+				<span>
+					{{ collection?.contributors?.length }}人推荐了
+					{{ collection?.items?.length }}本书
+				</span>
 			</div>
 		</div>
 		<div class="oc-nav sticky top-0 font-medium text-sold-out">
@@ -143,10 +146,50 @@
 </template>
 
 <script>
+import gql from "graphql-tag";
 import NavFooter from "../components/NavFooter/NavFooter.vue";
 export default {
+	data() {
+		return {
+			collection: {},
+		};
+	},
 	components: {
 		NavFooter,
+	},
+	apollo: {
+		collection: {
+			query: gql`
+				query Query($collectionId: ID!) {
+					collection(id: $collectionId) {
+						name
+						description
+						image
+						maskColor
+						proposer {
+							name
+							avatar
+						}
+						items {
+							id
+							title
+							rawAuthor
+							doubanRating
+							image
+						}
+						contributors {
+							name
+						}
+					}
+				}
+			`,
+			// 静态参数
+			variables() {
+				return {
+					collectionId: this.$route.params.id,
+				};
+			},
+		},
 	},
 };
 </script>
