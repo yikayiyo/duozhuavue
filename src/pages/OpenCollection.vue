@@ -10,6 +10,7 @@
 				font-light
 				leading-category
 			"
+			:style="ocHeaderStyleObj"
 		>
 			<div class="top mt-8 mb-20">
 				<a href="/users/90150559088119017">
@@ -26,11 +27,7 @@
 								bg-menu
 							"
 						>
-							<img
-								alt=""
-								:src="collection?.proposer?.avatar"
-								class="jsx-280654375"
-							/>
+							<img alt="" :src="collection?.proposer?.avatar" />
 						</span>
 						<div class="ml-2.5">
 							<div class="name flex text-base font-medium">
@@ -57,7 +54,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="oc-nav sticky top-0 font-medium text-sold-out">
+		<div class="oc-nav sticky top-0 font-medium text-sold-out bg-white">
 			<nav
 				class="
 					flex
@@ -91,54 +88,25 @@
 			</nav>
 		</div>
 		<div class="oc-content">
-			<div class="oc-item mt-7.5 border-b border-menu">
-				<a href="" class="book-item ml-4 flex">
-					<div class="image-wrapper w-20 h-30 mr-3 shadow-book-list-item-image">
-						<div class="image"></div>
-					</div>
-					<div class="content">
-						<h3 class="book-name my-bk-list-item-title">
-							如何像人类学家一样思考
-						</h3>
-						<div class="book-author text-xs text-sold-out mt-1">
-							马修恩格尔克
-						</div>
-						<span class="douban-rating text-xs text-dbr mt-1.25"
-							>豆瓣评分 7.7</span
-						>
-					</div>
-				</a>
-				<div class="contribs-wrapper">
-					<div class="contribs px-4 pt-4 pb-6.5">
-						<div
-							class="
-								contribs-main
-								h-30
-								overflow-hidden
-								text-shiwu
-								font-light
-								leading-1.6
-							"
-						>
-							<p>
-								如果你对人类学感兴趣，那么这本导读书不容错过。书中展现了一种颇有荒诞性质却在阅读后认为无比合理的组合。例如：板球-蟋蟀、披头士乐队-牲畜、养老基金-牛、性金钱权力-口袋妖怪、《种族纯洁法案》-一滴血等等。当然其中也有不少我从没想到过的解释，例如：“语言是族群特征的外部表现。”这本书藉由人类学提供了一个全新的视角，你可以把它视作一次对认知边缘的试探，也可以把他看作是对刻板思维的挑战。
-							</p>
-						</div>
-						<div class="contribs-footer mt-4 flex justify-between">
-							<div class="left">
-								<a href="" class="flex">
-									<span>avatar</span>
-									<span>nickname</span>
-								</a>
-							</div>
-							<div class="right flex">
-								<span>分享</span>
-								<span>评论</span>
-								<span>点赞</span>
-							</div>
-						</div>
-					</div>
-				</div>
+			<oc-item
+				v-for="conb of collection.contributions"
+				:conb="conb"
+				:key="conb.id"
+			></oc-item>
+		</div>
+		<div class="footer flex justify-center text-gray-300 py-12 text-footer">
+			<div class="flex items-center">
+				<div class="w-10 border-t border-current"></div>
+				<svg
+					width="12"
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg"
+					class="mx-2.25 transform rotate-45"
+				>
+					<rect x="4" y="4" width="16" height="16" class=""></rect>
+				</svg>
+				<div class="w-10 border-t border-current"></div>
 			</div>
 		</div>
 	</div>
@@ -148,14 +116,29 @@
 <script>
 import gql from "graphql-tag";
 import NavFooter from "../components/NavFooter/NavFooter.vue";
+import OcItem from "../components/MainSection/OcItem.vue";
 export default {
 	data() {
 		return {
 			collection: {},
 		};
 	},
+	computed: {
+		ocHeaderStyleObj() {
+			return {
+				backgroundImage: `linear-gradient(
+							to top,
+							${this.collection.maskColor + "99"},
+							${this.collection.maskColor} 56%
+						), url(${this.collection.image})`,
+				backgroundSize: `cover, cover`,
+				backgroundPosition: `center top, center center`,
+			};
+		},
+	},
 	components: {
 		NavFooter,
+		OcItem,
 	},
 	apollo: {
 		collection: {
@@ -171,14 +154,23 @@ export default {
 							avatar
 						}
 						items {
-							id
 							title
-							rawAuthor
-							doubanRating
-							image
 						}
 						contributors {
 							name
+						}
+						contributions {
+							book {
+								title
+								rawAuthor
+								doubanRating
+								image
+							}
+							contributor {
+								name
+								avatar
+							}
+							reason
 						}
 					}
 				}
@@ -195,16 +187,6 @@ export default {
 </script>
 
 <style scoped>
-.oc-header {
-	background-image: linear-gradient(
-			to top,
-			rgba(203, 150, 37, 0.6),
-			rgb(203, 150, 37) 56%
-		),
-		url(https://img.duozhuayu.com/d497a1f82a5e11ecaeab327963c9d23b.jpeg?x-oss-process=image/resize,w_450/quality,Q_80);
-	background-size: cover, cover;
-	background-position: center top, center center;
-}
 .image {
 	width: 100%;
 	height: 100%;
