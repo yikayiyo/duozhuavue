@@ -29,13 +29,21 @@
 						>
 							<img alt="" :src="collection?.proposer?.avatar" />
 						</span>
-						<div class="ml-2.5">
+						<div class="ml-2.5 max-w-oc">
 							<div class="name flex text-base font-medium">
-								{{ collection.proposer?.name }}
+								<p
+									class="
+										flex-1
+										overflow-hidden overflow-ellipsis
+										whitespace-nowrap
+									"
+								>
+									{{ collection.proposer?.name }}
+								</p>
 								<img
 									alt="客座鱼编"
 									src="https://asset.duozhuayu.com/oc/proposer_badge.png"
-									class="jsx-1779555337 w-21 ml-2"
+									class="jsx-1779555337 w-21 ml-2 flex-shrink-0"
 								/>
 							</div>
 							<div class="desc text-xs">提案</div>

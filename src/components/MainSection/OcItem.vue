@@ -28,7 +28,7 @@
 					"
 					:style="{ maxHeight: maxHeight }"
 				>
-					<p ref="reason">
+					<p ref="reason" class="break-words text-is-active">
 						{{ conb.reason }}
 						<span
 							class="
@@ -53,8 +53,8 @@
 						</span>
 					</p>
 				</div>
-				<div class="contribs-footer mt-4 flex justify-between">
-					<div class="left">
+				<div class="contribs-footer mt-4 flex justify-between text-sold-out">
+					<div class="left flex-1 min-w-0 overflow-hidden">
 						<a href="" class="flex items-center">
 							<span
 								class="
@@ -70,13 +70,20 @@
 							>
 								<img alt="" :src="conb?.contributor?.avatar" />
 							</span>
-							<span class="ml-1 text-footer text-sold-out">{{
-								conb.contributor.name
-							}}</span>
+							<span
+								class="
+									ml-1
+									text-footer
+									leading-category
+									overflow-hidden overflow-ellipsis
+									whitespace-nowrap
+								"
+								>{{ conb.contributor.name }}的推荐</span
+							>
 						</a>
 					</div>
 					<div class="right flex items-center">
-						<a>
+						<a class="mr-7.5">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="18"
@@ -98,7 +105,7 @@
 								</g>
 							</svg>
 						</a>
-						<span>
+						<span class="mr-7.5">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="18"
@@ -148,7 +155,7 @@
 									></path>
 								</g>
 							</svg>
-							<span>0</span>
+							<span class="vote-count text-hsh ml-1.5">302</span>
 						</div>
 					</div>
 				</div>

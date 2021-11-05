@@ -81,6 +81,7 @@ module.exports = {
 			"3/4": "75%",
 			full: "100%",
 			elc: "95px",
+			oc: "200px",
 		},
 		minWidth: {
 			"1/2": "50%",
