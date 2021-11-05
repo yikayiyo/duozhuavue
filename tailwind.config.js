@@ -100,6 +100,9 @@ module.exports = {
 			screen: "100vh",
 			"oc-item": "178px",
 		},
+		maxHeight: {
+			30: "7.5rem",
+		},
 		lineHeight: {
 			"oc-title": "1.44",
 			"extra-loose": "2.5",

@@ -17,15 +17,41 @@
 		<div class="contribs-wrapper">
 			<div class="contribs px-4 pt-4 pb-6.5">
 				<div
+					ref="reasonWrapper"
 					class="
 						contribs-main
+						relative
 						overflow-hidden
 						text-shiwu
 						font-light
 						leading-1.6
 					"
+					:style="{ maxHeight: maxHeight }"
 				>
-					<p>{{ conb.reason }}</p>
+					<p ref="reason">
+						{{ conb.reason }}
+						<span
+							class="
+								absolute
+								right-0
+								bottom-0
+								w-24
+								text-right
+								bg-gradient-to-l
+								from-white
+								via-white
+								to-light-500
+							"
+						>
+							<button
+								class="show-all text-load"
+								v-show="pHeight > 120 && maxHeight === '120px'"
+								@click="showAll"
+							>
+								...展开
+							</button>
+						</span>
+					</p>
 				</div>
 				<div class="contribs-footer mt-4 flex justify-between">
 					<div class="left">
@@ -135,6 +161,15 @@
 export default {
 	name: "OcItem",
 	props: ["conb"],
+	data() {
+		return {
+			maxHeight: "120px",
+			pHeight: 0,
+		};
+	},
+	mounted() {
+		this.pHeight = this.$refs.reason.clientHeight;
+	},
 	computed: {
 		image() {
 			return {
@@ -145,6 +180,12 @@ export default {
 				backgroundSize: "cover",
 				backgroundRepeat: "no-repeat",
 			};
+		},
+	},
+	methods: {
+		showAll() {
+			console.log("click 展开");
+			this.maxHeight = this.$refs.reason.clientHeight + "px";
 		},
 	},
 };
