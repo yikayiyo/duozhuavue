@@ -169,6 +169,7 @@ export default {
 						}
 						contributions {
 							book {
+								id
 								title
 								rawAuthor
 								doubanRating

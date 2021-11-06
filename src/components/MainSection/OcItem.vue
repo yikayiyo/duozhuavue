@@ -1,6 +1,6 @@
 <template>
 	<div class="oc-item mt-7.5 border-b border-menu">
-		<a href="" class="book-item ml-4 flex">
+		<router-link :to="'/books/' + conb.book.id" class="book-item ml-4 flex">
 			<div class="image-wrapper w-20 h-30 mr-3 shadow-book-list-item-image">
 				<div :style="image"></div>
 			</div>
@@ -13,7 +13,7 @@
 					>豆瓣评分 {{ conb.book.doubanRating }}</span
 				>
 			</div>
-		</a>
+		</router-link>
 		<div class="contribs-wrapper">
 			<div class="contribs px-4 pt-4 pb-6.5">
 				<div

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Home from "../pages/Home.vue";
 import Book from "../pages/Book.vue";
 import Clothing from "../pages/Clothing.vue";
 import Electronics from "../pages/Electronics.vue";
@@ -10,11 +11,12 @@ import OpenCollections from "../pages/OpenCollections.vue";
 import OpenCollection from "../pages/OpenCollection.vue";
 
 const routes = [
-	{ path: "/", component: Book },
+	{ path: "/", component: Home },
 	{ path: "/clothing", component: Clothing },
 	{ path: "/electronics", component: Electronics },
 	{ path: "/original", component: Original },
 	{ path: "/book", redirect: "/" },
+	{ path: "/books/:id", component: Book },
 	{
 		path: "/search/book",
 		component: SearchBook,
