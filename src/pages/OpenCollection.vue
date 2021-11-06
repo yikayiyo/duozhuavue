@@ -128,6 +128,7 @@ import OcItem from "../components/MainSection/OcItem.vue";
 export default {
 	data() {
 		return {
+			id: this.$route.params.id,
 			collection: {},
 		};
 	},
@@ -187,7 +188,7 @@ export default {
 			// 静态参数
 			variables() {
 				return {
-					collectionId: this.$route.params.id,
+					collectionId: this.id,
 				};
 			},
 		},

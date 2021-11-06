@@ -16,7 +16,7 @@ const routes = [
 	{ path: "/electronics", component: Electronics },
 	{ path: "/original", component: Original },
 	{ path: "/book", redirect: "/" },
-	{ path: "/books/:id", component: Book },
+	{ path: "/books/:bookId", component: Book },
 	{
 		path: "/search/book",
 		component: SearchBook,

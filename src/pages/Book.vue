@@ -1,5 +1,5 @@
 <template>
-	<p>This is a Book Page: {{ $route.params.id }}</p>
+	<p>This is a Book Page: {{ $route.params.bookId }}</p>
 </template>
 
 <script>
