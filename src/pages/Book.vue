@@ -1,5 +1,5 @@
 <template>
-	<div class="container-wrapper text-is-active">
+	<div class="container-wrapper text-is-active relative">
 		<div class="book-wrapper">
 			<div class="book-header relative px-3.75 pt-7.5 pb-7 overflow-hidden">
 				<div
@@ -50,16 +50,19 @@
 				<div class="book-detail"></div>
 			</div>
 		</div>
+		<cart-footer></cart-footer>
 	</div>
 </template>
 
 <script>
 import gql from "graphql-tag";
 import doubanRating from "../components/MainSection/DoubanRating.vue";
+import cartFooter from "../components/NavFooter/cartFooter.vue";
 export default {
 	name: "BookPage",
 	components: {
 		doubanRating,
+		cartFooter,
 	},
 	data() {
 		return {
