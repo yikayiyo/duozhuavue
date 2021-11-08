@@ -45,17 +45,20 @@ module.exports = {
 				20: "80px",
 				21: "84px",
 				"oc-item": "132px",
+				37.5: "150px",
 			},
 			lineHeight: {
 				hsh: "1.1",
 				"search-input": "24px",
 				category: "1.4",
 				1.6: "1.6",
+				1.69: "1.69",
 			},
 			minWidth: {
 				4: "16px",
 			},
 			inset: {
+				"-50": "-50px",
 				ct: "67px",
 				45: "180px",
 			},
@@ -99,10 +102,12 @@ module.exports = {
 			86: "21.5rem",
 			full: "100%",
 			screen: "100vh",
+			auto: "auto",
 			"oc-item": "178px",
 		},
 		maxHeight: {
 			30: "7.5rem",
+			full: "100%",
 		},
 		lineHeight: {
 			"oc-title": "1.44",
@@ -168,10 +173,16 @@ module.exports = {
 			5: "20px",
 			6.25: "25px",
 			6.5: "26px",
+			7: "28px",
 			7.5: "30px",
 			8.75: "35px",
 			9: "36px",
 			12: "3rem",
+		},
+		zIndex: {
+			0: 0,
+			10: 10,
+			20: 20,
 		},
 	},
 	variants: {
