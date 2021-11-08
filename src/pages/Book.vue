@@ -1,5 +1,5 @@
 <template>
-	<div class="container-wrapper">
+	<div class="container-wrapper text-is-active">
 		<div class="book-wrapper">
 			<div class="book-header relative px-3.75 pt-7.5 pb-7 overflow-hidden">
 				<div
@@ -25,7 +25,11 @@
 						</p>
 						<p class="author flex">
 							<span class="tag">作者</span>
-							<span class="ml-3">{{ book.rawAuthor }}</span>
+							<span class="ml-3 text-load">
+								<router-link :to="'/search/book/' + book.rawAuthor">
+									{{ book.rawAuthor }}
+								</router-link>
+							</span>
 						</p>
 						<p class="publisher flex">
 							<span class="tag">出版社</span>
@@ -41,7 +45,7 @@
 						</p>
 					</div>
 				</div>
-				<div class="douban-rating"></div>
+				<douban-rating :rating="book.doubanRating" :isbn="book.isbn13" />
 				<div class="services"></div>
 				<div class="book-detail"></div>
 			</div>
@@ -51,8 +55,12 @@
 
 <script>
 import gql from "graphql-tag";
+import doubanRating from "../components/MainSection/DoubanRating.vue";
 export default {
 	name: "BookPage",
+	components: {
+		doubanRating,
+	},
 	data() {
 		return {
 			id: this.$route.params.bookId,
@@ -82,6 +90,7 @@ export default {
 				query getABook($bookId: ID!) {
 					book(id: $bookId) {
 						title
+						isbn13
 						rawAuthor
 						publisher
 						publishDate
