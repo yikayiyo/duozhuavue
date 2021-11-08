@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="book-main pt-4.5 mx-3.75">
-				<div class="book-info leading-category">
+				<div class="book-info leading-category pb-3.75">
 					<h1 class="text-xl font-medium text-is-active">{{ book.title }}</h1>
 					<div class="p-wrapper mt-3.5 text-hsh leading-1.69">
 						<p class="original-price flex">
