@@ -47,7 +47,6 @@
 				</div>
 				<douban-rating :rating="book.doubanRating" :isbn="book.isbn13" />
 				<duozhuayu-services />
-				<div class="book-detail"></div>
 			</div>
 		</div>
 		<cart-footer></cart-footer>
