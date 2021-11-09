@@ -56,7 +56,7 @@
 
 <script>
 export default {
-	name: "cartFooter",
+	name: "CartFooter",
 };
 </script>
 

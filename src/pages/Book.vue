@@ -46,7 +46,7 @@
 					</div>
 				</div>
 				<douban-rating :rating="book.doubanRating" :isbn="book.isbn13" />
-				<div class="services"></div>
+				<duozhuayu-services />
 				<div class="book-detail"></div>
 			</div>
 		</div>
@@ -56,13 +56,15 @@
 
 <script>
 import gql from "graphql-tag";
-import doubanRating from "../components/MainSection/DoubanRating.vue";
-import cartFooter from "../components/NavFooter/cartFooter.vue";
+import DoubanRating from "../components/MainSection/DoubanRating.vue";
+import DuozhuayuServices from "../components/MainSection/DuozhuayuServices.vue";
+import CartFooter from "../components/NavFooter/CartFooter.vue";
 export default {
 	name: "BookPage",
 	components: {
-		doubanRating,
-		cartFooter,
+		DoubanRating,
+		DuozhuayuServices,
+		CartFooter,
 	},
 	data() {
 		return {

@@ -21,6 +21,7 @@ module.exports = {
 				"oc-top": "rgb(203, 150, 37)",
 				"oc-middle": "rgba(203, 150, 37, 0.3)",
 				"oc-bottom": "rgba(203, 150, 37, 0.8)",
+				divider: "#aaaaaa1a",
 			},
 			backgroundImage: {
 				kindle: "url('/electronics/kindle.png')",
@@ -166,6 +167,7 @@ module.exports = {
 			auto: "auto",
 		},
 		padding: {
+			1: "4px",
 			1.25: "5px",
 			1.5: "6px",
 			1.875: "7.5px",
