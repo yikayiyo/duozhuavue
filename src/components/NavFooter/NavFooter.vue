@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import navFooterList from "./NavFooterList.vue";
+import NavFooterList from "./NavFooterList.vue";
 export default {
 	components: {
-		navFooterList,
+		NavFooterList,
 	},
 };
 </script>

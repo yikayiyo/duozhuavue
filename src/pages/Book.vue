@@ -57,9 +57,9 @@
 import gql from "graphql-tag";
 import DoubanRating from "../components/MainSection/DoubanRating.vue";
 import DuozhuayuServices from "../components/MainSection/DuozhuayuServices.vue";
-import CartFooter from "../components/NavFooter/CartFooter.vue";
+import CartFooter from "../components/CartFooter.vue";
 export default {
-	name: "BookPage",
+	name: "Book",
 	components: {
 		DoubanRating,
 		DuozhuayuServices,
