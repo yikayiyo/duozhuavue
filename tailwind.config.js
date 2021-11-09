@@ -22,6 +22,7 @@ module.exports = {
 				"oc-middle": "rgba(203, 150, 37, 0.3)",
 				"oc-bottom": "rgba(203, 150, 37, 0.8)",
 				divider: "#aaaaaa1a",
+				arrow: "#18c3aa",
 			},
 			backgroundImage: {
 				kindle: "url('/electronics/kindle.png')",
@@ -55,6 +56,7 @@ module.exports = {
 				hsh: "1.1",
 				"search-input": "24px",
 				category: "1.4",
+				1.5: "1.5",
 				1.6: "1.6",
 				1.69: "1.69",
 			},
@@ -139,6 +141,7 @@ module.exports = {
 			"4xl": "2.25rem",
 			"5xl": "3rem",
 			"6xl": "4rem",
+			service: "22px",
 			"brand-gender": "28px",
 		},
 		margin: {
@@ -162,6 +165,7 @@ module.exports = {
 			6.25: "25px",
 			7.5: "30px",
 			8: "32px",
+			12.5: "50px",
 			20: "80px",
 			"-8.75": "-35px",
 			auto: "auto",
@@ -186,6 +190,8 @@ module.exports = {
 			8.75: "35px",
 			9: "36px",
 			12: "3rem",
+			12.75: "51px",
+			15: "60px",
 			auto: "auto",
 		},
 		zIndex: {
