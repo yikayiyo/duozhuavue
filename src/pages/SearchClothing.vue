@@ -545,7 +545,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+	name: "SearchClothing",
+};
 </script>
 
 <style></style>

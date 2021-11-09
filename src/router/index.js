@@ -9,6 +9,9 @@ import SearchElectronics from "../pages/SearchElectronics.vue";
 import SearchClothing from "../pages/SearchClothing.vue";
 import OpenCollections from "../pages/OpenCollections.vue";
 import OpenCollection from "../pages/OpenCollection.vue";
+import BookService from "../pages/BookService.vue";
+import Support from "../pages/Support.vue";
+import Env from "../pages/Env.vue";
 
 const routes = [
 	{ path: "/", component: Home },
@@ -40,6 +43,18 @@ const routes = [
 	{
 		path: "/open-collections/:id",
 		component: OpenCollection,
+	},
+	{
+		path: "/support",
+		component: Support,
+	},
+	{
+		path: "/support/book-service",
+		component: BookService,
+	},
+	{
+		path: "/support/env",
+		component: Env,
 	},
 ];
 
