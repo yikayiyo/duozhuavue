@@ -11,33 +11,51 @@
 			border-t-0.5 border-b-0.5 border-true-gray-300
 		"
 	>
-		<a class="is-active" href="/book">
-			<span
-				class="
-					relative
-					after:block
-					after:absolute
-					after:inset-x-0
-					after:-bottom-3.5
-					after:h-0.5
-					after:rounded-full
-					after:bg-black
-				"
-				>图书</span
-			>
-		</a>
-		<a href="/clothing"><span>服饰</span></a>
-		<a href="/electronics"><span>电子</span></a>
-		<a href="/original"><span>原创商品</span></a>
+		<router-link :active-class="$route.path === '/' ? 'is-active' : ''" to="/">
+			<span>图书</span>
+		</router-link>
+		<router-link
+			to="/clothing"
+			:active-class="$route.path === '/clothing' ? 'is-active' : ''"
+			><span>服饰</span></router-link
+		>
+		<router-link
+			to="/electronics"
+			:active-class="$route.path === '/electronics' ? 'is-active' : ''"
+			><span>电子</span></router-link
+		>
+		<router-link
+			to="/original"
+			:active-class="$route.path === '/original' ? 'is-active' : ''"
+			><span>原创商品</span></router-link
+		>
 	</div>
 </template>
 
 <script>
-export default {};
+export default {
+	name: "NavHeader",
+};
 </script>
 
 <style scoped>
 .is-active {
 	color: rgb(51, 51, 51);
+}
+
+.is-active span {
+	position: relative;
+}
+
+.is-active span::after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -15px;
+	height: 2px;
+	border-radius: 999px;
+	background-color: black;
 }
 </style>
