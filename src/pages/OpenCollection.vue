@@ -62,7 +62,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="oc-nav sticky top-0 font-medium text-sold-out bg-white">
+		<div class="oc-nav sticky top-0 font-medium text-sold-out bg-white z-50">
 			<nav
 				class="
 					flex
