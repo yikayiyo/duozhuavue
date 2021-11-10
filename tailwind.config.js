@@ -57,8 +57,10 @@ module.exports = {
 				"search-input": "24px",
 				category: "1.4",
 				1.5: "1.5",
+				1.56: "1.56",
 				1.6: "1.6",
 				1.69: "1.69",
+				1.8: "1.8",
 			},
 			minWidth: {
 				4: "16px",
@@ -116,6 +118,7 @@ module.exports = {
 		},
 		maxHeight: {
 			30: "7.5rem",
+			"7.2em": "7.2em",
 			full: "100%",
 		},
 		lineHeight: {
@@ -169,9 +172,11 @@ module.exports = {
 			20: "80px",
 			"-8.75": "-35px",
 			auto: "auto",
+			"1.6em": "1.6em",
 		},
 		padding: {
 			1: "4px",
+			"1em": "1em",
 			1.25: "5px",
 			1.5: "6px",
 			1.875: "7.5px",

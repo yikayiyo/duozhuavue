@@ -1,6 +1,6 @@
 <template>
 	<div class="container-wrapper text-is-active relative">
-		<div class="book-wrapper">
+		<div class="book-wrapper pb-12.75">
 			<div class="book-header relative px-3.75 pt-7.5 pb-7 overflow-hidden">
 				<div
 					class="image-wrapper absolute -inset-50 z-10"
@@ -47,6 +47,70 @@
 				</div>
 				<douban-rating :rating="book.doubanRating" :isbn="book.isbn13" />
 				<duozhuayu-services />
+				<div class="book-detail-wrapper mt-3.75 pt-2.5 pb-3.75">
+					<h2 class="text-lg font-medium leading-1.56 mb-2">简介和目录</h2>
+					<div class="book-detail mb-7.5">
+						<div
+							class="
+								content
+								text-shiwu
+								leading-1.8
+								break-words
+								whitespace-pre-wrap
+							"
+							:class="collapsed ? 'collapsed' : ''"
+						>
+							<div class="book-summary mb-1.6em" v-html="book.summary"></div>
+							<div
+								class="book-author-intro mb-1.6em"
+								v-html="book.authorIntro"
+							></div>
+							<div class="book-catalog" v-html="book.catalog"></div>
+						</div>
+						<div
+							class="
+								read-more
+								flex
+								text-hsh text-load
+								mt-3
+								py-1.25
+								px-1em
+								items-center
+								justify-center
+							"
+						>
+							<button @click="toggleCollapsed">
+								{{ this.collapsed ? "查看更多" : "收起" }}
+							</button>
+							<svg
+								v-if="collapsed"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-hicon"
+							>
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+							<svg
+								v-if="!collapsed"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-hicon"
+							>
+								<polyline points="18 15 12 9 6 15"></polyline>
+							</svg>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<cart-footer></cart-footer>
@@ -68,8 +132,14 @@ export default {
 	data() {
 		return {
 			id: this.$route.params.bookId,
+			collapsed: true,
 			book: {},
 		};
+	},
+	methods: {
+		toggleCollapsed() {
+			this.collapsed = !this.collapsed;
+		},
 	},
 	computed: {
 		imageWrapperStyle() {
@@ -86,6 +156,13 @@ export default {
 		},
 		price() {
 			return (this.book.originalPrice / 100).toFixed(2);
+		},
+		bookSummary() {
+			let res = [];
+			if (this.book.summary) {
+				res = this.book.summary.split("\n");
+			}
+			return res;
 		},
 	},
 	apollo: {
@@ -127,5 +204,10 @@ export default {
 }
 .tag::after {
 	content: ":";
+}
+
+.collapsed {
+	max-height: 7.2em;
+	overflow: hidden;
 }
 </style>
