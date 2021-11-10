@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../pages/Home.vue";
+import Sell from "../pages/Sell.vue";
+import Cart from "../pages/Cart.vue";
+import User from "../pages/User.vue";
 import Book from "../pages/Book.vue";
 import Clothing from "../pages/Clothing.vue";
 import Electronics from "../pages/Electronics.vue";
@@ -14,11 +17,14 @@ import Support from "../pages/Support.vue";
 import Env from "../pages/Env.vue";
 
 const routes = [
-	{ path: "/", component: Home },
+	{ path: "/", redirect: "/book" },
 	{ path: "/clothing", component: Clothing },
 	{ path: "/electronics", component: Electronics },
 	{ path: "/original", component: Original },
-	{ path: "/book", redirect: "/" },
+	{ path: "/book", component: Home },
+	{ path: "/sell", component: Sell },
+	{ path: "/cart", component: Cart },
+	{ path: "/users/:userId", component: User },
 	{ path: "/books/:bookId", component: Book },
 	{
 		path: "/search/book",

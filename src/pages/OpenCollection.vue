@@ -118,12 +118,12 @@
 			</div>
 		</div>
 	</div>
-	<nav-footer></nav-footer>
+	<oc-footer></oc-footer>
 </template>
 
 <script>
 import gql from "graphql-tag";
-import NavFooter from "../components/NavFooter/NavFooter.vue";
+import OcFooter from "../components/NavFooter/OcFooter.vue";
 import OcItem from "../components/MainSection/OcItem.vue";
 export default {
 	data() {
@@ -146,7 +146,7 @@ export default {
 		},
 	},
 	components: {
-		NavFooter,
+		OcFooter,
 		OcItem,
 	},
 	apollo: {

@@ -1,6 +1,6 @@
 <template>
 	<nav-header></nav-header>
-	<div class="">
+	<div class="home">
 		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
 		<home-section></home-section>
 	</div>

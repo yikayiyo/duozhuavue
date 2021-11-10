@@ -3,11 +3,8 @@
 </template>
 
 <script>
-import NavHeader from "../NavHeader/NavHeader.vue";
 export default {
-	components: {
-		NavHeader,
-	},
+	name: "MainSection",
 };
 </script>
 

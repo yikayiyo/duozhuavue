@@ -11,7 +11,10 @@
 			border-t-0.5 border-b-0.5 border-true-gray-300
 		"
 	>
-		<router-link :active-class="$route.path === '/' ? 'is-active' : ''" to="/">
+		<router-link
+			:active-class="$route.path === '/book' ? 'is-active' : ''"
+			to="/book"
+		>
 			<span>图书</span>
 		</router-link>
 		<router-link
