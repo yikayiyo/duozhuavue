@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeWrapper from "../pages/HomeWrapper.vue";
 import HomePage from "../pages/HomePage.vue";
 import Sell from "../pages/Sell.vue";
+import SellBook from "../pages/SellBook.vue";
+import SellClothing from "../pages/SellClothing.vue";
+import SellElectronics from "../pages/SellElectronics.vue";
+
 import Cart from "../pages/Cart.vue";
 import User from "../pages/User.vue";
 import Book from "../pages/Book.vue";
@@ -30,7 +34,24 @@ const routes = [
 		],
 	},
 
-	{ path: "/sell", component: Sell },
+	{
+		path: "/sell",
+		component: Sell,
+		children: [
+			{
+				path: "",
+				component: SellBook,
+			},
+			{
+				path: "clothing",
+				component: SellClothing,
+			},
+			{
+				path: "electronics",
+				component: SellElectronics,
+			},
+		],
+	},
 	{ path: "/cart", component: Cart },
 	{ path: "/users/:userId", component: User },
 	{ path: "/books/:bookId", component: Book },
