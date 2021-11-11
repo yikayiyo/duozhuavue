@@ -3,6 +3,7 @@
 		class="
 			sell-nav-header-wrapper
 			sticky
+			top-0
 			text-sold-out text-base
 			h-12
 			bg-white
