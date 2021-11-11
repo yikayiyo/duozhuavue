@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../pages/Home.vue";
+import HomeWrapper from "../pages/HomeWrapper.vue";
+import HomePage from "../pages/HomePage.vue";
 import Sell from "../pages/Sell.vue";
 import Cart from "../pages/Cart.vue";
 import User from "../pages/User.vue";
 import Book from "../pages/Book.vue";
-import Clothing from "../pages/Clothing.vue";
-import Electronics from "../pages/Electronics.vue";
-import Original from "../pages/Original.vue";
+import ClothingPage from "../pages/ClothingPage.vue";
+import ElectronicsPage from "../pages/ElectronicsPage.vue";
+import OriginalPage from "../pages/OriginalPage.vue";
 import SearchBook from "../pages/SearchBook.vue";
 import SearchElectronics from "../pages/SearchElectronics.vue";
 import SearchClothing from "../pages/SearchClothing.vue";
@@ -17,11 +18,18 @@ import Support from "../pages/Support.vue";
 import Env from "../pages/Env.vue";
 
 const routes = [
-	{ path: "/", redirect: "/book" },
-	{ path: "/clothing", component: Clothing },
-	{ path: "/electronics", component: Electronics },
-	{ path: "/original", component: Original },
-	{ path: "/book", component: Home },
+	{
+		path: "/",
+		component: HomeWrapper,
+		children: [
+			{ path: "", redirect: "/book" },
+			{ path: "/book", component: HomePage },
+			{ path: "/clothing", component: ClothingPage },
+			{ path: "/electronics", component: ElectronicsPage },
+			{ path: "/original", component: OriginalPage },
+		],
+	},
+
 	{ path: "/sell", component: Sell },
 	{ path: "/cart", component: Cart },
 	{ path: "/users/:userId", component: User },

@@ -1,21 +1,11 @@
 <template>
 	<ul class="flex flex-row justify-between items-center">
 		<li class="flex-1 flex flex-col items-center justify-center">
-			<router-link
-				class="flex flex-col items-center"
-				to="/book"
-				:active-class="
-					['/', '/book', '/clothing', '/electronics', '/original'].includes(
-						$route.path
-					)
-						? 'home-active'
-						: ''
-				"
-			>
+			<router-link class="flex flex-col items-center" to="/book">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 200 200"
-					style="height: 30px; width: 30px"
+					style="height: 30px; width: 30px; fill: rgb(73, 119, 73)"
 				>
 					<path
 						d="M175 79.13l-67-50.5a13.47 13.47 0 00-15.94 0L25 79.13a10.78 10.78 0 00-4 12.12 12.35 12.35 0 0012 8.08c1.57 0 2.77.86 2.9 1.68-.46 4.51-4.33 44.41.22 59.36 1.9 6.27 6.5 10 12.28 10h103.19c5.93 0 10.66-3.9 12.33-10.17 4.33-16.22.62-54.8.17-59.21.12-.82 1.33-1.68 2.9-1.68a12.35 12.35 0 0012-8.08 10.78 10.78 0 00-3.99-12.1zm-54.77 72.28h-40.5v-22.15a14.09 14.09 0 0114.08-14.07h12.38a14.09 14.09 0 0114.08 14.07z"
@@ -86,21 +76,9 @@
 </template>
 
 <script>
-import NavFooterListItem from "./NavFooterListItem.vue";
 export default {
 	name: "NavFooterList",
-	components: {
-		NavFooterListItem,
-	},
 };
 </script>
 
-<style scoped>
-.home-active,
-.is-active {
-	color: rgb(73, 119, 73);
-}
-.home-active > svg {
-	fill: currentColor;
-}
-</style>
+<style scoped></style>

@@ -1,5 +1,4 @@
 <template>
-	<nav-header></nav-header>
 	<div class="flex flex-col pb-12">
 		<div class="pt-3.75 px-3.75 flex flex-wrap justify-between">
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
@@ -169,18 +168,11 @@
 			</div>
 		</div>
 	</div>
-	<nav-footer></nav-footer>
 </template>
 
 <script>
-import NavHeader from "../components/NavHeader/NavHeader.vue";
-import NavFooter from "../components/NavFooter/NavFooter.vue";
-
 export default {
-	components: {
-		NavHeader,
-		NavFooter,
-	},
+	name: "Original",
 };
 </script>
 

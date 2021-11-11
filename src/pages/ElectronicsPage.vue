@@ -1,5 +1,4 @@
 <template>
-	<nav-header></nav-header>
 	<search
 		:link="searchLink"
 		:placeholder="searchPlaceholder"
@@ -138,12 +137,9 @@
 			</div>
 		</div>
 	</div>
-	<nav-footer></nav-footer>
 </template>
 
 <script>
-import NavHeader from "../components/NavHeader/NavHeader.vue";
-import NavFooter from "../components/NavFooter/NavFooter.vue";
 import Search from "../components/Search/Search.vue";
 export default {
 	data() {
@@ -154,9 +150,7 @@ export default {
 		};
 	},
 	components: {
-		NavHeader,
 		Search,
-		NavFooter,
 	},
 };
 </script>
