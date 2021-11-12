@@ -5,7 +5,8 @@ import Sell from "../pages/Sell.vue";
 import SellBook from "../pages/SellBook.vue";
 import SellClothing from "../pages/SellClothing.vue";
 import SellElectronics from "../pages/SellElectronics.vue";
-
+import Login from "../pages/Login.vue";
+import SignUp from "../pages/SignUp.vue";
 import Cart from "../pages/Cart.vue";
 import User from "../pages/User.vue";
 import Book from "../pages/Book.vue";
@@ -33,7 +34,14 @@ const routes = [
 			{ path: "/original", component: OriginalPage },
 		],
 	},
-
+	{
+		path: "/signup",
+		component: SignUp,
+	},
+	{
+		path: "/login",
+		component: Login,
+	},
 	{
 		path: "/sell",
 		component: Sell,

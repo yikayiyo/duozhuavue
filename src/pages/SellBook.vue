@@ -113,7 +113,7 @@
 			<div class="mb-3.5 flex items-center justify-center">
 				<button
 					class="
-						shadow
+						hasShadow
 						text-lg
 						font-medium
 						text-white
@@ -165,7 +165,7 @@ export default {
 </script>
 
 <style scoped>
-.shadow {
+.hasShadow {
 	box-shadow: rgba(102, 102, 102, 0.5) 0px 1px 6px 0px;
 }
 </style>
