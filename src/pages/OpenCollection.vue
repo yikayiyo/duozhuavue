@@ -1,5 +1,7 @@
 <template>
-	<div class="oc-wrapper">
+	<div v-if="$apollo.queries.collection.loading">Loading</div>
+	<div v-else-if="error" class="text-label p-3.75">{{ error }}</div>
+	<div class="oc-wrapper" v-else>
 		<div
 			class="
 				oc-header
@@ -117,8 +119,8 @@
 				<div class="w-10 border-t border-current"></div>
 			</div>
 		</div>
+		<oc-footer></oc-footer>
 	</div>
-	<oc-footer></oc-footer>
 </template>
 
 <script>
@@ -130,6 +132,7 @@ export default {
 		return {
 			id: this.$route.params.id,
 			collection: {},
+			error: "",
 		};
 	},
 	computed: {
@@ -190,6 +193,9 @@ export default {
 				return {
 					collectionId: this.id,
 				};
+			},
+			error(err) {
+				this.error = err.message;
 			},
 		},
 	},
