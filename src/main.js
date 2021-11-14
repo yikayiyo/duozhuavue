@@ -5,4 +5,8 @@ import router from "./router";
 import store from "./store";
 import apolloProvider from "./graphql";
 
+// router.beforeEach(async (to, from) => {
+
+// });
+
 createApp(App).use(apolloProvider).use(router).use(store).mount("#app");

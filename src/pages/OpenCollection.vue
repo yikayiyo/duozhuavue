@@ -1,6 +1,13 @@
 <template>
 	<div v-if="$apollo.queries.collection.loading">Loading</div>
-	<div v-else-if="error" class="text-label p-3.75">{{ error }}</div>
+	<div v-else-if="error" class="p-3.75">
+		<div class="error-info text-label">{{ error }}</div>
+		<router-link
+			to="/login"
+			class="inline-block mt-3 text-menu-active border p-4"
+			>Login</router-link
+		>
+	</div>
 	<div class="oc-wrapper" v-else>
 		<div
 			class="

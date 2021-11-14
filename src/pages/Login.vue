@@ -68,6 +68,12 @@ const SIGN_IN_MUTATION = gql`
 		signIn(email: $email, password: $password)
 	}
 `;
+
+const LOGIN_MUTATION = gql`
+	mutation {
+		loginMutation @client
+	}
+`;
 export default {
 	name: "Login",
 	data() {
@@ -119,6 +125,9 @@ export default {
 						// 结果
 						console.log(res);
 						localStorage.setItem("token", res.data.signIn);
+						this.$apollo.mutate({
+							mutation: LOGIN_MUTATION,
+						});
 						this.$router.push("/book");
 					})
 					.catch((error) => {
