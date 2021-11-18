@@ -35,11 +35,11 @@
 			<div
 				class="oc-list-wrapper mx-3.75 flex overflow-x-auto pb-8.75 -mb-8.75"
 			>
-				<div v-if="$apollo.queries.collections.loading">Loading...</div>
+				<div v-if="loading">Loading...</div>
 				<div class="text-label" v-else-if="error">{{ error }}</div>
 				<div v-else>
 					<oc-list-item
-						v-for="collection of collections"
+						v-for="collection of result.collections"
 						:collection="collection"
 						:key="collection.id"
 					></oc-list-item>
@@ -100,44 +100,43 @@
 import OcListItem from "./OcListItem.vue";
 import BookListItem from "./BookListItem.vue";
 import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
+import { watch } from "@vue/runtime-core";
 
 export default {
-	data() {
+	name: "HomeSection",
+	setup() {
+		const GET_COLLECTIONS = gql`
+			query getCollections {
+				collections {
+					id
+					name
+					items {
+						title
+					}
+					contributors {
+						name
+					}
+					proposer {
+						name
+						avatar
+					}
+					image
+					maskColor
+				}
+			}
+		`;
+		const { result, loading, error } = useQuery(GET_COLLECTIONS);
+		watch(result, (value) => console.log(value));
 		return {
-			collections: [],
-			error: "",
+			result,
+			loading,
+			error,
 		};
 	},
 	components: {
 		OcListItem,
 		BookListItem,
-	},
-	apollo: {
-		collections: {
-			query: gql`
-				query Query {
-					collections {
-						id
-						name
-						items {
-							title
-						}
-						contributors {
-							name
-						}
-						proposer {
-							name
-							avatar
-						}
-						image
-						maskColor
-					}
-				}
-			`,
-			error(error) {
-				this.error = error.message;
-			},
-		},
 	},
 };
 </script>

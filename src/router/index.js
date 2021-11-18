@@ -14,6 +14,7 @@ import ClothingPage from "../pages/ClothingPage.vue";
 import ElectronicsPage from "../pages/ElectronicsPage.vue";
 import OriginalPage from "../pages/OriginalPage.vue";
 import SearchBook from "../pages/SearchBook.vue";
+import SearchBookInfo from "../pages/SearchBookInfo.vue";
 import SearchElectronics from "../pages/SearchElectronics.vue";
 import SearchClothing from "../pages/SearchClothing.vue";
 import OpenCollections from "../pages/OpenCollections.vue";
@@ -61,11 +62,22 @@ const routes = [
 		],
 	},
 	{ path: "/cart", component: Cart },
-	{ path: "/users/:userId", component: User },
+	{
+		path: "/users/:userId",
+		component: User,
+		beforeEnter: (to, from) => {
+			// 如果未登录，跳转到登录界面
+			return false;
+		},
+	},
 	{ path: "/books/:bookId", component: Book },
 	{
 		path: "/search/book",
 		component: SearchBook,
+	},
+	{
+		path: "/search/book/:info",
+		component: SearchBookInfo,
 	},
 	{
 		path: "/search/clothing",

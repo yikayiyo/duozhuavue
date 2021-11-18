@@ -1,6 +1,10 @@
 <template>
 	<div class="home">
-		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
+		<search
+			link="/search/book"
+			placeholder="搜索书名、作者、分类、ISBN"
+			showIcon="true"
+		/>
 		<home-section></home-section>
 	</div>
 </template>
@@ -11,13 +15,6 @@ import HomeSection from "../components/Home/HomeSection.vue";
 
 export default {
 	name: "HomePage",
-	data() {
-		return {
-			placeholder: "搜索书名、作者、分类、ISBN",
-			link: "/search/book",
-			showIcon: true,
-		};
-	},
 	components: {
 		Search,
 		HomeSection,

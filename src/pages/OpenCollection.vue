@@ -1,13 +1,6 @@
 <template>
-	<div v-if="$apollo.queries.collection.loading">Loading</div>
-	<div v-else-if="error" class="p-3.75">
-		<div class="error-info text-label">{{ error }}</div>
-		<router-link
-			to="/login"
-			class="inline-block mt-3 text-menu-active border p-4"
-			>Login</router-link
-		>
-	</div>
+	<div v-if="loading">Loading</div>
+	<div v-else-if="error" class="p-3.75">error</div>
 	<div class="oc-wrapper" v-else>
 		<div
 			class="
@@ -36,7 +29,7 @@
 								bg-menu
 							"
 						>
-							<img alt="" :src="collection?.proposer?.avatar" />
+							<img alt="user avatar" :src="result.collection.proposer.avatar" />
 						</span>
 						<div class="ml-2.5 max-w-oc">
 							<div class="name flex text-base font-medium">
@@ -47,7 +40,7 @@
 										whitespace-nowrap
 									"
 								>
-									{{ collection.proposer?.name }}
+									{{ result.collection.proposer.name }}
 								</p>
 								<img
 									alt="客座鱼编"
@@ -60,14 +53,14 @@
 					</div>
 				</a>
 				<h1 class="mb-4 text-3xl font-medium">
-					{{ collection?.name }}
+					{{ result.collection.name }}
 				</h1>
-				<span class="leading-1.6">{{ collection?.description }}</span>
+				<span class="leading-1.6">{{ result.collection.description }}</span>
 			</div>
 			<div class="bottom mb-7.5">
 				<span>
-					{{ collection?.contributors?.length }}人推荐了
-					{{ collection?.items?.length }}本书
+					{{ result.collection.contributors.length }}人推荐了
+					{{ result.collection.items.length }}本书
 				</span>
 			</div>
 		</div>
@@ -106,7 +99,7 @@
 		</div>
 		<div class="oc-content">
 			<oc-item
-				v-for="conb of collection.contributions"
+				v-for="conb of result.collection.contributions"
 				:conb="conb"
 				:key="conb.id"
 			></oc-item>
@@ -134,77 +127,71 @@
 import gql from "graphql-tag";
 import OcFooter from "../components/NavFooter/OcFooter.vue";
 import OcItem from "../components/MainSection/OcItem.vue";
+import { useQuery } from "@vue/apollo-composable";
+import { useRoute } from "vue-router";
+import { computed } from "@vue/reactivity";
 export default {
-	data() {
-		return {
-			id: this.$route.params.id,
-			collection: {},
-			error: "",
-		};
-	},
-	computed: {
-		ocHeaderStyleObj() {
+	name: "OpenCollection",
+	setup() {
+		const route = useRoute();
+		const GET_COLLECTION = gql`
+			query getCollection($collectionId: ID!) {
+				collection(id: $collectionId) {
+					name
+					description
+					image
+					maskColor
+					proposer {
+						name
+						avatar
+					}
+					items {
+						title
+					}
+					contributors {
+						name
+					}
+					contributions {
+						book {
+							id
+							title
+							rawAuthor
+							doubanRating
+							image
+						}
+						contributor {
+							name
+							avatar
+						}
+						reason
+					}
+				}
+			}
+		`;
+		const { result, loading, error } = useQuery(GET_COLLECTION, {
+			collectionId: route.params.id,
+		});
+		const ocHeaderStyleObj = computed(() => {
 			return {
 				backgroundImage: `linear-gradient(
 							to top,
-							${this.collection.maskColor + "99"},
-							${this.collection.maskColor} 56%
-						), url(${this.collection.image})`,
+							${result.value.collection.maskColor + "99"},
+							${result.value.collection.maskColor} 56%
+						), url(${result.value.collection.image})`,
 				backgroundSize: `cover, cover`,
 				backgroundPosition: `center top, center center`,
 			};
-		},
+		});
+		return {
+			result,
+			loading,
+			error,
+			ocHeaderStyleObj,
+		};
 	},
 	components: {
 		OcFooter,
 		OcItem,
-	},
-	apollo: {
-		collection: {
-			query: gql`
-				query Query($collectionId: ID!) {
-					collection(id: $collectionId) {
-						name
-						description
-						image
-						maskColor
-						proposer {
-							name
-							avatar
-						}
-						items {
-							title
-						}
-						contributors {
-							name
-						}
-						contributions {
-							book {
-								id
-								title
-								rawAuthor
-								doubanRating
-								image
-							}
-							contributor {
-								name
-								avatar
-							}
-							reason
-						}
-					}
-				}
-			`,
-			// 静态参数
-			variables() {
-				return {
-					collectionId: this.id,
-				};
-			},
-			error(err) {
-				this.error = err.message;
-			},
-		},
 	},
 };
 </script>

@@ -122,76 +122,84 @@ import gql from "graphql-tag";
 import DoubanRating from "../components/MainSection/DoubanRating.vue";
 import DuozhuayuServices from "../components/MainSection/DuozhuayuServices.vue";
 import CartFooter from "../components/CartFooter.vue";
+import { useRoute } from "vue-router";
+import { useQuery, useResult } from "@vue/apollo-composable";
+import { ref, computed } from "@vue/reactivity";
+import { watch } from "@vue/runtime-core";
 export default {
 	name: "Book",
+	setup() {
+		//状态
+		const collapsed = ref(false);
+		//获取book信息
+		const route = useRoute();
+		const GET_BOOK = gql`
+			query getABook($bookId: ID!) {
+				book(id: $bookId) {
+					title
+					isbn13
+					rawAuthor
+					publisher
+					publishDate
+					binding
+					doubanRating
+					authorIntro
+					originalPrice
+					summary
+					catalog
+					image
+				}
+			}
+		`;
+		const { result, loading, error } = useQuery(GET_BOOK, {
+			bookId: route.params.bookId,
+		});
+		const book = useResult(result, {}, (data) => data.book);
+		// 计算属性
+		const imageWrapperStyle = computed(() => {
+			return {
+				background: `center center / cover rgb(214, 186, 140)`,
+				filter: "blur(25px)",
+				backgroundImage: `url(${book.value.image})`,
+			};
+		});
+		const imageStyle = computed(() => ({
+			boxShadow: `rgb(0,0,0,20%) 0px 1px 10px`,
+		}));
+		const price = computed(() => {
+			return (book.value.originalPrice / 100).toFixed(2);
+		});
+		const bookSummary = computed(() => {
+			let res = [];
+			if (book.value.summary) {
+				res = book.value.summary.split("\n");
+			}
+			return res;
+		});
+
+		return {
+			collapsed,
+			book,
+			loading,
+			error,
+			imageWrapperStyle,
+			imageStyle,
+			price,
+			bookSummary,
+		};
+	},
 	components: {
 		DoubanRating,
 		DuozhuayuServices,
 		CartFooter,
 	},
-	data() {
-		return {
-			id: this.$route.params.bookId,
-			collapsed: true,
-			book: {},
-		};
-	},
+
 	methods: {
 		toggleCollapsed() {
 			this.collapsed = !this.collapsed;
 		},
 	},
-	computed: {
-		imageWrapperStyle() {
-			return {
-				background: `center center / cover rgb(214, 186, 140)`,
-				filter: "blur(25px)",
-				backgroundImage: `url(${this.book.image})`,
-			};
-		},
-		imageStyle() {
-			return {
-				boxShadow: `rgb(0,0,0,20%) 0px 1px 10px`,
-			};
-		},
-		price() {
-			return (this.book.originalPrice / 100).toFixed(2);
-		},
-		bookSummary() {
-			let res = [];
-			if (this.book.summary) {
-				res = this.book.summary.split("\n");
-			}
-			return res;
-		},
-	},
-	apollo: {
-		book: {
-			query: gql`
-				query getABook($bookId: ID!) {
-					book(id: $bookId) {
-						title
-						isbn13
-						rawAuthor
-						publisher
-						publishDate
-						binding
-						doubanRating
-						authorIntro
-						originalPrice
-						summary
-						catalog
-						image
-					}
-				}
-			`,
-			variables() {
-				return {
-					bookId: this.id,
-				};
-			},
-		},
-	},
+	computed: {},
 };
 </script>
 

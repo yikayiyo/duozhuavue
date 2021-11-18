@@ -6,7 +6,7 @@
 		<form @submit.prevent="login" class="flex flex-col">
 			<label for="email">邮箱</label>
 			<input
-				class="bg-menu py-2.25 pl-2 rounded"
+				class="bg-menu py-2.25 pl-2 rounded mt-1"
 				type="email"
 				name="email"
 				v-model="email"
@@ -15,9 +15,9 @@
 			<p class="text-red-600 text-xs py-1" v-if="errors.email">
 				{{ errors.email }}
 			</p>
-			<label for="password">密码</label>
+			<label for="password" class="mt-2">密码</label>
 			<input
-				class="bg-menu py-2.25 pl-2 rounded"
+				class="bg-menu py-2.25 pl-2 rounded mt-1"
 				type="password"
 				name="password"
 				v-model="password"
@@ -37,6 +37,7 @@
 					px-9
 					rounded-full
 					shadow
+					border
 				"
 				type="submit"
 			>

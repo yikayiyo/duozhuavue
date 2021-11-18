@@ -4,7 +4,6 @@ import {
 	InMemoryCache,
 } from "@apollo/client/core";
 import { setContext } from "@apollo/client/link/context";
-import { createApolloProvider } from "@vue/apollo-option";
 import gql from "graphql-tag";
 
 const IS_LOGGED_IN = gql`
@@ -18,6 +17,7 @@ const cache = new InMemoryCache();
 const httpLink = createHttpLink({
 	uri: "http://localhost:5001/graphql",
 });
+
 const authLink = setContext((_, { headers }) => {
 	const token = localStorage.getItem("token");
 	return {
@@ -41,7 +41,7 @@ const resolvers = {
 	},
 };
 
-const apolloClient = new ApolloClient({
+export const apolloClient = new ApolloClient({
 	link: authLink.concat(httpLink),
 	cache,
 	resolvers,
@@ -62,14 +62,3 @@ apolloClient.onResetStore(() =>
 		},
 	})
 );
-
-const apolloProvider = createApolloProvider({
-	defaultClient: apolloClient,
-	defaultOptions: {
-		$query: {
-			fetchPolicy: "cache-and-network",
-		},
-	},
-});
-
-export default apolloProvider;

@@ -1,12 +1,15 @@
-import { createApp } from "vue";
+import { createApp, h, provide } from "vue";
+import { DefaultApolloClient } from "@vue/apollo-composable";
+import { apolloClient } from "./graphql";
 import App from "./App.vue";
 import "./index.css";
 import router from "./router";
-import store from "./store";
-import apolloProvider from "./graphql";
 
-// router.beforeEach(async (to, from) => {
+const app = createApp({
+	setup() {
+		provide(DefaultApolloClient, apolloClient);
+	},
+	render: () => h(App),
+});
 
-// });
-
-createApp(App).use(apolloProvider).use(router).use(store).mount("#app");
+app.use(router).mount("#app");
