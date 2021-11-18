@@ -115,6 +115,7 @@ module.exports = {
 			full: "100%",
 			screen: "100vh",
 			auto: "auto",
+			hicon: "1.4em",
 			"oc-item": "178px",
 		},
 		maxHeight: {
