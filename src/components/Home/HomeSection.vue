@@ -32,40 +32,18 @@
 					</div>
 				</div>
 			</router-link>
-
-			<div v-if="loading" class="flex w-full justify-center">
-				<svg
-					class="animate-spin h-5 w-5 text-white"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-				>
-					<circle
-						class="opacity-25"
-						cx="12"
-						cy="12"
-						r="10"
-						stroke="black"
-						stroke-width="2"
-					></circle>
-					<path
-						class="opacity-75"
-						fill="currentColor"
-						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-					></path>
-				</svg>
-			</div>
+			<loading v-if="loading" />
 			<div class="text-label" v-else-if="error">{{ error }}</div>
 			<div
 				v-else
 				class="oc-list-wrapper mx-3.75 flex overflow-x-auto pb-8.75 -mb-8.75"
 			>
 				<oc-list-item
-					v-for="collection of result.collections"
+					v-for="collection of collections"
 					:collection="collection"
 					:key="collection.id"
 				></oc-list-item>
-				<a href="">
+				<router-link to="/open-collections">
 					<div
 						class="
 							flex flex-col
@@ -97,9 +75,9 @@
 								</g>
 							</svg>
 						</span>
-						<span class="text-shiwu"> {{ result.collections.length }}个 </span>
+						<span class="text-shiwu"> {{ collections.length }}个 </span>
 					</div>
-				</a>
+				</router-link>
 			</div>
 		</div>
 
@@ -156,8 +134,8 @@
 import OcListItem from "./OcListItem.vue";
 import BookListItem from "./BookListItem.vue";
 import gql from "graphql-tag";
-import { useQuery } from "@vue/apollo-composable";
-import { watch } from "@vue/runtime-core";
+import { useQuery, useResult } from "@vue/apollo-composable";
+import Loading from "../Loading/Loading.vue";
 
 export default {
 	name: "HomeSection",
@@ -183,9 +161,9 @@ export default {
 			}
 		`;
 		const { result, loading, error } = useQuery(GET_COLLECTIONS);
-		watch(result, (value) => console.log(value));
+		const collections = useResult(result, []);
 		return {
-			result,
+			collections,
 			loading,
 			error,
 		};
@@ -193,6 +171,7 @@ export default {
 	components: {
 		OcListItem,
 		BookListItem,
+		Loading,
 	},
 };
 </script>

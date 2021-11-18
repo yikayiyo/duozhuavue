@@ -108,7 +108,7 @@ const routes = [
 		component: BookService,
 	},
 	{
-		path: "/support/env",
+		path: "/support/environmental-exploration",
 		component: Env,
 	},
 ];

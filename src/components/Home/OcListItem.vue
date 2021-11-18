@@ -77,7 +77,7 @@ export default {
 					this.collection?.maskColor + "CC"
 				} 0%, ${this.collection?.maskColor + "4D"} 35%, ${
 					this.collection?.maskColor
-				} 89%) center top / auto no-repeat, url(${
+				} 59%) center top / auto no-repeat, url(${
 					this.collection?.image
 				})center center / cover no-repeat`,
 			};

@@ -1,12 +1,25 @@
 <template>
-	<div class="container-wrapper text-is-active relative">
+	<loading v-if="loading" />
+	<p v-else-if="error">{{ error }}</p>
+	<div v-else class="container-wrapper text-is-active relative">
 		<div class="book-wrapper pb-12.75">
-			<div class="book-header relative px-3.75 pt-7.5 pb-7 overflow-hidden">
+			<div
+				class="
+					book-header
+					relative
+					px-3.75
+					pt-7.5
+					pb-7
+					overflow-hidden
+					flex flex-col
+					items-center
+				"
+			>
 				<div
 					class="image-wrapper absolute -inset-50 z-10"
 					:style="imageWrapperStyle"
 				></div>
-				<div class="image w-37.5 h-auto my-0 mx-auto relative z-20">
+				<div class="image w-37.5 h-auto relative z-20">
 					<img
 						class="max-w-full max-h-full"
 						:src="book.image"
@@ -80,7 +93,7 @@
 							"
 						>
 							<button @click="toggleCollapsed">
-								{{ this.collapsed ? "查看更多" : "收起" }}
+								{{ collapsed ? "查看更多" : "收起" }}
 							</button>
 							<svg
 								v-if="collapsed"
@@ -122,15 +135,15 @@ import gql from "graphql-tag";
 import DoubanRating from "../components/MainSection/DoubanRating.vue";
 import DuozhuayuServices from "../components/MainSection/DuozhuayuServices.vue";
 import CartFooter from "../components/CartFooter.vue";
+import Loading from "../components/Loading/Loading.vue";
 import { useRoute } from "vue-router";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { ref, computed } from "@vue/reactivity";
-import { watch } from "@vue/runtime-core";
 export default {
 	name: "Book",
 	setup() {
 		//状态
-		const collapsed = ref(false);
+		const collapsed = ref(true);
 		//获取book信息
 		const route = useRoute();
 		const GET_BOOK = gql`
@@ -169,13 +182,6 @@ export default {
 		const price = computed(() => {
 			return (book.value.originalPrice / 100).toFixed(2);
 		});
-		const bookSummary = computed(() => {
-			let res = [];
-			if (book.value.summary) {
-				res = book.value.summary.split("\n");
-			}
-			return res;
-		});
 
 		return {
 			collapsed,
@@ -185,13 +191,13 @@ export default {
 			imageWrapperStyle,
 			imageStyle,
 			price,
-			bookSummary,
 		};
 	},
 	components: {
 		DoubanRating,
 		DuozhuayuServices,
 		CartFooter,
+		Loading,
 	},
 
 	methods: {
@@ -199,7 +205,6 @@ export default {
 			this.collapsed = !this.collapsed;
 		},
 	},
-	computed: {},
 };
 </script>
 
@@ -217,5 +222,13 @@ export default {
 .collapsed {
 	max-height: 7.2em;
 	overflow: hidden;
+}
+
+.image-wrapper::before {
+	content: "";
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

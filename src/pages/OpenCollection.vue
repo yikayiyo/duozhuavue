@@ -1,5 +1,5 @@
 <template>
-	<div v-if="loading">Loading</div>
+	<loading v-if="loading" />
 	<div v-else-if="error" class="p-3.75">error</div>
 	<div class="oc-wrapper" v-else>
 		<div
@@ -29,7 +29,7 @@
 								bg-menu
 							"
 						>
-							<img alt="user avatar" :src="result.collection.proposer.avatar" />
+							<img alt="user avatar" :src="collection.proposer.avatar" />
 						</span>
 						<div class="ml-2.5 max-w-oc">
 							<div class="name flex text-base font-medium">
@@ -40,11 +40,11 @@
 										whitespace-nowrap
 									"
 								>
-									{{ result.collection.proposer.name }}
+									{{ collection.proposer.name }}
 								</p>
 								<img
 									alt="客座鱼编"
-									src="https://asset.duozhuayu.com/oc/proposer_badge.png"
+									src="/public/proposer_badge.png"
 									class="jsx-1779555337 w-21 ml-2 flex-shrink-0"
 								/>
 							</div>
@@ -53,14 +53,14 @@
 					</div>
 				</a>
 				<h1 class="mb-4 text-3xl font-medium">
-					{{ result.collection.name }}
+					{{ collection.name }}
 				</h1>
-				<span class="leading-1.6">{{ result.collection.description }}</span>
+				<span class="leading-1.6">{{ collection.description }}</span>
 			</div>
 			<div class="bottom mb-7.5">
 				<span>
-					{{ result.collection.contributors.length }}人推荐了
-					{{ result.collection.items.length }}本书
+					{{ collection.contributors.length }} 人推荐了
+					{{ collection.items.length }} 本书
 				</span>
 			</div>
 		</div>
@@ -99,7 +99,7 @@
 		</div>
 		<div class="oc-content">
 			<oc-item
-				v-for="conb of result.collection.contributions"
+				v-for="conb of collection.contributions"
 				:conb="conb"
 				:key="conb.id"
 			></oc-item>
@@ -127,7 +127,8 @@
 import gql from "graphql-tag";
 import OcFooter from "../components/NavFooter/OcFooter.vue";
 import OcItem from "../components/MainSection/OcItem.vue";
-import { useQuery } from "@vue/apollo-composable";
+import Loading from "../components/Loading/Loading.vue";
+import { useQuery, useResult } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import { computed } from "@vue/reactivity";
 export default {
@@ -171,19 +172,21 @@ export default {
 		const { result, loading, error } = useQuery(GET_COLLECTION, {
 			collectionId: route.params.id,
 		});
+		const collection = useResult(result, null);
+		console.log(collection);
 		const ocHeaderStyleObj = computed(() => {
 			return {
 				backgroundImage: `linear-gradient(
 							to top,
-							${result.value.collection.maskColor + "99"},
-							${result.value.collection.maskColor} 56%
-						), url(${result.value.collection.image})`,
+							${collection.value.maskColor + "99"},
+							${collection.value.maskColor} 56%
+						), url(${collection.value.image})`,
 				backgroundSize: `cover, cover`,
 				backgroundPosition: `center top, center center`,
 			};
 		});
 		return {
-			result,
+			collection,
 			loading,
 			error,
 			ocHeaderStyleObj,
@@ -192,6 +195,7 @@ export default {
 	components: {
 		OcFooter,
 		OcItem,
+		Loading,
 	},
 };
 </script>
