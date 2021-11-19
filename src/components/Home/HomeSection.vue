@@ -133,33 +133,13 @@
 <script>
 import OcListItem from "./OcListItem.vue";
 import BookListItem from "./BookListItem.vue";
-import gql from "graphql-tag";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import Loading from "../Loading/Loading.vue";
+import { GET_COLLECTIONS } from "../../graphql/schema";
 
 export default {
 	name: "HomeSection",
 	setup() {
-		const GET_COLLECTIONS = gql`
-			query getCollections {
-				collections {
-					id
-					name
-					items {
-						title
-					}
-					contributors {
-						name
-					}
-					proposer {
-						name
-						avatar
-					}
-					image
-					maskColor
-				}
-			}
-		`;
 		const { result, loading, error } = useQuery(GET_COLLECTIONS);
 		const collections = useResult(result, []);
 		return {

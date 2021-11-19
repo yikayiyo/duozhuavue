@@ -3,28 +3,28 @@
 		<div class="icon-wrapper mt-20 w-1/3 mx-auto">
 			<div class="icon"></div>
 		</div>
-		<form @submit.prevent="login" class="flex flex-col">
+		<form @submit.prevent="signIn" class="flex flex-col">
 			<label for="email">邮箱</label>
 			<input
 				class="bg-menu py-2.25 pl-2 rounded mt-1"
-				type="email"
+				type="text"
 				name="email"
-				v-model="email"
+				v-model="signInForm.email"
 				@change="onInputChange"
 			/>
-			<p class="text-red-600 text-xs py-1" v-if="errors.email">
-				{{ errors.email }}
+			<p class="text-red-600 text-xs py-1" v-if="signInForm.errors.email">
+				{{ signInForm.errors.email }}
 			</p>
 			<label for="password" class="mt-2">密码</label>
 			<input
 				class="bg-menu py-2.25 pl-2 rounded mt-1"
 				type="password"
 				name="password"
-				v-model="password"
+				v-model="signInForm.password"
 				@change="onInputChange"
 			/>
-			<p class="text-red-600 text-xs py-1" v-if="errors.password">
-				{{ errors.password }}
+			<p class="text-red-600 text-xs py-1" v-if="signInForm.errors.password">
+				{{ signInForm.errors.password }}
 			</p>
 			<button
 				class="
@@ -63,78 +63,69 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
-const SIGN_IN_MUTATION = gql`
-	mutation SignInMutation($email: String!, $password: String!) {
-		signIn(email: $email, password: $password)
-	}
-`;
+import { SIGN_IN_MUTATION } from "../graphql/schema";
+import { useMutation } from "@vue/apollo-composable";
+import { reactive } from "@vue/reactivity";
 
-const LOGIN_MUTATION = gql`
-	mutation {
-		loginMutation @client
-	}
-`;
 export default {
 	name: "Login",
-	data() {
-		return {
+	setup() {
+		const signInForm = reactive({
 			email: "",
 			password: "",
 			errors: {
 				email: "",
 				password: "",
 			},
+		});
+		const {
+			mutate: signInMutation,
+			loading: signInLoading,
+			onError,
+		} = useMutation(SIGN_IN_MUTATION, () => ({
+			variables: {
+				email: signInForm.email,
+				password: signInForm.password,
+			},
+		}));
+
+		onError((error) => {
+			signInForm.errors.password = error;
+		});
+
+		return {
+			signInForm,
+			signInMutation,
+			signInLoading,
 		};
 	},
+
 	methods: {
 		onInputChange(e) {
-			this.errors = {
-				email: "",
-				password: "",
-			};
+			this.signInForm.errors.email = "";
+			this.signInForm.errors.password = "";
 		},
 		validateEmail(email) {
 			const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 			return re.test(email);
 		},
 		validateForm() {
-			if (!this.email) {
-				this.errors.email = "请输入邮箱地址";
+			if (!this.signInForm.email) {
+				this.signInForm.errors.email = "请输入邮箱地址";
 			}
-			if (!this.password) {
-				this.errors.password = "请输入密码";
+			if (!this.signInForm.password) {
+				this.signInForm.errors.password = "请输入密码";
 			}
-			if (this.email && !this.validateEmail(this.email)) {
-				this.errors.email = "请输入有效的邮箱地址";
+			if (this.signInForm.email && !this.validateEmail(this.signInForm.email)) {
+				this.signInForm.errors.email = "请输入有效的邮箱地址";
 			}
 		},
-		login() {
+		signIn() {
 			this.validateForm();
-			//login
-			if (this.email && this.password) {
-				// sent req to server
-				this.$apollo
-					.mutate({
-						mutation: SIGN_IN_MUTATION,
-						variables: {
-							email: this.email,
-							password: this.password,
-						},
-					})
-					.then((res) => {
-						// 结果
-						console.log(res);
-						localStorage.setItem("token", res.data.signIn);
-						this.$apollo.mutate({
-							mutation: LOGIN_MUTATION,
-						});
-						this.$router.push("/book");
-					})
-					.catch((error) => {
-						// 错误
-						this.errors.password = error;
-					});
+			if (this.signInForm.errors.email || this.signInForm.errors.password) {
+				return;
+			} else {
+				this.signInMutation();
 			}
 		},
 	},
@@ -144,7 +135,7 @@ export default {
 <style scoped>
 .icon {
 	padding-top: 100%;
-	background-image: url("/src/assets/logo.jpg");
+	background-image: url("/logo.jpg");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;

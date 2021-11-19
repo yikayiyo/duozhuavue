@@ -139,6 +139,7 @@ import Loading from "../components/Loading/Loading.vue";
 import { useRoute } from "vue-router";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { ref, computed } from "@vue/reactivity";
+import { GET_BOOK } from "../graphql/schema";
 export default {
 	name: "Book",
 	setup() {
@@ -146,24 +147,6 @@ export default {
 		const collapsed = ref(true);
 		//获取book信息
 		const route = useRoute();
-		const GET_BOOK = gql`
-			query getABook($bookId: ID!) {
-				book(id: $bookId) {
-					title
-					isbn13
-					rawAuthor
-					publisher
-					publishDate
-					binding
-					doubanRating
-					authorIntro
-					originalPrice
-					summary
-					catalog
-					image
-				}
-			}
-		`;
 		const { result, loading, error } = useQuery(GET_BOOK, {
 			bookId: route.params.bookId,
 		});
