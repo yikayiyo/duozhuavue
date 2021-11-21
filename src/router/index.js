@@ -65,10 +65,6 @@ const routes = [
 	{
 		path: "/users/:userId",
 		component: User,
-		beforeEnter: (to, from) => {
-			// 如果未登录，跳转到登录界面
-			return false;
-		},
 	},
 	{ path: "/books/:bookId", component: Book },
 	{

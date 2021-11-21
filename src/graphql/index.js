@@ -4,13 +4,7 @@ import {
 	InMemoryCache,
 } from "@apollo/client/core";
 import { setContext } from "@apollo/client/link/context";
-import gql from "graphql-tag";
-
-const IS_LOGGED_IN = gql`
-	query IsUserLoggedIn {
-		isLoggedIn @client
-	}
-`;
+import { typeDefs, IS_LOGGED_IN } from "../graphql/schema";
 
 const cache = new InMemoryCache();
 
@@ -30,13 +24,25 @@ const authLink = setContext((_, { headers }) => {
 
 const resolvers = {
 	Mutation: {
-		loginMutation: (_, __, { cache }) => {
+		signIn: (_, { id }, { cache }) => {
 			cache.writeQuery({
 				query: IS_LOGGED_IN,
 				data: {
-					isLoggedIn: !!localStorage.getItem("token"),
+					id,
+					loggedIn: true,
 				},
 			});
+			return true;
+		},
+		signOut: (_, __, { cache }) => {
+			cache.writeQuery({
+				query: IS_LOGGED_IN,
+				data: {
+					id: "",
+					loggedIn: false,
+				},
+			});
+			return true;
 		},
 	},
 };
@@ -44,13 +50,15 @@ const resolvers = {
 export const apolloClient = new ApolloClient({
 	link: authLink.concat(httpLink),
 	cache,
+	typeDefs,
 	resolvers,
 });
 
 cache.writeQuery({
 	query: IS_LOGGED_IN,
 	data: {
-		isLoggedIn: !!localStorage.getItem("token"),
+		id: "",
+		loggedIn: false,
 	},
 });
 
@@ -58,7 +66,8 @@ apolloClient.onResetStore(() =>
 	cache.writeQuery({
 		query: IS_LOGGED_IN,
 		data: {
-			isLoggedIn: !!localStorage.getItem("token"),
+			id: "",
+			loggedIn: false,
 		},
 	})
 );

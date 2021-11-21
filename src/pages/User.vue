@@ -1,6 +1,7 @@
 <template>
 	<div class="user-wrapper p-3.75">
-		<div class="break-words" v-if="isLoggedIn">
+		{{ result }}
+		<div class="break-words" v-if="result.loggedIn">
 			<p>current user is : {{ getUserToken() || "''" }}</p>
 			<button
 				@click="logOut"
@@ -24,13 +25,15 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
+import { useMutation, useQuery } from "@vue/apollo-composable";
 import UserFooter from "../components/NavFooter/UserFooter.vue";
+import { IS_LOGGED_IN, SIGN_OUT } from "../graphql/schema";
 export default {
 	name: "User",
-	data() {
+	setup() {
+		const { result } = useQuery(IS_LOGGED_IN);
 		return {
-			isLoggedIn: false,
+			result,
 		};
 	},
 	components: {
@@ -40,19 +43,10 @@ export default {
 		getUserToken() {
 			return localStorage.getItem("token") || "";
 		},
-		async logOut() {
+		logOut() {
 			localStorage.removeItem("token");
-			await this.$apollo.getClient().resetStore();
-			this.$router.push("/login");
-		},
-	},
-	apollo: {
-		isLoggedIn: {
-			query: gql`
-				{
-					isLoggedIn @client
-				}
-			`,
+			const { mutate } = useMutation(SIGN_OUT);
+			mutate();
 		},
 	},
 };

@@ -63,13 +63,15 @@
 </template>
 
 <script>
-import { SIGN_IN_MUTATION } from "../graphql/schema";
+import { SIGN_IN_MUTATION, IS_LOGGED_IN } from "../graphql/schema";
 import { useMutation } from "@vue/apollo-composable";
 import { reactive } from "@vue/reactivity";
+import { useRouter } from "vue-router";
 
 export default {
 	name: "Login",
 	setup() {
+		const router = useRouter();
 		const signInForm = reactive({
 			email: "",
 			password: "",
@@ -82,15 +84,36 @@ export default {
 			mutate: signInMutation,
 			loading: signInLoading,
 			onError,
+			onDone,
 		} = useMutation(SIGN_IN_MUTATION, () => ({
 			variables: {
 				email: signInForm.email,
 				password: signInForm.password,
 			},
+			update: (cache, { data: { signIn } }) => {
+				cache.writeQuery({
+					query: IS_LOGGED_IN,
+					data: {
+						id: signIn,
+						loggedIn: true,
+					},
+				});
+			},
 		}));
 
 		onError((error) => {
 			signInForm.errors.password = error;
+		});
+		// 登录成功时，跳转到主页，更新本地状态
+		onDone(({ data: { signIn } }) => {
+			localStorage.setItem("token", signIn);
+			// const { mutate } = useMutation(SIGN_IN, () => ({
+			// 	variables: {
+			// 		id: signIn,
+			// 	},
+			// }));
+			// mutate();
+			router.push("book");
 		});
 
 		return {
@@ -101,7 +124,7 @@ export default {
 	},
 
 	methods: {
-		onInputChange(e) {
+		onInputChange() {
 			this.signInForm.errors.email = "";
 			this.signInForm.errors.password = "";
 		},
