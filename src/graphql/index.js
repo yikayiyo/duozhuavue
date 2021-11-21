@@ -4,9 +4,9 @@ import {
 	InMemoryCache,
 } from "@apollo/client/core";
 import { setContext } from "@apollo/client/link/context";
-import { typeDefs, IS_LOGGED_IN } from "../graphql/schema";
+import { CURRENT_USER } from "../graphql/schema";
 
-const cache = new InMemoryCache();
+export const cache = new InMemoryCache();
 
 const httpLink = createHttpLink({
 	uri: "http://localhost:5001/graphql",
@@ -22,52 +22,25 @@ const authLink = setContext((_, { headers }) => {
 	};
 });
 
-const resolvers = {
-	Mutation: {
-		signIn: (_, { id }, { cache }) => {
-			cache.writeQuery({
-				query: IS_LOGGED_IN,
-				data: {
-					id,
-					loggedIn: true,
-				},
-			});
-			return true;
-		},
-		signOut: (_, __, { cache }) => {
-			cache.writeQuery({
-				query: IS_LOGGED_IN,
-				data: {
-					id: "",
-					loggedIn: false,
-				},
-			});
-			return true;
-		},
-	},
-};
-
 export const apolloClient = new ApolloClient({
 	link: authLink.concat(httpLink),
 	cache,
-	typeDefs,
-	resolvers,
 });
 
 cache.writeQuery({
-	query: IS_LOGGED_IN,
+	query: CURRENT_USER,
 	data: {
 		id: "",
-		loggedIn: false,
+		token: "",
 	},
 });
 
 apolloClient.onResetStore(() =>
 	cache.writeQuery({
-		query: IS_LOGGED_IN,
+		query: CURRENT_USER,
 		data: {
 			id: "",
-			loggedIn: false,
+			token: "",
 		},
 	})
 );

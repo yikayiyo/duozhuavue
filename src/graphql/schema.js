@@ -1,31 +1,9 @@
 import gql from "graphql-tag";
 
-export const typeDefs = gql`
-	type Query {
-		IsUserLoggedIn: Boolean
-	}
-
-	type Mutation {
-		SignIn(id: String!): Boolean!
-		SignOut: Boolean!
-	}
-`;
-
-export const SIGN_IN = gql`
-	mutation SignIn($id: String!) {
-		signIn(id: $id) @client
-	}
-`;
-
-export const SIGN_OUT = gql`
-	mutation SignOut {
-		signOut @client
-	}
-`;
-
-export const IS_LOGGED_IN = gql`
-	query IsUserLoggedIn {
-		loggedIn @client
+export const CURRENT_USER = gql`
+	query currentUser @client {
+		id
+		token
 	}
 `;
 
@@ -106,6 +84,9 @@ export const GET_COLLECTIONS = gql`
 
 export const SIGN_IN_MUTATION = gql`
 	mutation SignInMutation($email: String!, $password: String!) {
-		signIn(email: $email, password: $password)
+		signIn(email: $email, password: $password) {
+			id
+			token
+		}
 	}
 `;

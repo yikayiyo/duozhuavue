@@ -63,11 +63,10 @@
 </template>
 
 <script>
-import { SIGN_IN_MUTATION, IS_LOGGED_IN } from "../graphql/schema";
+import { CURRENT_USER, SIGN_IN_MUTATION } from "../graphql/schema";
 import { useMutation } from "@vue/apollo-composable";
 import { reactive } from "@vue/reactivity";
 import { useRouter } from "vue-router";
-
 export default {
 	name: "Login",
 	setup() {
@@ -90,12 +89,19 @@ export default {
 				email: signInForm.email,
 				password: signInForm.password,
 			},
-			update: (cache, { data: { signIn } }) => {
-				cache.writeQuery({
-					query: IS_LOGGED_IN,
+			update: (
+				cache,
+				{
 					data: {
-						id: signIn,
-						loggedIn: true,
+						signIn: { id, token },
+					},
+				}
+			) => {
+				cache.writeQuery({
+					query: CURRENT_USER,
+					data: {
+						id,
+						token,
 					},
 				});
 			},
@@ -105,16 +111,16 @@ export default {
 			signInForm.errors.password = error;
 		});
 		// 登录成功时，跳转到主页，更新本地状态
-		onDone(({ data: { signIn } }) => {
-			localStorage.setItem("token", signIn);
-			// const { mutate } = useMutation(SIGN_IN, () => ({
-			// 	variables: {
-			// 		id: signIn,
-			// 	},
-			// }));
-			// mutate();
-			router.push("book");
-		});
+		onDone(
+			({
+				data: {
+					signIn: { token },
+				},
+			}) => {
+				localStorage.setItem("token", token);
+				router.push("book");
+			}
+		);
 
 		return {
 			signInForm,

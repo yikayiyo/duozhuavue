@@ -1,8 +1,7 @@
 <template>
 	<div class="user-wrapper p-3.75">
-		{{ result }}
-		<div class="break-words" v-if="result.loggedIn">
-			<p>current user is : {{ getUserToken() || "''" }}</p>
+		<div class="break-words" v-if="currentUser.id !== ''">
+			<p>current user is : {{ currentUser.id || "''" }}</p>
 			<button
 				@click="logOut"
 				class="
@@ -25,29 +24,30 @@
 </template>
 
 <script>
-import { useMutation, useQuery } from "@vue/apollo-composable";
+import { useQuery, useResult } from "@vue/apollo-composable";
 import UserFooter from "../components/NavFooter/UserFooter.vue";
-import { IS_LOGGED_IN, SIGN_OUT } from "../graphql/schema";
+import { CURRENT_USER } from "../graphql/schema";
+import { useRouter } from "vue-router";
 export default {
 	name: "User",
 	setup() {
-		const { result } = useQuery(IS_LOGGED_IN);
+		const { result } = useQuery(CURRENT_USER);
+		const currentUser = useResult(result, {});
+		const router = useRouter();
+
+		function logOut() {
+			console.log("click logout");
+			localStorage.removeItem("token");
+			router.push("/login");
+		}
+
 		return {
-			result,
+			currentUser,
+			logOut,
 		};
 	},
 	components: {
 		UserFooter,
-	},
-	methods: {
-		getUserToken() {
-			return localStorage.getItem("token") || "";
-		},
-		logOut() {
-			localStorage.removeItem("token");
-			const { mutate } = useMutation(SIGN_OUT);
-			mutate();
-		},
 	},
 };
 </script>
