@@ -10,6 +10,7 @@
     "@apollo/client": "^3.4.16",
     "@vue/apollo-composable": "*",
     "@vue/apollo-option": "*",
+    "apollo3-cache-persist": "^0.13.0",
     "graphql": "^15.7.2",
     "graphql-tag": "^2.12.5",
     "vue": "^3.2.6",

@@ -1,12 +1,5 @@
 import gql from "graphql-tag";
 
-export const CURRENT_USER = gql`
-	query currentUser @client {
-		id
-		token
-	}
-`;
-
 export const GET_BOOK = gql`
 	query getABook($bookId: ID!) {
 		book(id: $bookId) {
@@ -85,6 +78,15 @@ export const GET_COLLECTIONS = gql`
 export const SIGN_IN_MUTATION = gql`
 	mutation SignInMutation($email: String!, $password: String!) {
 		signIn(email: $email, password: $password) {
+			id
+			token
+		}
+	}
+`;
+
+export const CURRENT_USER = gql`
+	query GetCurrentUser {
+		currentUser @client {
 			id
 			token
 		}

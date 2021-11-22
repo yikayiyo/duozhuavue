@@ -64,13 +64,14 @@
 
 <script>
 import { CURRENT_USER, SIGN_IN_MUTATION } from "../graphql/schema";
-import { useMutation } from "@vue/apollo-composable";
+import { useApolloClient, useMutation } from "@vue/apollo-composable";
 import { reactive } from "@vue/reactivity";
 import { useRouter } from "vue-router";
 export default {
 	name: "Login",
 	setup() {
 		const router = useRouter();
+		const { client } = useApolloClient();
 		const signInForm = reactive({
 			email: "",
 			password: "",
@@ -89,22 +90,6 @@ export default {
 				email: signInForm.email,
 				password: signInForm.password,
 			},
-			update: (
-				cache,
-				{
-					data: {
-						signIn: { id, token },
-					},
-				}
-			) => {
-				cache.writeQuery({
-					query: CURRENT_USER,
-					data: {
-						id,
-						token,
-					},
-				});
-			},
 		}));
 
 		onError((error) => {
@@ -114,10 +99,18 @@ export default {
 		onDone(
 			({
 				data: {
-					signIn: { token },
+					signIn: { id, token },
 				},
 			}) => {
-				localStorage.setItem("token", token);
+				client.writeQuery({
+					query: CURRENT_USER,
+					data: {
+						currentUser: {
+							id,
+							token,
+						},
+					},
+				});
 				router.push("book");
 			}
 		);

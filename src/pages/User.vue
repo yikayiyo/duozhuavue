@@ -24,20 +24,19 @@
 </template>
 
 <script>
-import { useQuery, useResult } from "@vue/apollo-composable";
 import UserFooter from "../components/NavFooter/UserFooter.vue";
-import { CURRENT_USER } from "../graphql/schema";
 import { useRouter } from "vue-router";
+import { useApolloClient, useQuery, useResult } from "@vue/apollo-composable";
+import { CURRENT_USER } from "../graphql/schema";
 export default {
 	name: "User",
 	setup() {
 		const { result } = useQuery(CURRENT_USER);
 		const currentUser = useResult(result, {});
 		const router = useRouter();
-
+		const { client } = useApolloClient();
 		function logOut() {
-			console.log("click logout");
-			localStorage.removeItem("token");
+			client.clearStore();
 			router.push("/login");
 		}
 
