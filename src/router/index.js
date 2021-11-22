@@ -24,6 +24,7 @@ import Support from "../pages/Support.vue";
 import Env from "../pages/Env.vue";
 import Activity from "../pages/Activity.vue";
 import BookShelf from "../pages/BookShelf.vue";
+import PageNotFound from "../pages/PageNotFound.vue";
 
 const routes = [
 	{
@@ -118,6 +119,10 @@ const routes = [
 	{
 		path: "/support/environmental-exploration",
 		component: Env,
+	},
+	{
+		path: "/:pathMatch(.*)*",
+		component: PageNotFound,
 	},
 ];
 

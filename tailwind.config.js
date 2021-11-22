@@ -52,6 +52,7 @@ module.exports = {
 				21: "84px",
 				"oc-item": "132px",
 				37.5: "150px",
+				qr: "200px",
 			},
 			lineHeight: {
 				hsh: "1.1",
@@ -119,6 +120,7 @@ module.exports = {
 			auto: "auto",
 			hicon: "1.4em",
 			"oc-item": "178px",
+			qr: "200px",
 		},
 		maxHeight: {
 			30: "7.5rem",
