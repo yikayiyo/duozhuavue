@@ -1,5 +1,7 @@
 import gql from "graphql-tag";
 
+// query
+
 export const GET_BOOK = gql`
 	query getABook($bookId: ID!) {
 		book(id: $bookId) {
@@ -75,6 +77,24 @@ export const GET_COLLECTIONS = gql`
 	}
 `;
 
+export const GET_USER = gql`
+	query getUser($userId: ID!) {
+		user(id: $userId) {
+			id
+			name
+			purchasedBooks {
+				title
+			}
+			soldBooks {
+				title
+			}
+			income
+			avatar
+		}
+	}
+`;
+// mutation
+
 export const SIGN_IN_MUTATION = gql`
 	mutation SignInMutation($email: String!, $password: String!) {
 		signIn(email: $email, password: $password) {
@@ -84,6 +104,7 @@ export const SIGN_IN_MUTATION = gql`
 	}
 `;
 
+// local query
 export const CURRENT_USER = gql`
 	query GetCurrentUser {
 		currentUser @client {

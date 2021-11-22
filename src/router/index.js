@@ -22,6 +22,8 @@ import OpenCollection from "../pages/OpenCollection.vue";
 import BookService from "../pages/BookService.vue";
 import Support from "../pages/Support.vue";
 import Env from "../pages/Env.vue";
+import Activity from "../pages/Activity.vue";
+import BookShelf from "../pages/BookShelf.vue";
 
 const routes = [
 	{
@@ -65,6 +67,16 @@ const routes = [
 	{
 		path: "/users/:userId",
 		component: User,
+		children: [
+			{
+				path: "activities",
+				component: Activity,
+			},
+			{
+				path: "owning-bookshelf",
+				component: BookShelf,
+			},
+		],
 	},
 	{ path: "/books/:bookId", component: Book },
 	{
