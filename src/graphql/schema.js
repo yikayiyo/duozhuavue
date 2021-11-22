@@ -29,6 +29,7 @@ export const GET_COLLECTION = gql`
 			image
 			maskColor
 			proposer {
+				id
 				name
 				avatar
 			}
@@ -47,6 +48,7 @@ export const GET_COLLECTION = gql`
 					image
 				}
 				contributor {
+					id
 					name
 					avatar
 				}

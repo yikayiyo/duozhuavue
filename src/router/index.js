@@ -67,14 +67,23 @@ const routes = [
 	{ path: "/cart", component: Cart },
 	{
 		path: "/users/:userId",
+		name: "user",
 		component: User,
 		children: [
 			{
+				path: "",
+				redirect: {
+					name: "user.activity",
+				},
+			},
+			{
 				path: "activities",
+				name: "user.activity",
 				component: Activity,
 			},
 			{
 				path: "owning-bookshelf",
+				name: "user.bookshelf",
 				component: BookShelf,
 			},
 		],

@@ -55,7 +55,10 @@
 				</div>
 				<div class="contribs-footer mt-4 flex justify-between text-sold-out">
 					<div class="left flex-1 min-w-0 overflow-hidden">
-						<a href="" class="flex items-center">
+						<router-link
+							:to="'/users/' + conb.contributor.id"
+							class="flex items-center"
+						>
 							<span
 								class="
 									flex-shrink-0
@@ -68,7 +71,7 @@
 									bg-menu
 								"
 							>
-								<img alt="" :src="conb?.contributor?.avatar" />
+								<img alt="" :src="conb.contributor.avatar" />
 							</span>
 							<span
 								class="
@@ -80,7 +83,7 @@
 								"
 								>{{ conb.contributor.name }}的推荐</span
 							>
-						</a>
+						</router-link>
 					</div>
 					<div class="right flex items-center">
 						<a class="mr-7.5">

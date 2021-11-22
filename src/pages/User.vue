@@ -192,6 +192,7 @@ export default {
 			userId: route.params.userId,
 		});
 		const user = useResult(result, null);
+
 		const userIncome = computed(() => (user.value.income / 100).toFixed(2));
 		const activityLink = computed(
 			() => "/users/" + user.value.id + "/activities"
@@ -207,6 +208,7 @@ export default {
 			client.resetStore();
 			router.push("/login");
 		}
+
 		return {
 			user,
 			userIncome,
@@ -224,10 +226,9 @@ export default {
 				return {
 					path: "/login",
 				};
-			}
-			if (currentUser.id !== "" && to.params.userId === "0") {
+			} else if (to.params.userId === "0") {
 				return {
-					path: "/users/" + currentUser.id + "/activities",
+					path: "/users/" + currentUser.id,
 				};
 			} else {
 				return true;
@@ -239,6 +240,7 @@ export default {
 			};
 		}
 	},
+
 	components: {
 		UserFooter,
 	},

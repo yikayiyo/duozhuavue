@@ -15,7 +15,7 @@
 			:style="ocHeaderStyleObj"
 		>
 			<div class="top mt-8 mb-20">
-				<a href="/users/90150559088119017">
+				<a :href="'/users/' + collection.proposer.id">
 					<div class="wrapper flex items-center mb-3.5">
 						<span
 							class="
