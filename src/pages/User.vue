@@ -211,10 +211,18 @@ export default {
 
 		onBeforeRouteUpdate((to, from) => {
 			if (to.params.userId === "0") {
-				const { currentUser } = client.cache.readQuery({ query: CURRENT_USER });
-				return {
-					path: "/users/" + currentUser.id,
-				};
+				const {
+					currentUser: { id },
+				} = client.cache.readQuery({ query: CURRENT_USER });
+				if (id !== "") {
+					return {
+						path: "/users/" + currentUser.id,
+					};
+				} else {
+					return {
+						path: "/login",
+					};
+				}
 			}
 		});
 
@@ -227,27 +235,48 @@ export default {
 		};
 	},
 	beforeRouteEnter(to, _) {
-		try {
+		// 访问/users/0
+		// 如果已经登录，跳转到登录用户主页; 否则，跳转到登录页面
+		if (to.params.userId === "0") {
 			const { currentUser } = apolloClient.cache.readQuery({
 				query: CURRENT_USER,
 			});
-			if (currentUser.id === "") {
-				return {
-					path: "/login",
-				};
-			} else if (to.params.userId === "0") {
+			if (currentUser.id !== "") {
 				return {
 					path: "/users/" + currentUser.id,
 				};
 			} else {
-				return true;
+				return {
+					path: "/login",
+				};
 			}
-		} catch (err) {
-			// console.error(err);
-			return {
-				path: "/login",
-			};
 		}
+		// 访问 /users/xxx, 不管是否登录，均可以打开
+		else {
+			return true;
+		}
+
+		// try {
+		// 	const { currentUser } = apolloClient.cache.readQuery({
+		// 		query: CURRENT_USER,
+		// 	});
+		// 	if (currentUser.id === "") {
+		// 		return {
+		// 			path: "/login",
+		// 		};
+		// 	} else if (to.params.userId === "0") {
+		// 		return {
+		// 			path: "/users/" + currentUser.id,
+		// 		};
+		// 	} else {
+		// 		return true;
+		// 	}
+		// } catch (err) {
+		// 	// console.error(err);
+		// 	return {
+		// 		path: "/login",
+		// 	};
+		// }
 	},
 
 	components: {
