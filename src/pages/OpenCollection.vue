@@ -15,7 +15,7 @@
 			:style="ocHeaderStyleObj"
 		>
 			<div class="top mt-8 mb-20">
-				<a :href="'/users/' + collection.proposer.id">
+				<router-link :to="'/users/' + collection.proposer.id">
 					<div class="wrapper flex items-center mb-3.5">
 						<span
 							class="
@@ -51,7 +51,7 @@
 							<div class="desc text-xs">提案</div>
 						</div>
 					</div>
-				</a>
+				</router-link>
 				<h1 class="mb-4 text-3xl font-medium">
 					{{ collection.name }}
 				</h1>
