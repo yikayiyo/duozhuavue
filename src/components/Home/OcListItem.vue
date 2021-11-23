@@ -67,6 +67,7 @@
 </template>
 
 <script>
+// todo: change to Composition API
 export default {
 	name: "OcListItem",
 	props: ["collection"],

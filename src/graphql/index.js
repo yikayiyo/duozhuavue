@@ -9,7 +9,7 @@ import { CURRENT_USER } from "./schema";
 
 const cache = new InMemoryCache();
 // 初始化时写入currentUser信息
-console.log("写入空的currentUser信息");
+// console.log("写入空的currentUser信息");
 cache.writeQuery({
 	query: CURRENT_USER,
 	data: {

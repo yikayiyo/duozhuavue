@@ -1,4 +1,6 @@
 <template>
+	<loading v-if="loading" />
+	<div v-else-if="error" class="p-3.75">error</div>
 	<div class="user-wrapper text-shiwu leading-category">
 		<button
 			@click="logOut"
@@ -177,6 +179,7 @@
 
 <script>
 import UserFooter from "../components/NavFooter/UserFooter.vue";
+import Loading from "../components/Loading/Loading.vue";
 import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
 import { useApolloClient, useQuery, useResult } from "@vue/apollo-composable";
 import { apolloClient } from "../graphql";
@@ -185,13 +188,18 @@ import { computed } from "vue";
 export default {
 	name: "User",
 	setup() {
-		// const { result } = useQuery(CURRENT_USER);
-		// const currentUser = useResult(result, {});
 		const route = useRoute();
-		const { result } = useQuery(GET_USER, () => ({
+		const { result, loading, error } = useQuery(GET_USER, () => ({
 			userId: route.params.userId,
 		}));
-		const user = useResult(result, null);
+		const user = useResult(result, {
+			id: "",
+			name: "",
+			income: 0,
+			avatar: "",
+			purchasedBooks: [],
+			soldBooks: [],
+		});
 
 		const userIncome = computed(() => (user.value.income / 100).toFixed(2));
 		const activityLink = computed(
@@ -216,7 +224,7 @@ export default {
 				} = client.cache.readQuery({ query: CURRENT_USER });
 				if (id !== "") {
 					return {
-						path: "/users/" + currentUser.id,
+						path: "/users/" + id,
 					};
 				} else {
 					return {
@@ -228,6 +236,8 @@ export default {
 
 		return {
 			user,
+			loading,
+			error,
 			userIncome,
 			activityLink,
 			bookShelfLink,
@@ -255,32 +265,11 @@ export default {
 		else {
 			return true;
 		}
-
-		// try {
-		// 	const { currentUser } = apolloClient.cache.readQuery({
-		// 		query: CURRENT_USER,
-		// 	});
-		// 	if (currentUser.id === "") {
-		// 		return {
-		// 			path: "/login",
-		// 		};
-		// 	} else if (to.params.userId === "0") {
-		// 		return {
-		// 			path: "/users/" + currentUser.id,
-		// 		};
-		// 	} else {
-		// 		return true;
-		// 	}
-		// } catch (err) {
-		// 	// console.error(err);
-		// 	return {
-		// 		path: "/login",
-		// 	};
-		// }
 	},
 
 	components: {
 		UserFooter,
+		Loading,
 	},
 };
 </script>
