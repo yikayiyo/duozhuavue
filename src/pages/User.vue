@@ -210,9 +210,8 @@ export default {
 		}
 
 		onBeforeRouteUpdate((to, from) => {
-			const { currentUser } = client.cache.readQuery({ query: CURRENT_USER });
-			console.log(currentUser.id);
-			if (to.params.userId === "0" && currentUser.id !== "") {
+			if (to.params.userId === "0") {
+				const { currentUser } = client.cache.readQuery({ query: CURRENT_USER });
 				return {
 					path: "/users/" + currentUser.id,
 				};
