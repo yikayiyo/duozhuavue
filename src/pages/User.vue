@@ -34,7 +34,18 @@
 					>
 						<img :src="user.avatar" alt="avatar image" class="w-full" />
 					</div>
-					<div class="name text-xl font-normal my-2 mx-3.75">
+					<div
+						class="
+							name
+							text-xl
+							font-normal
+							my-2
+							mx-3.75
+							max-w-1/2
+							overflow-hidden overflow-ellipsis
+							whitespace-nowrap
+						"
+					>
 						{{ user.name }}
 					</div>
 					<div class="info">卖书收入 {{ userIncome }} 元</div>

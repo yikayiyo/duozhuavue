@@ -3,25 +3,25 @@
 		<div class="icon-wrapper mt-20 w-1/3 mx-auto">
 			<div class="icon"></div>
 		</div>
-		<form @submit.prevent="signIn" class="flex flex-col">
-			<label for="email">邮箱</label>
+		<form @submit.prevent="signIn" class="flex flex-col max-w-3/4 mx-auto">
 			<input
-				class="bg-menu py-2.25 pl-2 rounded mt-1"
+				class="bg-menu py-3 pl-2 rounded mt-1"
 				type="text"
 				name="email"
 				v-model="signInForm.email"
 				@change="onInputChange"
+				placeholder="邮箱"
 			/>
 			<p class="text-red-600 text-xs py-1" v-if="signInForm.errors.email">
 				{{ signInForm.errors.email }}
 			</p>
-			<label for="password" class="mt-2">密码</label>
 			<input
-				class="bg-menu py-2.25 pl-2 rounded mt-1"
+				class="bg-menu py-3 pl-2 rounded mt-4"
 				type="password"
 				name="password"
 				v-model="signInForm.password"
 				@change="onInputChange"
+				placeholder="密码"
 			/>
 			<p class="text-red-600 text-xs py-1" v-if="signInForm.errors.password">
 				{{ signInForm.errors.password }}
@@ -33,7 +33,7 @@
 					font-medium
 					text-white
 					bg-load
-					py-3
+					py-2.25
 					px-9
 					rounded-full
 					shadow
@@ -43,22 +43,21 @@
 			>
 				登录
 			</button>
+			<button
+				class="
+					mt-8
+					text-load text-lg
+					font-medium
+					border
+					py-2.25
+					px-9
+					rounded-full
+					shadow-sm
+				"
+			>
+				注册
+			</button>
 		</form>
-		<button
-			class="
-				w-full
-				mt-8
-				text-load text-lg
-				font-medium
-				border
-				py-3
-				px-9
-				rounded-full
-				shadow-sm
-			"
-		>
-			注册
-		</button>
 	</div>
 </template>
 

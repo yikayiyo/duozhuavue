@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { nextTick } from "@vue/runtime-core";
+import { createRouter, createWebHistory, routerKey } from "vue-router";
 import HomeWrapper from "../pages/HomeWrapper.vue";
 import HomePage from "../pages/HomePage.vue";
 import Sell from "../pages/Sell.vue";
@@ -30,6 +31,7 @@ const routes = [
 	{
 		path: "/",
 		component: HomeWrapper,
+		meta: { title: "duozhuavue" },
 		children: [
 			{ path: "", redirect: "/book" },
 			{ path: "/book", component: HomePage },
@@ -49,6 +51,7 @@ const routes = [
 	{
 		path: "/sell",
 		component: Sell,
+		meta: { title: "卖东西 - duozhuavue" },
 		children: [
 			{
 				path: "",
@@ -64,11 +67,12 @@ const routes = [
 			},
 		],
 	},
-	{ path: "/cart", component: Cart },
+	{ path: "/cart", component: Cart, meta: { title: "购物车 - duozhuavue" } },
 	{
 		path: "/users/:userId",
 		name: "user",
 		component: User,
+		meta: { title: "我的 - duozhuavue" },
 		children: [
 			{
 				path: "",
@@ -135,7 +139,17 @@ const routes = [
 	},
 ];
 
-export default createRouter({
+const router = createRouter({
 	history: createWebHistory(),
 	routes,
 });
+
+const DEFAULT_TITLE = "Hire me";
+
+router.afterEach((to, from) => {
+	nextTick(() => {
+		document.title = to.meta.title || DEFAULT_TITLE;
+	});
+});
+
+export default router;
