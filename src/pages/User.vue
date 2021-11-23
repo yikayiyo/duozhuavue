@@ -177,7 +177,7 @@
 
 <script>
 import UserFooter from "../components/NavFooter/UserFooter.vue";
-import { useRoute, useRouter } from "vue-router";
+import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
 import { useApolloClient, useQuery, useResult } from "@vue/apollo-composable";
 import { apolloClient } from "../graphql";
 import { CURRENT_USER, GET_USER } from "../graphql/schema";
@@ -188,9 +188,9 @@ export default {
 		// const { result } = useQuery(CURRENT_USER);
 		// const currentUser = useResult(result, {});
 		const route = useRoute();
-		const { result } = useQuery(GET_USER, {
+		const { result } = useQuery(GET_USER, () => ({
 			userId: route.params.userId,
-		});
+		}));
 		const user = useResult(result, null);
 
 		const userIncome = computed(() => (user.value.income / 100).toFixed(2));
@@ -208,6 +208,16 @@ export default {
 			client.resetStore();
 			router.push("/login");
 		}
+
+		onBeforeRouteUpdate((to, from) => {
+			const { currentUser } = client.cache.readQuery({ query: CURRENT_USER });
+			console.log(currentUser.id);
+			if (to.params.userId === "0" && currentUser.id !== "") {
+				return {
+					path: "/users/" + currentUser.id,
+				};
+			}
+		});
 
 		return {
 			user,
