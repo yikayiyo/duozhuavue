@@ -27,6 +27,17 @@ import Activity from "../pages/Activity.vue";
 import BookShelf from "../pages/BookShelf.vue";
 import PageNotFound from "../pages/PageNotFound.vue";
 
+const scrollBehavior = function (to, from, savedPosition) {
+	if (savedPosition) {
+		return savedPosition;
+	} else {
+		return {
+			top: 0,
+			// behavior: "smooth",
+		};
+	}
+};
+
 const routes = [
 	{
 		path: "/",
@@ -142,6 +153,7 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
+	scrollBehavior,
 });
 
 const DEFAULT_TITLE = "Hire me";

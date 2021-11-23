@@ -1,32 +1,19 @@
-<template></template>
+<template>
+	<div class="cart-wrapper relative">
+		<cart-nav-header></cart-nav-header>
+		<router-view></router-view>
+		<back-to></back-to>
+	</div>
+</template>
 
 <script>
-import { apolloClient } from "../graphql";
-import { CURRENT_USER } from "../graphql/schema";
+import CartNavHeader from "../components/NavHeader/CartNavHeader.vue";
+import BackTo from "../components/BackTo/BackTo.vue";
 export default {
 	name: "Cart",
-	beforeRouteEnter(to, _) {
-		try {
-			const { currentUser } = apolloClient.cache.readQuery({
-				query: CURRENT_USER,
-			});
-			if (currentUser.id === "") {
-				return {
-					path: "/login",
-				};
-			}
-			if (currentUser.id !== "" && to.params.userId === "0") {
-				return {
-					path: "/users/" + currentUser.id,
-				};
-			} else {
-				return true;
-			}
-		} catch (err) {
-			return {
-				path: "/login",
-			};
-		}
+	components: {
+		CartNavHeader,
+		BackTo,
 	},
 };
 </script>
