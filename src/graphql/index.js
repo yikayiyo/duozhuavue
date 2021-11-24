@@ -39,6 +39,11 @@ const authLink = setContext((_, { headers }) => {
 	};
 });
 
+persistCache({
+	cache,
+	storage: new LocalStorageWrapper(window.localStorage),
+});
+
 export const apolloClient = new ApolloClient({
 	link: authLink.concat(httpLink),
 	cache,
@@ -55,9 +60,4 @@ apolloClient.onResetStore(() => {
 			},
 		},
 	});
-});
-
-await persistCache({
-	cache,
-	storage: new LocalStorageWrapper(window.localStorage),
 });
