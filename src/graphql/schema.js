@@ -95,6 +95,20 @@ export const GET_USER = gql`
 		}
 	}
 `;
+
+export const GET_TOP_CATEGORIES = gql`
+	query getTopCategories {
+		topCategories {
+			id
+			name
+			themeColor
+			subCategory {
+				id
+				name
+			}
+		}
+	}
+`;
 // mutation
 
 export const SIGN_IN_MUTATION = gql`
