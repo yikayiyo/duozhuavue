@@ -38,7 +38,8 @@ const authLink = setContext((_, { headers }) => {
 		},
 	};
 });
-
+// top await will cause a build error, but without await queries might run before the cache is persisted
+// todo: resolve the promise, then init apollo client
 persistCache({
 	cache,
 	storage: new LocalStorageWrapper(window.localStorage),

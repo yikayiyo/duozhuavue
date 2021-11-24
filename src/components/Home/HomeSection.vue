@@ -80,59 +80,15 @@
 				</router-link>
 			</div>
 		</div>
-
 		<div class="feed-content-wrapper mt-2.5 bg-menu">
-			<div class="feed-section relative mb-4 bg-white">
-				<div class="title p-3.75 bg-white sticky top-ct">
-					<h2 class="text-xl font-medium leading-hsh">猜你喜欢</h2>
-				</div>
-				<div class="book-list-wrapper -mt-3.75">
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-				</div>
-			</div>
-			<div class="feed-section relative mb-4 bg-white">
-				<div class="title p-3.75 bg-white sticky top-ct">
-					<h2 class="text-xl font-medium leading-hsh">前端开发</h2>
-				</div>
-				<div class="book-list-wrapper -mt-3.75">
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-				</div>
-			</div>
-			<div class="feed-section relative mb-4 bg-white">
-				<div class="title p-3.75 bg-white sticky top-ct">
-					<h2 class="text-xl font-medium leading-hsh">UI</h2>
-				</div>
-				<div class="book-list-wrapper -mt-3.75">
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-				</div>
-			</div>
-			<div class="feed-section relative mb-4 bg-white">
-				<div class="title p-3.75 bg-white sticky top-ct">
-					<h2 class="text-xl font-medium leading-hsh">心理学</h2>
-				</div>
-				<div class="book-list-wrapper -mt-3.75">
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-					<book-list-item></book-list-item>
-				</div>
-			</div>
+			<feed />
 		</div>
 	</div>
 </template>
 
 <script>
 import OcListItem from "./OcListItem.vue";
-import BookListItem from "./BookListItem.vue";
+import Feed from "./Feed.vue";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import Loading from "../Loading/Loading.vue";
 import { GET_COLLECTIONS } from "../../graphql/schema";
@@ -150,7 +106,7 @@ export default {
 	},
 	components: {
 		OcListItem,
-		BookListItem,
+		Feed,
 		Loading,
 	},
 };
