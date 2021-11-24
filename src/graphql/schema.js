@@ -109,6 +109,26 @@ export const GET_TOP_CATEGORIES = gql`
 		}
 	}
 `;
+
+export const GET_BOOKS_FROM_CATEGORY = gql`
+	query getBooksFromCategory($categoryId: ID!) {
+		category(id: $categoryId) {
+			name
+			description
+			items {
+				id
+				title
+				rawAuthor
+				image
+				doubanRating
+				originalPrice
+			}
+			parentCategory {
+				themeColor
+			}
+		}
+	}
+`;
 // mutation
 
 export const SIGN_IN_MUTATION = gql`

@@ -3,12 +3,7 @@
 		<div class="title p-3.75 bg-white sticky top-ct">
 			<h2 class="text-xl font-medium leading-hsh">猜你喜欢</h2>
 		</div>
-		<div class="book-list-wrapper -mt-3.75">
-			<book-list-item></book-list-item>
-			<book-list-item></book-list-item>
-			<book-list-item></book-list-item>
-			<book-list-item></book-list-item>
-		</div>
+		<div class="book-list-wrapper mt-3.75 p-3.75">some books</div>
 	</div>
 </template>
 

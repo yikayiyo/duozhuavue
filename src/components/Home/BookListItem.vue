@@ -1,19 +1,18 @@
 <template>
-	<a href="">
+	<router-link :to="bookLink">
 		<div class="book-list-item-wrapper flex px-3.75 py-4.5">
-			<div class="image-wrapper w-20 h-30 shadow-book-list-item-image">
-				<!-- :style="book.images.small" -->
-				<div class="image"></div>
+			<div class="image-wrapper w-22.5 h-32 shadow-book-list-item-image">
+				<div class="image" :style="{ backgroundImage: bgImage }"></div>
 			</div>
 			<div class="content ml-3 flex-1 flex flex-col">
 				<div class="content-top flex-1 flex">
 					<div class="content-left flex-1 flex flex-col">
-						<h3 class="book-name my-bk-list-item-title">孩子与恶</h3>
+						<h3 class="book-name my-bk-list-item-title">{{ book.title }}</h3>
 						<div class="book-author text-xs text-sold-out mt-1">
-							[日]河合隼雄
+							{{ book.rawAuthor }}
 						</div>
 						<div class="douban-rating text-xs text-dbr mt-1.25">
-							豆瓣评分 8.0
+							豆瓣评分 {{ book.doubanRating }}
 						</div>
 					</div>
 					<div class="content-right ml-3 flex-shrink-0">
@@ -44,9 +43,8 @@
 				<div class="content-bottom mt-1.25 leading-category">
 					<div class="price-wrapper flex items-center">
 						<div class="price text-lg">
-							¥11.10<span class="price-suffix text-hsh ml-0.75 font-light"
-								>起</span
-							>
+							¥{{ bookPrice }}
+							<span class="price-suffix text-hsh ml-0.75 font-light">起</span>
 						</div>
 						<span
 							class="
@@ -63,12 +61,32 @@
 				</div>
 			</div>
 		</div>
-	</a>
+	</router-link>
 </template>
 
 <script>
+import { computed } from "@vue/reactivity";
 export default {
 	props: ["book"],
+	setup(props) {
+		const bgImage = computed(() => {
+			return "url(" + props.book.image + ")";
+		});
+
+		const bookLink = computed(() => {
+			return "/books/" + props.book.id;
+		});
+
+		const bookPrice = computed(() => {
+			return (props.book.originalPrice / 100).toFixed(2);
+		});
+
+		return {
+			bgImage,
+			bookLink,
+			bookPrice,
+		};
+	},
 };
 </script>
 
@@ -76,7 +94,6 @@ export default {
 .image {
 	width: 100%;
 	height: 100%;
-	background-image: url("https://img.duozhuayu.com/928c621a40e511e7838200163e063441.jpg?x-oss-process=image/resize,w_270/quality,Q_80");
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;

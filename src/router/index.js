@@ -11,6 +11,7 @@ import SignUp from "../pages/SignUp.vue";
 import Cart from "../pages/Cart.vue";
 import User from "../pages/User.vue";
 import Book from "../pages/Book.vue";
+import BookCategory from "../pages/BookCategory.vue";
 import ClothingPage from "../pages/ClothingPage.vue";
 import ElectronicsPage from "../pages/ElectronicsPage.vue";
 import OriginalPage from "../pages/OriginalPage.vue";
@@ -104,6 +105,10 @@ const routes = [
 		],
 	},
 	{ path: "/books/:bookId", component: Book },
+	{
+		path: "/categories/:categoryId",
+		component: BookCategory,
+	},
 	{
 		path: "/search/book",
 		component: SearchBook,
