@@ -10,7 +10,7 @@
 			<p class="mt-2.5 text-footer">{{ category.description }}</p>
 		</div>
 		<div class="book-list-wrapper">
-			<div class="sort-options bg-white text-hsh">
+			<div class="sort-options bg-white text-hsh sticky top-0 z-20">
 				<div
 					class="
 						sort-option
@@ -20,8 +20,6 @@
 						flex
 						items-center
 						justify-center
-						sticky
-						top-0
 					"
 				>
 					<div class="sort-option font-medium" @click="toggleShowAllOptions">
@@ -39,6 +37,7 @@
 						width="18"
 						height="18"
 						style="flex-shrink: 0; margin-left: 3px; transform: rotate(0deg)"
+						:style="showAllOptions ? 'transform: rotate(180deg)' : ''"
 					>
 						<polyline points="6 9 12 15 18 9"></polyline>
 					</svg>
@@ -49,10 +48,11 @@
 						absolute
 						left-0
 						right-0
-						text-hsh
-						z-10
+						text-footer
+						font-medium
 						flex flex-col
 						justify-center
+						bg-white
 					"
 					v-if="showAllOptions"
 				>

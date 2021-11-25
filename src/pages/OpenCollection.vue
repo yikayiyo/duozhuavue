@@ -165,13 +165,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.image {
-	width: 100%;
-	height: 100%;
-	background-image: url("https://img.duozhuayu.com/c4776364f8fc11eb8b077e9c661745cd.jpeg?x-oss-process=image/resize,w_270/quality,Q_80");
-	background-position: center center;
-	background-size: cover;
-	background-repeat: no-repeat;
-}
-</style>
+<style></style>
