@@ -129,6 +129,27 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 		}
 	}
 `;
+
+export const GET_CATEGORY_FEED = gql`
+	query getCategoryFeed {
+		categoryFeed {
+			cursor
+			hasNextPage
+			categories {
+				id
+				name
+				items {
+					id
+					title
+					rawAuthor
+					doubanRating
+					originalPrice
+					image
+				}
+			}
+		}
+	}
+`;
 // mutation
 
 export const SIGN_IN_MUTATION = gql`

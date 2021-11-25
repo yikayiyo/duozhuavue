@@ -1,6 +1,10 @@
 <template>
 	<div class="home-section-wrapper">
-		<div class="oc-wrapper">
+		<loading v-if="collectionLoading" />
+		<div class="text-label" v-else-if="collectionError">
+			{{ collectionError }}
+		</div>
+		<div class="oc-wrapper" v-else>
 			<router-link to="/open-collections" class="oc-header-wrapper">
 				<div class="oc-header flex items-center p-3.75">
 					<div class="oc-header-title flex-grow">
@@ -32,10 +36,7 @@
 					</div>
 				</div>
 			</router-link>
-			<loading v-if="loading" />
-			<div class="text-label" v-else-if="error">{{ error }}</div>
 			<div
-				v-else
 				class="oc-list-wrapper mx-3.75 flex overflow-x-auto pb-8.75 -mb-8.75"
 			>
 				<oc-list-item
@@ -80,8 +81,16 @@
 				</router-link>
 			</div>
 		</div>
-		<div class="feed-content-wrapper mt-2.5 bg-menu">
-			<feed />
+		<loading v-if="categoryFeedLoading" />
+		<div class="text-label" v-else-if="categoryFeedError">
+			{{ categoryFeedError }}
+		</div>
+		<div class="feed-content-wrapper mt-2.5 bg-menu" v-else>
+			<feed
+				v-for="category of categoryFeed.categories"
+				:key="category.id"
+				:category="category"
+			/>
 		</div>
 	</div>
 </template>
@@ -91,17 +100,33 @@ import OcListItem from "./OcListItem.vue";
 import Feed from "./Feed.vue";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import Loading from "../Loading/Loading.vue";
-import { GET_COLLECTIONS } from "../../graphql/schema";
+import { GET_CATEGORY_FEED, GET_COLLECTIONS } from "../../graphql/schema";
 
 export default {
 	name: "HomeSection",
 	setup() {
-		const { result, loading, error } = useQuery(GET_COLLECTIONS);
-		const collections = useResult(result, []);
+		const {
+			result: collectionsResult,
+			loading: collectionLoading,
+			error: collectionError,
+		} = useQuery(GET_COLLECTIONS);
+		const collections = useResult(collectionsResult, []);
+
+		const {
+			result: categoryFeedResult,
+			loading: categoryFeedLoading,
+			error: categoryFeedError,
+		} = useQuery(GET_CATEGORY_FEED);
+
+		const categoryFeed = useResult(categoryFeedResult, {});
+
 		return {
 			collections,
-			loading,
-			error,
+			collectionLoading,
+			collectionError,
+			categoryFeed,
+			categoryFeedLoading,
+			categoryFeedError,
 		};
 	},
 	components: {
