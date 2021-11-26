@@ -69,6 +69,7 @@ module.exports = {
 				4: "16px",
 			},
 			inset: {
+				"-1": "-1px",
 				"-50": "-50px",
 				ct: "67px",
 				45: "180px",
