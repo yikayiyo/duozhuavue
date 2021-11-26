@@ -21,9 +21,10 @@
 						items-center
 						justify-center
 					"
+					:class="showAllOptions ? 'text-load' : ''"
 				>
 					<div class="sort-option font-medium" @click="toggleShowAllOptions">
-						评分优先
+						{{ selectedSortOption }}
 					</div>
 					<svg
 						viewBox="0 0 24 24"
@@ -33,11 +34,11 @@
 						stroke-linecap="round"
 						stroke-linejoin="round"
 						xmlns="http://www.w3.org/2000/svg"
-						class="Icon"
 						width="18"
 						height="18"
 						style="flex-shrink: 0; margin-left: 3px; transform: rotate(0deg)"
 						:style="showAllOptions ? 'transform: rotate(180deg)' : ''"
+						:class="showAllOptions ? 'text-load stroke-current' : ''"
 					>
 						<polyline points="6 9 12 15 18 9"></polyline>
 					</svg>
@@ -53,16 +54,61 @@
 						flex flex-col
 						justify-center
 						bg-white
+						border-b-0.5 border-menu
 					"
 					v-if="showAllOptions"
 				>
-					<div class="sort-option px-6 py-3 bg-white">评分优先</div>
-					<div class="sort-option px-6 py-3 bg-white">低价优先</div>
+					<div
+						class="sort-option px-6 py-3 bg-white flex justify-between"
+						:class="selectedSortOption === '评分优先' ? 'text-load' : ''"
+						name="rating"
+						@click="sortByRating"
+					>
+						<span>评分优先</span>
+						<svg
+							width="18px"
+							height="18px"
+							viewBox="0 0 20 20"
+							version="1.1"
+							fill="none"
+							fill-rule="evenodd"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2.90909091"
+							style="width: 15px; height: 15px"
+							:class="selectedSortOption === '评分优先' ? 'stroke-current' : ''"
+						>
+							<polyline points="2 9.70728325 7.53750321 15 18 5"></polyline>
+						</svg>
+					</div>
+					<div
+						class="sort-option px-6 py-3 bg-white flex justify-between"
+						:class="selectedSortOption === '低价优先' ? 'text-load' : ''"
+						name="price"
+						@click="sortByPrice"
+					>
+						<span>低价优先</span>
+						<svg
+							width="18px"
+							height="18px"
+							viewBox="0 0 20 20"
+							version="1.1"
+							fill="none"
+							fill-rule="evenodd"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2.90909091"
+							style="width: 15px; height: 15px"
+							:class="selectedSortOption === '低价优先' ? 'stroke-current' : ''"
+						>
+							<polyline points="2 9.70728325 7.53750321 15 18 5"></polyline>
+						</svg>
+					</div>
 				</div>
 			</div>
 
 			<book-list-item
-				v-for="book of category.items"
+				v-for="book of books"
 				:key="book.id"
 				:book="book"
 			></book-list-item>
@@ -86,6 +132,14 @@ export default {
 			categoryId,
 		});
 		const category = useResult(result, [], (data) => data.category);
+
+		// 排序时使用数据副本，默认高评分优先
+		const selectedSortOption = ref("评分优先");
+		const books = ref([...category.value.items]);
+		books.value.sort((a, b) => {
+			return b.doubanRating - a.doubanRating;
+		});
+
 		const headerBg = computed(
 			() => category.value.parentCategory[0].themeColor
 		);
@@ -95,13 +149,32 @@ export default {
 			showAllOptions.value = !showAllOptions.value;
 		};
 
+		const sortByRating = function () {
+			selectedSortOption.value = "评分优先";
+			books.value.sort((a, b) => {
+				return b.doubanRating - a.doubanRating;
+			});
+			toggleShowAllOptions();
+		};
+		const sortByPrice = function () {
+			selectedSortOption.value = "低价优先";
+			books.value.sort((a, b) => {
+				return a.originalPrice - b.originalPrice;
+			});
+			toggleShowAllOptions();
+		};
+
 		return {
 			category,
+			books,
 			loading,
 			error,
 			headerBg,
 			showAllOptions,
 			toggleShowAllOptions,
+			selectedSortOption,
+			sortByRating,
+			sortByPrice,
 		};
 	},
 	components: {
