@@ -10,6 +10,7 @@
 		</div>
 		<div class="book-list-wrapper -mt-3.75">
 			<book-list-item
+				class="book-list-item"
 				:book="item"
 				v-for="item of category.items"
 				:key="item.id"
@@ -55,5 +56,8 @@ export default {
 <style scoped>
 .title-wrapper.is-pinned {
 	border-bottom: 0.5px solid rgb(242, 242, 242);
+}
+.book-list-wrapper > .book-list-item:last-child {
+	margin-bottom: 128px;
 }
 </style>
