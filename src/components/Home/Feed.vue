@@ -1,5 +1,5 @@
 <template>
-	<div id="feed-section" class="feed-section relative mb-4 bg-white">
+	<div id="feed-section" class="feed-section relative bg-white">
 		<div
 			id="title-wrapper"
 			class="title-wrapper p-3.75 bg-white sticky top-ct z-20"
