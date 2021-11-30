@@ -37,7 +37,7 @@
 
 <script>
 export default {
-	props: ["backto"],
+	name: "BackTo",
 };
 </script>
 

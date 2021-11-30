@@ -114,6 +114,7 @@
 			></book-list-item>
 		</div>
 	</div>
+	<back-to />
 </template>
 
 <script>
@@ -122,6 +123,7 @@ import { useRoute } from "vue-router";
 import { GET_BOOKS_FROM_CATEGORY } from "../graphql/schema";
 import Loading from "../components/Loading/Loading.vue";
 import BookListItem from "../components/Home/BookListItem.vue";
+import BackTo from "../components/BackTo/BackTo.vue";
 import { computed, ref } from "@vue/reactivity";
 export default {
 	name: "BookCategory",
@@ -180,6 +182,7 @@ export default {
 	components: {
 		Loading,
 		BookListItem,
+		BackTo,
 	},
 };
 </script>
