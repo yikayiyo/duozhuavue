@@ -108,7 +108,7 @@
 			</div>
 
 			<book-list-item
-				v-for="book of books"
+				v-for="book of sortedBooks"
 				:key="book.id"
 				:book="book"
 			></book-list-item>
@@ -129,16 +129,18 @@ export default {
 	name: "BookCategory",
 	setup() {
 		const route = useRoute();
+		const selectedSortOption = ref("评分优先");
+		const showAllOptions = ref(false);
+
 		const categoryId = route.params.categoryId;
 		const { result, loading, error } = useQuery(GET_BOOKS_FROM_CATEGORY, {
 			categoryId,
 		});
-		const category = useResult(result, [], (data) => data.category);
 
-		// 排序时使用数据副本，默认高评分优先
-		const selectedSortOption = ref("评分优先");
-		const books = ref([...category.value.items]);
-		books.value.sort((a, b) => {
+		const category = useResult(result, {}, (data) => data.category);
+		const books = useResult(result, [], (data) => data.category.items);
+		let sortedBooks = ref([...books.value]);
+		sortedBooks.value.sort((a, b) => {
 			return b.doubanRating - a.doubanRating;
 		});
 
@@ -146,21 +148,21 @@ export default {
 			() => category.value.parentCategory[0].themeColor
 		);
 
-		const showAllOptions = ref(false);
 		const toggleShowAllOptions = function () {
 			showAllOptions.value = !showAllOptions.value;
 		};
 
 		const sortByRating = function () {
 			selectedSortOption.value = "评分优先";
-			books.value.sort((a, b) => {
+			sortedBooks.value.sort((a, b) => {
 				return b.doubanRating - a.doubanRating;
 			});
 			toggleShowAllOptions();
 		};
+
 		const sortByPrice = function () {
 			selectedSortOption.value = "低价优先";
-			books.value.sort((a, b) => {
+			sortedBooks.value.sort((a, b) => {
 				return a.originalPrice - b.originalPrice;
 			});
 			toggleShowAllOptions();
@@ -168,7 +170,7 @@ export default {
 
 		return {
 			category,
-			books,
+			sortedBooks,
 			loading,
 			error,
 			headerBg,
