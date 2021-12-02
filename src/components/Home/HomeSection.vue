@@ -116,7 +116,9 @@ export default {
 			result: categoryFeedResult,
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
-		} = useQuery(GET_CATEGORY_FEED);
+		} = useQuery(GET_CATEGORY_FEED, {
+			first: 1,
+		});
 
 		const categoryFeed = useResult(categoryFeedResult, {});
 

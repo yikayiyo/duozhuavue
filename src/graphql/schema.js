@@ -131,8 +131,8 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 `;
 
 export const GET_CATEGORY_FEED = gql`
-	query getCategoryFeed {
-		categoryFeed {
+	query getCategoryFeed($first: Int, $after: String) {
+		categoryFeed(first: $first, after: $after) {
 			cursor
 			hasNextPage
 			categories {

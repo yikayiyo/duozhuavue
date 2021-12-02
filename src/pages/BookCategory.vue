@@ -141,7 +141,7 @@ export default {
 		const category = useResult(result, {}, (data) => data.category);
 		const books = useResult(result, [], (data) => data.category.items);
 		let sortedBooks = ref([]);
-
+		// 解决白屏问题
 		watch(
 			books,
 			() => {

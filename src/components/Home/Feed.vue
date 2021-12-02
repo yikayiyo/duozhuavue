@@ -2,7 +2,7 @@
 	<div id="feed-section" class="feed-section relative bg-white">
 		<div
 			id="title-wrapper"
-			class="title-wrapper p-3.75 bg-white sticky top-ct z-20"
+			class="title-wrapper p-3.75 bg-white sticky top-ct z-10"
 			:class="{ 'is-pinned': isPinned }"
 			ref="target"
 		>
@@ -58,6 +58,6 @@ export default {
 	border-bottom: 0.5px solid rgb(242, 242, 242);
 }
 .book-list-wrapper > .book-list-item:last-child {
-	margin-bottom: 128px;
+	margin-bottom: 16px;
 }
 </style>
