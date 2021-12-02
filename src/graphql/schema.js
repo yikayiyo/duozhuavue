@@ -111,17 +111,25 @@ export const GET_TOP_CATEGORIES = gql`
 `;
 
 export const GET_BOOKS_FROM_CATEGORY = gql`
-	query getBooksFromCategory($categoryId: ID!) {
+	query getBooksFromCategory($categoryId: ID!, $after: String) {
 		category(id: $categoryId) {
 			name
 			description
-			items {
-				id
-				title
-				rawAuthor
-				image
-				doubanRating
-				originalPrice
+			items(first: 1, after: $after) {
+				pageInfo {
+					hasNextPage
+					endCursor
+				}
+				edges {
+					node {
+						id
+						title
+						rawAuthor
+						image
+						doubanRating
+						originalPrice
+					}
+				}
 			}
 			parentCategory {
 				themeColor
@@ -131,20 +139,24 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 `;
 
 export const GET_CATEGORY_FEED = gql`
-	query getCategoryFeed($first: Int, $after: String) {
-		categoryFeed(first: $first, after: $after) {
+	query getCategoryFeed {
+		categoryFeed {
 			cursor
 			hasNextPage
 			categories {
 				id
 				name
 				items {
-					id
-					title
-					rawAuthor
-					doubanRating
-					originalPrice
-					image
+					cursor
+					hasNextPage
+					books {
+						id
+						title
+						rawAuthor
+						doubanRating
+						originalPrice
+						image
+					}
 				}
 			}
 		}

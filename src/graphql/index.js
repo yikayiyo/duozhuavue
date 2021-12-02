@@ -6,8 +6,35 @@ import {
 import { persistCache, LocalStorageWrapper } from "apollo3-cache-persist";
 import { setContext } from "@apollo/client/link/context";
 import { CURRENT_USER } from "./schema";
+import { relayStylePagination } from "@apollo/client/utilities";
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+	typePolicies: {
+		Query: {
+			fields: {
+				category: {
+					...relayStylePagination(),
+				},
+				// categoryFeed: relayStylePagination(),
+			},
+		},
+		// Category: {
+		// 	fields: {
+		// 		items: {
+		// 			merge(oldv, newv) {
+		// 				console.log(newv);
+		// 				return oldv
+		// 					? {
+		// 							edges: [...oldv.edges, ...newv.edges],
+		// 							pageInfo: newv.pageInfo,
+		// 					  }
+		// 					: newv;
+		// 			},
+		// 		},
+		// 	},
+		// },
+	},
+});
 // 初始化时写入currentUser信息
 // console.log("写入空的currentUser信息");
 cache.writeQuery({

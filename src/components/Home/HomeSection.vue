@@ -90,6 +90,7 @@
 				v-for="category of categoryFeed.categories"
 				:key="category.id"
 				:category="category"
+				:loadMore="loadMoreBook"
 			/>
 		</div>
 	</div>
@@ -116,11 +117,13 @@ export default {
 			result: categoryFeedResult,
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
-		} = useQuery(GET_CATEGORY_FEED, {
-			first: 1,
-		});
+		} = useQuery(GET_CATEGORY_FEED);
 
 		const categoryFeed = useResult(categoryFeedResult, {});
+
+		const loadMoreBook = (id, cursor) => {
+			console.log("category: ", id, " ,load more book after: ", cursor);
+		};
 
 		return {
 			collections,
@@ -129,6 +132,7 @@ export default {
 			categoryFeed,
 			categoryFeedLoading,
 			categoryFeedError,
+			loadMoreBook,
 		};
 	},
 	components: {

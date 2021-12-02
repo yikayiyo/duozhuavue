@@ -106,12 +106,23 @@
 					</div>
 				</div>
 			</div>
-
 			<book-list-item
 				v-for="book of sortedBooks"
 				:key="book.id"
 				:book="book"
 			></book-list-item>
+			<div
+				class="
+					load-more
+					py-4
+					text-footer text-center
+					border-t-0.5 border-b-0.5 border-menu
+				"
+				v-if="hasNextPage"
+				@click="loadMoreBooks"
+			>
+				再多来点儿
+			</div>
 		</div>
 	</div>
 	<back-to />
@@ -134,12 +145,31 @@ export default {
 		const showAllOptions = ref(false);
 
 		const categoryId = route.params.categoryId;
-		const { result, loading, error } = useQuery(GET_BOOKS_FROM_CATEGORY, {
-			categoryId,
-		});
+		const { result, loading, error, fetchMore } = useQuery(
+			GET_BOOKS_FROM_CATEGORY,
+			{
+				categoryId,
+			}
+		);
 
 		const category = useResult(result, {}, (data) => data.category);
-		const books = useResult(result, [], (data) => data.category.items);
+		const cursor = useResult(
+			result,
+			"",
+			(data) => data.category.items.pageInfo.endCursor
+		);
+		const hasNextPage = useResult(
+			result,
+			false,
+			(data) => data.category.items.pageInfo.hasNextPage
+		);
+		const edges = useResult(result, [], (data) => data.category.items.edges);
+		const books = computed(() => {
+			return edges.value.map((edge) => {
+				return edge.node;
+			});
+		});
+
 		let sortedBooks = ref([]);
 		// 解决白屏问题
 		watch(
@@ -179,6 +209,28 @@ export default {
 			toggleShowAllOptions();
 		};
 
+		const loadMoreBooks = function () {
+			fetchMore({
+				variables: {
+					after: cursor.value,
+				},
+				updateQuery: (previousResult, { fetchMoreResult }) => {
+					const newEdges = fetchMoreResult.category.items.edges;
+					const pageInfo = fetchMoreResult.category.items.pageInfo;
+
+					return newEdges.length
+						? {
+								category: {
+									...previousResult.category,
+									edges: [...previousResult.category.items.edges, ...newEdges],
+									pageInfo,
+								},
+						  }
+						: previousResult;
+				},
+			});
+		};
+
 		return {
 			category,
 			sortedBooks,
@@ -190,6 +242,9 @@ export default {
 			selectedSortOption,
 			sortByRating,
 			sortByPrice,
+			cursor,
+			hasNextPage,
+			loadMoreBooks,
 		};
 	},
 	components: {

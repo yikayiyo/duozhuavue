@@ -1,5 +1,5 @@
 <template>
-	<div id="feed-section" class="feed-section relative bg-white">
+	<div id="feed-section" class="feed-section relative bg-white mb-4">
 		<div
 			id="title-wrapper"
 			class="title-wrapper p-3.75 bg-white sticky top-ct z-10"
@@ -11,24 +11,49 @@
 		<div class="book-list-wrapper -mt-3.75">
 			<book-list-item
 				class="book-list-item"
-				:book="item"
-				v-for="item of category.items"
-				:key="item.id"
+				:book="book"
+				v-for="book in books"
+				:key="book.id"
 			/>
+			<div
+				class="
+					feed-footer
+					py-4
+					text-footer text-center
+					border-t-0.5 border-menu
+				"
+				@click="loadMore(category.id, cursor)"
+				v-if="hasNextPage"
+			>
+				加载更多
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 import BookListItem from "./BookListItem.vue";
 import { onMounted } from "@vue/runtime-core";
 export default {
 	name: "Feed",
-	props: ["category"],
-	setup() {
+	props: ["category", "loadMore"],
+	setup(props) {
 		const target = ref();
 		const isPinned = ref(false);
+
+		const books = computed(() => {
+			return props.category.items.books;
+		});
+
+		const hasNextPage = computed(() => {
+			return props.category.items.hasNextPage;
+		});
+
+		const cursor = computed(() => {
+			return props.category.items.cursor;
+		});
+
 		const observer = new IntersectionObserver(
 			([e]) => {
 				isPinned.value = !e.isIntersecting;
@@ -45,6 +70,9 @@ export default {
 		return {
 			target,
 			isPinned,
+			books,
+			hasNextPage,
+			cursor,
 		};
 	},
 	components: {
