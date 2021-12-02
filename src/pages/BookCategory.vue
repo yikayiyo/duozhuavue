@@ -125,6 +125,7 @@ import Loading from "../components/Loading/Loading.vue";
 import BookListItem from "../components/Home/BookListItem.vue";
 import BackTo from "../components/BackTo/BackTo.vue";
 import { computed, ref } from "@vue/reactivity";
+import { watch } from "@vue/runtime-core";
 export default {
 	name: "BookCategory",
 	setup() {
@@ -139,7 +140,17 @@ export default {
 
 		const category = useResult(result, {}, (data) => data.category);
 		const books = useResult(result, [], (data) => data.category.items);
-		let sortedBooks = ref([...books.value]);
+		let sortedBooks = ref([]);
+
+		watch(
+			books,
+			() => {
+				sortedBooks.value = [...books.value];
+			},
+			{
+				immediate: true,
+			}
+		);
 		sortedBooks.value.sort((a, b) => {
 			return b.doubanRating - a.doubanRating;
 		});
