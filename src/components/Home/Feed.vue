@@ -42,17 +42,15 @@ export default {
 		const target = ref();
 		const isPinned = ref(false);
 
-		const books = computed(() => {
-			return props.category.items.books;
+		const categoryItemConnection = computed(() => {
+			return props.category.items;
 		});
 
-		const hasNextPage = computed(() => {
-			return props.category.items.hasNextPage;
-		});
+		const books = categoryItemConnection.value.edges.map((edge) => edge.node);
 
-		const cursor = computed(() => {
-			return props.category.items.cursor;
-		});
+		const hasNextPage = categoryItemConnection.value.pageInfo.hasNextPage;
+
+		const cursor = categoryItemConnection.value.pageInfo.endCursor;
 
 		const observer = new IntersectionObserver(
 			([e]) => {

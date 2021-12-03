@@ -12,27 +12,28 @@ const cache = new InMemoryCache({
 	typePolicies: {
 		Query: {
 			fields: {
-				category: {
-					...relayStylePagination(),
+				categoryFeed: {
+					keyArgs: false,
+					merge(existing, incoming) {
+						// console.log("existing: ", existing);
+						// console.log("incoming: ", incoming);
+						if (!existing) return incoming;
+						return {
+							...incoming,
+							categories: [...existing.categories, ...incoming.categories],
+						};
+					},
 				},
-				// categoryFeed: relayStylePagination(),
 			},
 		},
-		// Category: {
-		// 	fields: {
-		// 		items: {
-		// 			merge(oldv, newv) {
-		// 				console.log(newv);
-		// 				return oldv
-		// 					? {
-		// 							edges: [...oldv.edges, ...newv.edges],
-		// 							pageInfo: newv.pageInfo,
-		// 					  }
-		// 					: newv;
-		// 			},
-		// 		},
-		// 	},
-		// },
+		Category: {
+			fields: {
+				items: {
+					...relayStylePagination(),
+					keyArgs: false,
+				},
+			},
+		},
 	},
 });
 // 初始化时写入currentUser信息

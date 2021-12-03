@@ -139,23 +139,27 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 `;
 
 export const GET_CATEGORY_FEED = gql`
-	query getCategoryFeed {
-		categoryFeed {
+	query getCategoryFeed($after: String) {
+		categoryFeed(after: $after) {
 			cursor
 			hasNextPage
 			categories {
 				id
 				name
 				items {
-					cursor
-					hasNextPage
-					books {
-						id
-						title
-						rawAuthor
-						doubanRating
-						originalPrice
-						image
+					pageInfo {
+						endCursor
+						hasNextPage
+					}
+					edges {
+						node {
+							id
+							title
+							rawAuthor
+							doubanRating
+							originalPrice
+							image
+						}
 					}
 				}
 			}

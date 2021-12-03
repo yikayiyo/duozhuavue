@@ -87,11 +87,24 @@
 		</div>
 		<div class="feed-content-wrapper mt-2.5 bg-menu" v-else>
 			<feed
-				v-for="category of categoryFeed.categories"
+				v-for="category of categories"
 				:key="category.id"
 				:category="category"
 				:loadMore="loadMoreBook"
 			/>
+			<div
+				class="
+					load-more-category
+					feed-footer
+					py-15
+					text-footer text-center
+					border-t-0.5 border-menu
+				"
+				v-if="hasNextPage"
+				@click="loadMoreCategories"
+			>
+				加载更多分类
+			</div>
 		</div>
 	</div>
 </template>
@@ -102,6 +115,7 @@ import Feed from "./Feed.vue";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import Loading from "../Loading/Loading.vue";
 import { GET_CATEGORY_FEED, GET_COLLECTIONS } from "../../graphql/schema";
+import { computed } from "@vue/reactivity";
 
 export default {
 	name: "HomeSection",
@@ -117,22 +131,42 @@ export default {
 			result: categoryFeedResult,
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
+			fetchMore,
 		} = useQuery(GET_CATEGORY_FEED);
 
-		const categoryFeed = useResult(categoryFeedResult, {});
+		const categoryFeed = useResult(
+			categoryFeedResult,
+			{},
+			(data) => data.categoryFeed
+		);
+
+		const cursor = computed(() => categoryFeed.value.cursor);
+		const hasNextPage = computed(() => categoryFeed.value.hasNextPage);
+		const categories = computed(() => categoryFeed.value.categories);
 
 		const loadMoreBook = (id, cursor) => {
 			console.log("category: ", id, " ,load more book after: ", cursor);
+		};
+
+		const loadMoreCategories = function () {
+			fetchMore({
+				variables: {
+					after: cursor.value,
+				},
+			});
 		};
 
 		return {
 			collections,
 			collectionLoading,
 			collectionError,
-			categoryFeed,
+			cursor,
+			hasNextPage,
+			categories,
 			categoryFeedLoading,
 			categoryFeedError,
 			loadMoreBook,
+			loadMoreCategories,
 		};
 	},
 	components: {

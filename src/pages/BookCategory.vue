@@ -214,20 +214,6 @@ export default {
 				variables: {
 					after: cursor.value,
 				},
-				updateQuery: (previousResult, { fetchMoreResult }) => {
-					const newEdges = fetchMoreResult.category.items.edges;
-					const pageInfo = fetchMoreResult.category.items.pageInfo;
-
-					return newEdges.length
-						? {
-								category: {
-									...previousResult.category,
-									edges: [...previousResult.category.items.edges, ...newEdges],
-									pageInfo,
-								},
-						  }
-						: previousResult;
-				},
 			});
 		};
 
