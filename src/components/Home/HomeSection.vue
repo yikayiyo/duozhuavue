@@ -120,6 +120,7 @@ import {
 	GET_COLLECTIONS,
 } from "../../graphql/schema";
 import { computed } from "@vue/reactivity";
+import { watch } from "@vue/runtime-core";
 
 export default {
 	name: "HomeSection",
@@ -147,6 +148,7 @@ export default {
 		const cursor = computed(() => categoryFeed.value.pageInfo.endCursor);
 		const hasNextPage = computed(() => categoryFeed.value.pageInfo.hasNextPage);
 		const categoryEdges = computed(() => categoryFeed.value.edges);
+
 		const categories = computed(() => {
 			return categoryEdges.value.map((edge) => edge.node);
 		});

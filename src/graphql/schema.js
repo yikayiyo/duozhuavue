@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 export const GET_BOOK = gql`
 	query getABook($bookId: ID!) {
 		book(id: $bookId) {
+			id
 			title
 			isbn13
 			rawAuthor
@@ -24,6 +25,7 @@ export const GET_BOOK = gql`
 export const GET_COLLECTION = gql`
 	query getCollection($collectionId: ID!) {
 		collection(id: $collectionId) {
+			id
 			name
 			description
 			image
@@ -113,6 +115,7 @@ export const GET_TOP_CATEGORIES = gql`
 export const GET_BOOKS_FROM_CATEGORY = gql`
 	query getBooksFromCategory($categoryId: ID!, $after: String) {
 		category(id: $categoryId) @connection(key: "cccc", filter: ["id"]) {
+			id
 			name
 			description
 			items(first: 1, after: $after) {

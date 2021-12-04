@@ -46,9 +46,17 @@ export default {
 			return props.category.items;
 		});
 
-		const books = categoryItemConnection.value.edges.map((edge) => edge.node);
-		const hasNextPage = categoryItemConnection.value.pageInfo.hasNextPage;
-		const cursor = categoryItemConnection.value.pageInfo.endCursor;
+		const books = computed(() =>
+			categoryItemConnection.value.edges.map((edge) => edge.node)
+		);
+
+		const hasNextPage = computed(
+			() => categoryItemConnection.value.pageInfo.hasNextPage
+		);
+
+		const cursor = computed(
+			() => categoryItemConnection.value.pageInfo.endCursor
+		);
 
 		const observer = new IntersectionObserver(
 			([e]) => {
