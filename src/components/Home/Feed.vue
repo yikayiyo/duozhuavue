@@ -22,7 +22,7 @@
 					text-footer text-center
 					border-t-0.5 border-menu
 				"
-				@click="loadMore(category.id, cursor)"
+				@click="loadMoreBooks(category.id, cursor)"
 				v-if="hasNextPage"
 			>
 				加载更多
@@ -37,7 +37,7 @@ import BookListItem from "./BookListItem.vue";
 import { onMounted } from "@vue/runtime-core";
 export default {
 	name: "Feed",
-	props: ["category", "loadMore"],
+	props: ["category", "loadMoreBooks"],
 	setup(props) {
 		const target = ref();
 		const isPinned = ref(false);
@@ -47,9 +47,7 @@ export default {
 		});
 
 		const books = categoryItemConnection.value.edges.map((edge) => edge.node);
-
 		const hasNextPage = categoryItemConnection.value.pageInfo.hasNextPage;
-
 		const cursor = categoryItemConnection.value.pageInfo.endCursor;
 
 		const observer = new IntersectionObserver(

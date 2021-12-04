@@ -90,7 +90,7 @@
 				v-for="category of categories"
 				:key="category.id"
 				:category="category"
-				:loadMore="loadMoreBook"
+				:loadMoreBooks="loadMoreBooks"
 			/>
 			<div
 				class="
@@ -114,7 +114,11 @@ import OcListItem from "./OcListItem.vue";
 import Feed from "./Feed.vue";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import Loading from "../Loading/Loading.vue";
-import { GET_CATEGORY_FEED, GET_COLLECTIONS } from "../../graphql/schema";
+import {
+	GET_BOOKS_FROM_CATEGORY,
+	GET_CATEGORY_FEED,
+	GET_COLLECTIONS,
+} from "../../graphql/schema";
 import { computed } from "@vue/reactivity";
 
 export default {
@@ -140,12 +144,21 @@ export default {
 			(data) => data.categoryFeed
 		);
 
-		const cursor = computed(() => categoryFeed.value.cursor);
-		const hasNextPage = computed(() => categoryFeed.value.hasNextPage);
-		const categories = computed(() => categoryFeed.value.categories);
+		const cursor = computed(() => categoryFeed.value.pageInfo.endCursor);
+		const hasNextPage = computed(() => categoryFeed.value.pageInfo.hasNextPage);
+		const categoryEdges = computed(() => categoryFeed.value.edges);
+		const categories = computed(() => {
+			return categoryEdges.value.map((edge) => edge.node);
+		});
 
-		const loadMoreBook = (id, cursor) => {
-			console.log("category: ", id, " ,load more book after: ", cursor);
+		const loadMoreBooks = (categoryId, itemCursor) => {
+			fetchMore({
+				query: GET_BOOKS_FROM_CATEGORY,
+				variables: {
+					categoryId,
+					after: itemCursor,
+				},
+			});
 		};
 
 		const loadMoreCategories = function () {
@@ -165,7 +178,7 @@ export default {
 			categories,
 			categoryFeedLoading,
 			categoryFeedError,
-			loadMoreBook,
+			loadMoreBooks,
 			loadMoreCategories,
 		};
 	},

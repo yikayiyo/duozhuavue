@@ -112,7 +112,7 @@ export const GET_TOP_CATEGORIES = gql`
 
 export const GET_BOOKS_FROM_CATEGORY = gql`
 	query getBooksFromCategory($categoryId: ID!, $after: String) {
-		category(id: $categoryId) {
+		category(id: $categoryId) @connection(key: "cccc", filter: ["id"]) {
 			name
 			description
 			items(first: 1, after: $after) {
@@ -139,26 +139,35 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 `;
 
 export const GET_CATEGORY_FEED = gql`
-	query getCategoryFeed($after: String) {
-		categoryFeed(after: $after) {
-			cursor
-			hasNextPage
-			categories {
-				id
-				name
-				items {
-					pageInfo {
-						endCursor
-						hasNextPage
-					}
-					edges {
-						node {
-							id
-							title
-							rawAuthor
-							doubanRating
-							originalPrice
-							image
+	query getCategoryFeed(
+		$first: Int
+		$after: String
+		$itemsFirst: Int
+		$itemsAfter: String
+	) {
+		categoryFeed(first: $first, after: $after) {
+			pageInfo {
+				hasNextPage
+				endCursor
+			}
+			edges {
+				node {
+					id
+					name
+					items(first: $itemsFirst, after: $itemsAfter) {
+						pageInfo {
+							endCursor
+							hasNextPage
+						}
+						edges {
+							node {
+								id
+								title
+								rawAuthor
+								doubanRating
+								originalPrice
+								image
+							}
 						}
 					}
 				}

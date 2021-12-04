@@ -13,16 +13,8 @@ const cache = new InMemoryCache({
 		Query: {
 			fields: {
 				categoryFeed: {
+					...relayStylePagination(),
 					keyArgs: false,
-					merge(existing, incoming) {
-						// console.log("existing: ", existing);
-						// console.log("incoming: ", incoming);
-						if (!existing) return incoming;
-						return {
-							...incoming,
-							categories: [...existing.categories, ...incoming.categories],
-						};
-					},
 				},
 			},
 		},
