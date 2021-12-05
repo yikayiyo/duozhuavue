@@ -120,7 +120,6 @@ import {
 	GET_COLLECTIONS,
 } from "../../graphql/schema";
 import { computed } from "@vue/reactivity";
-import { watch } from "@vue/runtime-core";
 
 export default {
 	name: "HomeSection",

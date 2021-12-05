@@ -36,9 +36,11 @@ export const GET_COLLECTION = gql`
 				avatar
 			}
 			items {
+				id
 				title
 			}
 			contributors {
+				id
 				name
 			}
 			contributions {
@@ -55,6 +57,7 @@ export const GET_COLLECTION = gql`
 					avatar
 				}
 				reason
+				id
 			}
 		}
 	}
@@ -66,12 +69,15 @@ export const GET_COLLECTIONS = gql`
 			id
 			name
 			items {
+				id
 				title
 			}
 			contributors {
+				id
 				name
 			}
 			proposer {
+				id
 				name
 				avatar
 			}
@@ -114,7 +120,7 @@ export const GET_TOP_CATEGORIES = gql`
 
 export const GET_BOOKS_FROM_CATEGORY = gql`
 	query getBooksFromCategory($categoryId: ID!, $after: String) {
-		category(id: $categoryId) @connection(key: "cccc", filter: ["id"]) {
+		category(id: $categoryId) {
 			id
 			name
 			description
