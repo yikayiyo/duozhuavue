@@ -7,6 +7,7 @@ import { persistCache, LocalStorageWrapper } from "apollo3-cache-persist";
 import { setContext } from "@apollo/client/link/context";
 import { CURRENT_USER } from "./schema";
 import { relayStylePagination } from "@apollo/client/utilities";
+import { startIndexFromArray } from "./utils";
 
 const cache = new InMemoryCache({
 	typePolicies: {
@@ -15,6 +16,26 @@ const cache = new InMemoryCache({
 				categoryFeed: {
 					...relayStylePagination(),
 					keyArgs: false,
+					// read(existing, { args: { first = 2, after }, readField }) {
+					// 	console.log("existing: ", existing);
+					// 	console.log(`after: ${after}, first: ${first}`);
+					// 	const res = {};
+					// 	if (existing) {
+					// 		let startIndex = startIndexFromArray(
+					// 			existing.edges,
+					// 			after,
+					// 			readField
+					// 		);
+					// 		res.edges = existing.edges.slice(startIndex, startIndex + first);
+					// 		res.pageInfo = {
+					// 			startCursor: res.edges[0].cursor,
+					// 			endCursor: res.edges[res.edges.length - 1].cursor,
+					// 			hasNextPage: true,
+					// 			hasPreviousPage: startIndex === 0 ? false : true,
+					// 		};
+					// 	}
+					// 	return res;
+					// },
 				},
 			},
 		},

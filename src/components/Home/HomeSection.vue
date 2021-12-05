@@ -96,7 +96,7 @@
 				class="
 					load-more-category
 					feed-footer
-					py-15
+					pb-15
 					text-footer text-center
 					border-t-0.5 border-menu
 				"
@@ -104,6 +104,18 @@
 				@click="loadMoreCategories"
 			>
 				加载更多分类
+			</div>
+			<div
+				class="
+					load-more-category
+					feed-footer
+					pb-15
+					text-footer text-center
+					border-t-0.5 border-menu
+				"
+				v-else
+			>
+				都在这里了-0-
 			</div>
 		</div>
 	</div>
@@ -136,7 +148,14 @@ export default {
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
 			fetchMore,
-		} = useQuery(GET_CATEGORY_FEED);
+		} = useQuery(GET_CATEGORY_FEED, {
+			variables: {
+				after: "",
+				first: 2,
+				itemsAfter: "",
+				itemsFirst: 2,
+			},
+		});
 
 		const categoryFeed = useResult(
 			categoryFeedResult,

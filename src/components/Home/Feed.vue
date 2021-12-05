@@ -27,6 +27,17 @@
 			>
 				加载更多
 			</div>
+			<div
+				class="
+					feed-footer
+					py-4
+					text-footer text-center
+					border-t-0.5 border-menu
+				"
+				v-else
+			>
+				该分类下没有书籍了
+			</div>
 		</div>
 	</div>
 </template>
@@ -91,5 +102,8 @@ export default {
 }
 .book-list-wrapper > .book-list-item:last-child {
 	margin-bottom: 16px;
+}
+.feed-section:last-child {
+	padding-bottom: 48px;
 }
 </style>
