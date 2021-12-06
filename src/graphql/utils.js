@@ -12,5 +12,5 @@ export function startIndexFromArray(items, cursor, readField) {
 			return i + 1;
 		}
 	}
-	return 0;
+	return -1;
 }

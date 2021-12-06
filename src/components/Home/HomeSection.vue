@@ -131,7 +131,7 @@ import {
 	GET_CATEGORY_FEED,
 	GET_COLLECTIONS,
 } from "../../graphql/schema";
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 
 export default {
 	name: "HomeSection",
@@ -143,19 +143,20 @@ export default {
 		} = useQuery(GET_COLLECTIONS);
 		const collections = useResult(collectionsResult, []);
 
+		const after = ref("");
+		const first = ref(2);
+
 		const {
 			result: categoryFeedResult,
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
 			fetchMore,
-		} = useQuery(GET_CATEGORY_FEED, {
-			variables: {
-				after: "",
-				first: 2,
-				itemsAfter: "",
-				itemsFirst: 2,
-			},
-		});
+		} = useQuery(GET_CATEGORY_FEED, () => ({
+			after: after.value,
+			first: first.value,
+			itemsAfter: "",
+			itemsFirst: 3,
+		}));
 
 		const categoryFeed = useResult(
 			categoryFeedResult,
@@ -186,14 +187,22 @@ export default {
 				variables: {
 					after: cursor.value,
 				},
+			}).then(({ data: { categoryFeed } }) => {
+				// update ref's value
+				// console.log("categoryFeed: ", categoryFeed);
+				// first.value += categoryFeed.edges.length;
+				after.value = categoryFeed.pageInfo.endCursor;
+				console.log(
+					"$after is updated, there will be a new categoryFeed query..."
+				);
 			});
 		};
 
 		return {
+			after,
 			collections,
 			collectionLoading,
 			collectionError,
-			cursor,
 			hasNextPage,
 			categories,
 			categoryFeedLoading,

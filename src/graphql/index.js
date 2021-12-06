@@ -16,26 +16,32 @@ const cache = new InMemoryCache({
 				categoryFeed: {
 					...relayStylePagination(),
 					keyArgs: false,
-					// read(existing, { args: { first = 2, after }, readField }) {
-					// 	console.log("existing: ", existing);
-					// 	console.log(`after: ${after}, first: ${first}`);
-					// 	const res = {};
-					// 	if (existing) {
-					// 		let startIndex = startIndexFromArray(
-					// 			existing.edges,
-					// 			after,
-					// 			readField
-					// 		);
-					// 		res.edges = existing.edges.slice(startIndex, startIndex + first);
-					// 		res.pageInfo = {
-					// 			startCursor: res.edges[0].cursor,
-					// 			endCursor: res.edges[res.edges.length - 1].cursor,
-					// 			hasNextPage: true,
-					// 			hasPreviousPage: startIndex === 0 ? false : true,
-					// 		};
-					// 	}
-					// 	return res;
-					// },
+					read(existing, { args: { first = 2, after }, readField }) {
+						// console.log("existing: ", existing);
+						// console.log(`after: ${after}, first: ${first}`);
+						const res = {};
+						if (existing) {
+							let startIndex = startIndexFromArray(
+								existing.edges,
+								after,
+								readField
+							);
+							if (startIndex === -1 || startIndex === existing.edges.length)
+								return existing;
+							res.edges = [
+								// ...existing.edges,
+								...existing.edges.slice(startIndex, startIndex + first),
+							];
+							res.pageInfo = {
+								startCursor: res.edges[0].cursor,
+								endCursor: res.edges[res.edges.length - 1].cursor,
+								hasNextPage: true,
+								hasPreviousPage: startIndex === 0 ? false : true,
+							};
+						}
+						// console.log("res: ", res);
+						return res;
+					},
 				},
 			},
 		},

@@ -124,7 +124,7 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 			id
 			name
 			description
-			items(first: 1, after: $after) {
+			items(first: 2, after: $after) {
 				pageInfo {
 					hasNextPage
 					endCursor
