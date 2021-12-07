@@ -144,7 +144,7 @@ export default {
 		const collections = useResult(collectionsResult, []);
 
 		const after = ref("");
-		const first = ref(2);
+		const first = ref(1);
 
 		const {
 			result: categoryFeedResult,
@@ -183,6 +183,7 @@ export default {
 		};
 
 		const loadMoreCategories = function () {
+			console.log("调用loadMoreCategories，after参数为：", cursor.value);
 			fetchMore({
 				variables: {
 					after: cursor.value,
@@ -204,6 +205,7 @@ export default {
 			collectionLoading,
 			collectionError,
 			hasNextPage,
+			categoryFeed,
 			categories,
 			categoryFeedLoading,
 			categoryFeedError,

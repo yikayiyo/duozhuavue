@@ -16,18 +16,27 @@ const cache = new InMemoryCache({
 				categoryFeed: {
 					...relayStylePagination(),
 					keyArgs: false,
-					read(existing, { args: { first = 2, after }, readField }) {
+					read(existing, { args: { first = 1, after }, readField }) {
 						// console.log("existing: ", existing);
-						// console.log(`after: ${after}, first: ${first}`);
+						console.log(`after: ${after}, first: ${first}`);
 						const res = {};
+						if (!existing) {
+							console.log("缓存数据为空，返回{},请求服务器数据");
+							return existing;
+						}
 						if (existing) {
+							console.log("existing: ", existing);
 							let startIndex = startIndexFromArray(
 								existing.edges,
 								after,
 								readField
 							);
-							if (startIndex === -1 || startIndex === existing.edges.length)
+							console.log("startIndex: ", startIndex);
+
+							if (startIndex === -1 || startIndex === existing.edges.length) {
+								console.log("缓存未命中，返回existing");
 								return existing;
+							}
 							res.edges = [
 								// ...existing.edges,
 								...existing.edges.slice(startIndex, startIndex + first),
@@ -39,7 +48,7 @@ const cache = new InMemoryCache({
 								hasPreviousPage: startIndex === 0 ? false : true,
 							};
 						}
-						// console.log("res: ", res);
+						console.log("res: ", res);
 						return res;
 					},
 				},
