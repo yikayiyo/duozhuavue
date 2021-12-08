@@ -124,7 +124,7 @@
 <script>
 import OcListItem from "./OcListItem.vue";
 import Feed from "./Feed.vue";
-import { useQuery, useLazyQuery, useResult } from "@vue/apollo-composable";
+import { useQuery, useResult } from "@vue/apollo-composable";
 import Loading from "../Loading/Loading.vue";
 import {
 	GET_BOOKS_FROM_CATEGORY,
@@ -132,7 +132,6 @@ import {
 	GET_COLLECTIONS,
 } from "../../graphql/schema";
 import { computed, ref } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
 
 export default {
 	name: "HomeSection",
@@ -146,14 +145,12 @@ export default {
 
 		const after = ref("");
 		const first = ref(1);
-
 		const {
-			load: getCategoryFeed,
 			result: categoryFeedResult,
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
 			fetchMore,
-		} = useLazyQuery(GET_CATEGORY_FEED, () => ({
+		} = useQuery(GET_CATEGORY_FEED, () => ({
 			after: after.value,
 			first: first.value,
 			itemsAfter: "",
@@ -176,11 +173,6 @@ export default {
 			return categoryFeed.value.edges.map((edge) => edge.node);
 		});
 
-		onMounted(() => {
-			console.log("挂载后请求 categoryFeed 数据");
-			getCategoryFeed();
-		});
-
 		const loadMoreBooks = (categoryId, itemCursor) => {
 			fetchMore({
 				query: GET_BOOKS_FROM_CATEGORY,
@@ -192,10 +184,9 @@ export default {
 		};
 
 		const loadMoreCategories = function () {
-			console.log("调用loadMoreCategories");
-			first.value += 1;
-			getCategoryFeed();
-			console.log("再次调用getCategoryFeed()");
+			// console.log("调用loadMoreCategories");
+			after.value = cursor.value;
+			// console.log("更改after，query自动重新执行，after值为：", after.value);
 			// 请求更多分类
 			// after: cursor.value,
 			// .then(({ data: { categoryFeed } }) => {
