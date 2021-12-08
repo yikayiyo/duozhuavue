@@ -124,7 +124,7 @@
 <script>
 import OcListItem from "./OcListItem.vue";
 import Feed from "./Feed.vue";
-import { useQuery, useResult } from "@vue/apollo-composable";
+import { useQuery, useLazyQuery, useResult } from "@vue/apollo-composable";
 import Loading from "../Loading/Loading.vue";
 import {
 	GET_BOOKS_FROM_CATEGORY,
@@ -132,6 +132,7 @@ import {
 	GET_COLLECTIONS,
 } from "../../graphql/schema";
 import { computed, ref } from "@vue/reactivity";
+import { onMounted } from "@vue/runtime-core";
 
 export default {
 	name: "HomeSection",
@@ -147,11 +148,12 @@ export default {
 		const first = ref(1);
 
 		const {
+			load: getCategoryFeed,
 			result: categoryFeedResult,
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
 			fetchMore,
-		} = useQuery(GET_CATEGORY_FEED, () => ({
+		} = useLazyQuery(GET_CATEGORY_FEED, () => ({
 			after: after.value,
 			first: first.value,
 			itemsAfter: "",
@@ -160,16 +162,23 @@ export default {
 
 		const categoryFeed = useResult(
 			categoryFeedResult,
-			{},
+			{
+				edges: [],
+				pageInfo: {},
+			},
 			(data) => data.categoryFeed
 		);
 
 		const cursor = computed(() => categoryFeed.value.pageInfo.endCursor);
 		const hasNextPage = computed(() => categoryFeed.value.pageInfo.hasNextPage);
-		const categoryEdges = computed(() => categoryFeed.value.edges);
-
+		// const categoryEdges = computed(() => categoryFeed.value.edges);
 		const categories = computed(() => {
-			return categoryEdges.value.map((edge) => edge.node);
+			return categoryFeed.value.edges.map((edge) => edge.node);
+		});
+
+		onMounted(() => {
+			console.log("挂载后请求 categoryFeed 数据");
+			getCategoryFeed();
 		});
 
 		const loadMoreBooks = (categoryId, itemCursor) => {
@@ -183,29 +192,30 @@ export default {
 		};
 
 		const loadMoreCategories = function () {
-			console.log("调用loadMoreCategories，after参数为：", cursor.value);
-			fetchMore({
-				variables: {
-					after: cursor.value,
-				},
-			}).then(({ data: { categoryFeed } }) => {
-				// update ref's value
-				// console.log("categoryFeed: ", categoryFeed);
-				// first.value += categoryFeed.edges.length;
-				after.value = categoryFeed.pageInfo.endCursor;
-				console.log(
-					"$after is updated, there will be a new categoryFeed query..."
-				);
-			});
+			console.log("调用loadMoreCategories");
+			first.value += 1;
+			getCategoryFeed();
+			console.log("再次调用getCategoryFeed()");
+			// 请求更多分类
+			// after: cursor.value,
+			// .then(({ data: { categoryFeed } }) => {
+			// 	// update ref's value
+			// 	// console.log("categoryFeed: ", categoryFeed);
+			// 	// first.value += categoryFeed.edges.length;
+			// 	after.value = categoryFeed.pageInfo.endCursor;
+			// 	console.log(
+			// 		"$after is updated, there will be a new categoryFeed query..."
+			// 	);
+			// });
 		};
 
 		return {
 			after,
+			first,
 			collections,
 			collectionLoading,
 			collectionError,
 			hasNextPage,
-			categoryFeed,
 			categories,
 			categoryFeedLoading,
 			categoryFeedError,

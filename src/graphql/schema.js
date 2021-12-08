@@ -154,7 +154,8 @@ export const GET_CATEGORY_FEED = gql`
 		$itemsFirst: Int
 		$itemsAfter: String
 	) {
-		categoryFeed(first: $first, after: $after) {
+		categoryFeed(first: $first, after: $after)
+			@connection(key: "categoryFeedPage", filter: ["after"]) {
 			pageInfo {
 				hasNextPage
 				endCursor
