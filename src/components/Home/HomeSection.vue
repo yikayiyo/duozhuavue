@@ -184,20 +184,11 @@ export default {
 		};
 
 		const loadMoreCategories = function () {
-			// console.log("调用loadMoreCategories");
-			after.value = cursor.value;
-			// console.log("更改after，query自动重新执行，after值为：", after.value);
-			// 请求更多分类
-			// after: cursor.value,
-			// .then(({ data: { categoryFeed } }) => {
-			// 	// update ref's value
-			// 	// console.log("categoryFeed: ", categoryFeed);
-			// 	// first.value += categoryFeed.edges.length;
-			// 	after.value = categoryFeed.pageInfo.endCursor;
-			// 	console.log(
-			// 		"$after is updated, there will be a new categoryFeed query..."
-			// 	);
-			// });
+			fetchMore({
+				variables: {
+					after: cursor.value,
+				},
+			});
 		};
 
 		return {
