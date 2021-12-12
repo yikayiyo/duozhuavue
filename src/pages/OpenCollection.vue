@@ -55,7 +55,9 @@
 				<h1 class="mb-4 text-3xl font-medium">
 					{{ collection.name }}
 				</h1>
-				<span class="leading-1.6">{{ collection.description }}</span>
+				<span class="leading-1.6 font-normal">{{
+					collection.description
+				}}</span>
 			</div>
 			<div class="bottom mb-7.5">
 				<span>
