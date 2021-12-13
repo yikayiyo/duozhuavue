@@ -42,7 +42,7 @@ cache.writeQuery({
 });
 
 const httpLink = createHttpLink({
-	uri: "http://localhost:5001/graphql",
+	uri: import.meta.env.VITE_API_URI,
 });
 
 const authLink = setContext((_, { headers }) => {
