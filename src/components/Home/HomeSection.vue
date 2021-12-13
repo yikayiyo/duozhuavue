@@ -81,7 +81,7 @@
 				</router-link>
 			</div>
 		</div>
-		<loading v-if="categoryFeedLoading" />
+		<loading v-if="networkStatus === 1" class="loading" />
 		<div class="text-label" v-else-if="categoryFeedError">
 			{{ categoryFeedError }}
 		</div>
@@ -100,10 +100,22 @@
 					text-footer text-center
 					border-t-0.5 border-menu
 				"
-				v-if="hasNextPage"
+				v-if="hasNextPage && networkStatus === 7"
 				@click="loadMoreCategories"
 			>
 				加载更多分类
+			</div>
+			<div
+				class="
+					load-more-category
+					feed-footer
+					pb-15
+					text-footer text-center
+					border-t-0.5 border-menu
+				"
+				v-else-if="hasNextPage && networkStatus === 3"
+			>
+				<loading />
 			</div>
 			<div
 				class="
@@ -150,12 +162,19 @@ export default {
 			loading: categoryFeedLoading,
 			error: categoryFeedError,
 			fetchMore,
-		} = useQuery(GET_CATEGORY_FEED, () => ({
-			after: after.value,
-			first: first.value,
-			itemsAfter: "",
-			itemsFirst: 3,
-		}));
+			networkStatus,
+		} = useQuery(
+			GET_CATEGORY_FEED,
+			() => ({
+				after: after.value,
+				first: first.value,
+				itemsAfter: "",
+				itemsFirst: 3,
+			}),
+			{
+				notifyOnNetworkStatusChange: true,
+			}
+		);
 
 		const categoryFeed = useResult(
 			categoryFeedResult,
@@ -203,6 +222,7 @@ export default {
 			categoryFeedError,
 			loadMoreBooks,
 			loadMoreCategories,
+			networkStatus,
 		};
 	},
 	components: {
@@ -213,4 +233,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.loading svg {
+	background-color: #dfa;
+	color: red;
+	fill: currentColor;
+}
+</style>
