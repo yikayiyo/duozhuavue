@@ -1,5 +1,5 @@
 import { nextTick } from "@vue/runtime-core";
-import { createRouter, createWebHistory, routerKey } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import HomeWrapper from "../pages/HomeWrapper.vue";
 import HomePage from "../pages/HomePage.vue";
 import Sell from "../pages/Sell.vue";

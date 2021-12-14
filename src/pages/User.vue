@@ -228,7 +228,8 @@ export default {
 			router.push("/login");
 		}
 
-		onBeforeRouteUpdate((to, from) => {
+		// 处理路由参数变化、组件重用时，可能带来的BUG
+		onBeforeRouteUpdate((to, _) => {
 			if (to.params.userId === "0") {
 				const {
 					currentUser: { id },
@@ -255,13 +256,14 @@ export default {
 			logOut,
 		};
 	},
+
 	beforeRouteEnter(to, _) {
+		const { currentUser } = apolloClient.cache.readQuery({
+			query: CURRENT_USER,
+		});
 		// 访问/users/0
 		// 如果已经登录，跳转到登录用户主页; 否则，跳转到登录页面
 		if (to.params.userId === "0") {
-			const { currentUser } = apolloClient.cache.readQuery({
-				query: CURRENT_USER,
-			});
 			if (currentUser.id !== "") {
 				return {
 					path: "/users/" + currentUser.id,
@@ -272,9 +274,15 @@ export default {
 				};
 			}
 		}
-		// 访问 /users/xxx, 不管是否登录，均可以打开
+		// 访问 /users/xxx, 未登录时不能访问
 		else {
-			return true;
+			if (currentUser.id !== "") {
+				return true;
+			} else {
+				return {
+					path: "/login",
+				};
+			}
 		}
 	},
 
