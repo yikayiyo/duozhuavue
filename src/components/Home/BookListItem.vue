@@ -65,6 +65,21 @@
 								"
 								>3.7折</span
 							>
+							<div
+								class="bookmark ml-0.75"
+								@click.stop.prevent="addToBookShelf(bookId)"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 24 24"
+									class="w-7.5"
+									:fill="isInMyBookShelf ? 'red' : '#f2f2f2'"
+								>
+									<path
+										d="M18.36,13.29,12.71,19a1,1,0,0,1-1.42,0L5.64,13.29a5,5,0,0,1,0-7.07A5,5,0,0,1,12,5.63a5,5,0,0,1,6.36,7.66Z"
+									/>
+								</svg>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -74,10 +89,12 @@
 </template>
 
 <script>
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 export default {
 	props: ["book"],
 	setup(props) {
+		const isInMyBookShelf = ref(false);
+		const bookId = computed(() => props.book.id);
 		const bgImage = computed(() => {
 			return "url(" + props.book.image + ")";
 		});
@@ -90,10 +107,19 @@ export default {
 			return (props.book.originalPrice / 100).toFixed(2);
 		});
 
+		const addToBookShelf = (id) => {
+			console.log("add to book shelf: ", id);
+			// send mutation then set isInMyBookShelf.value
+			isInMyBookShelf.value = !isInMyBookShelf.value;
+		};
+
 		return {
+			bookId,
 			bgImage,
 			bookLink,
 			bookPrice,
+			isInMyBookShelf,
+			addToBookShelf,
 		};
 	},
 };
