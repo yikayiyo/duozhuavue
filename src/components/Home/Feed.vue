@@ -12,6 +12,7 @@
 			<book-list-item
 				class="book-list-item"
 				:book="book"
+				:isLoggedIn="isLoggedIn"
 				v-for="book in books"
 				:key="book.id"
 			/>
@@ -46,29 +47,28 @@
 import { computed, ref } from "@vue/reactivity";
 import BookListItem from "./BookListItem.vue";
 import { onMounted } from "@vue/runtime-core";
+import { useApolloClient } from "@vue/apollo-composable";
+import { CURRENT_USER } from "../../graphql/schema";
 export default {
 	name: "Feed",
 	props: ["category", "loadMoreBooks"],
 	setup(props) {
-		const target = ref();
-		const isPinned = ref(false);
-
 		const categoryItemConnection = computed(() => {
 			return props.category.items;
 		});
-
 		const books = computed(() =>
 			categoryItemConnection.value.edges.map((edge) => edge.node)
 		);
-
 		const hasNextPage = computed(
 			() => categoryItemConnection.value.pageInfo.hasNextPage
 		);
-
 		const cursor = computed(
 			() => categoryItemConnection.value.pageInfo.endCursor
 		);
 
+		// 分类标题sticky为true时，添加一个下边界
+		const target = ref();
+		const isPinned = ref(false);
 		const observer = new IntersectionObserver(
 			([e]) => {
 				isPinned.value = !e.isIntersecting;
@@ -78,16 +78,23 @@ export default {
 				threshold: 1,
 			}
 		);
-
 		onMounted(() => {
 			observer.observe(target.value);
 		});
+
+		// 获取当前用户
+		const { client } = useApolloClient();
+		const {
+			currentUser: { id },
+		} = client.cache.readQuery({ query: CURRENT_USER });
+		const isLoggedIn = computed(() => id !== "");
 		return {
 			target,
 			isPinned,
 			books,
 			hasNextPage,
 			cursor,
+			isLoggedIn,
 		};
 	},
 	components: {

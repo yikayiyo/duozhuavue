@@ -66,6 +66,7 @@
 								>3.7折</span
 							>
 							<div
+								v-if="isLoggedIn"
 								class="bookmark ml-0.75"
 								@click.stop.prevent="addToBookShelf(bookId)"
 							>
@@ -91,7 +92,7 @@
 <script>
 import { computed, ref } from "@vue/reactivity";
 export default {
-	props: ["book"],
+	props: ["book", "isLoggedIn"],
 	setup(props) {
 		const isInMyBookShelf = ref(false);
 		const bookId = computed(() => props.book.id);
