@@ -3,7 +3,7 @@ import Wrapper from "./components/Wrapper/Wrapper.vue";
 </script>
 
 <template>
-	<div class="bg-gray-100 h-screen overflow-scroll">
+	<div class="bg-gray-100">
 		<wrapper />
 	</div>
 </template>
