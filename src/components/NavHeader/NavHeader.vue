@@ -56,7 +56,7 @@ export default {
 	position: absolute;
 	left: 0;
 	right: 0;
-	bottom: -15px;
+	bottom: -14px;
 	height: 2px;
 	border-radius: 999px;
 	background-color: black;
