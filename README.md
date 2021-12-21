@@ -1,6 +1,6 @@
 ## 简介
 
-看了很多教程，敲了不少代码，但是感觉前端开发水平没多少实质提高。学习 `Vue` 的时候，想着还是 `learn by doing` 吧。因为比较喜欢[多抓鱼:green_heart:](https://www.duozhuayu.com/book)，就拿它来练手。截至更新 `README` 文档的时候，算是有些收获。因为项目是用 `Vue`写的，就取了个无聊的谐音梗名字 `duozhuavue`。
+看了很多教程，敲了不少代码，但是感觉前端开发水平没多少实质提高。学习 `Vue` 的时候，想着还是 `learn by doing` 吧。因为比较喜欢[多抓鱼:green_heart:](https://www.duozhuayu.com/book)，就拿它来练手。截至更新 `README` 文档的时候，算是有些收获。因为项目是用 `Vue` 写的，就取了个无聊的谐音梗名字 `duozhuavue`。
 
 ## 技术栈
 
