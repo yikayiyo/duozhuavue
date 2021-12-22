@@ -84,6 +84,10 @@ module.exports = {
 				load: "2px",
 				"oc-item": "5px",
 			},
+			flex: {
+				2: "2 2 0%",
+				5: "5 5 0%",
+			},
 		},
 		borderWidth: {
 			DEFAULT: "1px",
