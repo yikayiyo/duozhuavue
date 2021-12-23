@@ -51,8 +51,10 @@ module.exports = {
 				20: "80px",
 				21: "84px",
 				22.5: "90px",
+				23: "92px",
 				"oc-item": "132px",
 				37.5: "150px",
+
 				qr: "200px",
 			},
 			lineHeight: {
@@ -234,5 +236,5 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/line-clamp")],
 };

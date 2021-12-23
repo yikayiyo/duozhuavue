@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@tailwindcss/line-clamp": "^0.3.0",
     "@vue/apollo-composable": "*",
     "apollo3-cache-persist": "^0.13.0",
     "graphql": "^15.7.2",

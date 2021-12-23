@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="/books/ + id">
 		<div class="douban-style-book-wrapper p-3.75">
-			<div class="top flex">
-				<div class="image-wrapper w-24 h-32 mr-3">
+			<div class="top flex justify-between">
+				<div class="image-wrapper rounded w-23 mr-2 h-32">
 					<div
 						class="image rounded h-full bg-cover bg-no-repeat bg-bottom"
 						:style="{ backgroundImage: bgImage }"
@@ -11,31 +11,31 @@
 				<div
 					class="
 						book-intro-wrapper
-						h-32
-						w-3/4
+						rounded
+						flex-1
 						bg-menu
 						px-5
-						py-4
+						pt-6
 						text-cbl
 						leading-1.6
 					"
 				>
-					<div
-						class="
-							book-intro
-							h-full
-							overflow-hidden
-							text-ellipsis
-							whitespace-normal
-						"
-					>
-						<p>{{ summary }}</p>
-					</div>
+					<div class="book-intro h-20 line-clamp-4" v-html="summary"></div>
+					<div class="title text-center text-sold-out">- 图书简介 -</div>
 				</div>
 			</div>
 			<div class="middle flex justify-between items-center py-2">
-				<div class="left">
-					<div class="title text-base">{{ title }}</div>
+				<div class="left max-w-1/2">
+					<div
+						class="
+							title
+							text-base
+							whitespace-nowrap
+							overflow-hidden overflow-ellipsis
+						"
+					>
+						{{ title }}
+					</div>
 				</div>
 				<div class="right">
 					<svg
@@ -51,7 +51,16 @@
 				</div>
 			</div>
 			<douban-rating :rating="rating" />
-			<div class="bottom text-xs text-sold-out py-2 border-b-0.5">
+			<div
+				class="
+					bottom
+					text-xs text-sold-out
+					py-2
+					border-b-0.5
+					overflow-hidden overflow-ellipsis
+					whitespace-nowrap
+				"
+			>
 				{{ bookInfo }}
 			</div>
 		</div>
@@ -97,4 +106,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.book-intro {
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+}
+</style>
