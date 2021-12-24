@@ -185,6 +185,24 @@ export const GET_CATEGORY_FEED = gql`
 		}
 	}
 `;
+
+export const GET_BOOKSHELF = gql`
+	query getBookshelf($userId: ID!) {
+		user(id: $userId) {
+			bookShelf {
+				title
+				id
+				rawAuthor
+				publisher
+				publishDate
+				doubanRating
+				summary
+				image
+			}
+		}
+	}
+`;
+
 // mutation
 
 export const SIGN_IN_MUTATION = gql`

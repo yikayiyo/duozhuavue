@@ -1,8 +1,8 @@
 <template>
 	<router-link :to="/books/ + id">
-		<div class="douban-style-book-wrapper p-3.75">
+		<div class="douban-style-book-wrapper px-3.75 pt-3.75">
 			<div class="top flex justify-between">
-				<div class="image-wrapper rounded w-23 mr-2 h-32">
+				<div class="image-wrapper rounded w-23 mr-2 h-32 bg-menu">
 					<div
 						class="image rounded h-full bg-cover bg-no-repeat bg-bottom"
 						:style="{ backgroundImage: bgImage }"
@@ -50,7 +50,7 @@
 					</svg>
 				</div>
 			</div>
-			<douban-rating :rating="rating" />
+			<douban-rating :rating="doubanRating" />
 			<div
 				class="
 					bottom
@@ -75,10 +75,9 @@ export default {
 	name: "DoubanBook",
 	props: ["book"],
 	setup(props) {
-		console.log(props);
 		const {
 			id,
-			rating,
+			doubanRating,
 			image,
 			title,
 			summary,
@@ -95,7 +94,7 @@ export default {
 		});
 		return {
 			id,
-			rating,
+			doubanRating,
 			image,
 			title,
 			summary,
@@ -106,9 +105,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.book-intro {
-	-webkit-line-clamp: 4;
-	-webkit-box-orient: vertical;
-}
-</style>
+<style scoped></style>
