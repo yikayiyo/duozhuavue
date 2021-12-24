@@ -181,8 +181,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="user-activity">
-			<router-view></router-view>
+		<div class="user-tab">
+			<router-view :books="user.bookShelf"></router-view>
 		</div>
 	</div>
 	<user-footer></user-footer>
@@ -210,6 +210,7 @@ export default {
 			avatar: "",
 			purchasedBooks: [],
 			soldBooks: [],
+			bookShelf: [],
 		});
 
 		const userIncome = computed(() => (user.value.income / 100).toFixed(2));

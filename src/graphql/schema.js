@@ -100,6 +100,16 @@ export const GET_USER = gql`
 			}
 			income
 			avatar
+			bookShelf {
+				title
+				id
+				rawAuthor
+				publisher
+				publishDate
+				doubanRating
+				summary
+				image
+			}
 		}
 	}
 `;
@@ -181,23 +191,6 @@ export const GET_CATEGORY_FEED = gql`
 						}
 					}
 				}
-			}
-		}
-	}
-`;
-
-export const GET_BOOKSHELF = gql`
-	query getBookshelf($userId: ID!) {
-		user(id: $userId) {
-			bookShelf {
-				title
-				id
-				rawAuthor
-				publisher
-				publishDate
-				doubanRating
-				summary
-				image
 			}
 		}
 	}
