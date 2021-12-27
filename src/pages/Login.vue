@@ -39,12 +39,34 @@
 					shadow
 					border
 				"
+				v-if="!signInLoading"
 				type="submit"
 			>
 				登录
 			</button>
 			<button
 				class="
+					mt-8
+					text-lg
+					font-medium
+					text-white
+					bg-load
+					py-2.25
+					px-9
+					rounded-full
+					shadow
+					border
+				"
+				v-else
+				type="submit"
+			>
+				<Loading />
+			</button>
+		</form>
+		<div class="signup max-w-3/4 mx-auto">
+			<button
+				class="
+					w-full
 					mt-8
 					text-load text-lg
 					font-medium
@@ -54,10 +76,11 @@
 					rounded-full
 					shadow-sm
 				"
+				@click="toSignUpPage"
 			>
 				注册
 			</button>
-		</form>
+		</div>
 	</div>
 </template>
 
@@ -66,8 +89,12 @@ import { CURRENT_USER, SIGN_IN_MUTATION } from "../graphql/schema";
 import { useApolloClient, useMutation } from "@vue/apollo-composable";
 import { reactive } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import Loading from "../components/Loading/Loading.vue";
 export default {
 	name: "Login",
+	components: {
+		Loading,
+	},
 	setup() {
 		const router = useRouter();
 		const { client } = useApolloClient();
@@ -90,6 +117,11 @@ export default {
 				password: signInForm.password,
 			},
 		}));
+
+		const toSignUpPage = () => {
+			console.log("click signUp");
+			// goto signup page
+		};
 
 		onError((error) => {
 			signInForm.errors.password = error;
@@ -118,6 +150,7 @@ export default {
 			signInForm,
 			signInMutation,
 			signInLoading,
+			toSignUpPage,
 		};
 	},
 
