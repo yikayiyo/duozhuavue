@@ -18,6 +18,19 @@ export const GET_BOOK = gql`
 			summary
 			catalog
 			image
+			comments {
+				id
+				content
+				commenter {
+					id
+					name
+					avatar
+				}
+				voters {
+					id
+					name
+				}
+			}
 		}
 	}
 `;
