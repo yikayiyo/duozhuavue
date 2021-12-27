@@ -21,6 +21,8 @@ export const GET_BOOK = gql`
 			comments {
 				id
 				content
+				rating
+				voteByMe
 				commenter {
 					id
 					name
@@ -30,6 +32,7 @@ export const GET_BOOK = gql`
 					id
 					name
 				}
+				createdAt
 			}
 		}
 	}
