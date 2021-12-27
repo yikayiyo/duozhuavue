@@ -127,7 +127,7 @@
 						<div class="comments-header flex justify-between">
 							<h2 class="text-lg font-medium leading-1.56">
 								{{
-									book.comments.length === 0 ? "暂无评论" : "commentsHeaderMsg"
+									book.comments.length === 0 ? "暂无评论" : commentsHeaderMsg
 								}}
 							</h2>
 							<div class="new-comment flex items-center text-load">
@@ -150,7 +150,15 @@
 								<div class="new-comment-text ml-1.25 text-shiwu">给书评分</div>
 							</div>
 						</div>
-						<div class="comments-body"></div>
+						<div class="comments-body" v-show="book.comments.length > 0">
+							<div
+								class="comment"
+								v-for="comment of book.comments"
+								:key="comment.id"
+							>
+								<div class="content">{{ comment.id + comment.content }}</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -193,7 +201,9 @@ export default {
 		const price = computed(() => {
 			return (book.value.originalPrice / 100).toFixed(2);
 		});
-
+		const commentsHeaderMsg = computed(() => {
+			return book.value.comments.length + `条鱼友评论`;
+		});
 		return {
 			collapsed,
 			book,
@@ -202,6 +212,7 @@ export default {
 			imageWrapperStyle,
 			imageStyle,
 			price,
+			commentsHeaderMsg,
 		};
 	},
 	components: {
