@@ -177,7 +177,7 @@
 										</span>
 									</a>
 								</div>
-								<div class="comment-right ml-3 text-shiwu">
+								<div class="comment-right flex-1 ml-3 text-shiwu">
 									<div class="name-with-rating flex mb-1.75">
 										<a href="">
 											<p class="font-medium">
@@ -187,9 +187,71 @@
 										<div class="rating ml-2.25">{{ comment.rating }}</div>
 									</div>
 									<div class="comment-content">
-										{{ comment.content }}
+										<div>
+											{{ comment.content }}
+										</div>
+										<div class="text-right text-xs text-sold-out">
+											{{ commentDateFormatter(comment.createdAt) }}
+										</div>
 									</div>
-									<div class="comment-footer"></div>
+									<footer class="contrib-footer">
+										<div class="interact-actions flex">
+											<div class="comment-item" style="margin-right: 40px">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="18"
+													height="18"
+													viewBox="0 0 18 17"
+												>
+													<g
+														fill="none"
+														fill-rule="evenodd"
+														stroke="#AAA"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														stroke-width="1.2"
+														transform="translate(1 1)"
+													>
+														<path
+															d="M12.169348,0 L3.83065199,0 C1.71493085,0 0,1.79029667 0,3.9989971 L0,9.14005968 C0,11.3369741 1.69686706,13.1154847 3.79678239,13.135521 L4.46740051,14.4319833 C4.79706463,15.0684285 5.62009596,15.1945389 6.11120519,14.6853828 L7.60259667,13.1390568 L12.169348,13.1390568 C14.2850692,13.1390568 16,11.3487601 16,9.14005968 L16,3.9989971 C16,1.79029667 14.2850692,0 12.169348,0 Z"
+														></path>
+														<path
+															d="M4.47615044 4.65C9.4446895 4.65 11.928959 4.65 11.928959 4.65M5.59750752 8.65L9.51801392 8.65"
+														></path>
+													</g>
+												</svg>
+											</div>
+											<div class="action-item">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="18"
+													height="18"
+													viewBox="0 0 19 18"
+												>
+													<g
+														fill="none"
+														fill-rule="evenodd"
+														stroke="#AAA"
+														stroke-width="1.2"
+														transform="translate(1 1)"
+													>
+														<path
+															stroke-linecap="round"
+															stroke-linejoin="round"
+															d="M2.74290235,5.6549 L1.32674307,5.9209 C0.564288721,6.0539 2.27373675e-13,6.8189 2.27373675e-13,7.7199 L2.27373675e-13,11.9069 C2.27373675e-13,13.4389 0.575163664,14.7399 2.35502937,14.7399 L3.1924,14.7529"
+														></path>
+														<path
+															stroke-linecap="square"
+															d="M3.5568,12.0065 L3.5568,5.5265 C3.5568,5.0625 3.66704045,4.6065 3.87715685,4.1995 L5.02667263,1.4615 C5.30368708,0.8025 6.22518415,0.2695 6.762253,0.7125 C7.33983756,1.1885 7.68751897,1.9135 7.71107462,2.6895 L7.71672798,2.9035 C7.74876366,3.9715 8.57321145,4.8195 9.58045109,4.8195 L15.0557266,4.8195 C16.6047462,4.8195 17.320838,6.4245 16.8638584,7.9955 L15.6361379,12.4075 C14.9680996,14.2355 13.3097818,15.4405 11.4630187,15.4405 L6.79240423,15.4405 C5.00500143,15.4405 3.5568,13.9025 3.5568,12.0065 Z"
+														></path>
+													</g>
+												</svg>
+												<span class="label" v-if="comment.voters.length > 0">
+													{{ comment.voters.length }}</span
+												>
+											</div>
+										</div>
+									</footer>
 								</div>
 							</div>
 						</div>
@@ -236,8 +298,11 @@ export default {
 			return (book.value.originalPrice / 100).toFixed(2);
 		});
 		const commentsHeaderMsg = computed(() => {
-			return book.value.comments.length + `条鱼友评论`;
+			return book.value.comments.length + ` 条鱼友评论`;
 		});
+		const commentDateFormatter = function (datetime) {
+			return new Date(datetime).toLocaleString();
+		};
 		return {
 			collapsed,
 			book,
@@ -247,6 +312,7 @@ export default {
 			imageStyle,
 			price,
 			commentsHeaderMsg,
+			commentDateFormatter,
 		};
 	},
 	components: {
