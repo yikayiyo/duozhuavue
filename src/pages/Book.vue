@@ -152,11 +152,45 @@
 						</div>
 						<div class="comments-body" v-show="book.comments.length > 0">
 							<div
-								class="comment"
+								class="comment flex py-4.5 border-b-0.5"
 								v-for="comment of book.comments"
 								:key="comment.id"
 							>
-								<div class="content">{{ comment.id + comment.content }}</div>
+								<div class="comment-left">
+									<a href="">
+										<span
+											class="
+												avatar-wrapper
+												inline-block
+												w-7.5
+												h-7.5
+												rounded-99
+												border-1 border-menu
+												bg-menu
+												overflow-hidden
+											"
+										>
+											<img
+												:src="comment.commenter.avatar"
+												alt="comment avatar"
+											/>
+										</span>
+									</a>
+								</div>
+								<div class="comment-right ml-3 text-shiwu">
+									<div class="name-with-rating flex mb-1.75">
+										<a href="">
+											<p class="font-medium">
+												{{ comment.commenter.name }}
+											</p>
+										</a>
+										<div class="rating ml-2.25">{{ comment.rating }}</div>
+									</div>
+									<div class="comment-content">
+										{{ comment.content }}
+									</div>
+									<div class="comment-footer"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -252,5 +286,9 @@ export default {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.comment:last-of-type {
+	margin-bottom: 64px;
 }
 </style>
