@@ -125,6 +125,7 @@ export const GET_USER = gql`
 				doubanRating
 				summary
 				image
+				isbn13
 			}
 		}
 	}

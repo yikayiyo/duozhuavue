@@ -50,7 +50,7 @@
 					</svg>
 				</div>
 			</div>
-			<douban-rating :rating="doubanRating" />
+			<douban-rating :rating="doubanRating" :isbn="book.isbn13" />
 			<div
 				class="
 					bottom

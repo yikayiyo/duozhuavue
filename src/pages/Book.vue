@@ -178,13 +178,15 @@
 									</a>
 								</div>
 								<div class="comment-right flex-1 ml-3 text-shiwu">
-									<div class="name-with-rating flex mb-1.75">
+									<div class="name-with-rating flex mb-1.75 items-center">
 										<a href="">
 											<p class="font-medium">
 												{{ comment.commenter.name }}
 											</p>
 										</a>
-										<div class="rating ml-2.25">{{ comment.rating }}</div>
+										<div class="rating ml-2.25">
+											<DuozhuavueRating :rating="comment.rating" />
+										</div>
 									</div>
 									<div class="comment-content">
 										<div>
@@ -272,6 +274,7 @@ import { useRoute } from "vue-router";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { ref, computed } from "@vue/reactivity";
 import { GET_BOOK } from "../graphql/schema";
+import DuozhuavueRating from "../components/MainSection/DuozhuavueRating.vue";
 export default {
 	name: "Book",
 	setup() {
@@ -320,6 +323,7 @@ export default {
 		DuozhuayuServices,
 		CartFooter,
 		Loading,
+		DuozhuavueRating,
 	},
 
 	methods: {
