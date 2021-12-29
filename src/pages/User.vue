@@ -1,7 +1,7 @@
 <template>
 	<loading v-if="loading" />
 	<div v-else-if="error" class="p-3.75">error</div>
-	<div class="user-wrapper text-shiwu leading-category">
+	<div v-else class="user-wrapper text-shiwu leading-category">
 		<button
 			@click="logOut"
 			class="

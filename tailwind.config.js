@@ -25,6 +25,7 @@ module.exports = {
 				divider: "#aaaaaa1a",
 				info: "#fff9",
 				arrow: "#18c3aa",
+				disable: "#497749",
 			},
 			backgroundImage: {
 				kindle: "url('/electronics/kindle.png')",
@@ -53,9 +54,9 @@ module.exports = {
 				21: "84px",
 				22.5: "90px",
 				23: "92px",
+				27.5: "110px",
 				"oc-item": "132px",
 				37.5: "150px",
-
 				qr: "200px",
 			},
 			lineHeight: {
@@ -125,6 +126,7 @@ module.exports = {
 			30: "7.5rem",
 			32: "128px",
 			32.5: "130px",
+			39: "156px",
 			86: "21.5rem",
 			full: "100%",
 			screen: "100vh",
@@ -132,6 +134,7 @@ module.exports = {
 			hicon: "1.4em",
 			"oc-item": "178px",
 			qr: "200px",
+			"9em": "9em",
 		},
 		maxHeight: {
 			30: "7.5rem",
@@ -199,6 +202,7 @@ module.exports = {
 		},
 		padding: {
 			1: "4px",
+			"0.8em": "0.8em",
 			"1em": "1em",
 			1.25: "5px",
 			1.5: "6px",
