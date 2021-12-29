@@ -130,7 +130,11 @@
 									book.comments.length === 0 ? "暂无评论" : commentsHeaderMsg
 								}}
 							</h2>
-							<div class="new-comment flex items-center text-load">
+							<div
+								class="new-comment flex items-center text-load"
+								v-if="myComment.length === 0"
+								@click="newComment"
+							>
 								<svg
 									class="new-comment-icon"
 									xmlns="http://www.w3.org/2000/svg"
@@ -148,6 +152,51 @@
 									></path>
 								</svg>
 								<div class="new-comment-text ml-1.25 text-shiwu">给书评分</div>
+							</div>
+							<div
+								v-else
+								class="
+									update-comment
+									flex
+									items-center
+									text-load
+									rounded-99
+									border-0.5 border-rating
+									box-border
+								"
+								@click="updateComment(myComment[0].id)"
+							>
+								<span
+									class="
+										avatar-wrapper
+										inline-block
+										w-7.5
+										h-7.5
+										rounded-99
+										border-1 border-rating
+										bg-menu
+										overflow-hidden
+										-m-1
+									"
+								>
+									<img
+										:src="myComment[0].commenter.avatar"
+										alt="comment avatar"
+									/>
+								</span>
+								<DuozhuavueRating :rating="myComment[0].rating" />
+								<svg
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="rgb(170, 170, 170)"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									xmlns="http://www.w3.org/2000/svg"
+									class="w-hicon -ml-3"
+								>
+									<polyline points="9 18 15 12 9 6"></polyline>
+								</svg>
 							</div>
 						</div>
 						<div class="comments-body" v-show="book.comments.length > 0">
@@ -270,11 +319,13 @@ import DoubanRating from "../components/MainSection/DoubanRating.vue";
 import DuozhuayuServices from "../components/MainSection/DuozhuayuServices.vue";
 import CartFooter from "../components/CartFooter.vue";
 import Loading from "../components/Loading/Loading.vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { ref, computed } from "@vue/reactivity";
 import { GET_BOOK } from "../graphql/schema";
 import DuozhuavueRating from "../components/MainSection/DuozhuavueRating.vue";
+import useLoggedInUserId from "../hooks/useLoggedInUserId";
+
 export default {
 	name: "Book",
 	setup() {
@@ -286,6 +337,7 @@ export default {
 			bookId: route.params.bookId,
 		});
 		const book = useResult(result, {}, (data) => data.book);
+
 		// 计算属性
 		const imageWrapperStyle = computed(() => {
 			return {
@@ -306,6 +358,38 @@ export default {
 		const commentDateFormatter = function (datetime) {
 			return new Date(datetime).toLocaleString();
 		};
+
+		// 添加评论或更新评论
+		const currentUserId = useLoggedInUserId();
+		const comments = useResult(result, [], (data) => data.book.comments);
+		// return [] if the current user did not have any comment, else return [comment]
+		const myComment = computed(() => {
+			return comments.value.filter(
+				(comment) => comment.commenter.id === currentUserId
+			);
+		});
+		const router = useRouter();
+		const newComment = () => {
+			router.push({
+				name: "comment",
+				query: {
+					bookId: route.params.bookId,
+					source: "book",
+				},
+			});
+		};
+
+		const updateComment = (commentId) => {
+			router.push({
+				name: "comment",
+				query: {
+					bookId: route.params.bookId,
+					source: "book",
+					commentId,
+				},
+			});
+		};
+
 		return {
 			collapsed,
 			book,
@@ -316,6 +400,10 @@ export default {
 			price,
 			commentsHeaderMsg,
 			commentDateFormatter,
+			currentUserId,
+			myComment,
+			newComment,
+			updateComment,
 		};
 	},
 	components: {

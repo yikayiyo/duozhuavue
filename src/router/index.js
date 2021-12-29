@@ -25,6 +25,7 @@ import BookService from "../pages/BookService.vue";
 import Support from "../pages/Support.vue";
 import Env from "../pages/Env.vue";
 import Activity from "../pages/Activity.vue";
+import Comment from "../pages/Comment.vue";
 import BookShelf from "../pages/BookShelf.vue";
 import PageNotFound from "../pages/PageNotFound.vue";
 
@@ -105,6 +106,11 @@ const routes = [
 		],
 	},
 	{ path: "/books/:bookId", component: Book },
+	{
+		path: "/book/rating",
+		name: "comment",
+		component: Comment,
+	},
 	{
 		path: "/categories/:categoryId",
 		component: BookCategory,
