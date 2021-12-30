@@ -47,7 +47,7 @@
 				<span v-if="commentId === ''"
 					>* 如果买到的书品相不符或疑似盗版，请联系客服处理。 *</span
 				>
-				<span v-else> {{ commentDate }} 评分 · </span>
+				<span v-else> {{ commentString }} 评分 · </span>
 				<span class="text-is-active" @click="deleteComment(commentId)"
 					>删除评分和评论</span
 				>
@@ -81,27 +81,58 @@
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import { GET_BOOK, GET_COMMENT } from "../graphql/schema";
-import { ref, computed } from "@vue/reactivity";
-import { onMounted } from "@vue/runtime-core";
+import { ref, computed, watch } from "vue";
 export default {
 	name: "Comment",
 	setup() {
 		const rating = ref(0);
 		const content = ref("");
+
 		const route = useRoute();
 		const { bookId, commentId } = route.query;
+
 		const { result: bookResult } = useQuery(GET_BOOK, () => ({
 			bookId,
 		}));
 		const book = useResult(bookResult, {}, (data) => data.book);
+
 		const { result: commentResult } = useQuery(GET_COMMENT, () => ({
 			commentId,
 		}));
-		const comment = useResult(commentResult, {}, (data) => data.comment);
-		onMounted(() => {
-			rating.value = comment.value.rating;
-			content.value = comment.value.content;
-		});
+
+		const commentRating = useResult(
+			commentResult,
+			0,
+			(data) => data.comment.rating
+		);
+		const commentContent = useResult(
+			commentResult,
+			"",
+			(data) => data.comment.content
+		);
+		const commentDate = useResult(
+			commentResult,
+			"",
+			(data) => data.comment.createdAt
+		);
+		watch(
+			commentRating,
+			(newV, oldV) => {
+				rating.value = newV;
+			},
+			{
+				immediate: true,
+			}
+		);
+		watch(
+			commentContent,
+			(newV, oldV) => {
+				content.value = newV;
+			},
+			{
+				immediate: true,
+			}
+		);
 		const imgStyle = computed(() => {
 			return {
 				backgroundImage: `url(${book.value.image})`,
@@ -111,8 +142,8 @@ export default {
 				backgroundRepeat: "no-repeat",
 			};
 		});
-		const commentDate = computed(() => {
-			return comment.value?.createdAt.split("T")[0];
+		const commentString = computed(() => {
+			return commentDate.value.split("T")[0];
 		});
 		const changeRating = (idx) => {
 			rating.value = idx * 2;
@@ -120,7 +151,6 @@ export default {
 		const deleteComment = (commentId) => {
 			console.log("delete comment: ", commentId);
 		};
-
 		const updateComment = () => {
 			console.log("current comment");
 			console.log("content: ", content.value);
@@ -134,11 +164,13 @@ export default {
 			content,
 			bookId,
 			commentId,
-			commentDate,
+			commentString,
 			imgStyle,
 			changeRating,
 			deleteComment,
 			updateComment,
+			commentRating,
+			commentContent,
 		};
 	},
 };

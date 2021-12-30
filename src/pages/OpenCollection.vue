@@ -69,31 +69,16 @@
 		<div class="oc-nav sticky top-0 font-medium text-sold-out bg-white z-50">
 			<nav
 				class="
+					oc-nav-items
 					flex
 					items-center
 					justify-between
 					h-12
 					border-b-0.5 border-menu
-					after:block
-					before:block
 				"
 			>
 				<span
-					class="
-						popular
-						text-is-active
-						flex
-						items-center
-						self-stretch
-						relative
-						after:block
-						after:absolute
-						after:inset-x-0
-						after:bottom-0
-						after:h-0.5
-						after:rounded-full
-						after:bg-black
-					"
+					class="popular text-is-active flex items-center self-stretch relative"
 					>热门</span
 				>
 				<span class="latest flex items-center self-stretch">最新</span>
@@ -167,4 +152,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.oc-nav-items::after,
+.oc-nav-items::before {
+	display: block;
+	content: "";
+}
+</style>
