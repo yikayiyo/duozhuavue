@@ -213,6 +213,16 @@ export const GET_CATEGORY_FEED = gql`
 	}
 `;
 
+export const GET_COMMENT = gql`
+	query getComment($commentId: ID!) {
+		comment(id: $commentId) {
+			content
+			rating
+			createdAt
+		}
+	}
+`;
+
 // mutation
 
 export const SIGN_IN_MUTATION = gql`
