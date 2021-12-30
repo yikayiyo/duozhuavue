@@ -112,7 +112,7 @@ export default {
 			};
 		});
 		const commentDate = computed(() => {
-			return comment.value.createdAt.split("T")[0];
+			return comment.value?.createdAt.split("T")[0];
 		});
 		const changeRating = (idx) => {
 			rating.value = idx * 2;

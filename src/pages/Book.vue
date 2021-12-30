@@ -370,13 +370,19 @@ export default {
 		});
 		const router = useRouter();
 		const newComment = () => {
-			router.push({
-				name: "comment",
-				query: {
-					bookId: route.params.bookId,
-					source: "book",
-				},
-			});
+			if (currentUserId === "") {
+				router.push({
+					path: "/login",
+				});
+			} else {
+				router.push({
+					name: "comment",
+					query: {
+						bookId: route.params.bookId,
+						source: "book",
+					},
+				});
+			}
 		};
 
 		const updateComment = (commentId) => {
