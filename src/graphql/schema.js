@@ -234,6 +234,42 @@ export const SIGN_IN_MUTATION = gql`
 	}
 `;
 
+export const ADD_COMMENT_MUTATION = gql`
+	mutation addComment(
+		$bookId: ID!
+		$userId: ID!
+		$content: String!
+		$created: DateTime!
+		$rating: Int
+	) {
+		addComment(
+			bookId: $bookId
+			userId: $userId
+			content: $content
+			created: $created
+			rating: $rating
+		) {
+			code
+			success
+			message
+			comment {
+				id
+				content
+				commenter {
+					name
+				}
+			}
+			book {
+				id
+				comments {
+					content
+					createdAt
+				}
+			}
+		}
+	}
+`;
+
 // local query
 export const CURRENT_USER = gql`
 	query GetCurrentUser {

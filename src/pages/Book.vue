@@ -376,7 +376,7 @@ export default {
 				});
 			} else {
 				router.push({
-					name: "comment",
+					name: "newComment",
 					query: {
 						bookId: route.params.bookId,
 						source: "book",

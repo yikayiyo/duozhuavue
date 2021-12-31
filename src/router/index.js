@@ -26,6 +26,7 @@ import Support from "../pages/Support.vue";
 import Env from "../pages/Env.vue";
 import Activity from "../pages/Activity.vue";
 import Comment from "../pages/Comment.vue";
+import NewComment from "../pages/NewComment.vue";
 import BookShelf from "../pages/BookShelf.vue";
 import PageNotFound from "../pages/PageNotFound.vue";
 
@@ -110,6 +111,11 @@ const routes = [
 		path: "/book/rating",
 		name: "comment",
 		component: Comment,
+	},
+	{
+		path: "/book/rating",
+		name: "newComment",
+		component: NewComment,
 	},
 	{
 		path: "/categories/:categoryId",
