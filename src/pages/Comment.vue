@@ -111,6 +111,7 @@
 						bg-load
 						text-white
 					"
+					@click="deleteComment"
 				>
 					确定
 				</button>
@@ -122,8 +123,12 @@
 
 <script>
 import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
-import { useRoute } from "vue-router";
-import { GET_BOOK, GET_COMMENT } from "../graphql/schema";
+import { useRoute, useRouter } from "vue-router";
+import {
+	DELETE_COMMENT_MUTATION,
+	GET_BOOK,
+	GET_COMMENT,
+} from "../graphql/schema";
 import { ref, computed, watch } from "vue";
 export default {
 	name: "Comment",
@@ -131,6 +136,8 @@ export default {
 		const rating = ref(0);
 		const content = ref("");
 		const showModal = ref(false);
+
+		const router = useRouter();
 
 		const route = useRoute();
 		const { bookId, commentId } = route.query;
@@ -202,14 +209,20 @@ export default {
 			showModal.value = true;
 		};
 
-		// const { mutate: deleteComment } = useMutation(
-		// 	DELETE_COMMENT_MUTATION,
-		// 	() => ({
-		// 		variables: {
-		// 			commentId,
-		// 		},
-		// 	})
-		// );
+		const { mutate: deleteComment, onDone: onCommentDelete } = useMutation(
+			DELETE_COMMENT_MUTATION,
+			() => ({
+				variables: {
+					bookId,
+					commentId,
+				},
+			})
+		);
+
+		onCommentDelete(() => {
+			router.go(-1);
+			// todo: delete cache or refetch
+		});
 
 		const updateComment = () => {
 			console.log("current comment");
@@ -230,7 +243,7 @@ export default {
 			blurStyle,
 			changeRating,
 			tryDeleteComment,
-			// deleteComment,
+			deleteComment,
 			updateComment,
 			commentRating,
 			commentContent,

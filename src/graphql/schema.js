@@ -270,6 +270,22 @@ export const ADD_COMMENT_MUTATION = gql`
 	}
 `;
 
+export const DELETE_COMMENT_MUTATION = gql`
+	mutation deleteComment($bookId: ID!, $commentId: ID!) {
+		deleteComment(bookId: $bookId, commentId: $commentId) {
+			code
+			success
+			message
+			book {
+				comments {
+					content
+					createdAt
+				}
+			}
+		}
+	}
+`;
+
 // local query
 export const CURRENT_USER = gql`
 	query GetCurrentUser {
