@@ -161,6 +161,8 @@ export default {
 			// router.go(-1);
 			// todo: when go back, book page should scroll to specific section
 			router.replace("/books/" + bookId + "?target=book-comment-wrapper");
+			rating.value = 0;
+			content.value = "";
 		});
 
 		return {

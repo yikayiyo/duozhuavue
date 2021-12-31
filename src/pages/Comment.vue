@@ -1,5 +1,8 @@
 <template>
-	<div class="comment-wrapper p-0.8em text-is-active">
+	<div
+		class="comment-wrapper p-0.8em text-is-active h-screen"
+		:style="showModal ? blurStyle : ''"
+	>
 		<form @submit.prevent="updateComment">
 			<router-link class="flex flex-col items-center" :to="'/books/' + bookId">
 				<h1 class="book-title mb-5 text-xl">给「 {{ book.title }} 」评分</h1>
@@ -48,11 +51,11 @@
 					>* 如果买到的书品相不符或疑似盗版，请联系客服处理。 *</span
 				>
 				<span v-else> {{ commentString }} 评分 · </span>
-				<span class="text-is-active" @click="deleteComment(commentId)"
+				<span class="text-is-active" @click="tryDeleteComment"
 					>删除评分和评论</span
 				>
 			</div>
-			<div class="fixed bottom-0 left-0 right-0 z-10 max-w-dzy mx-auto">
+			<div class="absolute bottom-0 left-0 right-0 z-10 max-w-dzy mx-auto">
 				<div class="submit-section w-full pt-2.5 px-5 pb-5">
 					<button
 						class="
@@ -75,10 +78,50 @@
 			</div>
 		</form>
 	</div>
+	<div
+		class="
+			modal-wrapper
+			fixed
+			inset-0
+			z-20
+			bg-layer
+			flex
+			items-center
+			justify-center
+		"
+		v-show="showModal"
+		@click="showModal = false"
+	>
+		<div class="modal bg-white rounded-xl absolute">
+			<h1 class="my-6.75 px-5.5 text-center">确定要删除吗？</h1>
+			<div class="buttons flex justify-around leading-category my-6.75 px-5.5">
+				<button
+					class="py-1.5 text-shiwu w-33.75 border-0.5 rounded-99"
+					@click.stop="showModal = !showModal"
+				>
+					取消
+				</button>
+				<button
+					class="
+						py-1.5
+						text-shiwu
+						w-33.75
+						border-0.5
+						rounded-99
+						bg-load
+						text-white
+					"
+				>
+					确定
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="layer absolute inset-0 filter blur z-10" v-if="showModal"></div>
 </template>
 
 <script>
-import { useQuery, useResult } from "@vue/apollo-composable";
+import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import { GET_BOOK, GET_COMMENT } from "../graphql/schema";
 import { ref, computed, watch } from "vue";
@@ -87,6 +130,7 @@ export default {
 	setup() {
 		const rating = ref(0);
 		const content = ref("");
+		const showModal = ref(false);
 
 		const route = useRoute();
 		const { bookId, commentId } = route.query;
@@ -142,15 +186,31 @@ export default {
 				backgroundRepeat: "no-repeat",
 			};
 		});
+		const blurStyle = computed(() => {
+			return {
+				filter: "blur(6px)",
+			};
+		});
+
 		const commentString = computed(() => {
 			return commentDate.value.split("T")[0];
 		});
 		const changeRating = (idx) => {
 			rating.value = idx * 2;
 		};
-		const deleteComment = (commentId) => {
-			console.log("delete comment: ", commentId);
+		const tryDeleteComment = () => {
+			showModal.value = true;
 		};
+
+		// const { mutate: deleteComment } = useMutation(
+		// 	DELETE_COMMENT_MUTATION,
+		// 	() => ({
+		// 		variables: {
+		// 			commentId,
+		// 		},
+		// 	})
+		// );
+
 		const updateComment = () => {
 			console.log("current comment");
 			console.log("content: ", content.value);
@@ -162,12 +222,15 @@ export default {
 			book,
 			rating,
 			content,
+			showModal,
 			bookId,
 			commentId,
 			commentString,
 			imgStyle,
+			blurStyle,
 			changeRating,
-			deleteComment,
+			tryDeleteComment,
+			// deleteComment,
 			updateComment,
 			commentRating,
 			commentContent,

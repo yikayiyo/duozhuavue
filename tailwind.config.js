@@ -26,6 +26,7 @@ module.exports = {
 				info: "#fff9",
 				arrow: "#18c3aa",
 				disable: "#497749",
+				layer: "rgba(0,0,0,0.3)",
 			},
 			backgroundImage: {
 				kindle: "url('/electronics/kindle.png')",
@@ -56,6 +57,7 @@ module.exports = {
 				23: "92px",
 				27.5: "110px",
 				"oc-item": "132px",
+				33.75: "135px",
 				37.5: "150px",
 				qr: "200px",
 			},
@@ -216,6 +218,7 @@ module.exports = {
 			4.5: "18px",
 			4.75: "19px",
 			5: "20px",
+			5.5: "22px",
 			6: "24px",
 			6.25: "25px",
 			6.5: "26px",
