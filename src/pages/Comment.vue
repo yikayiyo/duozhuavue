@@ -216,6 +216,32 @@ export default {
 					bookId,
 					commentId,
 				},
+				update: (
+					cache,
+					{
+						data: {
+							deleteComment: { book },
+						},
+					}
+				) => {
+					console.log(book);
+					const data = cache.readQuery({
+						query: GET_BOOK,
+						variables: {
+							id: bookId,
+						},
+					});
+					console.log("cache data: ", data);
+					data.comments = [...book.comments];
+					cache.writeQuery({
+						query: GET_BOOK,
+						variables: {
+							id: bookId,
+						},
+						data,
+					});
+					console.log("after delete mutation data = ", data);
+				},
 			})
 		);
 
