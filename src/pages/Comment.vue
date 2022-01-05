@@ -125,6 +125,7 @@
 import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
 import { useRoute, useRouter } from "vue-router";
 import {
+	CURRENT_USER,
 	DELETE_COMMENT_MUTATION,
 	GET_BOOK,
 	GET_COMMENT,
@@ -216,31 +217,16 @@ export default {
 					bookId,
 					commentId,
 				},
-				update: (
-					cache,
-					{
-						data: {
-							deleteComment: { book },
-						},
-					}
-				) => {
-					console.log(book);
-					const data = cache.readQuery({
-						query: GET_BOOK,
-						variables: {
-							id: bookId,
-						},
+				update: (cache) => {
+					// 删除cache中的该条comment
+					const normalizedId = cache.identify({
+						commentId,
+						__typename: "Comment",
 					});
-					console.log("cache data: ", data);
-					data.comments = [...book.comments];
-					cache.writeQuery({
-						query: GET_BOOK,
-						variables: {
-							id: bookId,
-						},
-						data,
-					});
-					console.log("after delete mutation data = ", data);
+					cache.evict({ id: normalizedId });
+					cache.gc();
+					// 更新cache中bookId的comments字段
+					// 由字段策略决定，见/graphql/index.js中的cache.typePolicies
 				},
 			})
 		);

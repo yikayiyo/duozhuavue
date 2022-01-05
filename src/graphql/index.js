@@ -27,6 +27,15 @@ const cache = new InMemoryCache({
 				},
 			},
 		},
+		Book: {
+			fields: {
+				comments: {
+					merge(existing = [], incoming) {
+						return incoming;
+					},
+				},
+			},
+		},
 	},
 });
 // 初始化时写入currentUser信息

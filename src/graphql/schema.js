@@ -277,7 +277,9 @@ export const DELETE_COMMENT_MUTATION = gql`
 			success
 			message
 			book {
+				id
 				comments {
+					id
 					content
 					createdAt
 				}
