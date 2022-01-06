@@ -288,6 +288,33 @@ export const DELETE_COMMENT_MUTATION = gql`
 	}
 `;
 
+export const UPDATE_COMMENT_MUTATION = gql`
+	mutation UpdateComment(
+		$commentId: ID!
+		$rating: Int!
+		$updatedAt: DateTime!
+		$content: String
+	) {
+		updateComment(
+			commentId: $commentId
+			rating: $rating
+			updatedAt: $updatedAt
+			content: $content
+		) {
+			code
+			success
+			message
+			comment {
+				id
+				rating
+				content
+				createdAt
+				updatedAt
+			}
+		}
+	}
+`;
+
 // local query
 export const CURRENT_USER = gql`
 	query GetCurrentUser {

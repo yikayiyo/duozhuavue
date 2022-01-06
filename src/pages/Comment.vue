@@ -125,8 +125,8 @@
 import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
 import { useRoute, useRouter } from "vue-router";
 import {
-	CURRENT_USER,
 	DELETE_COMMENT_MUTATION,
+	UPDATE_COMMENT_MUTATION,
 	GET_BOOK,
 	GET_COMMENT,
 } from "../graphql/schema";
@@ -230,18 +230,25 @@ export default {
 				},
 			})
 		);
-
 		onCommentDelete(() => {
 			router.go(-1);
-			// todo: delete cache or refetch
 		});
 
-		const updateComment = () => {
-			console.log("current comment");
-			console.log("content: ", content.value);
-			console.log("rating: ", rating.value);
-			// useMutation
-		};
+		const { mutate: updateComment, onDone: onCommentUpdate } = useMutation(
+			UPDATE_COMMENT_MUTATION,
+			() => ({
+				variables: {
+					commentId,
+					rating: rating.value,
+					content: content.value,
+					updatedAt: new Date().toISOString(),
+				},
+			})
+		);
+
+		onCommentUpdate(() => {
+			router.go(-1);
+		});
 
 		return {
 			book,
