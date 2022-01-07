@@ -70,6 +70,25 @@
 							shadow
 							border
 						"
+						v-if="isUpdating"
+						:disabled="isUpdating"
+					>
+						<Loading />
+					</button>
+					<button
+						v-else
+						class="
+							text-shiwu
+							w-full
+							font-medium
+							text-white
+							bg-load
+							py-2.25
+							px-9
+							rounded-full
+							shadow
+							border
+						"
 						type="submit"
 					>
 						确定
@@ -131,8 +150,12 @@ import {
 	GET_COMMENT,
 } from "../graphql/schema";
 import { ref, computed, watch } from "vue";
+import Loading from "../components/Loading/Loading.vue";
 export default {
 	name: "Comment",
+	components: {
+		Loading,
+	},
 	setup() {
 		const rating = ref(0);
 		const content = ref("");
@@ -234,19 +257,21 @@ export default {
 			router.go(-1);
 		});
 
-		const { mutate: updateComment, onDone: onCommentUpdate } = useMutation(
-			UPDATE_COMMENT_MUTATION,
-			() => ({
-				variables: {
-					commentId,
-					rating: rating.value,
-					content: content.value,
-					updatedAt: new Date().toISOString(),
-				},
-			})
-		);
+		const {
+			mutate: updateComment,
+			loading: isUpdating,
+			onDone: onCommentUpdate,
+		} = useMutation(UPDATE_COMMENT_MUTATION, () => ({
+			variables: {
+				commentId,
+				rating: rating.value,
+				content: content.value,
+				updatedAt: new Date().toISOString(),
+			},
+		}));
 
 		onCommentUpdate(({ data: { updateComment } }) => {
+			console.log("click update");
 			if (updateComment.success) {
 				content.value = "";
 				rating.value = 0;
@@ -268,6 +293,7 @@ export default {
 			tryDeleteComment,
 			deleteComment,
 			updateComment,
+			isUpdating,
 			commentRating,
 			commentContent,
 		};
