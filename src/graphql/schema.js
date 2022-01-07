@@ -216,9 +216,11 @@ export const GET_CATEGORY_FEED = gql`
 export const GET_COMMENT = gql`
 	query getComment($commentId: ID!) {
 		comment(id: $commentId) {
+			id
 			content
 			rating
 			createdAt
+			updatedAt
 		}
 	}
 `;

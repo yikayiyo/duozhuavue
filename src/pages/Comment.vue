@@ -246,8 +246,12 @@ export default {
 			})
 		);
 
-		onCommentUpdate(() => {
-			router.go(-1);
+		onCommentUpdate(({ data: { updateComment } }) => {
+			if (updateComment.success) {
+				content.value = "";
+				rating.value = 0;
+				router.go(-1);
+			}
 		});
 
 		return {
