@@ -271,7 +271,7 @@ export default {
 		}));
 
 		onCommentUpdate(({ data: { updateComment } }) => {
-			console.log("click update");
+			// console.log("click update");
 			if (updateComment.success) {
 				content.value = "";
 				rating.value = 0;
@@ -301,4 +301,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+button:disabled {
+	background-color: #859e85;
+}
+</style>
