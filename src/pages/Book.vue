@@ -206,7 +206,7 @@
 								:key="comment.id"
 							>
 								<div class="comment-left">
-									<a href="">
+									<router-link :to="'/users/' + comment.commenter.id">
 										<span
 											class="
 												avatar-wrapper
@@ -224,7 +224,7 @@
 												alt="comment avatar"
 											/>
 										</span>
-									</a>
+									</router-link>
 								</div>
 								<div class="comment-right flex-1 ml-3 text-shiwu">
 									<div class="name-with-rating flex mb-1.75 items-center">
