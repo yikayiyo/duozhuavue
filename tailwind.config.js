@@ -23,6 +23,7 @@ module.exports = {
 				"oc-middle": "rgba(203, 150, 37, 0.3)",
 				"oc-bottom": "rgba(203, 150, 37, 0.8)",
 				divider: "#aaaaaa1a",
+				splitter: "#ffffff80",
 				info: "#fff9",
 				arrow: "#18c3aa",
 				disable: "#497749",
@@ -234,6 +235,7 @@ module.exports = {
 			15: "60px",
 			16.5: "66px",
 			50: "200px",
+			"5%": "5%",
 			auto: "auto",
 		},
 		zIndex: {

@@ -58,7 +58,7 @@
 				</router-link>
 			</li>
 			<li class="flex-1 flex flex-col items-center">
-				<router-link class="flex flex-col items-center" to="/users/0">
+				<router-link class="flex flex-col items-center" :to="/users/ + userId">
 					<svg
 						viewBox="0 0 200 200"
 						style="height: 30px; width: 30px; fill: rgb(73, 119, 73)"
@@ -77,6 +77,7 @@
 <script>
 export default {
 	name: "UserFooter",
+	props: ["userId"],
 };
 </script>
 

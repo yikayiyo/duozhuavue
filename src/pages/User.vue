@@ -51,6 +51,7 @@
 					<div class="info">卖书收入 {{ userIncome }} 元</div>
 				</div>
 				<div
+					v-if="showInfos"
 					class="
 						info-tab
 						border-t-0.5 border-b-0.5 border-info
@@ -175,6 +176,11 @@
 						<span class="mt-1.5">通知</span>
 					</router-link>
 				</div>
+				<div v-else class="splitter flex items-center justify-between px-5%">
+					<span class="left flex-1 border-t-0.5 border-splitter"></span>
+					<div class="circle mx-1.25"></div>
+					<span class="right flex-1 border-t-0.5 border-splitter"></span>
+				</div>
 				<div class="book-shelf-tab flex justify-around p-4 text-base">
 					<router-link :to="activityLink" class="relative">动态</router-link>
 					<router-link :to="bookShelfLink" class="relative">书架</router-link>
@@ -185,23 +191,29 @@
 			<router-view :books="user.bookShelf"></router-view>
 		</div>
 	</div>
-	<user-footer></user-footer>
+	<user-footer :userId="currentUserId" />
 </template>
 
 <script>
 import UserFooter from "../components/NavFooter/UserFooter.vue";
 import Loading from "../components/Loading/Loading.vue";
-import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useApolloClient, useQuery, useResult } from "@vue/apollo-composable";
 import { apolloClient } from "../graphql";
 import { CURRENT_USER, GET_USER } from "../graphql/schema";
-import { computed } from "vue";
+import { ref, computed, watch } from "vue";
+import useLoggedInUserId from "../hooks/useLoggedInUserId";
 export default {
 	name: "User",
+	components: {
+		UserFooter,
+		Loading,
+	},
 	setup() {
 		const route = useRoute();
+		let userId = ref(route.params.userId);
 		const { result, loading, error } = useQuery(GET_USER, () => ({
-			userId: route.params.userId,
+			userId: userId.value,
 		}));
 		const user = useResult(result, {
 			id: "",
@@ -212,13 +224,22 @@ export default {
 			soldBooks: [],
 			bookShelf: [],
 		});
-
+		const currentUserId = useLoggedInUserId() || 0;
+		const showInfos = computed(() => currentUserId === userId.value);
 		const userIncome = computed(() => (user.value.income / 100).toFixed(2));
 		const activityLink = computed(
 			() => "/users/" + user.value.id + "/activities"
 		);
 		const bookShelfLink = computed(
 			() => "/users/" + user.value.id + "/owning-bookshelf"
+		);
+
+		// watch the route params, update the userId when it changes, then update the component.
+		watch(
+			() => route.params,
+			(newParams, _) => {
+				userId.value = newParams.userId; // userId is a variable used in useQuery, when it changes, that query will be re-send.
+			}
 		);
 
 		const router = useRouter();
@@ -229,25 +250,8 @@ export default {
 			router.push("/login");
 		}
 
-		// 处理路由参数变化、组件重用时，可能带来的BUG
-		onBeforeRouteUpdate((to, _) => {
-			if (to.params.userId === "0") {
-				const {
-					currentUser: { id },
-				} = client.cache.readQuery({ query: CURRENT_USER });
-				if (id !== "") {
-					return {
-						path: "/users/" + id,
-					};
-				} else {
-					return {
-						path: "/login",
-					};
-				}
-			}
-		});
-
 		return {
+			userId,
 			user,
 			loading,
 			error,
@@ -255,19 +259,23 @@ export default {
 			activityLink,
 			bookShelfLink,
 			logOut,
+			currentUserId,
+			showInfos,
 		};
 	},
 
 	beforeRouteEnter(to, _) {
-		const { currentUser } = apolloClient.cache.readQuery({
+		const {
+			currentUser: { id },
+		} = apolloClient.cache.readQuery({
 			query: CURRENT_USER,
 		});
 		// 访问/users/0
 		// 如果已经登录，跳转到登录用户主页; 否则，跳转到登录页面
 		if (to.params.userId === "0") {
-			if (currentUser.id !== "") {
+			if (id !== "") {
 				return {
-					path: "/users/" + currentUser.id,
+					path: "/users/" + id,
 				};
 			} else {
 				return {
@@ -277,7 +285,7 @@ export default {
 		}
 		// 访问 /users/xxx, 未登录时不能访问
 		else {
-			if (currentUser.id !== "") {
+			if (id !== "") {
 				return true;
 			} else {
 				return {
@@ -285,11 +293,6 @@ export default {
 				};
 			}
 		}
-	},
-
-	components: {
-		UserFooter,
-		Loading,
 	},
 };
 </script>
