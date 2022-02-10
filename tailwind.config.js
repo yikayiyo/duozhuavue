@@ -1,5 +1,5 @@
 module.exports = {
-	// mode: "jit",
+	mode: "jit",
 	purge: ["./index.html", "./src/**/**/*.{vue,js,ts,jsx,tsx}"],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
@@ -61,6 +61,7 @@ module.exports = {
 				33.75: "135px",
 				37.5: "150px",
 				qr: "200px",
+				"50%": "50%",
 			},
 			lineHeight: {
 				hsh: "1.1",
