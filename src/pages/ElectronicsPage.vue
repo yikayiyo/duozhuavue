@@ -193,15 +193,23 @@ export default {
 	margin-left: 5px;
 }
 
+.link-wrapper {
+	position: relative;
+}
+
 .sold-out::after {
 	content: "暂时无货";
-	display: inline-block;
+	width: 84px;
+	height: 32px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(-12deg);
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 4px;
 	font-size: 16px;
 	font-weight: 400;
-	padding: 10px;
+	padding: 4px 10px;
 	color: white;
-	transform: translate(100%, -332%) rotate(-12deg);
 }
 </style>
