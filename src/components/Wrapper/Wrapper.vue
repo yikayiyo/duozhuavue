@@ -1,5 +1,5 @@
 <template>
-	<div class="relative min-h-screen max-w-dzy m-auto bg-white overflow-y-auto">
+	<div class="relative min-h-screen max-w-dzy m-auto bg-white">
 		<main-section></main-section>
 	</div>
 </template>

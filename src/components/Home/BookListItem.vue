@@ -7,7 +7,7 @@
 				>
 					<div class="image" :style="{ backgroundImage: bgImage }"></div>
 				</div>
-				<div class="content ml-3 flex-1 flex flex-col">
+				<div class="content ml-3 mr-3 flex-1 flex flex-col">
 					<div class="content-top flex-1 flex">
 						<div class="content-left flex-1 flex flex-col">
 							<h3 class="book-name my-bk-list-item-title">{{ book.title }}</h3>
@@ -16,37 +16,6 @@
 							</div>
 							<div class="douban-rating text-xs text-dbr mt-1.25">
 								豆瓣评分 {{ book.doubanRating }}
-							</div>
-						</div>
-						<div class="content-right ml-3 flex-shrink-0">
-							<div
-								class="
-									avatar-wrapper
-									relative
-									box-border
-									w-11.25
-									h-11.25
-									pl-3.75
-								"
-							>
-								<div
-									class="
-										avatar
-										box-border
-										w-7.5
-										h-7.5
-										border border-menu
-										bg-menu
-										rounded-99
-										overflow-hidden
-									"
-								>
-									<img
-										src="https://img.duozhuayu.com/da600914264d11ecbbd5b6b4ccd51b20.jpeg"
-										alt=""
-										class="w-full"
-									/>
-								</div>
 							</div>
 						</div>
 					</div>

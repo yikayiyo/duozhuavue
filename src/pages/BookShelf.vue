@@ -29,6 +29,6 @@ export default {
 
 <style>
 .book-grid:last-child {
-	margin-bottom: 48px;
+	padding-bottom: 48px;
 }
 </style>
