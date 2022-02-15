@@ -47,9 +47,9 @@
 					<div class="link-wrapper">
 						<a href="">
 							<img
-								src="https://img.duozhuayu.com/63e8f58eaa2011eab1b500163e06ce9f.png"
+								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/kindle.png"
 								alt=""
-								class="rounded"
+								class="rounded w-full h-full"
 							/>
 						</a>
 					</div>
@@ -72,7 +72,7 @@
 					<div class="link-wrapper">
 						<a href="">
 							<img
-								src="https://img.duozhuayu.com/441d4e2a2fb411eb9f81d29b61c245d0.jpeg"
+								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/airpods.jpeg"
 								alt=""
 								class="rounded"
 							/>
@@ -98,7 +98,7 @@
 					<div class="link-wrapper sold-out">
 						<a href="">
 							<img
-								src="https://img.duozhuayu.com/6d14111c0ebf11ebb50e00163e06ce9f.jpeg"
+								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/b%260.jpeg"
 								alt=""
 							/>
 						</a>
