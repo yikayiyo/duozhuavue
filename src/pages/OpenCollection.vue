@@ -66,7 +66,18 @@
 				</span>
 			</div>
 		</div>
-		<div class="oc-nav sticky top-0 font-medium text-sold-out bg-white z-50">
+		<div
+			class="
+				oc-nav
+				sticky
+				top-0
+				font-medium
+				text-sold-out
+				bg-white
+				dark:bg-black
+				z-50
+			"
+		>
 			<nav
 				class="
 					oc-nav-items
@@ -75,6 +86,7 @@
 					justify-between
 					h-12
 					border-b-0.5 border-menu
+					dark:border-darkborder
 				"
 			>
 				<span
@@ -91,7 +103,17 @@
 				:key="conb.id"
 			></oc-item>
 		</div>
-		<div class="footer flex justify-center text-gray-300 py-12 text-footer">
+		<div
+			class="
+				footer
+				flex
+				justify-center
+				text-gray-300
+				dark:text-darkborder
+				py-12
+				text-footer
+			"
+		>
 			<div class="flex items-center">
 				<div class="w-10 border-t border-current"></div>
 				<svg
@@ -157,5 +179,8 @@ export default {
 .oc-nav-items::before {
 	display: block;
 	content: "";
+}
+.dark .text-is-active {
+	color: white;
 }
 </style>

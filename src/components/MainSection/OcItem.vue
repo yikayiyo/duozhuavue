@@ -1,5 +1,5 @@
 <template>
-	<div class="oc-item mt-7.5 border-b border-menu">
+	<div class="oc-item mt-7.5 border-b border-menu dark:border-darkborder">
 		<router-link :to="'/books/' + conb.book.id" class="book-item ml-4 flex">
 			<div class="image-wrapper w-20 h-30 mr-3 shadow-book-list-item-image">
 				<div :style="image"></div>
@@ -28,7 +28,7 @@
 					"
 					:style="{ maxHeight: maxHeight }"
 				>
-					<p ref="reason" class="break-words text-is-active">
+					<p ref="reason" class="reason break-words text-is-active">
 						{{ conb.reason }}
 						<span
 							class="
@@ -41,6 +41,7 @@
 								from-white
 								via-white
 								to-light-500
+								dark:from-black dark:via-black dark:to-light-500
 							"
 						>
 							<button
@@ -200,3 +201,15 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.dark .reason {
+	color: white;
+}
+.dark .show-all {
+	color: #f2f2f2;
+}
+.dark .image-wrapper {
+	background-color: #15181c;
+}
+</style>
