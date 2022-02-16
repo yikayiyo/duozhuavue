@@ -66,4 +66,7 @@ export default {
 	border-radius: 999px;
 	background-color: black;
 }
+.dark .is-active span::after {
+	background-color: white;
+}
 </style>
