@@ -1,7 +1,7 @@
 module.exports = {
 	mode: "jit",
 	purge: ["./index.html", "./src/**/**/*.{vue,js,ts,jsx,tsx}"],
-	darkMode: false, // or 'media' or 'class'
+	darkMode: "class", // or 'media' or 'class'
 	theme: {
 		extend: {
 			colors: {
@@ -28,6 +28,8 @@ module.exports = {
 				arrow: "#18c3aa",
 				disable: "#497749",
 				layer: "rgba(0,0,0,0.3)",
+				darkbg: "#15181c",
+				darkborder: "#2f3336",
 			},
 			backgroundImage: {
 				kindle: "url('/electronics/kindle.png')",

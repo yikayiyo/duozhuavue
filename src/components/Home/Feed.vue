@@ -1,8 +1,11 @@
 <template>
-	<div id="feed-section" class="feed-section relative bg-white mb-4">
+	<div
+		id="feed-section"
+		class="feed-section relative bg-white dark:bg-black dark:text-white mb-4"
+	>
 		<div
 			id="title-wrapper"
-			class="title-wrapper p-3.75 bg-white sticky top-ct z-10"
+			class="title-wrapper p-3.75 bg-white dark:bg-black sticky top-ct z-10"
 			:class="{ 'is-pinned': isPinned }"
 			ref="target"
 		>
@@ -22,6 +25,7 @@
 					py-4
 					text-footer text-center
 					border-t-0.5 border-menu
+					dark:border-darkborder
 				"
 				@click="loadMoreBooks(category.id, cursor)"
 				v-if="hasNextPage"
@@ -34,6 +38,7 @@
 					py-4
 					text-footer text-center
 					border-t-0.5 border-menu
+					dark:border-darkborder
 				"
 				v-else
 			>
@@ -104,6 +109,9 @@ export default {
 </script>
 
 <style scoped>
+.dark .title-wrapper.is-pinned {
+	border-bottom: 0.5px solid #2f3336;
+}
 .title-wrapper.is-pinned {
 	border-bottom: 0.5px solid rgb(242, 242, 242);
 }

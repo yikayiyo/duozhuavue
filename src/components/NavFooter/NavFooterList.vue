@@ -81,4 +81,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.dark svg {
+	fill: white;
+}
+</style>

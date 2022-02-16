@@ -8,8 +8,10 @@
 			bottom-0
 			inset-x-0
 			border-t border-b
+			dark:border-darkborder
 			z-50
 			bg-white
+			dark:bg-black dark:text-white
 		"
 	>
 		<nav-footer-list />

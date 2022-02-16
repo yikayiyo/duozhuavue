@@ -85,7 +85,7 @@
 		<div class="text-label" v-else-if="categoryFeedError">
 			{{ categoryFeedError }}
 		</div>
-		<div class="feed-content-wrapper mt-2.5 bg-menu" v-else>
+		<div class="feed-content-wrapper mt-2.5 bg-menu dark:bg-darkbg" v-else>
 			<feed
 				v-for="category of categories"
 				:key="category.id"
@@ -99,6 +99,7 @@
 					pb-15
 					text-footer text-center
 					border-t-0.5 border-menu
+					dark:border-darkborder
 				"
 				v-if="hasNextPage && networkStatus === 7"
 				@click="loadMoreCategories"
@@ -124,6 +125,7 @@
 					pb-15
 					text-footer text-center
 					border-t-0.5 border-menu
+					dark:border-none
 				"
 				v-else
 			>

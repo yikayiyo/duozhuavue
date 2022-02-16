@@ -3,7 +3,14 @@
 		<router-link :to="bookLink">
 			<div class="book-list-item-wrapper flex px-3.75 py-4.5">
 				<div
-					class="image-wrapper w-22.5 h-32 shadow-book-list-item-image bg-menu"
+					class="
+						image-wrapper
+						w-22.5
+						h-32
+						shadow-book-list-item-image
+						bg-menu
+						dark:bg-darkbg dark:border-darkborder
+					"
 				>
 					<div class="image" :style="{ backgroundImage: bgImage }"></div>
 				</div>

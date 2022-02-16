@@ -10,6 +10,7 @@
 			sticky
 			top-0
 			bg-white
+			dark:bg-black
 			z-20
 		"
 	>
@@ -44,6 +45,7 @@
 						border-0
 						rounded
 						bg-search-input
+						dark:bg-darkbg
 						outline-none
 						leading-search-input
 					"
@@ -61,7 +63,9 @@
 						fill-rule="nonzero"
 					></path>
 				</svg>
-				<div class="text-cbl font-medium leading-cbl">分类</div>
+				<div class="text-cbl font-medium leading-cbl dark:text-gray-400">
+					分类
+				</div>
 			</router-link>
 		</div>
 	</div>

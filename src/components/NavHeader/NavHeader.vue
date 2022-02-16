@@ -9,6 +9,7 @@
 			tracking-wide
 			text-gray-400
 			border-t-0.5 border-b-0.5 border-true-gray-300
+			dark:border-darkborder
 		"
 	>
 		<router-link
@@ -42,6 +43,10 @@ export default {
 </script>
 
 <style scoped>
+.dark .is-active {
+	color: white;
+}
+
 .is-active {
 	color: rgb(51, 51, 51);
 }
