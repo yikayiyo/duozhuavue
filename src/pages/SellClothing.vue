@@ -4,19 +4,37 @@
 			sell-clothing-wrapper
 			leading-category
 			text-is-active
+			dark:text-menu
 			min-h-screen
 			pb-50
 		"
 	>
-		<div class="callout py-2 px-3.75 text-load text-hsh bg-load-more">
+		<div
+			class="
+				callout
+				py-2
+				px-3.75
+				text-load text-hsh
+				bg-load-more
+				dark:bg-darkbg
+			"
+		>
 			目前开放的城市：北京、上海、深圳、杭州、南京、苏州
 		</div>
-		<div class="first-panel flex p-3.75 border-b border-search-input">
+		<div
+			class="
+				first-panel
+				flex
+				p-3.75
+				border-b border-search-input
+				dark:border-darkborder
+			"
+		>
 			<div class="img-wrapper h-32.5">
 				<img
 					src="/public/sell/buyout_step_1.png"
 					alt=""
-					class="w-37.5 h-full"
+					class="w-37.5 h-full dark:bg-white"
 				/>
 			</div>
 			<div class="info flex-1 flex flex-col justify-center items-center">
@@ -28,12 +46,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="second-panel flex p-3.75 border-b border-search-input">
+		<div
+			class="
+				second-panel
+				flex
+				p-3.75
+				border-b border-search-input
+				dark:border-darkborder
+			"
+		>
 			<div class="img-wrapper h-32.5">
 				<img
 					src="/public/sell/buyout_step_2.png"
 					alt=""
-					class="w-37.5 h-full"
+					class="w-37.5 h-full dark:bg-white"
 				/>
 			</div>
 			<div class="info flex-1 flex flex-col justify-center items-center">
@@ -41,12 +67,20 @@
 				<div class="text-xl font-medium tracking-brand-gender">上门取衣</div>
 			</div>
 		</div>
-		<div class="third-panel flex p-3.75 border-b border-search-input">
+		<div
+			class="
+				third-panel
+				flex
+				p-3.75
+				border-b border-search-input
+				dark:border-darkborder
+			"
+		>
 			<div class="img-wrapper h-32.5">
 				<img
 					src="/public/sell/buyout_step_3.png"
 					alt=""
-					class="w-37.5 h-full"
+					class="w-37.5 h-full dark:bg-white"
 				/>
 			</div>
 			<div class="info flex-1 flex flex-col justify-center items-center">
@@ -61,7 +95,7 @@
 		<div class="recycling p-3.75 mt-8.75 text-center">
 			<h2 class="text-xl font-semibold">认真对待每件衣服</h2>
 			<p class="mt-1 mb-5 text-hsh">每件衣服经过专业清洗后二次销售</p>
-			<div class="recycle-img"></div>
+			<div class="recycle-img dark:bg-white"></div>
 		</div>
 		<div class="qa pt-9.5 px-6.25 pb-8.5">
 			<h2 class="text-xl font-semibold text-center">常见疑问</h2>
@@ -83,19 +117,32 @@
 										-ml-5%
 									"
 								>
-									<div class="case-image case1 self-stretch"></div>
+									<div
+										class="
+											case-image
+											case1
+											self-stretch
+											dark:bg-white dark:ml-7.5
+										"
+									></div>
 									<div class="case-name">奢侈品</div>
 								</div>
 								<div class="no-buyout-case flex-1 flex flex-col items-center">
-									<div class="case-image case2 self-stretch"></div>
+									<div
+										class="case-image case2 self-stretch dark:bg-white"
+									></div>
 									<div class="case-name">内衣裤</div>
 								</div>
 								<div class="no-buyout-case flex-1 flex flex-col items-center">
-									<div class="case-image case3 self-stretch"></div>
+									<div
+										class="case-image case3 self-stretch dark:bg-white"
+									></div>
 									<div class="case-name">童装</div>
 								</div>
 								<div class="no-buyout-case flex-1 flex flex-col items-center">
-									<div class="case-image case4 self-stretch"></div>
+									<div
+										class="case-image case4 self-stretch dark:bg-white"
+									></div>
 									<div class="case-name">包袋配饰鞋子</div>
 								</div>
 							</div>
@@ -130,7 +177,9 @@
 		<router-link to="/support/clothing-buyout" class="">
 			<div
 				class="
-					border-t-0.5 border-menu border-b
+					border-t-0.5 border-menu
+					dark:border-darkborder
+					border-b
 					sell-clothing-rules
 					px-3.75
 					py-4.5

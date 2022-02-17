@@ -1,6 +1,22 @@
 <template>
-	<div class="sell-book-wrapper leading-category text-is-active min-h-screen">
-		<div class="first-panel flex p-3.75 border-b border-search-input">
+	<div
+		class="
+			sell-book-wrapper
+			leading-category
+			text-is-active
+			dark:text-menu
+			min-h-screen
+		"
+	>
+		<div
+			class="
+				first-panel
+				flex
+				p-3.75
+				border-b border-search-input
+				dark:border-darkborder
+			"
+		>
 			<div class="img-wrapper h-32.5">
 				<img
 					src="/public/sell/sell_book_intro_1.png"
@@ -34,7 +50,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="second-panel flex p-3.75 border-b border-search-input">
+		<div
+			class="
+				second-panel
+				flex
+				p-3.75
+				border-b border-search-input
+				dark:border-darkborder
+			"
+		>
 			<div class="img-wrapper h-32.5">
 				<img
 					src="/public/sell/sell_book_intro_2.png"
@@ -47,7 +71,15 @@
 				<div class="text-xl font-medium tracking-brand-gender">上门取书</div>
 			</div>
 		</div>
-		<div class="third-panel flex p-3.75 border-b border-search-input">
+		<div
+			class="
+				third-panel
+				flex
+				p-3.75
+				border-b border-search-input
+				dark:border-darkborder
+			"
+		>
 			<div class="img-wrapper h-32.5">
 				<img
 					src="/public/sell/sell_book_intro_3.png"
@@ -89,6 +121,7 @@
 					px-3.75
 					py-4.5
 					border-b border-search-input
+					dark:border-darkborder
 					text-shiwu text-load
 					flex
 					justify-between

@@ -7,7 +7,9 @@
 			text-sold-out text-base
 			h-12
 			bg-white
+			dark:bg-black
 			border-0.5 border-b
+			dark:border-darkborder
 			flex
 			items-center
 			justify-between
@@ -49,6 +51,9 @@ export default {
 .is-active {
 	color: rgb(51, 51, 51);
 }
+.dark .is-active {
+	color: white;
+}
 .is-active > span::after {
 	content: "";
 	position: absolute;
@@ -58,6 +63,9 @@ export default {
 	height: 2px;
 	background-color: rgb(51, 51, 51);
 	border-radius: 99px;
+}
+.dark .is-active > span::after {
+	background-color: white;
 }
 .nav-item {
 	position: relative;
