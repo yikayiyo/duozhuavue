@@ -1,5 +1,5 @@
 <template>
-	<div class="services-wrapper bg-douban mt-3.75 px-2.5 rounded">
+	<div class="services-wrapper bg-douban dark:bg-darkbg mt-3.75 px-2.5 rounded">
 		<router-link to="/support/book-service">
 			<div class="flex py-3">
 				<span

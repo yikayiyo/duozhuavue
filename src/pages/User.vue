@@ -8,6 +8,7 @@
 				m-3.75
 				text-white text-xs
 				border-0.5
+				dark:border-darkborder
 				py-1
 				px-3
 				rounded-full
@@ -28,6 +29,7 @@
 							w-20
 							h-20
 							border-2 border-white
+							dark:border-darkborder
 							rounded-99
 							overflow-hidden
 						"
@@ -55,6 +57,7 @@
 					class="
 						info-tab
 						border-t-0.5 border-b-0.5 border-info
+						dark:border-darkborder
 						flex
 						justify-around
 					"
@@ -310,6 +313,15 @@ export default {
 			rgba(93, 93, 93) 82%
 		);
 }
+
+.dark .wrapper-bg {
+	background-image: radial-gradient(
+		circle at center top,
+		#000000 0%,
+		#1a1919 82%
+	);
+}
+
 .avatar-shadow {
 	box-shadow: rgb(0, 0, 0, 20%) 0px 0px 8px 0px;
 }
@@ -323,5 +335,8 @@ export default {
 	position: absolute;
 	bottom: -20px;
 	right: 5px;
+}
+.dark .router-link-active::after {
+	border-bottom-color: black;
 }
 </style>

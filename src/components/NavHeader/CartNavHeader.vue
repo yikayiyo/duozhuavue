@@ -7,7 +7,9 @@
 			text-sold-out text-base
 			h-12
 			bg-white
+			dark:bg-black
 			border-0.5 border-b
+			dark:border-darkborder
 			flex
 			items-center
 			justify-between
@@ -37,6 +39,10 @@ export default {
 .router-link-active {
 	color: rgb(51, 51, 51);
 }
+.dark .router-link-active {
+	color: white;
+}
+
 .router-link-active > span::after {
 	content: "";
 	position: absolute;
@@ -47,6 +53,11 @@ export default {
 	background-color: rgb(51, 51, 51);
 	border-radius: 99px;
 }
+
+.dark .router-link-active > span::after {
+	background-color: white;
+}
+
 .nav-item {
 	position: relative;
 }

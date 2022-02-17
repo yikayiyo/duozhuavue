@@ -10,6 +10,7 @@
 				sticky
 				top-0
 				bg-white
+				dark:bg-black
 			"
 		>
 			<div class="search w-full flex items-center relative">
@@ -42,6 +43,7 @@
 						border-0
 						rounded
 						bg-search-input
+						dark:bg-darkbg
 						outline-none
 					"
 					value=""
@@ -57,7 +59,14 @@
 						>
 							女装
 						</h1>
-						<ul class="brands-items text-sm divide-y divide-menu">
+						<ul
+							class="
+								brands-items
+								text-sm
+								divide-y divide-menu
+								dark:divide-darkborder
+							"
+						>
 							<li class="brand-item flex items-center">
 								<div class="min-w-4 mr-1.25 font-semibold italic flex-shrink-0">
 									1
@@ -167,7 +176,14 @@
 						>
 							男装
 						</h1>
-						<ul class="brands-items text-sm divide-y divide-menu">
+						<ul
+							class="
+								brands-items
+								text-sm
+								divide-y divide-menu
+								dark:divide-darkborder
+							"
+						>
 							<li class="brand-item flex items-center">
 								<div class="min-w-4 mr-1.25 font-semibold italic flex-shrink-0">
 									1
@@ -282,7 +298,9 @@
 						rounded-load
 						mt-2
 						text-load
+						dark:text-sold-out
 						bg-load-more
+						dark:bg-darkbg
 						cursor-pointer
 					"
 				>
@@ -305,6 +323,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							mr-6.25
 							min-w-[calc((100%-25px)/2)]
@@ -321,6 +340,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							min-w-[calc((100%-25px)/2)]
 						"
@@ -336,6 +356,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							mr-6.25
 							min-w-[calc((100%-25px)/2)]
@@ -352,6 +373,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							min-w-[calc((100%-25px)/2)]
 						"
@@ -367,6 +389,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							mr-6.25
 							min-w-[calc((100%-25px)/2)]
@@ -388,6 +411,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							min-w-[calc((100%-25px)/2)]
 						"
@@ -423,6 +447,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							mr-6.25
 							min-w-[calc((100%-25px)/2)]
@@ -439,6 +464,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							min-w-[calc((100%-25px)/2)]
 						"
@@ -454,6 +480,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							mr-6.25
 							min-w-[calc((100%-25px)/2)]
@@ -470,6 +497,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							min-w-[calc((100%-25px)/2)]
 						"
@@ -485,6 +513,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							mr-6.25
 							min-w-[calc((100%-25px)/2)]
@@ -506,6 +535,7 @@
 					<li
 						class="
 							border-b border-menu
+							dark:border-darkborder
 							category__item
 							min-w-[calc((100%-25px)/2)]
 						"

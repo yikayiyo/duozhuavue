@@ -31,13 +31,46 @@
 			>
 				全部
 			</div>
-			<div class="nav-item px-4.5 py-2.25 mt-2.5 mr-4 rounded-menu bg-menu">
+			<div
+				class="
+					nav-item
+					px-4.5
+					py-2.25
+					mt-2.5
+					mr-4
+					rounded-menu
+					bg-menu
+					dark:text-white dark:bg-darkborder
+				"
+			>
 				kindle
 			</div>
-			<div class="nav-item px-4.5 py-2.25 mt-2.5 mr-4 rounded-menu bg-menu">
+			<div
+				class="
+					nav-item
+					px-4.5
+					py-2.25
+					mt-2.5
+					mr-4
+					rounded-menu
+					bg-menu
+					dark:text-white dark:bg-darkborder
+				"
+			>
 				耳机
 			</div>
-			<div class="nav-item px-4.5 py-2.25 mt-2.5 mr-4 rounded-menu bg-menu">
+			<div
+				class="
+					nav-item
+					px-4.5
+					py-2.25
+					mt-2.5
+					mr-4
+					rounded-menu
+					bg-menu
+					dark:text-white dark:bg-darkborder
+				"
+			>
 				游戏机
 			</div>
 		</div>
@@ -121,7 +154,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer flex justify-center text-gray-300 py-7.5 text-footer">
+		<div
+			class="
+				footer
+				flex
+				justify-center
+				text-gray-300
+				dark:text-darkborder
+				py-7.5
+				text-footer
+			"
+		>
 			<div class="flex items-center">
 				<div class="w-10 border-t border-current"></div>
 				<svg
@@ -168,6 +211,9 @@ export default {
 	line-height: 1.67;
 	text-align: left;
 	cursor: pointer;
+}
+.dark .item-tag {
+	background-color: #2f3336;
 }
 
 .Label {

@@ -152,7 +152,17 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer flex justify-center text-gray-300 py-7.5 text-footer">
+		<div
+			class="
+				footer
+				flex
+				justify-center
+				text-gray-300
+				dark:text-darkborder
+				py-7.5
+				text-footer
+			"
+		>
 			<div class="flex items-center">
 				<div class="w-10 border-t border-current"></div>
 				<svg

@@ -1,7 +1,7 @@
 <template>
 	<loading v-if="loading" />
 	<p v-else-if="error">{{ error }}</p>
-	<div v-else class="container-wrapper text-is-active relative">
+	<div v-else class="container-wrapper text-is-active dark:text-menu relative">
 		<div class="book-wrapper pb-12.75">
 			<div
 				class="
@@ -30,7 +30,9 @@
 			</div>
 			<div class="book-main pt-4.5 mx-3.75">
 				<div class="book-info leading-category pb-3.75">
-					<h1 class="text-xl font-medium text-is-active">{{ book.title }}</h1>
+					<h1 class="text-xl font-medium text-is-active dark:text-white">
+						{{ book.title }}
+					</h1>
 					<div class="p-wrapper mt-3.5 text-hsh leading-1.69">
 						<p class="original-price flex">
 							<span class="tag">原价</span>
@@ -162,6 +164,7 @@
 									text-load
 									rounded-99
 									border-0.5 border-rating
+									dark:border-darkborder
 									box-border
 								"
 								@click="updateComment(myComment[0].id)"
@@ -201,7 +204,7 @@
 						</div>
 						<div class="comments-body" v-show="book.comments.length > 0">
 							<div
-								class="comment flex py-4.5 border-b-0.5"
+								class="comment flex py-4.5 border-b-0.5 dark:border-darkborder"
 								v-for="comment of book.comments"
 								:key="comment.id"
 							>
@@ -215,7 +218,9 @@
 												h-7.5
 												rounded-99
 												border-1 border-menu
+												dark:border-darkborder
 												bg-menu
+												dark:bg-darkbg
 												overflow-hidden
 											"
 										>

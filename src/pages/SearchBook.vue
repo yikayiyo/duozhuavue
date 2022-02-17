@@ -10,6 +10,7 @@
 				sticky
 				top-0
 				bg-white
+				dark:bg-black
 			"
 		>
 			<div class="search w-full flex items-center relative">
@@ -42,6 +43,7 @@
 						border-0
 						rounded
 						bg-search-input
+						dark:bg-darkbg
 						outline-none
 					"
 					value=""
@@ -60,7 +62,13 @@
 					{{ category.name }}
 				</div>
 				<div
-					class="items-wrapper m-2.5 border-b-0.5 border-menu flex flex-wrap"
+					class="
+						items-wrapper
+						m-2.5
+						border-b-0.5 border-menu
+						dark:border-darkborder
+						flex flex-wrap
+					"
 				>
 					<div
 						class="category-item mb-5 w-5/12 flex-grow"

@@ -2,7 +2,9 @@
 	<router-link :to="/books/ + id">
 		<div class="douban-style-book-wrapper px-3.75 pt-3.75">
 			<div class="top flex justify-between">
-				<div class="image-wrapper rounded w-23 mr-2 h-32 bg-menu">
+				<div
+					class="image-wrapper rounded w-23 mr-2 h-32 bg-menu dark:bg-darkbg"
+				>
 					<div
 						class="image rounded h-full bg-cover bg-no-repeat bg-bottom"
 						:style="{ backgroundImage: bgImage }"
@@ -14,6 +16,7 @@
 						rounded
 						flex-1
 						bg-menu
+						dark:bg-darkbg
 						px-5
 						pt-6
 						text-cbl
@@ -57,6 +60,7 @@
 					text-xs text-sold-out
 					py-2
 					border-b-0.5
+					dark:border-darkborder
 					overflow-hidden overflow-ellipsis
 					whitespace-nowrap
 				"

@@ -1,6 +1,6 @@
 <template>
 	<a class="douban-wrapper" :href="'https://book.douban.com/isbn/' + isbn">
-		<div class="flex items-center px-3 h-13 bg-douban rounded">
+		<div class="flex items-center px-3 h-13 bg-douban dark:bg-darkbg rounded">
 			<div class="left text-sm text-dbr">
 				豆瓣评分
 				<span class="ml-1.25">{{ rating }}</span>
