@@ -99,7 +99,7 @@
 					pb-15
 					text-footer text-center
 					border-t-0.5 border-menu
-					dark:border-darkborder
+					dark:border-none
 				"
 				v-if="hasNextPage && networkStatus === 7"
 				@click="loadMoreCategories"

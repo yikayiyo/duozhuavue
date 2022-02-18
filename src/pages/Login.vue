@@ -5,7 +5,7 @@
 		</div>
 		<form @submit.prevent="signIn" class="flex flex-col max-w-3/4 mx-auto">
 			<input
-				class="bg-menu py-3 pl-2 rounded mt-1"
+				class="bg-menu dark:bg-darkbg py-3 pl-2 rounded mt-1"
 				type="text"
 				name="email"
 				v-model="signInForm.email"
@@ -16,7 +16,7 @@
 				{{ signInForm.errors.email }}
 			</p>
 			<input
-				class="bg-menu py-3 pl-2 rounded mt-4"
+				class="bg-menu dark:bg-darkbg py-3 pl-2 rounded mt-4"
 				type="password"
 				name="password"
 				v-model="signInForm.password"
@@ -38,6 +38,7 @@
 					rounded-full
 					shadow
 					border
+					dark:border-darkborder
 				"
 				v-if="!signInLoading"
 				type="submit"
@@ -56,6 +57,7 @@
 					rounded-full
 					shadow
 					border
+					dark:bg-darkborder
 				"
 				v-else
 				type="submit"
@@ -71,6 +73,7 @@
 					text-load text-lg
 					font-medium
 					border
+					dark:border-darkborder dark:bg-darkbg
 					py-2.25
 					px-9
 					rounded-full

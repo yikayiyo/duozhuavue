@@ -82,7 +82,7 @@
 							<img
 								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/kindle.png"
 								alt=""
-								class="rounded w-full h-full"
+								class="rounded dark:bg-white w-full h-full"
 							/>
 						</a>
 					</div>
@@ -133,6 +133,7 @@
 							<img
 								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/b%260.jpeg"
 								alt=""
+								class="rounded"
 							/>
 						</a>
 					</div>
@@ -213,6 +214,7 @@ export default {
 	cursor: pointer;
 }
 .dark .item-tag {
+	color: #f2f2f2;
 	background-color: #2f3336;
 }
 
