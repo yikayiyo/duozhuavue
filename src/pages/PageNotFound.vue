@@ -8,15 +8,23 @@
 			>逛逛吧</span
 		>
 	</div>
-	<user-footer></user-footer>
+	<user-footer :userId="loggedInUserId" v-if="loggedInUserId"></user-footer>
+	<user-footer :userId="0" v-else></user-footer>
 </template>
 
 <script>
 import UserFooter from "../components/NavFooter/UserFooter.vue";
+import useLoggedInUserId from "../hooks/useLoggedInUserId";
 export default {
 	name: "PageNotFound",
 	components: {
 		UserFooter,
+	},
+	setup() {
+		const loggedInUserId = useLoggedInUserId();
+		return {
+			loggedInUserId,
+		};
 	},
 };
 </script>
