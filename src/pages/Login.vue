@@ -5,7 +5,14 @@
 		</div>
 		<form @submit.prevent="signIn" class="flex flex-col max-w-3/4 mx-auto">
 			<input
-				class="bg-menu dark:bg-darkbg py-3 pl-2 rounded mt-1"
+				class="
+					bg-menu
+					dark:bg-darkbg dark:text-menu dark:outline-none
+					py-3
+					pl-2
+					rounded
+					mt-8
+				"
 				type="text"
 				name="email"
 				v-model="signInForm.email"
@@ -16,7 +23,14 @@
 				{{ signInForm.errors.email }}
 			</p>
 			<input
-				class="bg-menu dark:bg-darkbg py-3 pl-2 rounded mt-4"
+				class="
+					bg-menu
+					dark:bg-darkbg dark:text-menu dark:outline-none
+					py-3
+					pl-2
+					rounded
+					mt-4
+				"
 				type="password"
 				name="password"
 				v-model="signInForm.password"
@@ -57,7 +71,7 @@
 					rounded-full
 					shadow
 					border
-					dark:bg-darkborder
+					dark:bg-black dark:border-darkborder
 				"
 				v-else
 				type="submit"
@@ -192,7 +206,7 @@ export default {
 <style scoped>
 .icon {
 	padding-top: 100%;
-	background-image: url("/logo.jpg");
+	background-image: url("login.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;

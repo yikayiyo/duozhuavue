@@ -113,6 +113,7 @@
 					pb-15
 					text-footer text-center
 					border-t-0.5 border-menu
+					dark:border-none
 				"
 				v-else-if="hasNextPage && networkStatus === 3"
 			>

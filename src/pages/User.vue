@@ -180,9 +180,23 @@
 					</router-link>
 				</div>
 				<div v-else class="splitter flex items-center justify-between px-5%">
-					<span class="left flex-1 border-t-0.5 border-splitter"></span>
+					<span
+						class="
+							left
+							flex-1
+							border-t-0.5 border-splitter
+							dark:border-darkborder
+						"
+					></span>
 					<div class="circle mx-1.25"></div>
-					<span class="right flex-1 border-t-0.5 border-splitter"></span>
+					<span
+						class="
+							right
+							flex-1
+							border-t-0.5 border-splitter
+							dark:border-darkborder
+						"
+					></span>
 				</div>
 				<div class="book-shelf-tab flex justify-around p-4 text-base">
 					<router-link :to="activityLink" class="relative">动态</router-link>
