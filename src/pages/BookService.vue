@@ -1,5 +1,7 @@
 <template>
-	<div class="service-wrapper pt-5 px-15 pb-12.75 text-is-active">
+	<div
+		class="service-wrapper pt-5 px-15 pb-12.75 text-is-active dark:text-menu"
+	>
 		<video
 			class="mb-12.5"
 			controls=""

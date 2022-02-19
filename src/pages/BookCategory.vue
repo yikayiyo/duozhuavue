@@ -1,7 +1,7 @@
 <template>
 	<loading v-if="loading" />
 	<div class="error" v-else-if="error">{{ error }}</div>
-	<div class="book-category-wrapper text-is-active" v-else>
+	<div class="book-category-wrapper text-is-active dark:text-white" v-else>
 		<div
 			class="book-category-header py-8.75 flex flex-col items-center text-white"
 			:style="{ backgroundColor: headerBg }"
@@ -10,13 +10,16 @@
 			<p class="mt-2.5 text-footer">{{ category.description }}</p>
 		</div>
 		<div class="book-list-wrapper">
-			<div class="sort-options bg-white text-hsh sticky top-0 z-20">
+			<div
+				class="sort-options bg-white dark:bg-black text-hsh sticky top-0 z-20"
+			>
 				<div
 					class="
 						sort-option
 						selected
 						h-10
 						border-b border-b-1 border-search-input
+						dark:border-darkborder
 						flex
 						items-center
 						justify-center
@@ -54,12 +57,22 @@
 						flex flex-col
 						justify-center
 						bg-white
+						dark:bg-darkbg
 						border-b-0.5 border-menu
+						dark:border-darkborder
 					"
 					v-if="showAllOptions"
 				>
 					<div
-						class="sort-option px-6 py-3 bg-white flex justify-between"
+						class="
+							sort-option
+							px-6
+							py-3
+							bg-white
+							dark:bg-black
+							flex
+							justify-between
+						"
 						:class="selectedSortOption === '评分优先' ? 'text-load' : ''"
 						name="rating"
 						@click="sortByRating"
@@ -82,7 +95,15 @@
 						</svg>
 					</div>
 					<div
-						class="sort-option px-6 py-3 bg-white flex justify-between"
+						class="
+							sort-option
+							px-6
+							py-3
+							bg-white
+							dark:bg-black
+							flex
+							justify-between
+						"
 						:class="selectedSortOption === '低价优先' ? 'text-load' : ''"
 						name="price"
 						@click="sortByPrice"
@@ -117,6 +138,7 @@
 					py-4
 					text-footer text-center
 					border-t-0.5 border-b-0.5 border-menu
+					dark:border-darkborder
 				"
 				v-if="hasNextPage"
 				@click="loadMoreBooks"

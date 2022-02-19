@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="comment-wrapper p-0.8em text-is-active h-screen"
+		class="comment-wrapper p-0.8em text-is-active dark:text-menu h-screen"
 		:style="showModal ? blurStyle : ''"
 	>
 		<form @submit.prevent="updateComment">
@@ -37,11 +37,13 @@
 					</span>
 				</div>
 			</div>
-			<section class="w-full border-0.5 border-search-input mb-3.75">
+			<section
+				class="w-full border-0.5 border-search-input dark:border-black mb-3.75"
+			>
 				<textarea
 					name="reason"
 					placeholder="一些阅读感受"
-					class="w-full h-30 p-2.25 text-sm outline-none"
+					class="w-full h-30 p-2.25 text-sm outline-none dark:bg-darkbg"
 					v-model="content"
 				>
 				</textarea>
@@ -51,7 +53,7 @@
 					>* 如果买到的书品相不符或疑似盗版，请联系客服处理。 *</span
 				>
 				<span v-else> {{ commentString }} 评分 · </span>
-				<span class="text-is-active" @click="tryDeleteComment"
+				<span class="text-is-active dark:text-menu" @click="tryDeleteComment"
 					>删除评分和评论</span
 				>
 			</div>
@@ -88,6 +90,7 @@
 							rounded-full
 							shadow
 							border
+							dark:border-darkborder
 						"
 						type="submit"
 					>
@@ -111,11 +114,18 @@
 		v-show="showModal"
 		@click="showModal = false"
 	>
-		<div class="modal bg-white rounded-xl absolute">
+		<div class="modal bg-white dark:bg-black rounded-xl absolute">
 			<h1 class="my-6.75 px-5.5 text-center">确定要删除吗？</h1>
 			<div class="buttons flex justify-around leading-category my-6.75 px-5.5">
 				<button
-					class="py-1.5 text-shiwu w-33.75 border-0.5 rounded-99"
+					class="
+						py-1.5
+						text-shiwu
+						w-33.75
+						border-0.5
+						dark:border-darkborder
+						rounded-99
+					"
 					@click.stop="showModal = !showModal"
 				>
 					取消
@@ -126,6 +136,7 @@
 						text-shiwu
 						w-33.75
 						border-0.5
+						dark:border-darkborder
 						rounded-99
 						bg-load
 						text-white

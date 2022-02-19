@@ -177,7 +177,9 @@
 										h-7.5
 										rounded-99
 										border-1 border-rating
+										dark:border-darkborder
 										bg-menu
+										dark:bg-darkbg
 										overflow-hidden
 										-m-1
 									"

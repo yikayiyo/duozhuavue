@@ -1,5 +1,5 @@
 <template>
-	<div class="comment-wrapper p-0.8em text-is-active">
+	<div class="comment-wrapper p-0.8em text-is-active dark:text-menu">
 		<form @submit.prevent="addComment()">
 			<router-link class="flex flex-col items-center" :to="'/books/' + bookId">
 				<h1 class="book-title mb-5 text-xl">给「 {{ book.title }} 」评分</h1>
@@ -47,11 +47,13 @@
 					</span>
 				</div>
 			</div>
-			<section class="w-full border-0.5 border-search-input mb-3.75">
+			<section
+				class="w-full border-0.5 border-search-input dark:border-black mb-3.75"
+			>
 				<textarea
 					name="reason"
 					placeholder="一些阅读感受"
-					class="w-full h-30 p-2.25 text-sm outline-none"
+					class="w-full h-30 p-2.25 text-sm outline-none dark:bg-darkbg"
 					v-model="content"
 				>
 				</textarea>
@@ -90,6 +92,7 @@
 							rounded-full
 							shadow
 							border
+							dark:border-darkbg
 						"
 						v-else
 						type="submit"
