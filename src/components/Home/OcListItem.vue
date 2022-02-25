@@ -9,7 +9,7 @@
 			mr-2.625
 			rounded-oc-item
 			text-hsh
-			dark:border-0.5 dark:border-darkbg
+			dark:border-darkbg
 		"
 		:style="styleObj"
 	>

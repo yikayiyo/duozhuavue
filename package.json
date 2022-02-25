@@ -4,7 +4,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest --coverage",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
@@ -18,10 +21,14 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.6.1",
+    "@vitest/ui": "^0.5.5",
     "@vue/compiler-sfc": "^3.2.6",
+    "@vue/test-utils": "*",
     "autoprefixer": "^10.3.4",
+    "happy-dom": "^2.41.0",
     "postcss": "^8.3.7",
     "tailwindcss": "^2.2.15",
-    "vite": "^2.5.4"
+    "vite": "^2.5.4",
+    "vitest": "^0.5.5"
   }
 }

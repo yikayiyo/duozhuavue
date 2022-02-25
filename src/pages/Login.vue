@@ -42,6 +42,7 @@
 			</p>
 			<button
 				class="
+				  login
 					mt-8
 					text-lg
 					font-medium
@@ -61,6 +62,7 @@
 			</button>
 			<button
 				class="
+				  loading
 					mt-8
 					text-lg
 					font-medium
@@ -82,6 +84,7 @@
 		<div class="signup max-w-3/4 mx-auto">
 			<button
 				class="
+				  signup
 					w-full
 					mt-8
 					text-load text-lg
