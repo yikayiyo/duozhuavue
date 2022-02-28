@@ -6,6 +6,7 @@
 		<form @submit.prevent="signIn" class="flex flex-col max-w-3/4 mx-auto">
 			<input
 				class="
+				  email
 					bg-menu
 					dark:bg-darkbg dark:text-menu dark:outline-none
 					py-3
@@ -24,6 +25,7 @@
 			</p>
 			<input
 				class="
+				  password
 					bg-menu
 					dark:bg-darkbg dark:text-menu dark:outline-none
 					py-3
