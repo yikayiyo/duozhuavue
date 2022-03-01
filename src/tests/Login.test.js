@@ -42,5 +42,16 @@ describe('Login component', () => {
     await btn.trigger('submit');
     // todo: 等待服务器返回消息
     expect(wrapper.text()).toContain("Error: Password didn't match");
+  });
+
+  it.todo("should show user not found", async () => {
+    let emailInput = wrapper.get("input.email");
+    let passwordInput = wrapper.get("input.password");
+    emailInput.setValue("notexist@gmail.com");
+    passwordInput.setValue("notexist");
+    let btn = wrapper.get('button.login');
+    await btn.trigger('submit');
+    // todo: 等待服务器返回消息
+    expect(wrapper.text()).toContain(`Error: Couldn't find this user`);
   })
 })
