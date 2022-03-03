@@ -77,6 +77,7 @@ module.exports = {
 			},
 			minWidth: {
 				4: "16px",
+				0: "0px"
 			},
 			inset: {
 				"-1": "-1px",

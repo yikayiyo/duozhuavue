@@ -233,13 +233,11 @@
 										</span>
 									</router-link>
 								</div>
-								<div class="comment-right flex-1 ml-3 text-shiwu">
+								<div class="comment-right min-w-0 flex-1 ml-3 text-shiwu">
 									<div class="name-with-rating flex mb-1.75 items-center">
-										<a href="">
-											<p class="font-medium">
-												{{ comment.commenter.name }}
-											</p>
-										</a>
+										<p class="font-medium max-w-1/2 whitespace-nowrap overflow-hidden overflow-ellipsis">
+											{{ comment.commenter.name }}
+										</p>
 										<div class="rating ml-2.25">
 											<DuozhuavueRating :rating="comment.rating" />
 										</div>
