@@ -2,9 +2,9 @@
 	<div class="flex flex-col pb-12">
 		<div class="pt-3.75 px-3.75 flex flex-wrap justify-between">
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
-				<div class="link-wrapper">
+				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/wc.jpeg" alt="" class="rounded" />
+						<img src="/originals/wc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -28,9 +28,9 @@
 				</div>
 			</div>
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
-				<div class="link-wrapper">
+				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/bc.jpeg" alt="" class="rounded" />
+						<img src="/originals/bc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -54,9 +54,9 @@
 				</div>
 			</div>
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
-				<div class="link-wrapper">
+				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/swc.jpeg" alt="" class="rounded" />
+						<img src="/originals/swc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -80,9 +80,9 @@
 				</div>
 			</div>
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
-				<div class="link-wrapper">
+				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/sbc.jpeg" alt="" class="rounded" />
+						<img src="/originals/sbc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -106,9 +106,9 @@
 				</div>
 			</div>
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
-				<div class="link-wrapper">
+				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/bag.jpeg" alt="" class="rounded" />
+						<img src="/originals/bag.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -132,9 +132,9 @@
 				</div>
 			</div>
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
-				<div class="link-wrapper">
+				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/paper.jpeg" alt="" class="rounded" />
+						<img src="/originals/paper.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">

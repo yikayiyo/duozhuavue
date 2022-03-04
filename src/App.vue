@@ -6,7 +6,7 @@ export default {
 		Wrapper,
 	},
 	setup() {
-		const isDark = ref(false);
+		const isDark = ref(true);
 		function toggleMode() {
 			isDark.value = !isDark.value;
 		}
