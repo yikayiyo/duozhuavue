@@ -77,7 +77,7 @@
 		<div class="feed-section flex flex-wrap justify-between pt-3.75 px-3.75">
 			<div class="pt-3.75 px-3.75 flex flex-wrap justify-between">
 				<div class="flex flex-col justify-between w-[calc(50%-7.5px)] mb-7.5">
-					<div class="link-wrapper">
+					<div class="link-wrapper aspect-w-1 aspect-h-1">
 						<a href="">
 							<img
 								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/kindle.png"
@@ -102,12 +102,12 @@
 					</div>
 				</div>
 				<div class="flex flex-col justify-between w-[calc(50%-7.5px)] mb-7.5">
-					<div class="link-wrapper">
+					<div class="link-wrapper aspect-w-1 aspect-h-1">
 						<a href="">
 							<img
 								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/airpods.jpeg"
 								alt=""
-								class="rounded"
+								class="rounded dark:bg-white w-full h-full"
 							/>
 						</a>
 					</div>
@@ -128,12 +128,12 @@
 					</div>
 				</div>
 				<div class="flex flex-col justify-between w-[calc(50%-7.5px)] mb-7.5">
-					<div class="link-wrapper sold-out">
+					<div class="link-wrapper sold-out aspect-w-1 aspect-h-1">
 						<a href="">
 							<img
 								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/b%260.jpeg"
 								alt=""
-								class="rounded"
+								class="rounded dark:bg-white w-full h-full"
 							/>
 						</a>
 					</div>
