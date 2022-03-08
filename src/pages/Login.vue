@@ -97,8 +97,10 @@
 					px-9
 					rounded-full
 					shadow-sm
+					cursor-not-allowed
 				"
 				@click="toSignUpPage"
+				disabled
 			>
 				注册
 			</button>
@@ -111,6 +113,7 @@ import { CURRENT_USER, SIGN_IN_MUTATION } from "../graphql/schema";
 import { useApolloClient, useMutation } from "@vue/apollo-composable";
 import { reactive } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 import Loading from "../components/Loading/Loading.vue";
 export default {
 	name: "Login",
@@ -120,6 +123,7 @@ export default {
 	setup() {
 		const router = useRouter();
 		const { client } = useApolloClient();
+		const toast = useToast();
 		const signInForm = reactive({
 			email: "",
 			password: "",
@@ -145,8 +149,8 @@ export default {
 			// goto signup page
 		};
 
-		onError((error) => {
-			signInForm.errors.password = error;
+		onError(({message}) => {
+			toast.error(message);
 		});
 		// 登录成功时，跳转到主页，更新本地状态
 		onDone(
@@ -155,6 +159,7 @@ export default {
 					signIn: { id, token },
 				},
 			}) => {
+				toast.success("login successfully.");
 				client.writeQuery({
 					query: CURRENT_USER,
 					data: {
