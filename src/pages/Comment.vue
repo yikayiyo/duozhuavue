@@ -14,7 +14,20 @@
 				<p class="text-load text-shiwu mb-2.5" v-if="rating === 0">
 					* 根据书的内容来打分哦 *
 				</p>
-				<div class="rating flex" v-else>
+					<p class="text-load text-shiwu mb-2.5" v-else-if="rating === 2">
+					不要看 😡
+				</p>
+				<p class="text-load text-shiwu mb-2.5" v-else-if="rating === 4">
+					不太好看 😑
+				</p>
+				<p class="text-load text-shiwu mb-2.5" v-else-if="rating === 6">
+					还可以 🙂
+				</p>
+				<p class="text-load text-shiwu mb-2.5" v-else-if="rating === 8">
+					好看！👍
+				</p>
+				<p class="text-load text-shiwu mb-2.5" v-else>非常好看！❤️</p>
+				<div class="rating flex">
 					<span
 						class="mx-1.25"
 						v-for="idx in 5"
@@ -162,6 +175,8 @@ import {
 } from "../graphql/schema";
 import { ref, computed, watch } from "vue";
 import Loading from "../components/Loading/Loading.vue";
+import { useToast } from "vue-toastification";
+
 export default {
 	name: "Comment",
 	components: {
@@ -244,6 +259,8 @@ export default {
 			showModal.value = true;
 		};
 
+		const toast = useToast();
+
 		const { mutate: deleteComment, onDone: onCommentDelete } = useMutation(
 			DELETE_COMMENT_MUTATION,
 			() => ({
@@ -264,7 +281,8 @@ export default {
 				},
 			})
 		);
-		onCommentDelete(() => {
+		onCommentDelete(({ data: { deleteComment } }) => {
+			toast.success(deleteComment.message);
 			router.go(-1);
 		});
 
@@ -282,11 +300,13 @@ export default {
 		}));
 
 		onCommentUpdate(({ data: { updateComment } }) => {
-			// console.log("click update");
 			if (updateComment.success) {
 				content.value = "";
 				rating.value = 0;
+				toast.success(updateComment.message);
 				router.go(-1);
+			} else {
+				toast.warning(updateComment.message);
 			}
 		});
 

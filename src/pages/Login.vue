@@ -97,8 +97,10 @@
 					px-9
 					rounded-full
 					shadow-sm
+					cursor-not-allowed
 				"
 				@click="toSignUpPage"
+				disabled
 			>
 				注册
 			</button>

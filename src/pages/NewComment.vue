@@ -112,6 +112,8 @@ import { ADD_COMMENT_MUTATION, GET_BOOK } from "../graphql/schema";
 import { ref, computed } from "vue";
 import useLoggedInUserId from "../hooks/useLoggedInUserId";
 import Loading from "../components/Loading/Loading.vue";
+import { useToast } from "vue-toastification";
+
 export default {
 	name: "NewComment",
 	components: {
@@ -144,11 +146,13 @@ export default {
 		};
 		// get current user
 		const userId = useLoggedInUserId();
-		console.log("userId: ", userId);
+		const toast = useToast();
+		// console.log("userId: ", userId);
 		const {
 			mutate: addComment,
 			loading: addCommentLoading,
 			onDone,
+			onError
 		} = useMutation(ADD_COMMENT_MUTATION, () => ({
 			variables: {
 				bookId,
@@ -159,14 +163,18 @@ export default {
 			},
 		}));
 
-		onDone(() => {
-			console.log("add comment successfully!");
+		onDone(({ data: { addComment } }) => {
+			toast.success(addComment.message);
 			// router.go(-1);
 			// todo: when go back, book page should scroll to specific section
 			router.replace("/books/" + bookId + "?target=book-comment-wrapper");
 			rating.value = 0;
 			content.value = "";
 		});
+
+		onError(({message})=>{
+			toast.error(message);
+		})
 
 		return {
 			book,
