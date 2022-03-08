@@ -182,6 +182,7 @@
 										dark:bg-darkbg
 										overflow-hidden
 										-m-1
+										mr-1
 									"
 								>
 									<img
