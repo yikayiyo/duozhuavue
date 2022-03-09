@@ -1,5 +1,5 @@
 <template>
-	<div class="home-section-wrapper">
+	<div class="home-section-wrapper" ref="scrollComponent">
 		<loading v-if="collectionLoading" />
 		<div class="text-label" v-else-if="collectionError">
 			{{ collectionError }}
@@ -147,6 +147,7 @@ import {
 	GET_COLLECTIONS,
 } from "../../graphql/schema";
 import { computed, ref } from "@vue/reactivity";
+import { onMounted, onUnmounted } from '@vue/runtime-core';
 
 export default {
 	name: "HomeSection",
@@ -213,6 +214,26 @@ export default {
 			});
 		};
 
+		// 滚动加载书籍分类 
+		const scrollComponent = ref(null);
+
+		const handleScroll = (e) => {
+			let element = scrollComponent.value;
+			if(element.getBoundingClientRect().bottom <= window.innerHeight) {
+				loadMoreCategories();
+			}
+			// console.log('视口高度 window.innerHeight: ',window.innerHeight);
+			// console.log('元素相对于视口的位置 element.getBoundingClientRect().bottom: ', element.getBoundingClientRect().bottom);
+		}
+
+		onMounted(() => {
+			window.addEventListener("scroll", handleScroll);
+		});
+
+		onUnmounted(() => {
+			window.removeEventListener("scroll", handleScroll);
+		});
+
 		return {
 			after,
 			first,
@@ -226,6 +247,7 @@ export default {
 			loadMoreBooks,
 			loadMoreCategories,
 			networkStatus,
+			scrollComponent
 		};
 	},
 	components: {
