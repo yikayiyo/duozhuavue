@@ -331,6 +331,14 @@ export const TOGGLE_BOOKSHELF_MUTATION = gql`
 			user {
 				bookShelf {
 					title
+					id
+					rawAuthor
+					publisher
+					publishDate
+					doubanRating
+					summary
+					image
+					isbn13
 				}
 			}
 		}

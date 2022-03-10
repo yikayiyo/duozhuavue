@@ -52,7 +52,7 @@
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 									class="w-7.5"
-									:fill="isInBookshelf ? 'red' : '#f2f2f2'"
+									:fill="isBookInBookshelf ? 'red' : '#f2f2f2'"
 								>
 									<path
 										d="M18.36,13.29,12.71,19a1,1,0,0,1-1.42,0L5.64,13.29a5,5,0,0,1,0-7.07A5,5,0,0,1,12,5.63a5,5,0,0,1,6.36,7.66Z"
@@ -69,7 +69,7 @@
 
 <script>
 import { computed, ref } from "vue";
-import { useMutation, useQuery } from '@vue/apollo-composable';
+import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
 import { GET_IS_BOOK_IN_BOOKSHELF, TOGGLE_BOOKSHELF_MUTATION } from '../../graphql/schema';
 import useLoggedInUserId from '../../hooks/useLoggedInUserId';
 import { useToast } from 'vue-toastification';
@@ -78,7 +78,7 @@ export default {
 	setup(props) {
 		const bookId = computed(() => props.book.id);
 		const userId = useLoggedInUserId();
-		const isInBookshelf = ref(false); 
+		// const isInBookshelf = ref(false); 
 		const toast = useToast();
 
 		const bgImage = computed(() => {
@@ -95,18 +95,20 @@ export default {
 
 		
 		const {
-			onResult: onBookshelfCheck
+			result,
 		} = useQuery(GET_IS_BOOK_IN_BOOKSHELF, ()=>({
 			bookId: bookId.value,
 			userId
 		}));
 
-		onBookshelfCheck(({data}) => {
-			console.log('check book state');
-			if(data) {
-			  isInBookshelf.value = data.isBookInBookshelf;
-			}
-		})
+		const isBookInBookshelf = useResult(result, false);
+
+		// onBookshelfCheck(({data}) => {
+		// 	console.log('check book state');
+		// 	if(data) {
+		// 	  isInBookshelf.value = data.isBookInBookshelf;
+		// 	}
+		// })
 
 		const {mutate: toggleBookshelf, onDone: onToggle} = useMutation(
 			TOGGLE_BOOKSHELF_MUTATION, () => ({
@@ -131,8 +133,6 @@ export default {
 							}
 						})
 					}
-					
-
 				}
 			})
 		);
@@ -141,7 +141,7 @@ export default {
 			if(toggleBookshelf.success === true) {
 			  toast.success(toggleBookshelf.message);
 			} else {
-				isInBookshelf.value = !isInBookshelf.value;
+				isBookInBookshelf.value = !isBookInBookshelf.value;
 				toast.info(toggleBookshelf.message);
 			}
 		})
@@ -149,7 +149,7 @@ export default {
 		const addToBookShelf = () => {
 			// console.log("add to book shelf: ", bookId.value);
 			// 乐观更新
-			isInBookshelf.value = !isInBookshelf.value;
+			// isBookInBookshelf.value = !isBookInBookshelf.value;
 			// send mutation
 			toggleBookshelf();
 		};
@@ -160,7 +160,7 @@ export default {
 			bgImage,
 			bookLink,
 			bookPrice,
-			isInBookshelf,
+			isBookInBookshelf,
 			addToBookShelf,
 		};
 	},
