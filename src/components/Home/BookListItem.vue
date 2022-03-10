@@ -46,7 +46,7 @@
 							<div
 								v-if="isLoggedIn"
 								class="bookmark ml-0.75"
-								@click.stop.prevent="addToBookShelf(bookId)"
+								@click.stop.prevent="addToBookShelf()"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -68,14 +68,18 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useQuery, useResult } from '@vue/apollo-composable';
-import { GET_IS_BOOK_IN_BOOKSHELF } from '../../graphql/schema';
+import { computed, ref } from "vue";
+import { useMutation, useQuery } from '@vue/apollo-composable';
+import { GET_IS_BOOK_IN_BOOKSHELF, TOGGLE_BOOKSHELF_MUTATION } from '../../graphql/schema';
 import useLoggedInUserId from '../../hooks/useLoggedInUserId';
+import { useToast } from 'vue-toastification';
 export default {
 	props: ["book", "isLoggedIn"],
 	setup(props) {
 		const bookId = computed(() => props.book.id);
+		const userId = useLoggedInUserId();
+		const isInBookshelf = ref(false); 
+		const toast = useToast();
 
 		const bgImage = computed(() => {
 			return "url(" + props.book.image + ")";
@@ -89,19 +93,67 @@ export default {
 			return (props.book.originalPrice / 100).toFixed(2);
 		});
 
-		const addToBookShelf = (id) => {
-			console.log("add to book shelf: ", id);
-			// send mutation then set isInMyBookShelf.value
-		};
-
-		const userId = useLoggedInUserId();
+		
 		const {
-			result
+			onResult: onBookshelfCheck
 		} = useQuery(GET_IS_BOOK_IN_BOOKSHELF, ()=>({
 			bookId: bookId.value,
 			userId
 		}));
-		const isInBookshelf = useResult(result, false); 
+
+		onBookshelfCheck(({data}) => {
+			console.log('check book state');
+			if(data) {
+			  isInBookshelf.value = data.isBookInBookshelf;
+			}
+		})
+
+		const {mutate: toggleBookshelf, onDone: onToggle} = useMutation(
+			TOGGLE_BOOKSHELF_MUTATION, () => ({
+				variables:{
+					bookId: bookId.value,
+					userId
+				},
+				update: (cache, {data: {toggleBookshelf}}) => {
+					const oldData = cache.readQuery({query: GET_IS_BOOK_IN_BOOKSHELF, variables: {
+						bookId: bookId.value,
+						userId
+					}});
+					if(toggleBookshelf.success === true) {
+						cache.writeQuery({
+							query: GET_IS_BOOK_IN_BOOKSHELF, 
+							variables: {
+								bookId: bookId.value,
+								userId
+							},
+							data: {
+								isBookInBookshelf: !oldData.isBookInBookshelf
+							}
+						})
+					}
+					
+
+				}
+			})
+		);
+
+		onToggle(({data: {toggleBookshelf}}) => {
+			if(toggleBookshelf.success === true) {
+			  toast.success(toggleBookshelf.message);
+			} else {
+				isInBookshelf.value = !isInBookshelf.value;
+				toast.info(toggleBookshelf.message);
+			}
+		})
+
+		const addToBookShelf = () => {
+			// console.log("add to book shelf: ", bookId.value);
+			// 乐观更新
+			isInBookshelf.value = !isInBookshelf.value;
+			// send mutation
+			toggleBookshelf();
+		};
+
 
 		return {
 			bookId,

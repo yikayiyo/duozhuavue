@@ -323,6 +323,20 @@ export const UPDATE_COMMENT_MUTATION = gql`
 	}
 `;
 
+export const TOGGLE_BOOKSHELF_MUTATION = gql`
+	mutation toggleBookshelf($bookId: ID!, $userId: ID!) {
+		toggleBookshelf(bookId: $bookId, userId: $userId) {
+			message
+			success
+			user {
+				bookShelf {
+					title
+				}
+			}
+		}
+	}
+`;
+
 // local query
 export const CURRENT_USER = gql`
 	query GetCurrentUser {
