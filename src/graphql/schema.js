@@ -225,6 +225,12 @@ export const GET_COMMENT = gql`
 	}
 `;
 
+export const GET_IS_BOOK_IN_BOOKSHELF = gql`
+	query isBookInBookshelf($bookId: ID!, $userId: ID!) {
+		isBookInBookshelf(bookId: $bookId, userId: $userId)
+	}
+`;
+
 // mutation
 
 export const SIGN_IN_MUTATION = gql`

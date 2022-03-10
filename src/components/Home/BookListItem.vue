@@ -52,7 +52,7 @@
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 									class="w-7.5"
-									:fill="isInMyBookShelf ? 'red' : '#f2f2f2'"
+									:fill="isInBookshelf ? 'red' : '#f2f2f2'"
 								>
 									<path
 										d="M18.36,13.29,12.71,19a1,1,0,0,1-1.42,0L5.64,13.29a5,5,0,0,1,0-7.07A5,5,0,0,1,12,5.63a5,5,0,0,1,6.36,7.66Z"
@@ -68,12 +68,15 @@
 </template>
 
 <script>
-import { computed, ref } from "@vue/reactivity";
+import { computed } from "vue";
+import { useQuery, useResult } from '@vue/apollo-composable';
+import { GET_IS_BOOK_IN_BOOKSHELF } from '../../graphql/schema';
+import useLoggedInUserId from '../../hooks/useLoggedInUserId';
 export default {
 	props: ["book", "isLoggedIn"],
 	setup(props) {
-		const isInMyBookShelf = ref(false);
 		const bookId = computed(() => props.book.id);
+
 		const bgImage = computed(() => {
 			return "url(" + props.book.image + ")";
 		});
@@ -89,15 +92,23 @@ export default {
 		const addToBookShelf = (id) => {
 			console.log("add to book shelf: ", id);
 			// send mutation then set isInMyBookShelf.value
-			isInMyBookShelf.value = !isInMyBookShelf.value;
 		};
+
+		const userId = useLoggedInUserId();
+		const {
+			result
+		} = useQuery(GET_IS_BOOK_IN_BOOKSHELF, ()=>({
+			bookId: bookId.value,
+			userId
+		}));
+		const isInBookshelf = useResult(result, false); 
 
 		return {
 			bookId,
 			bgImage,
 			bookLink,
 			bookPrice,
-			isInMyBookShelf,
+			isInBookshelf,
 			addToBookShelf,
 		};
 	},
