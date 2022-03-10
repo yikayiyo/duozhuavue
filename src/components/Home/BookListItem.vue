@@ -46,13 +46,13 @@
 							<div
 								v-if="isLoggedIn"
 								class="bookmark ml-0.75"
-								@click.stop.prevent="addToBookShelf(bookId)"
+								@click.stop.prevent="addToBookShelf()"
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 									class="w-7.5"
-									:fill="isInMyBookShelf ? 'red' : '#f2f2f2'"
+									:fill="isBookInBookshelf ? 'red' : '#f2f2f2'"
 								>
 									<path
 										d="M18.36,13.29,12.71,19a1,1,0,0,1-1.42,0L5.64,13.29a5,5,0,0,1,0-7.07A5,5,0,0,1,12,5.63a5,5,0,0,1,6.36,7.66Z"
@@ -68,12 +68,19 @@
 </template>
 
 <script>
-import { computed, ref } from "@vue/reactivity";
+import { computed, ref } from "vue";
+import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
+import { GET_IS_BOOK_IN_BOOKSHELF, TOGGLE_BOOKSHELF_MUTATION } from '../../graphql/schema';
+import useLoggedInUserId from '../../hooks/useLoggedInUserId';
+import { useToast } from 'vue-toastification';
 export default {
 	props: ["book", "isLoggedIn"],
 	setup(props) {
-		const isInMyBookShelf = ref(false);
 		const bookId = computed(() => props.book.id);
+		const userId = useLoggedInUserId();
+		// const isInBookshelf = ref(false); 
+		const toast = useToast();
+
 		const bgImage = computed(() => {
 			return "url(" + props.book.image + ")";
 		});
@@ -86,18 +93,88 @@ export default {
 			return (props.book.originalPrice / 100).toFixed(2);
 		});
 
-		const addToBookShelf = (id) => {
-			console.log("add to book shelf: ", id);
-			// send mutation then set isInMyBookShelf.value
-			isInMyBookShelf.value = !isInMyBookShelf.value;
+		
+		const {
+			result,
+		} = useQuery(GET_IS_BOOK_IN_BOOKSHELF, ()=>({
+			bookId: bookId.value,
+			userId
+		}));
+
+		const isBookInBookshelf = useResult(result, false);
+
+		// onBookshelfCheck(({data}) => {
+		// 	console.log('check book state');
+		// 	if(data) {
+		// 	  isInBookshelf.value = data.isBookInBookshelf;
+		// 	}
+		// })
+
+		const {mutate: toggleBookshelf, onDone: onToggle} = useMutation(
+			TOGGLE_BOOKSHELF_MUTATION, () => ({
+				variables:{
+					bookId: bookId.value,
+					userId
+				},
+				update: (cache, {data: {toggleBookshelf}}) => {
+					const oldData = cache.readQuery({query: GET_IS_BOOK_IN_BOOKSHELF, variables: {
+						bookId: bookId.value,
+						userId
+					}});
+					if(toggleBookshelf.success === true) {
+						cache.writeQuery({
+							query: GET_IS_BOOK_IN_BOOKSHELF, 
+							variables: {
+								bookId: bookId.value,
+								userId
+							},
+							data: {
+								isBookInBookshelf: !oldData.isBookInBookshelf
+							}
+						})
+					}
+					// to update bookshelf cache data
+					const userCacheId = cache.identify({
+						id: userId,
+						__typename: "User",
+					})
+					// modify user.bookshelf
+					cache.modify({
+						id: userCacheId,
+						fields: {
+							bookShelf() {
+								return toggleBookshelf.user.bookShelf;
+							}
+						}
+					})
+				}
+			})
+		);
+
+		onToggle(({data: {toggleBookshelf}}) => {
+			if(toggleBookshelf.success === true) {
+			  toast.success(toggleBookshelf.message);
+			} else {
+				isBookInBookshelf.value = !isBookInBookshelf.value;
+				toast.info(toggleBookshelf.message);
+			}
+		})
+
+		const addToBookShelf = () => {
+			// console.log("add to book shelf: ", bookId.value);
+			// 乐观更新
+			// isBookInBookshelf.value = !isBookInBookshelf.value;
+			// send mutation
+			toggleBookshelf();
 		};
+
 
 		return {
 			bookId,
 			bgImage,
 			bookLink,
 			bookPrice,
-			isInMyBookShelf,
+			isBookInBookshelf,
 			addToBookShelf,
 		};
 	},

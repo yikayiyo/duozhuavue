@@ -225,6 +225,12 @@ export const GET_COMMENT = gql`
 	}
 `;
 
+export const GET_IS_BOOK_IN_BOOKSHELF = gql`
+	query isBookInBookshelf($bookId: ID!, $userId: ID!) {
+		isBookInBookshelf(bookId: $bookId, userId: $userId)
+	}
+`;
+
 // mutation
 
 export const SIGN_IN_MUTATION = gql`
@@ -312,6 +318,28 @@ export const UPDATE_COMMENT_MUTATION = gql`
 				content
 				createdAt
 				updatedAt
+			}
+		}
+	}
+`;
+
+export const TOGGLE_BOOKSHELF_MUTATION = gql`
+	mutation toggleBookshelf($bookId: ID!, $userId: ID!) {
+		toggleBookshelf(bookId: $bookId, userId: $userId) {
+			message
+			success
+			user {
+				bookShelf {
+					title
+					id
+					rawAuthor
+					publisher
+					publishDate
+					doubanRating
+					summary
+					image
+					isbn13
+				}
 			}
 		}
 	}

@@ -16,7 +16,7 @@ const cache = new InMemoryCache({
 				categoryFeed: {
 					...relayStylePagination(),
 					keyArgs: false,
-				},
+				}
 			},
 		},
 		Category: {
