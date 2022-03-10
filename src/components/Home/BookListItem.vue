@@ -133,6 +133,20 @@ export default {
 							}
 						})
 					}
+					// to update bookshelf cache data
+					const userCacheId = cache.identify({
+						id: userId,
+						__typename: "User",
+					})
+					// modify user.bookshelf
+					cache.modify({
+						id: userCacheId,
+						fields: {
+							bookShelf() {
+								return toggleBookshelf.user.bookShelf;
+							}
+						}
+					})
 				}
 			})
 		);

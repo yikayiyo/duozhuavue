@@ -36,15 +36,6 @@ const cache = new InMemoryCache({
 				},
 			},
 		},
-		User: {
-			fields: {
-				bookShelf: {
-					merge(existing = [], incoming) {
-						return incoming;
-					},
-				}
-			}
-		}
 	},
 });
 // 初始化时写入currentUser信息
