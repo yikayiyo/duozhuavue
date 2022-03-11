@@ -3,14 +3,7 @@
 		<router-link :to="bookLink">
 			<div class="book-list-item-wrapper flex px-3.75 py-4.5">
 				<div
-					class="
-						image-wrapper
-						w-22.5
-						h-32
-						shadow-book-list-item-image
-						bg-menu
-						dark:bg-darkbg dark:border-darkborder
-					"
+					class="image-wrapper w-22.5 h-32 shadow-book-list-item-image bg-menu dark:bg-darkbg dark:border-darkborder"
 				>
 					<div class="image" :style="{ backgroundImage: bgImage }"></div>
 				</div>
@@ -33,14 +26,7 @@
 								<span class="price-suffix text-hsh ml-0.75 font-light">起</span>
 							</div>
 							<span
-								class="
-									discount
-									ml-1.25
-									px-1.5
-									text-xs text-label
-									border border-label
-									rounded
-								"
+								class="discount ml-1.25 px-1.5 text-xs text-label border border-label rounded"
 								>3.7折</span
 							>
 							<div
@@ -69,16 +55,18 @@
 
 <script>
 import { computed, ref } from "vue";
-import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
-import { GET_IS_BOOK_IN_BOOKSHELF, TOGGLE_BOOKSHELF_MUTATION } from '../../graphql/schema';
-import useLoggedInUserId from '../../hooks/useLoggedInUserId';
-import { useToast } from 'vue-toastification';
+import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
+import {
+	GET_IS_BOOK_IN_BOOKSHELF,
+	TOGGLE_BOOKSHELF_MUTATION,
+} from "../../graphql/schema";
+import useLoggedInUserId from "../../hooks/useLoggedInUserId";
+import { useToast } from "vue-toastification";
 export default {
 	props: ["book", "isLoggedIn"],
 	setup(props) {
 		const bookId = computed(() => props.book.id);
 		const userId = useLoggedInUserId();
-		// const isInBookshelf = ref(false); 
 		const toast = useToast();
 
 		const bgImage = computed(() => {
@@ -93,72 +81,65 @@ export default {
 			return (props.book.originalPrice / 100).toFixed(2);
 		});
 
-		
-		const {
-			result,
-		} = useQuery(GET_IS_BOOK_IN_BOOKSHELF, ()=>({
+		const { result } = useQuery(GET_IS_BOOK_IN_BOOKSHELF, () => ({
 			bookId: bookId.value,
-			userId
+			userId,
 		}));
-
 		const isBookInBookshelf = useResult(result, false);
 
-		// onBookshelfCheck(({data}) => {
-		// 	console.log('check book state');
-		// 	if(data) {
-		// 	  isInBookshelf.value = data.isBookInBookshelf;
-		// 	}
-		// })
-
-		const {mutate: toggleBookshelf, onDone: onToggle} = useMutation(
-			TOGGLE_BOOKSHELF_MUTATION, () => ({
-				variables:{
+		const { mutate: toggleBookshelf, onDone: onToggle } = useMutation(
+			TOGGLE_BOOKSHELF_MUTATION,
+			() => ({
+				variables: {
 					bookId: bookId.value,
-					userId
+					userId,
 				},
-				update: (cache, {data: {toggleBookshelf}}) => {
-					const oldData = cache.readQuery({query: GET_IS_BOOK_IN_BOOKSHELF, variables: {
-						bookId: bookId.value,
-						userId
-					}});
-					if(toggleBookshelf.success === true) {
+				update: (cache, { data: { toggleBookshelf } }) => {
+					const oldData = cache.readQuery({
+						query: GET_IS_BOOK_IN_BOOKSHELF,
+						variables: {
+							bookId: bookId.value,
+							userId,
+						},
+					});
+					if (toggleBookshelf.success === true) {
 						cache.writeQuery({
-							query: GET_IS_BOOK_IN_BOOKSHELF, 
+							query: GET_IS_BOOK_IN_BOOKSHELF,
 							variables: {
 								bookId: bookId.value,
-								userId
+								userId,
 							},
 							data: {
-								isBookInBookshelf: !oldData.isBookInBookshelf
-							}
-						})
+								isBookInBookshelf: !oldData.isBookInBookshelf,
+							},
+						});
 					}
 					// to update bookshelf cache data
 					const userCacheId = cache.identify({
 						id: userId,
 						__typename: "User",
-					})
+					});
 					// modify user.bookshelf
 					cache.modify({
 						id: userCacheId,
 						fields: {
 							bookShelf() {
 								return toggleBookshelf.user.bookShelf;
-							}
-						}
-					})
-				}
+							},
+						},
+					});
+				},
 			})
 		);
 
-		onToggle(({data: {toggleBookshelf}}) => {
-			if(toggleBookshelf.success === true) {
-			  toast.success(toggleBookshelf.message);
+		onToggle(({ data: { toggleBookshelf } }) => {
+			if (toggleBookshelf.success === true) {
+				toast.success(toggleBookshelf.message);
 			} else {
 				isBookInBookshelf.value = !isBookInBookshelf.value;
 				toast.info(toggleBookshelf.message);
 			}
-		})
+		});
 
 		const addToBookShelf = () => {
 			// console.log("add to book shelf: ", bookId.value);
@@ -167,7 +148,6 @@ export default {
 			// send mutation
 			toggleBookshelf();
 		};
-
 
 		return {
 			bookId,

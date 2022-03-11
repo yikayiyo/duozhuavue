@@ -2,56 +2,59 @@
 	<loading v-if="loading" />
 	<div v-else-if="error" class="p-3.75">error</div>
 	<div v-else class="user-wrapper text-shiwu leading-category">
-		<div class="buttons-wrapper absolute right-0 flex items-center" v-show="showInfos">
+		<div
+			class="buttons-wrapper absolute right-0 flex items-center"
+			v-show="showInfos"
+		>
 			<span class="theme text-is-active" @click="toggleMode">
-			  <svg v-show="isDark" width="1.4em" height="1.4em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32" class="align-middle" style="display: inline-block;"><path fill="white" d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6ZM5.394 6.813L6.81 5.399l3.505 3.506L8.9 10.319zM2 15.005h5v2H2zm3.394 10.193L8.9 21.692l1.414 1.414l-3.505 3.506zM15 25.005h2v5h-2zm6.687-1.9l1.414-1.414l3.506 3.506l-1.414 1.414zm3.313-8.1h5v2h-5zm-3.313-6.101l3.506-3.506l1.414 1.414l-3.506 3.506zM15 2.005h2v5h-2z"></path></svg>
-				<svg v-show="!isDark" width="1.4em" height="1.4em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32" class="align-middle" style="display: inline-block;"><path fill="white" d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3Z"></path></svg>
+				<svg
+					v-show="isDark"
+					width="1.4em"
+					height="1.4em"
+					preserveAspectRatio="xMidYMid meet"
+					viewBox="0 0 32 32"
+					class="align-middle"
+					style="display: inline-block"
+				>
+					<path
+						fill="white"
+						d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6ZM5.394 6.813L6.81 5.399l3.505 3.506L8.9 10.319zM2 15.005h5v2H2zm3.394 10.193L8.9 21.692l1.414 1.414l-3.505 3.506zM15 25.005h2v5h-2zm6.687-1.9l1.414-1.414l3.506 3.506l-1.414 1.414zm3.313-8.1h5v2h-5zm-3.313-6.101l3.506-3.506l1.414 1.414l-3.506 3.506zM15 2.005h2v5h-2z"
+					></path>
+				</svg>
+				<svg
+					v-show="!isDark"
+					width="1.4em"
+					height="1.4em"
+					preserveAspectRatio="xMidYMid meet"
+					viewBox="0 0 32 32"
+					class="align-middle"
+					style="display: inline-block"
+				>
+					<path
+						fill="white"
+						d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3Z"
+					></path>
+				</svg>
 			</span>
 			<button
 				@click="logOut"
-				class="
-					m-3.75
-					text-white text-xs
-					border-0.5
-					dark:border-darkborder
-					py-1
-					px-3
-					rounded-full
-					shadow-sm
-				"
+				class="m-3.75 text-white text-xs border-0.5 dark:border-darkborder py-1 px-3 rounded-full shadow-sm"
 			>
 				登出帐号
 			</button>
 		</div>
-		
+
 		<div class="user-header-wrapper text-white wrapper-bg">
 			<div class="header-under"></div>
 			<div class="user-head">
 				<div class="basic-info flex flex-col items-center pt-8 pb-4.75">
 					<div
-						class="
-							avatar avatar-shadow
-							w-20
-							h-20
-							border-2 border-white
-							dark:border-darkborder
-							rounded-99
-							overflow-hidden
-						"
+						class="avatar avatar-shadow w-20 h-20 border-2 border-white dark:border-darkborder rounded-99 overflow-hidden"
 					>
 						<img :src="user.avatar" alt="avatar image" class="w-full" />
 					</div>
 					<div
-						class="
-							name
-							text-xl
-							font-normal
-							my-2
-							mx-3.75
-							max-w-1/2
-							overflow-hidden overflow-ellipsis
-							whitespace-nowrap
-						"
+						class="name text-xl font-normal my-2 mx-3.75 max-w-1/2 overflow-hidden overflow-ellipsis whitespace-nowrap"
 					>
 						{{ user.name }}
 					</div>
@@ -59,13 +62,7 @@
 				</div>
 				<div
 					v-if="showInfos"
-					class="
-						info-tab
-						border-t-0.5 border-b-0.5 border-info
-						dark:border-darkborder
-						flex
-						justify-around
-					"
+					class="info-tab border-t-0.5 border-b-0.5 border-info dark:border-darkborder flex justify-around"
 				>
 					<router-link to="/account" class="flex flex-col items-center p-3">
 						<svg width="15px" height="17px" viewBox="0 0 30 34" version="1.1">
@@ -152,8 +149,8 @@
 								</g>
 							</g>
 						</svg>
-						<span class="mt-1.5">买卖的书</span></router-link
-					>
+						<span class="mt-1.5">买卖的书</span>
+					</router-link>
 					<router-link
 						to="/notifications"
 						class="flex flex-col items-center p-3"
@@ -186,21 +183,11 @@
 				</div>
 				<div v-else class="splitter flex items-center justify-between px-5%">
 					<span
-						class="
-							left
-							flex-1
-							border-t-0.5 border-splitter
-							dark:border-darkborder
-						"
+						class="left flex-1 border-t-0.5 border-splitter dark:border-darkborder"
 					></span>
 					<div class="circle mx-1.25"></div>
 					<span
-						class="
-							right
-							flex-1
-							border-t-0.5 border-splitter
-							dark:border-darkborder
-						"
+						class="right flex-1 border-t-0.5 border-splitter dark:border-darkborder"
 					></span>
 				</div>
 				<div class="book-shelf-tab flex justify-around p-4 text-base">
@@ -271,8 +258,8 @@ export default {
 			client.resetStore();
 			router.push("/login");
 		}
-		const isDark = inject('isDark');
-		const toggleMode = inject('toggleMode');
+		const isDark = inject("isDark");
+		const toggleMode = inject("toggleMode");
 		return {
 			userId,
 			user,
@@ -285,7 +272,7 @@ export default {
 			currentUserId,
 			showInfos,
 			isDark,
-			toggleMode
+			toggleMode,
 		};
 	},
 
