@@ -14,7 +14,7 @@
 				<p class="text-load text-shiwu mb-2.5" v-if="rating === 0">
 					* 根据书的内容来打分哦 *
 				</p>
-					<p class="text-load text-shiwu mb-2.5" v-else-if="rating === 2">
+				<p class="text-load text-shiwu mb-2.5" v-else-if="rating === 2">
 					不要看 😡
 				</p>
 				<p class="text-load text-shiwu mb-2.5" v-else-if="rating === 4">
@@ -73,18 +73,7 @@
 			<div class="absolute bottom-0 left-0 right-0 z-10 max-w-dzy mx-auto">
 				<div class="submit-section w-full pt-2.5 px-5 pb-5">
 					<button
-						class="
-							text-shiwu
-							w-full
-							font-medium
-							text-white
-							bg-load
-							py-2.25
-							px-9
-							rounded-full
-							shadow
-							border
-						"
+						class="text-shiwu w-full font-medium text-white bg-load py-2.25 px-9 rounded-full shadow border"
 						v-if="isUpdating"
 						:disabled="isUpdating"
 					>
@@ -92,19 +81,7 @@
 					</button>
 					<button
 						v-else
-						class="
-							text-shiwu
-							w-full
-							font-medium
-							text-white
-							bg-load
-							py-2.25
-							px-9
-							rounded-full
-							shadow
-							border
-							dark:border-darkborder
-						"
+						class="text-shiwu w-full font-medium text-white bg-load py-2.25 px-9 rounded-full shadow border dark:border-darkborder"
 						type="submit"
 					>
 						确定
@@ -114,16 +91,7 @@
 		</form>
 	</div>
 	<div
-		class="
-			modal-wrapper
-			fixed
-			inset-0
-			z-20
-			bg-layer
-			flex
-			items-center
-			justify-center
-		"
+		class="modal-wrapper fixed inset-0 z-20 bg-layer flex items-center justify-center"
 		v-show="showModal"
 		@click="showModal = false"
 	>
@@ -131,29 +99,13 @@
 			<h1 class="my-6.75 px-5.5 text-center">确定要删除吗？</h1>
 			<div class="buttons flex justify-around leading-category my-6.75 px-5.5">
 				<button
-					class="
-						py-1.5
-						text-shiwu
-						w-33.75
-						border-0.5
-						dark:border-darkborder
-						rounded-99
-					"
+					class="py-1.5 text-shiwu w-33.75 border-0.5 dark:border-darkborder rounded-99"
 					@click.stop="showModal = !showModal"
 				>
 					取消
 				</button>
 				<button
-					class="
-						py-1.5
-						text-shiwu
-						w-33.75
-						border-0.5
-						dark:border-darkborder
-						rounded-99
-						bg-load
-						text-white
-					"
+					class="py-1.5 text-shiwu w-33.75 border-0.5 dark:border-darkborder rounded-99 bg-load text-white"
 					@click="deleteComment"
 				>
 					确定
@@ -271,7 +223,7 @@ export default {
 				update: (cache) => {
 					// 删除cache中的该条comment
 					const normalizedId = cache.identify({
-						commentId,
+						id: commentId,
 						__typename: "Comment",
 					});
 					cache.evict({ id: normalizedId });
