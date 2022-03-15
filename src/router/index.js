@@ -1,34 +1,34 @@
 import { nextTick } from "@vue/runtime-core";
 import { createRouter, createWebHistory } from "vue-router";
-import HomeWrapper from "../pages/HomeWrapper.vue";
-import HomePage from "../pages/HomePage.vue";
-import Sell from "../pages/Sell.vue";
-import SellBook from "../pages/SellBook.vue";
-import SellClothing from "../pages/SellClothing.vue";
-import SellElectronics from "../pages/SellElectronics.vue";
-import Login from "../pages/Login.vue";
-import SignUp from "../pages/SignUp.vue";
-import Cart from "../pages/Cart.vue";
-import User from "../pages/User.vue";
-import Book from "../pages/Book.vue";
-import BookCategory from "../pages/BookCategory.vue";
-import ClothingPage from "../pages/ClothingPage.vue";
-import ElectronicsPage from "../pages/ElectronicsPage.vue";
-import OriginalPage from "../pages/OriginalPage.vue";
-import SearchBook from "../pages/SearchBook.vue";
-import SearchBookInfo from "../pages/SearchBookInfo.vue";
-import SearchElectronics from "../pages/SearchElectronics.vue";
-import SearchClothing from "../pages/SearchClothing.vue";
-import OpenCollections from "../pages/OpenCollections.vue";
-import OpenCollection from "../pages/OpenCollection.vue";
-import BookService from "../pages/BookService.vue";
-import Support from "../pages/Support.vue";
-import Env from "../pages/Env.vue";
-import Activity from "../pages/Activity.vue";
-import Comment from "../pages/Comment.vue";
-import NewComment from "../pages/NewComment.vue";
-import BookShelf from "../pages/BookShelf.vue";
-import PageNotFound from "../pages/PageNotFound.vue";
+const HomeWrapper = () => import("../pages/HomeWrapper.vue")
+const HomePage = () => import("../pages/HomePage.vue")
+const Sell = () => import("../pages/Sell.vue")
+const SellBook = () => import("../pages/SellBook.vue")
+const SellClothing = () => import("../pages/SellClothing.vue")
+const SellElectronics = () => import("../pages/SellElectronics.vue")
+const Login = () => import("../pages/Login.vue")
+const SignUp = () => import("../pages/SignUp.vue")
+const Cart = () => import("../pages/Cart.vue")
+const User = () => import("../pages/User.vue")
+const Book = () => import("../pages/Book.vue")
+const BookCategory = () => import("../pages/BookCategory.vue")
+const ClothingPage = () => import("../pages/ClothingPage.vue")
+const ElectronicsPage = () => import("../pages/ElectronicsPage.vue")
+const OriginalPage = () => import("../pages/OriginalPage.vue")
+const SearchBook = () => import("../pages/SearchBook.vue")
+const SearchBookInfo = () => import("../pages/SearchBookInfo.vue")
+const SearchElectronics = () => import("../pages/SearchElectronics.vue")
+const SearchClothing = () => import("../pages/SearchClothing.vue")
+const OpenCollections = () => import("../pages/OpenCollections.vue")
+const OpenCollection = () => import("../pages/OpenCollection.vue")
+const BookService = () => import("../pages/BookService.vue")
+const Support = () => import("../pages/Support.vue")
+const Env = () => import("../pages/Env.vue")
+const Activity = () => import("../pages/Activity.vue")
+const Comment = () => import("../pages/Comment.vue")
+const NewComment = () => import("../pages/NewComment.vue")
+const BookShelf = () => import("../pages/BookShelf.vue")
+const PageNotFound = () => import("../pages/PageNotFound.vue")
 
 const scrollBehavior = function (to, from, savedPosition) {
 	if (savedPosition) {
