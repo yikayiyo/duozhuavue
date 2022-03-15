@@ -207,8 +207,8 @@
 import UserFooter from "../components/NavFooter/UserFooter.vue";
 import Loading from "../components/Loading/Loading.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useApolloClient, useQuery, useResult } from "@vue/apollo-composable";
-import { apolloClient } from "../graphql";
+import { useQuery, useResult } from "@vue/apollo-composable";
+import { apolloClient, persistor } from "../graphql";
 import { CURRENT_USER, GET_USER } from "../graphql/schema";
 import { ref, computed, watch, inject } from "vue";
 import useLoggedInUserId from "../hooks/useLoggedInUserId";
@@ -247,17 +247,21 @@ export default {
 		watch(
 			() => route.params,
 			(newParams, _) => {
-				userId.value = newParams.userId; // userId is a variable used in useQuery, when it changes, that query will be re-send.
+				if (newParams.userId) {
+					userId.value = newParams.userId;
+				}
+				// userId is a variable used in useQuery, when it changes, that query will be re-send.
 			}
 		);
 
 		const router = useRouter();
-		const { client } = useApolloClient();
 
 		function logOut() {
-			client.resetStore();
-			router.push("/login");
+			// apolloClient.resetStore();
+			persistor.purge();
+			router.replace("/login");
 		}
+
 		const isDark = inject("isDark");
 		const toggleMode = inject("toggleMode");
 		return {
