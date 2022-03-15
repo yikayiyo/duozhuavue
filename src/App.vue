@@ -9,7 +9,7 @@ export default {
 		const isDark = ref(true);
 		const toggleMode = () => {
 			isDark.value = !isDark.value;
-		}
+		};
 		provide("isDark", isDark);
 		provide("toggleMode", toggleMode);
 		return {

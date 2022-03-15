@@ -120,14 +120,14 @@ export default {
 						__typename: "User",
 					});
 					// modify user.bookshelf
-					cache.modify({
-						id: userCacheId,
-						fields: {
-							bookShelf() {
-								return toggleBookshelf.user.bookShelf;
-							},
-						},
-					});
+					// cache.modify({
+					// 	id: userCacheId,
+					// 	fields: {
+					// 		bookShelf() {
+					// 			return toggleBookshelf.user.bookShelf;
+					// 		},
+					// 	},
+					// });
 				},
 			})
 		);

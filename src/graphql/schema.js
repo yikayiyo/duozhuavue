@@ -329,6 +329,7 @@ export const TOGGLE_BOOKSHELF_MUTATION = gql`
 			message
 			success
 			user {
+				id
 				bookShelf {
 					title
 					id
