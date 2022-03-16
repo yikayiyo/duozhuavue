@@ -256,9 +256,9 @@ export default {
 
 		const router = useRouter();
 
-		function logOut() {
-			// apolloClient.resetStore();
-			persistor.purge();
+		async function logOut() {
+		  await apolloClient.clearStore();
+			await persistor.purge();
 			router.replace("/login");
 		}
 

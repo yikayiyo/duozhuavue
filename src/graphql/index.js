@@ -60,7 +60,7 @@ const authLink = setContext((_, { headers }) => {
 	};
 });
 
-let persistor = new CachePersistor({
+const persistor = new CachePersistor({
 	cache,
 	storage: new LocalStorageWrapper(window.localStorage),
 	debug: false,
@@ -79,18 +79,18 @@ const apolloClient = new ApolloClient({
 	cache,
 });
 
-// apolloClient.onResetStore(() => {
-// 	// 还原store
-// 	cache.writeQuery({
-// 		query: CURRENT_USER,
-// 		data: {
-// 			currentUser: {
-// 				id: "",
-// 				token: "",
-// 			},
-// 		},
-// 	});
-// });
+apolloClient.onClearStore(() => {
+	// 还原store
+	cache.writeQuery({
+		query: CURRENT_USER,
+		data: {
+			currentUser: {
+				id: "",
+				token: "",
+			},
+		},
+	});
+});
 
 export {
 	apolloClient,
