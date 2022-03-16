@@ -1,6 +1,7 @@
 <template>
-	<div class="overflow-scroll">
+	<div class="clothing-wrapper">
 		<search :link="link" :placeholder="placeholder" :showIcon="showIcon" />
+		<div>No data yet.</div>
 	</div>
 </template>
 

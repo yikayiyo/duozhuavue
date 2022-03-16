@@ -4,7 +4,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/wc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="wc" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -18,7 +18,7 @@
 						</div>
 						<div class="flex ml-2.25">
 							<img
-								src="https://asset.duozhuayu.com/credits/fish_icon.png"
+								:src="fishIcon"
 								alt=""
 								class="h-5 self-center"
 							/>
@@ -30,7 +30,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/bc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="bc" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -44,7 +44,7 @@
 						</div>
 						<div class="flex ml-2.25">
 							<img
-								src="https://asset.duozhuayu.com/credits/fish_icon.png"
+								:src="fishIcon"
 								alt=""
 								class="h-5 self-center"
 							/>
@@ -56,7 +56,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/swc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="swc" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -70,7 +70,7 @@
 						</div>
 						<div class="flex ml-2.25">
 							<img
-								src="https://asset.duozhuayu.com/credits/fish_icon.png"
+								:src="fishIcon"
 								alt=""
 								class="h-5 self-center"
 							/>
@@ -82,7 +82,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/sbc.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="sbc" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -96,7 +96,7 @@
 						</div>
 						<div class="flex ml-2.25">
 							<img
-								src="https://asset.duozhuayu.com/credits/fish_icon.png"
+								:src="fishIcon"
 								alt=""
 								class="h-5 self-center"
 							/>
@@ -108,7 +108,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/bag.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="bag" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -122,7 +122,7 @@
 						</div>
 						<div class="flex ml-2.25">
 							<img
-								src="https://asset.duozhuayu.com/credits/fish_icon.png"
+								:src="fishIcon"
 								alt=""
 								class="h-5 self-center"
 							/>
@@ -134,7 +134,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<a href="">
-						<img src="/originals/paper.jpeg" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="paper" alt="" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</a>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -142,7 +142,7 @@
 					<div class="purchase flex">
 						<div class="flex">
 							<img
-								src="https://asset.duozhuayu.com/credits/fish_icon.png"
+								:src="fishIcon"
 								alt=""
 								class="h-5 self-center"
 							/>
@@ -180,6 +180,15 @@
 	</div>
 </template>
 
+<script setup>
+import wc from "../assets/originals/wc.jpeg";
+import swc from "../assets/originals/swc.jpeg";
+import bc from "../assets/originals/bc.jpeg";
+import sbc from "../assets/originals/sbc.jpeg";
+import bag from "../assets/originals/bag.jpeg";
+import paper from "../assets/originals/paper.jpeg";
+import fishIcon from "../assets/fish_icon.png";
+</script>
 <script>
 export default {
 	name: "Original",

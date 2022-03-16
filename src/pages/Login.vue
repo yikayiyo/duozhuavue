@@ -216,7 +216,7 @@ export default {
 <style scoped>
 .icon {
 	padding-top: 100%;
-	background-image: url("/login.png");
+	background-image: url("../assets/login.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;

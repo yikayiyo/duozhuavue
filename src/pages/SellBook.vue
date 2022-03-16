@@ -19,7 +19,7 @@
 		>
 			<div class="img-wrapper h-32.5">
 				<img
-					src="/public/sell/sell_book_intro_1.png"
+					:src="sellBookIntroOne"
 					alt=""
 					class="w-37.5 h-full"
 				/>
@@ -61,7 +61,7 @@
 		>
 			<div class="img-wrapper h-32.5">
 				<img
-					src="/public/sell/sell_book_intro_2.png"
+					:src="sellBookIntroTwo"
 					alt=""
 					class="w-37.5 h-full"
 				/>
@@ -82,7 +82,7 @@
 		>
 			<div class="img-wrapper h-32.5">
 				<img
-					src="/public/sell/sell_book_intro_3.png"
+					:src="sellBookIntroThree"
 					alt=""
 					class="w-37.5 h-full"
 				/>
@@ -191,10 +191,10 @@
 	</div>
 </template>
 
-<script>
-export default {
-	name: "SellBook",
-};
+<script setup>
+import sellBookIntroOne from "../assets/sell/sell_book_intro_1.png";
+import sellBookIntroTwo from "../assets/sell/sell_book_intro_2.png";
+import sellBookIntroThree from "../assets/sell/sell_book_intro_3.png";
 </script>
 
 <style scoped>

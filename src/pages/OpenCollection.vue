@@ -44,7 +44,7 @@
 								</p>
 								<img
 									alt="客座鱼编"
-									src="/proposer_badge.png"
+									:src="proposer_badge"
 									class="jsx-1779555337 w-21 ml-2 flex-shrink-0"
 								/>
 							</div>
@@ -136,6 +136,7 @@
 import OcFooter from "../components/NavFooter/OcFooter.vue";
 import OcItem from "../components/MainSection/OcItem.vue";
 import Loading from "../components/Loading/Loading.vue";
+import proposer_badge from "../assets/proposer_badge.png";
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { useRoute } from "vue-router";
 import { computed } from "@vue/reactivity";
@@ -164,6 +165,7 @@ export default {
 			loading,
 			error,
 			ocHeaderStyleObj,
+			proposer_badge
 		};
 	},
 	components: {

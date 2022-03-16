@@ -32,7 +32,7 @@
 		>
 			<div class="img-wrapper h-32.5">
 				<img
-					src="/public/sell/buyout_step_1.png"
+					:src="buyoutStepOne"
 					alt=""
 					class="w-37.5 h-full dark:bg-white"
 				/>
@@ -57,7 +57,7 @@
 		>
 			<div class="img-wrapper h-32.5">
 				<img
-					src="/public/sell/buyout_step_2.png"
+					:src="buyoutStepTwo"
 					alt=""
 					class="w-37.5 h-full dark:bg-white"
 				/>
@@ -78,7 +78,7 @@
 		>
 			<div class="img-wrapper h-32.5">
 				<img
-					src="/public/sell/buyout_step_3.png"
+					:src="buyoutStepThree"
 					alt=""
 					class="w-37.5 h-full dark:bg-white"
 				/>
@@ -225,15 +225,15 @@
 	</div>
 </template>
 
-<script>
-export default {
-	name: "SellClothing",
-};
+<script setup>
+import buyoutStepOne from "../assets/sell/buyout_step_1.png";
+import buyoutStepTwo from "../assets/sell/buyout_step_2.png";
+import buyoutStepThree from "../assets/sell/buyout_step_3.png";
 </script>
 
 <style scoped>
 .recycle-img {
-	background-image: url("/public/sell/recycling_intro.png");
+	background-image: url("../assets/sell/recycling_intro.png");
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -244,16 +244,16 @@ export default {
 	padding-top: 69.98%;
 }
 .case1 {
-	background-image: url("/public/sell/no_buyout_case_1.png");
+	background-image: url("../assets/sell/no_buyout_case_1.png");
 }
 .case2 {
-	background-image: url("/public/sell/no_buyout_case_2.png");
+	background-image: url("../assets/sell/no_buyout_case_2.png");
 }
 .case3 {
-	background-image: url("/public/sell/no_buyout_case_3.png");
+	background-image: url("../assets/sell/no_buyout_case_3.png");
 }
 .case4 {
-	background-image: url("/public/sell/no_buyout_case_4.png");
+	background-image: url("../assets/sell/no_buyout_case_4.png");
 }
 .case-image {
 	padding-top: 100%;

@@ -74,7 +74,7 @@
 				游戏机
 			</div>
 		</div>
-		<div class="feed-section flex flex-wrap justify-between pt-3.75 px-3.75">
+		<div class="feed-section flex flex-wrap justify-between pt-3.75">
 			<div class="pt-3.75 px-3.75 flex flex-wrap justify-between">
 				<div class="flex flex-col justify-between w-[calc(50%-7.5px)] mb-7.5">
 					<div class="link-wrapper aspect-w-1 aspect-h-1">
