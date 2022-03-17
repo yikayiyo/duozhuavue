@@ -7,7 +7,7 @@
 			my-0
 			bottom-0
 			inset-x-0
-			border-t border-b
+			border-t
 			dark:border-darkborder
 			z-50
 			bg-white

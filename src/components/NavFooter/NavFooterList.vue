@@ -1,6 +1,6 @@
 <template>
 	<ul class="flex flex-row justify-between items-center">
-		<li class="flex-1 flex flex-col items-center justify-center">
+		<li class="flex-1 flex flex-col items-center justify-center h-12.5">
 			<router-link class="flex flex-col items-center" to="/book">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
