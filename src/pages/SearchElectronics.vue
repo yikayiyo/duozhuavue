@@ -16,51 +16,26 @@
 								stroke="#AAAAAA"
 								stroke-width="0.2"
 								fill="#AAAAAA"
-							></path>
+							/>
 						</g>
 					</svg>
 				</div>
 				<input
 					type="search"
 					placeholder="搜索 Kindle、耳机、游戏机"
-					class="
-						flex-1
-						py-2.25
-						pr-4
-						pl-9
-						border-0
-						rounded
-						bg-search-input
-						outline-none
-					"
-					value=""
+					class="flex-1 py-2.25 pr-4 pl-9 border-0 rounded dark:bg-darkbg bg-search-input outline-none"
+					disabled
 				/>
 			</div>
 		</div>
 		<div class="categories-wrapper px-2.5">
 			<div class="categories">
 				<div class="category mb-2.5">
-					<div class="category__title p-2.5 text-elc text-left font-medium">
-						Kindle
-					</div>
+					<div class="category__title p-2.5 text-elc text-left font-medium">Kindle</div>
 					<div class="category__items flex flex-wrap">
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-kindle bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-kindle bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
 							<div class="category__item__text mt-1.25 text-footer">Kindle</div>
 						</a>
@@ -68,189 +43,61 @@
 					<div class="divider mx-2.5 my-3.75 border-b-0.5"></div>
 				</div>
 				<div class="category mb-2.5">
-					<div class="category__title p-2.5 text-elc text-left font-medium">
-						耳机
-					</div>
+					<div class="category__title p-2.5 text-elc text-left font-medium">耳机</div>
 					<div class="category__items flex flex-wrap">
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-elh bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-elh bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
-							<div class="category__item__text mt-1.25 text-footer">
-								入门级耳机
-							</div>
+							<div class="category__item__text mt-1.25 text-footer">入门级耳机</div>
 						</a>
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-sh bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-sh bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
-							<div class="category__item__text mt-1.25 text-footer">
-								运动耳机
-							</div>
+							<div class="category__item__text mt-1.25 text-footer">运动耳机</div>
 						</a>
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-nch bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-nch bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
-							<div class="category__item__text mt-1.25 text-footer">
-								降噪耳机
-							</div>
+							<div class="category__item__text mt-1.25 text-footer">降噪耳机</div>
 						</a>
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-hrh bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-hrh bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
-							<div class="category__item__text mt-1.25 text-footer">
-								高音质耳机
-							</div>
+							<div class="category__item__text mt-1.25 text-footer">高音质耳机</div>
 						</a>
 					</div>
 					<div class="divider mx-2.5 my-3.75 border-b-0.5"></div>
 				</div>
 				<div class="category mb-2.5">
-					<div class="category__title p-2.5 text-elc text-left font-medium">
-						游戏机
-					</div>
+					<div class="category__title p-2.5 text-elc text-left font-medium">游戏机</div>
 					<div class="category__items flex flex-wrap">
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-switch bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-switch bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
 							<div class="category__item__text mt-1.25 text-footer">Switch</div>
 						</a>
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-ps bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-ps bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
-							<div class="category__item__text mt-1.25 text-footer">
-								PlayStation
-							</div>
+							<div class="category__item__text mt-1.25 text-footer">PlayStation</div>
 						</a>
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-xbox bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-xbox bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
 							<div class="category__item__text mt-1.25 text-footer">Xbox</div>
 						</a>
-						<a
-							class="
-								category__item
-								px-1.875
-								py-2.5
-								flex flex-col
-								items-center
-								max-w-elc
-							"
-						>
+						<a class="category__item px-1.875 py-2.5 flex flex-col items-center max-w-elc">
 							<div
-								class="
-									category__item__image
-									w-20
-									h-20
-									bg-swc bg-search-input bg-60% bg-center bg-no-repeat
-								"
+								class="category__item__image w-20 h-20 bg-swc bg-search-input bg-60% bg-center bg-no-repeat"
 							></div>
-							<div class="category__item__text mt-1.25 text-footer">
-								Switch 游戏卡带
-							</div>
+							<div class="category__item__text mt-1.25 text-footer">Switch 游戏卡带</div>
 						</a>
 					</div>
 					<div class="divider mx-2.5 my-3.75"></div>
@@ -266,7 +113,7 @@
 						xmlns="http://www.w3.org/2000/svg"
 						class="mx-2.25 transform rotate-45"
 					>
-						<rect x="4" y="4" width="16" height="16" class=""></rect>
+						<rect x="4" y="4" width="16" height="16" class />
 					</svg>
 					<div class="w-10 border-t border-current"></div>
 				</div>

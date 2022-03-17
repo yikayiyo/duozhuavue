@@ -1,90 +1,27 @@
 <template>
-	<search
-		:link="searchLink"
-		:placeholder="searchPlaceholder"
-		:showIcon="searchShowIcon"
-	/>
+	<search :link="searchLink" :placeholder="searchPlaceholder" :showIcon="searchShowIcon" />
 	<div class="home-electronics pb-12">
-		<div
-			class="
-				nav-section
-				flex flex-wrap
-				pt-1.25
-				px-3.75
-				pb-0
-				text-footer
-				font-medium
-				text-black
-			"
-		>
+		<div class="nav-section flex flex-wrap pt-1.25 px-3.75 pb-0 text-footer font-medium text-black">
+			<div class="nav-item px-4.5 py-2.25 mt-2.5 mr-4 rounded-menu bg-menu-active text-white">全部</div>
 			<div
-				class="
-					nav-item
-					px-4.5
-					py-2.25
-					mt-2.5
-					mr-4
-					rounded-menu
-					bg-menu-active
-					text-white
-				"
-			>
-				全部
-			</div>
+				class="nav-item px-4.5 py-2.25 mt-2.5 mr-4 rounded-menu bg-menu dark:text-white dark:bg-darkborder"
+			>kindle</div>
 			<div
-				class="
-					nav-item
-					px-4.5
-					py-2.25
-					mt-2.5
-					mr-4
-					rounded-menu
-					bg-menu
-					dark:text-white dark:bg-darkborder
-				"
-			>
-				kindle
-			</div>
+				class="nav-item px-4.5 py-2.25 mt-2.5 mr-4 rounded-menu bg-menu dark:text-white dark:bg-darkborder"
+			>耳机</div>
 			<div
-				class="
-					nav-item
-					px-4.5
-					py-2.25
-					mt-2.5
-					mr-4
-					rounded-menu
-					bg-menu
-					dark:text-white dark:bg-darkborder
-				"
-			>
-				耳机
-			</div>
-			<div
-				class="
-					nav-item
-					px-4.5
-					py-2.25
-					mt-2.5
-					mr-4
-					rounded-menu
-					bg-menu
-					dark:text-white dark:bg-darkborder
-				"
-			>
-				游戏机
-			</div>
+				class="nav-item px-4.5 py-2.25 mt-2.5 mr-4 rounded-menu bg-menu dark:text-white dark:bg-darkborder"
+			>游戏机</div>
 		</div>
 		<div class="feed-section flex flex-wrap justify-between pt-3.75">
 			<div class="pt-3.75 px-3.75 flex flex-wrap justify-between">
 				<div class="flex flex-col justify-between w-[calc(50%-7.5px)] mb-7.5">
 					<div class="link-wrapper aspect-w-1 aspect-h-1">
-						<a href="">
-							<img
-								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/kindle.png"
-								alt=""
-								class="rounded dark:bg-white w-full h-full"
-							/>
-						</a>
+						<img
+							:src="'https://duozhuavue-images.netlify.app/images/kindle.png' + srcSize"
+							alt="kindle"
+							class="rounded dark:bg-white w-full h-full"
+						/>
 					</div>
 					<div class="tags-wrapper">
 						<ul>
@@ -96,20 +33,16 @@
 					</div>
 					<div class="purchase flex items-center">
 						<span>¥328</span>
-						<span class="Label Label--following Label--emphasis"
-							>二手 5 折</span
-						>
+						<span class="Label Label--following Label--emphasis">二手 5 折</span>
 					</div>
 				</div>
 				<div class="flex flex-col justify-between w-[calc(50%-7.5px)] mb-7.5">
 					<div class="link-wrapper aspect-w-1 aspect-h-1">
-						<a href="">
-							<img
-								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/airpods.jpeg"
-								alt=""
-								class="rounded dark:bg-white w-full h-full"
-							/>
-						</a>
+						<img
+							src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/airpods.jpeg"
+							alt
+							class="rounded dark:bg-white w-full h-full"
+						/>
 					</div>
 					<div class="tags-wrapper">
 						<ul>
@@ -122,20 +55,16 @@
 					</div>
 					<div class="purchase flex items-center">
 						<span>¥348</span>
-						<span class="Label Label--following Label--emphasis"
-							>二手 2.7 折</span
-						>
+						<span class="Label Label--following Label--emphasis">二手 2.7 折</span>
 					</div>
 				</div>
 				<div class="flex flex-col justify-between w-[calc(50%-7.5px)] mb-7.5">
 					<div class="link-wrapper sold-out aspect-w-1 aspect-h-1">
-						<a href="">
-							<img
-								src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/b%260.jpeg"
-								alt=""
-								class="rounded dark:bg-white w-full h-full"
-							/>
-						</a>
+						<img
+							src="https://raw.githubusercontent.com/yikayiyo/duozhuavue-imgs/main/b%260.jpeg"
+							alt
+							class="rounded dark:bg-white w-full h-full"
+						/>
 					</div>
 					<div class="tags-wrapper">
 						<ul>
@@ -147,25 +76,13 @@
 						<h2>B&O Beoplay E6 Motion 无线耳机</h2>
 					</div>
 					<div class="purchase flex items-center">
-						<span class="">¥808</span>
-						<span class="Label Label--following Label--emphasis"
-							>二手 3.5 折</span
-						>
+						<span class>¥808</span>
+						<span class="Label Label--following Label--emphasis">二手 3.5 折</span>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div
-			class="
-				footer
-				flex
-				justify-center
-				text-gray-300
-				dark:text-darkborder
-				py-7.5
-				text-footer
-			"
-		>
+		<div class="footer flex justify-center text-gray-300 dark:text-darkborder py-7.5 text-footer">
 			<div class="flex items-center">
 				<div class="w-10 border-t border-current"></div>
 				<svg
@@ -175,7 +92,7 @@
 					xmlns="http://www.w3.org/2000/svg"
 					class="mx-2.25 transform rotate-45"
 				>
-					<rect x="4" y="4" width="16" height="16" class=""></rect>
+					<rect x="4" y="4" width="16" height="16" class />
 				</svg>
 				<div class="w-10 border-t border-current"></div>
 			</div>
@@ -183,20 +100,22 @@
 	</div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import Search from "../components/Search/Search.vue";
-export default {
-	data() {
-		return {
-			searchPlaceholder: "搜索 Kindle、耳机、游戏机",
-			searchLink: "/search/electronics",
-			searchShowIcon: true,
-		};
-	},
-	components: {
-		Search,
-	},
-};
+import useWindowWidth from "../hooks/useWindowWidth";
+const searchPlaceholder = "搜索 Kindle、耳机、游戏机";
+const searchLink = "/search/electronics";
+const searchShowIcon = true;
+// 根据屏幕大小确定请求的图片大小
+const srcSize = ref("?nf_resize=fit&w=250");
+const screenWidth = useWindowWidth();
+if (screenWidth.value <= 375) {
+	srcSize.value = "?nf_resize=fit&w=150"
+}
+else if (screenWidth.value <= 480) {
+	srcSize.value = "?nf_resize=fit&w=200"
+}
 </script>
 
 <style sco Searchped>
