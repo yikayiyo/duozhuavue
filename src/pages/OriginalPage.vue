@@ -131,7 +131,9 @@
 					<h2>表情包贴纸</h2>
 					<div class="purchase flex">
 						<div class="flex items-center">
-							<img :src="fishIcon" alt class="h-5 self-center" />
+							<div>
+								<img :src="fishIcon" alt class="h-5 self-center" />
+							</div>
 							<span class="ml-2.25">* 5</span>
 						</div>
 					</div>
