@@ -38,13 +38,10 @@ export default {
 	computed: {
 		styleObj() {
 			return {
-				background: `linear-gradient(to top, ${
-					this.collection?.maskColor + "CC"
-				} 0%, ${this.collection?.maskColor + "4D"} 35%, ${
-					this.collection?.maskColor
-				} 59%) center top / auto no-repeat, url(${
-					this.collection?.image
-				})center center / cover no-repeat`,
+				background: `linear-gradient(to top, ${this.collection?.maskColor + "CC"
+					} 0%, ${this.collection?.maskColor + "4D"} 35%, ${this.collection?.maskColor
+					} 59%) center top / auto no-repeat, url(${this.collection?.image
+					})center center / cover no-repeat`,
 			};
 		},
 		linkTo() {
@@ -55,11 +52,4 @@ export default {
 </script>
 
 <style scoped>
-/* h3.title {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
-	overflow: hidden;
-	text-overflow: ellipsis;
-} */
 </style>
