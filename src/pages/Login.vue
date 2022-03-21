@@ -5,78 +5,33 @@
 		</div>
 		<form @submit.prevent="signIn" class="flex flex-col max-w-3/4 mx-auto">
 			<input
-				class="
-				  email
-					bg-menu
-					dark:bg-darkbg dark:text-menu dark:outline-none
-					py-3
-					pl-2
-					rounded
-					mt-8
-				"
+				class="email bg-menu dark:bg-darkbg dark:text-menu dark:outline-none py-3 pl-2 rounded mt-8"
 				type="text"
 				name="email"
 				v-model="signInForm.email"
 				@change="onInputChange"
 				placeholder="邮箱"
 			/>
-			<p class="text-red-600 text-xs py-1" v-if="signInForm.errors.email">
-				{{ signInForm.errors.email }}
-			</p>
+			<p class="text-red-600 text-xs py-1" v-if="signInForm.errors.email">{{ signInForm.errors.email }}</p>
 			<input
-				class="
-				  password
-					bg-menu
-					dark:bg-darkbg dark:text-menu dark:outline-none
-					py-3
-					pl-2
-					rounded
-					mt-4
-				"
+				class="password bg-menu dark:bg-darkbg dark:text-menu dark:outline-none py-3 pl-2 rounded mt-4"
 				type="password"
 				name="password"
 				v-model="signInForm.password"
 				@change="onInputChange"
 				placeholder="密码"
 			/>
-			<p class="text-red-600 text-xs py-1" v-if="signInForm.errors.password">
-				{{ signInForm.errors.password }}
-			</p>
+			<p
+				class="text-red-600 text-xs py-1"
+				v-if="signInForm.errors.password"
+			>{{ signInForm.errors.password }}</p>
 			<button
-				class="
-				  login
-					mt-8
-					text-lg
-					font-medium
-					text-white
-					bg-load
-					py-2.25
-					px-9
-					rounded-full
-					shadow
-					border
-					dark:border-darkborder
-				"
+				class="login mt-8 text-lg font-medium text-white bg-load py-2.25 px-9 rounded-full shadow border dark:border-darkborder"
 				v-if="!signInLoading"
 				type="submit"
-			>
-				登录
-			</button>
+			>登录</button>
 			<button
-				class="
-				  loading
-					mt-8
-					text-lg
-					font-medium
-					text-white
-					bg-load
-					py-2.25
-					px-9
-					rounded-full
-					shadow
-					border
-					dark:bg-black dark:border-darkborder
-				"
+				class="loading mt-8 text-lg font-medium text-white bg-load py-2.25 px-9 rounded-full shadow border dark:bg-black dark:border-darkborder"
 				v-else
 				type="submit"
 			>
@@ -85,25 +40,10 @@
 		</form>
 		<div class="signup max-w-3/4 mx-auto">
 			<button
-				class="
-				  signup
-					w-full
-					mt-8
-					text-load text-lg
-					font-medium
-					border
-					dark:border-darkborder dark:bg-darkbg
-					py-2.25
-					px-9
-					rounded-full
-					shadow-sm
-					cursor-not-allowed
-				"
+				class="signup w-full mt-8 text-load text-lg font-medium border dark:border-darkborder dark:bg-darkbg py-2.25 px-9 rounded-full shadow-sm cursor-not-allowed"
 				@click="toSignUpPage"
 				disabled
-			>
-				注册
-			</button>
+			>注册</button>
 		</div>
 	</div>
 </template>
@@ -125,8 +65,8 @@ export default {
 		const { client } = useApolloClient();
 		const toast = useToast();
 		const signInForm = reactive({
-			email: "",
-			password: "",
+			email: "admin@test.com",
+			password: "duozhuavue",
 			errors: {
 				email: "",
 				password: "",
@@ -149,7 +89,7 @@ export default {
 			// goto signup page
 		};
 
-		onError(({message}) => {
+		onError(({ message }) => {
 			toast.error(message);
 		});
 		// 登录成功时，跳转到主页，更新本地状态
