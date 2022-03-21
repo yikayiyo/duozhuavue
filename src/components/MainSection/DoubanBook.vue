@@ -9,10 +9,10 @@
 					></div>
 				</div>
 				<div
-					class="book-intro-wrapper rounded flex-1 bg-menu dark:bg-darkbg px-5 pt-6 text-cbl leading-1.6"
+					class="book-intro-wrapper rounded flex-1 bg-menu dark:bg-darkbg px-5 pt-6 text-cbl leading-1.6 flex flex-col justify-evenly"
 				>
 					<div class="book-intro line-clamp-4">{{ summary }}</div>
-					<div class="title text-center text-sold-out mt-1">- 图书简介 -</div>
+					<div class="title text-center text-sold-out">- 图书简介 -</div>
 				</div>
 			</div>
 			<div class="middle flex justify-between items-center py-2">
