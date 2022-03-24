@@ -12,12 +12,17 @@
 			<div class="book-main pt-4.5 mx-3.75">
 				<div class="book-info leading-category pb-3.75">
 					<h1 class="text-xl font-medium text-is-active dark:text-white">{{ book.title }}</h1>
-					<div class="price-wrapper mt-4.25">
+					<div class="subtitle mt-0.75 mb-4.5 text-hsh" v-if="book.subtitle">{{ book.subtitle }}</div>
+					<div class="price-wrapper mt-4.25 flex items-center">
 						<span class="text-2xl font-medium">
 							{{ price }}
 							<span class="text-hsh">起</span>
 						</span>
-						<div class="label"></div>
+						<div class="label-wrapper mx-1.5 text-label">
+							<span
+								class="label text-xs px-1.5 border border-label inline-flex items-center h-5.5"
+							>{{ bookDiscount }}</span>
+						</div>
 					</div>
 					<div class="p-wrapper mt-3.5 text-hsh leading-1.69">
 						<p class="original-price flex">
@@ -272,6 +277,10 @@ export default {
 		const originalPrice = computed(() => {
 			return (book.value.originalPrice / 100).toFixed(2);
 		});
+		const bookDiscount = computed(() => {
+			const discount = (book.value.price / book.value.originalPrice * 10).toFixed(1);
+			return `二手 ${discount} 折`;
+		})
 		const commentsHeaderMsg = computed(() => {
 			return book.value.comments.length + ` 条鱼友评论`;
 		});
@@ -325,6 +334,7 @@ export default {
 			imageStyle,
 			originalPrice,
 			price,
+			bookDiscount,
 			commentsHeaderMsg,
 			commentDateFormatter,
 			currentUserId,

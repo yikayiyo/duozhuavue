@@ -7,6 +7,7 @@ export const GET_BOOK = gql`
 		book(id: $bookId) {
 			id
 			title
+			subtitle
 			isbn13
 			rawAuthor
 			publisher
