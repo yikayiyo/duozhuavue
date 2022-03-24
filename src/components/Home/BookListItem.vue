@@ -11,12 +11,8 @@
 					<div class="content-top flex-1 flex">
 						<div class="content-left flex-1 flex flex-col">
 							<h3 class="book-name my-bk-list-item-title">{{ book.title }}</h3>
-							<div class="book-author text-xs text-sold-out mt-1">
-								{{ book.rawAuthor }}
-							</div>
-							<div class="douban-rating text-xs text-dbr mt-1.25">
-								豆瓣评分 {{ book.doubanRating }}
-							</div>
+							<div class="book-author text-xs text-sold-out mt-1">{{ book.rawAuthor }}</div>
+							<div class="douban-rating text-xs text-dbr mt-1.25">豆瓣评分 {{ book.doubanRating }}</div>
 						</div>
 					</div>
 					<div class="content-bottom mt-1.25 leading-category">
@@ -27,13 +23,8 @@
 							</div>
 							<span
 								class="discount ml-1.25 px-1.5 text-xs text-label border border-label rounded"
-								>3.7折</span
-							>
-							<div
-								v-if="isLoggedIn"
-								class="bookmark ml-0.75"
-								@click.stop.prevent="addToBookShelf()"
-							>
+							>{{ bookDiscount }}</span>
+							<div v-if="isLoggedIn" class="bookmark ml-0.75" @click.stop.prevent="addToBookShelf()">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
@@ -54,7 +45,7 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
 import {
 	GET_IS_BOOK_IN_BOOKSHELF,
@@ -78,8 +69,12 @@ export default {
 		});
 
 		const bookPrice = computed(() => {
-			return (props.book.originalPrice / 100).toFixed(2);
+			return (props.book.price / 100).toFixed(2);
 		});
+
+		const bookDiscount = computed(() => {
+			return (props.book.price / props.book.originalPrice * 10).toFixed(1) + "折起";
+		})
 
 		const { result } = useQuery(GET_IS_BOOK_IN_BOOKSHELF, () => ({
 			bookId: bookId.value,
@@ -154,6 +149,7 @@ export default {
 			bgImage,
 			bookLink,
 			bookPrice,
+			bookDiscount,
 			isBookInBookshelf,
 			addToBookShelf,
 		};

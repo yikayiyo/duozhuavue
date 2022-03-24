@@ -12,10 +12,17 @@
 			<div class="book-main pt-4.5 mx-3.75">
 				<div class="book-info leading-category pb-3.75">
 					<h1 class="text-xl font-medium text-is-active dark:text-white">{{ book.title }}</h1>
+					<div class="price-wrapper mt-4.25">
+						<span class="text-2xl font-medium">
+							{{ price }}
+							<span class="text-hsh">起</span>
+						</span>
+						<div class="label"></div>
+					</div>
 					<div class="p-wrapper mt-3.5 text-hsh leading-1.69">
 						<p class="original-price flex">
 							<span class="tag">原价</span>
-							<span class="ml-3">¥{{ price }}</span>
+							<span class="ml-3">¥{{ originalPrice }}</span>
 						</p>
 						<p class="author flex">
 							<span class="tag">作者</span>
@@ -260,6 +267,9 @@ export default {
 			boxShadow: `rgb(0,0,0,20%) 0px 1px 10px`,
 		}));
 		const price = computed(() => {
+			return "¥" + (book.value.price / 100).toFixed(2);
+		});
+		const originalPrice = computed(() => {
 			return (book.value.originalPrice / 100).toFixed(2);
 		});
 		const commentsHeaderMsg = computed(() => {
@@ -313,6 +323,7 @@ export default {
 			error,
 			imageWrapperStyle,
 			imageStyle,
+			originalPrice,
 			price,
 			commentsHeaderMsg,
 			commentDateFormatter,

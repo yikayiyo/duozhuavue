@@ -15,6 +15,7 @@ export const GET_BOOK = gql`
 			doubanRating
 			authorIntro
 			originalPrice
+			price
 			summary
 			catalog
 			image
@@ -163,6 +164,7 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 						rawAuthor
 						image
 						doubanRating
+						price
 						originalPrice
 					}
 				}
@@ -203,6 +205,7 @@ export const GET_CATEGORY_FEED = gql`
 								rawAuthor
 								doubanRating
 								originalPrice
+								price
 								image
 							}
 						}
