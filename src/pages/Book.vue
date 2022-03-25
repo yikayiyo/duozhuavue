@@ -239,7 +239,7 @@
 <script>
 import DoubanRating from "../components/MainSection/DoubanRating.vue";
 import DuozhuayuServices from "../components/MainSection/DuozhuayuServices.vue";
-import CartFooter from "../components/CartFooter.vue";
+import CartFooter from "../components/NavFooter/CartFooter.vue";
 import Loading from "../components/Loading/Loading.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useQuery, useResult } from "@vue/apollo-composable";

@@ -30,6 +30,8 @@ module.exports = {
 				layer: "rgba(0,0,0,0.3)",
 				darkbg: "#15181c",
 				darkborder: "#2f3336",
+				emphasis: "rgb(199,89,67)",
+				"emphasis-soft": "rgba(199,89,67,0.06)"
 			},
 			backgroundImage: theme => ({
 				kindle: "url('/src/assets/electronics/kindle.png')",
@@ -222,6 +224,7 @@ module.exports = {
 			2.25: "9px",
 			2.5: "10px",
 			3: "12px",
+			3.25: "13px",
 			3.75: "15px",
 			4: "1rem",
 			4.5: "18px",

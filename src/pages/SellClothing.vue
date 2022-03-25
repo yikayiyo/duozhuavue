@@ -1,95 +1,35 @@
 <template>
 	<div
-		class="
-			sell-clothing-wrapper
-			leading-category
-			text-is-active
-			dark:text-menu
-			min-h-screen
-			pb-50
-		"
+		class="sell-clothing-wrapper leading-category text-is-active dark:text-menu min-h-screen pb-50"
 	>
 		<div
-			class="
-				callout
-				py-2
-				px-3.75
-				text-load text-hsh
-				bg-load-more
-				dark:bg-darkbg
-			"
-		>
-			目前开放的城市：北京、上海、深圳、杭州、南京、苏州
-		</div>
-		<div
-			class="
-				first-panel
-				flex
-				p-3.75
-				border-b border-search-input
-				dark:border-darkborder
-			"
-		>
+			class="callout py-2 px-3.75 text-load text-hsh bg-load-more dark:bg-darkbg"
+		>目前开放的城市：北京、上海、深圳、杭州、南京、苏州</div>
+		<div class="first-panel flex p-3.75 border-b border-search-input dark:border-darkborder">
 			<div class="img-wrapper h-32.5">
-				<img
-					:src="buyoutStepOne"
-					alt=""
-					class="w-37.5 h-full dark:bg-white"
-				/>
+				<img :src="buyoutStepOne" alt class="w-37.5 h-full dark:bg-white" />
 			</div>
 			<div class="info flex-1 flex flex-col justify-center items-center">
-				<div class="text-xl font-medium leading-category tracking-brand-gender">
-					提交品牌
-				</div>
-				<div class="text-xl font-medium leading-category tracking-brand-gender">
-					获得估价
-				</div>
+				<div class="text-xl font-medium leading-category tracking-brand-gender">提交品牌</div>
+				<div class="text-xl font-medium leading-category tracking-brand-gender">获得估价</div>
 			</div>
 		</div>
-		<div
-			class="
-				second-panel
-				flex
-				p-3.75
-				border-b border-search-input
-				dark:border-darkborder
-			"
-		>
+		<div class="second-panel flex p-3.75 border-b border-search-input dark:border-darkborder">
 			<div class="img-wrapper h-32.5">
-				<img
-					:src="buyoutStepTwo"
-					alt=""
-					class="w-37.5 h-full dark:bg-white"
-				/>
+				<img :src="buyoutStepTwo" alt class="w-37.5 h-full dark:bg-white" />
 			</div>
 			<div class="info flex-1 flex flex-col justify-center items-center">
 				<div class="text-xl font-medium tracking-brand-gender">免费顺丰</div>
 				<div class="text-xl font-medium tracking-brand-gender">上门取衣</div>
 			</div>
 		</div>
-		<div
-			class="
-				third-panel
-				flex
-				p-3.75
-				border-b border-search-input
-				dark:border-darkborder
-			"
-		>
+		<div class="third-panel flex p-3.75 border-b border-search-input dark:border-darkborder">
 			<div class="img-wrapper h-32.5">
-				<img
-					:src="buyoutStepThree"
-					alt=""
-					class="w-37.5 h-full dark:bg-white"
-				/>
+				<img :src="buyoutStepThree" alt class="w-37.5 h-full dark:bg-white" />
 			</div>
 			<div class="info flex-1 flex flex-col justify-center items-center">
-				<div class="text-xl font-medium leading-category tracking-brand-gender">
-					审核通过
-				</div>
-				<div class="text-xl font-medium leading-category tracking-brand-gender">
-					立即打款
-				</div>
+				<div class="text-xl font-medium leading-category tracking-brand-gender">审核通过</div>
+				<div class="text-xl font-medium leading-category tracking-brand-gender">立即打款</div>
 			</div>
 		</div>
 		<div class="recycling p-3.75 mt-8.75 text-center">
@@ -108,60 +48,34 @@
 								有污渍、破损、变形的衣服不收购；
 								非正品服装不收。以及这些品类也不收购：
 							</div>
-							<div class="no-buyout-list flex">
-								<div
-									class="
-										no-buyout-case
-										flex-1 flex flex-col
-										items-center
-										-ml-5%
-									"
-								>
-									<div
-										class="
-											case-image
-											case1
-											self-stretch
-											dark:bg-white dark:ml-7.5
-										"
-									></div>
-									<div class="case-name">奢侈品</div>
+							<div class="no-buyout-list flex mt-1">
+								<div class="no-buyout-case flex-1 flex flex-col items-center -ml-5%">
+									<div class="case-image case1 self-stretch dark:bg-white dark:ml-7.5"></div>
+									<div class="case-name dark:ml-7.5 dark:mt-1">奢侈品</div>
 								</div>
 								<div class="no-buyout-case flex-1 flex flex-col items-center">
-									<div
-										class="case-image case2 self-stretch dark:bg-white"
-									></div>
-									<div class="case-name">内衣裤</div>
+									<div class="case-image case2 self-stretch dark:bg-white"></div>
+									<div class="case-name dark:mt-1">内衣裤</div>
 								</div>
 								<div class="no-buyout-case flex-1 flex flex-col items-center">
-									<div
-										class="case-image case3 self-stretch dark:bg-white"
-									></div>
-									<div class="case-name">童装</div>
+									<div class="case-image case3 self-stretch dark:bg-white"></div>
+									<div class="case-name dark:mt-1">童装</div>
 								</div>
 								<div class="no-buyout-case flex-1 flex flex-col items-center">
-									<div
-										class="case-image case4 self-stretch dark:bg-white"
-									></div>
-									<div class="case-name">包袋配饰鞋子</div>
+									<div class="case-image case4 self-stretch dark:bg-white"></div>
+									<div class="case-name dark:mr-4 dark:mt-1">包袋配饰鞋子</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="qa-item mb-6.75">
-					<div class="question leading-1.5">
-						Q：目前支持哪些区域的收购服务？
-					</div>
-					<div class="answer text-hsh leading-category mt-1.25">
-						暂时只支持北京、上海、深圳、杭州、南京、苏州地区邮寄。
-					</div>
+					<div class="question leading-1.5">Q：目前支持哪些区域的收购服务？</div>
+					<div class="answer text-hsh leading-category mt-1.25">暂时只支持北京、上海、深圳、杭州、南京、苏州地区邮寄。</div>
 				</div>
 				<div class="qa-item mb-6.75">
 					<div class="question leading-1.5">Q：卖衣服的物流费用谁承担？</div>
-					<div class="answer text-hsh leading-category mt-1.25">
-						卖衣服物流费用全部由多抓鱼承担，我们会安排顺丰上门取件。
-					</div>
+					<div class="answer text-hsh leading-category mt-1.25">卖衣服物流费用全部由多抓鱼承担，我们会安排顺丰上门取件。</div>
 				</div>
 				<div class="qa-item">
 					<div class="question leading-1.5">Q：如何收到卖衣服的钱？</div>
@@ -174,20 +88,9 @@
 				</div>
 			</div>
 		</div>
-		<router-link to="/support/clothing-buyout" class="">
+		<router-link to="/support/clothing-buyout" class>
 			<div
-				class="
-					border-t-0.5 border-menu
-					dark:border-darkborder
-					border-b
-					sell-clothing-rules
-					px-3.75
-					py-4.5
-					text-shiwu
-					flex
-					justify-between
-					text-load
-				"
+				class="border-t-0.5 border-menu dark:border-darkborder border-b sell-clothing-rules px-3.75 py-4.5 text-shiwu flex justify-between text-load"
 			>
 				<p>详细的收购规则</p>
 				<svg
@@ -200,26 +103,15 @@
 					xmlns="http://www.w3.org/2000/svg"
 					class="w-hicon"
 				>
-					<polyline points="9 18 15 12 9 6"></polyline>
+					<polyline points="9 18 15 12 9 6" />
 				</svg>
 			</div>
 		</router-link>
 		<div class="footer fixed bottom-0 left-0 right-0 z-1 pb-16.5">
 			<div class="mb-3.5 flex items-center justify-center">
 				<button
-					class="
-						shadow
-						text-lg
-						font-medium
-						text-white
-						bg-load
-						py-3
-						px-9
-						rounded-full
-					"
-				>
-					提交衣服看估计
-				</button>
+					class="shadow text-lg font-medium text-white bg-load py-3 px-9 rounded-full cursor-not-allowed"
+				>提交衣服看估计</button>
 			</div>
 		</div>
 	</div>
