@@ -167,6 +167,7 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 						doubanRating
 						price
 						originalPrice
+						isBookInBookshelf(userId: $userId)
 					}
 				}
 			}
