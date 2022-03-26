@@ -26,6 +26,13 @@ const cache = new InMemoryCache({
 					keyArgs: false,
 				},
 			},
+		},
+		Book: {
+			fields: {
+				isBookInBookshelf: {
+					keyArgs: false
+				}
+			}
 		}
 	},
 });

@@ -46,9 +46,8 @@
 
 <script>
 import { computed } from "vue";
-import { useMutation, useQuery, useResult } from "@vue/apollo-composable";
+import { useMutation } from "@vue/apollo-composable";
 import {
-	GET_IS_BOOK_IN_BOOKSHELF,
 	TOGGLE_BOOKSHELF_MUTATION,
 } from "../../graphql/schema";
 import useLoggedInUserId from "../../hooks/useLoggedInUserId";
@@ -58,6 +57,7 @@ export default {
 	setup(props) {
 		const bookId = computed(() => props.book.id);
 		const userId = useLoggedInUserId();
+		const isBookInBookshelf = computed(() => props.book.isBookInBookshelf);
 		const toast = useToast();
 
 		const bgImage = computed(() => {
@@ -76,12 +76,6 @@ export default {
 			return (props.book.price / props.book.originalPrice * 10).toFixed(1) + "折起";
 		})
 
-		const { result } = useQuery(GET_IS_BOOK_IN_BOOKSHELF, () => ({
-			bookId: bookId.value,
-			userId,
-		}));
-		const isBookInBookshelf = useResult(result, false);
-
 		const { mutate: toggleBookshelf, onDone: onToggle } = useMutation(
 			TOGGLE_BOOKSHELF_MUTATION,
 			() => ({
@@ -90,39 +84,23 @@ export default {
 					userId,
 				},
 				update: (cache, { data: { toggleBookshelf } }) => {
-					const oldData = cache.readQuery({
-						query: GET_IS_BOOK_IN_BOOKSHELF,
-						variables: {
-							bookId: bookId.value,
-							userId,
-						},
+					// 获取缓存数据
+					const bookCacheId = cache.identify({
+						id: bookId.value,
+						__typename: "Book",
 					});
 					if (toggleBookshelf.success === true) {
-						cache.writeQuery({
-							query: GET_IS_BOOK_IN_BOOKSHELF,
-							variables: {
-								bookId: bookId.value,
-								userId,
-							},
-							data: {
-								isBookInBookshelf: !oldData.isBookInBookshelf,
-							},
-						});
+						// 修改缓存内容
+						cache.modify({
+							id: bookCacheId,
+							fields: {
+								isBookInBookshelf(v) {
+									console.log("v:", v);
+									return !v;
+								}
+							}
+						})
 					}
-					// to update bookshelf cache data
-					const userCacheId = cache.identify({
-						id: userId,
-						__typename: "User",
-					});
-					// modify user.bookshelf
-					// cache.modify({
-					// 	id: userCacheId,
-					// 	fields: {
-					// 		bookShelf() {
-					// 			return toggleBookshelf.user.bookShelf;
-					// 		},
-					// 	},
-					// });
 				},
 			})
 		);
