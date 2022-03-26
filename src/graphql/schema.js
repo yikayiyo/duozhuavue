@@ -167,7 +167,6 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 						doubanRating
 						price
 						originalPrice
-						isBookInBookshelf(userId: $userId)
 					}
 				}
 			}
@@ -342,6 +341,10 @@ export const TOGGLE_BOOKSHELF_MUTATION = gql`
 					image
 					isbn13
 				}
+			}
+			book {
+				id
+				isBookInBookshelf(userId: $userId)
 			}
 		}
 	}

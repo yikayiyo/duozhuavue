@@ -29,7 +29,7 @@
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
 									class="w-7.5"
-									:fill="isBookInBookshelf ? 'red' : '#f2f2f2'"
+									:fill="isInBookshelf ? 'red' : '#f2f2f2'"
 								>
 									<path
 										d="M18.36,13.29,12.71,19a1,1,0,0,1-1.42,0L5.64,13.29a5,5,0,0,1,0-7.07A5,5,0,0,1,12,5.63a5,5,0,0,1,6.36,7.66Z"
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { useMutation } from "@vue/apollo-composable";
 import {
 	TOGGLE_BOOKSHELF_MUTATION,
@@ -57,7 +57,7 @@ export default {
 	setup(props) {
 		const bookId = computed(() => props.book.id);
 		const userId = useLoggedInUserId();
-		const isBookInBookshelf = computed(() => props.book.isBookInBookshelf);
+		const isInBookshelf = ref(props.book.isBookInBookshelf);
 		const toast = useToast();
 
 		const bgImage = computed(() => {
@@ -83,25 +83,22 @@ export default {
 					bookId: bookId.value,
 					userId,
 				},
-				update: (cache, { data: { toggleBookshelf } }) => {
-					// 获取缓存数据
-					const bookCacheId = cache.identify({
-						id: bookId.value,
-						__typename: "Book",
-					});
-					if (toggleBookshelf.success === true) {
-						// 修改缓存内容
-						cache.modify({
-							id: bookCacheId,
-							fields: {
-								isBookInBookshelf(v) {
-									console.log("v:", v);
-									return !v;
-								}
-							}
-						})
-					}
-				},
+				// update: (cache, { data: { toggleBookshelf } }) => {
+				// 	// 获取缓存数据
+				// 	const bookCacheId = cache.identify({
+				// 		id: bookId.value,
+				// 		__typename: "Book",
+				// 	});
+				// 	// 修改缓存内容
+				// 	cache.modify({
+				// 		id: bookCacheId,
+				// 		fields: {
+				// 			isBookInBookshelf(v) {
+				// 				return !v;
+				// 			}
+				// 		}
+				// 	});
+				// },
 			})
 		);
 
@@ -109,16 +106,17 @@ export default {
 			if (toggleBookshelf.success === true) {
 				toast.success(toggleBookshelf.message);
 			} else {
-				isBookInBookshelf.value = !isBookInBookshelf.value;
+				// 请求失败，重置客户端状态
+				isInBookshelf.value = !isInBookshelf.value;
 				toast.info(toggleBookshelf.message);
 			}
 		});
 
 		const addToBookShelf = () => {
-			// console.log("add to book shelf: ", bookId.value);
-			// 乐观更新
-			// isBookInBookshelf.value = !isBookInBookshelf.value;
-			// send mutation
+			console.log("add to book shelf: ", bookId.value);
+			// 乐观更新，先修改客户端状态
+			isInBookshelf.value = !isInBookshelf.value;
+			// 再发送请求（send mutation
 			toggleBookshelf();
 		};
 
@@ -128,7 +126,7 @@ export default {
 			bookLink,
 			bookPrice,
 			bookDiscount,
-			isBookInBookshelf,
+			isInBookshelf,
 			addToBookShelf,
 		};
 	},

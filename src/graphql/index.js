@@ -30,7 +30,7 @@ const cache = new InMemoryCache({
 		Book: {
 			fields: {
 				isBookInBookshelf: {
-					keyArgs: false
+					keyArgs: ["userId"],
 				}
 			}
 		}
