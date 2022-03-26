@@ -113,7 +113,7 @@ export default {
 		});
 
 		const addToBookShelf = () => {
-			console.log("add to book shelf: ", bookId.value);
+			// console.log("add to book shelf: ", bookId.value);
 			// 乐观更新，先修改客户端状态
 			isInBookshelf.value = !isInBookshelf.value;
 			// 再发送请求（send mutation
