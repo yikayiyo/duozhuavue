@@ -186,8 +186,7 @@ export const GET_CATEGORY_FEED = gql`
 		$itemsAfter: String
 		$userId: ID!
 	) {
-		categoryFeed(first: $first, after: $after)
-			@connection(key: "categoryFeedPage", filter: ["after"]) {
+		categoryFeed(first: $first, after: $after) {
 			pageInfo {
 				hasNextPage
 				endCursor
@@ -332,15 +331,7 @@ export const TOGGLE_BOOKSHELF_MUTATION = gql`
 			user {
 				id
 				bookShelf {
-					title
 					id
-					rawAuthor
-					publisher
-					publishDate
-					doubanRating
-					summary
-					image
-					isbn13
 				}
 			}
 			book {

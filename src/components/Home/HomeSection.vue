@@ -188,7 +188,6 @@ export default {
 		return {
 			after,
 			first,
-			userId,
 			collections,
 			collectionLoading,
 			collectionError,
