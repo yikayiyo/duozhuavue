@@ -148,7 +148,7 @@ export const GET_TOP_CATEGORIES = gql`
 `;
 
 export const GET_BOOKS_FROM_CATEGORY = gql`
-	query getBooksFromCategory($categoryId: ID!, $after: String) {
+	query getBooksFromCategory($categoryId: ID!, $after: String, $userId: ID!) {
 		category(id: $categoryId) {
 			id
 			name
@@ -167,6 +167,7 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
 						doubanRating
 						price
 						originalPrice
+						isBookInBookshelf(userId: $userId)
 					}
 				}
 			}
@@ -183,9 +184,9 @@ export const GET_CATEGORY_FEED = gql`
 		$after: String
 		$itemsFirst: Int
 		$itemsAfter: String
+		$userId: ID!
 	) {
-		categoryFeed(first: $first, after: $after)
-			@connection(key: "categoryFeedPage", filter: ["after"]) {
+		categoryFeed(first: $first, after: $after) {
 			pageInfo {
 				hasNextPage
 				endCursor
@@ -208,6 +209,7 @@ export const GET_CATEGORY_FEED = gql`
 								originalPrice
 								price
 								image
+								isBookInBookshelf(userId: $userId)
 							}
 						}
 					}
@@ -226,12 +228,6 @@ export const GET_COMMENT = gql`
 			createdAt
 			updatedAt
 		}
-	}
-`;
-
-export const GET_IS_BOOK_IN_BOOKSHELF = gql`
-	query isBookInBookshelf($bookId: ID!, $userId: ID!) {
-		isBookInBookshelf(bookId: $bookId, userId: $userId)
 	}
 `;
 
@@ -335,16 +331,12 @@ export const TOGGLE_BOOKSHELF_MUTATION = gql`
 			user {
 				id
 				bookShelf {
-					title
 					id
-					rawAuthor
-					publisher
-					publishDate
-					doubanRating
-					summary
-					image
-					isbn13
 				}
+			}
+			book {
+				id
+				isBookInBookshelf(userId: $userId)
 			}
 		}
 	}

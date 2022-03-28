@@ -3,7 +3,7 @@ import {
 	createHttpLink,
 	InMemoryCache,
 } from "@apollo/client/core";
-import { CachePersistor, persistCache, LocalStorageWrapper } from "apollo3-cache-persist";
+import { CachePersistor, LocalStorageWrapper } from "apollo3-cache-persist";
 import { setContext } from "@apollo/client/link/context";
 import { CURRENT_USER } from "./schema";
 import { relayStylePagination } from "@apollo/client/utilities";
@@ -26,6 +26,13 @@ const cache = new InMemoryCache({
 					keyArgs: false,
 				},
 			},
+		},
+		Book: {
+			fields: {
+				isBookInBookshelf: {
+					keyArgs: ["userId"]
+				}
+			}
 		}
 	},
 });
