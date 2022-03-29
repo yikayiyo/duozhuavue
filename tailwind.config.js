@@ -182,6 +182,7 @@ module.exports = {
 		margin: {
 			"bk-list-item-title": "-0.1em",
 			"oc-title": "1.5px",
+			0: "0",
 			0.75: "3px",
 			"-1": "-4px",
 			1: "4px",
@@ -259,6 +260,7 @@ module.exports = {
 	},
 	variants: {
 		extend: {
+			margin: ['last']
 		},
 	},
 	plugins: [
