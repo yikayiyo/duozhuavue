@@ -4,7 +4,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<div>
-						<img :src="wc" alt class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="wc" alt="大白猫" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</div>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -28,7 +28,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<div>
-						<img :src="bc" alt class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="bc" alt="大黑猫" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</div>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -52,7 +52,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<div>
-						<img :src="swc" alt class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="swc" alt="小白猫" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</div>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -76,7 +76,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<div>
-						<img :src="sbc" alt class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="sbc" alt="小黑猫" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</div>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -100,7 +100,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<div>
-						<img :src="bag" alt class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="bag" alt="麻布袋" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</div>
 				</div>
 				<div class="title-wrapper mt-2.25">
@@ -124,7 +124,7 @@
 			<div class="flex flex-col w-[calc(50%-7.5px)] mb-7.5">
 				<div class="link-wrapper aspect-w-1 aspect-h-1">
 					<div>
-						<img :src="paper" alt class="rounded w-full h-full bg-menu dark:bg-white" />
+						<img :src="paper" alt="表情包贴纸" class="rounded w-full h-full bg-menu dark:bg-white" />
 					</div>
 				</div>
 				<div class="title-wrapper mt-2.25">

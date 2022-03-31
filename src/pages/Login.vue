@@ -34,6 +34,7 @@
 				class="loading mt-8 text-lg font-medium text-white bg-load py-2.25 px-9 rounded-full shadow border dark:bg-black dark:border-darkborder"
 				v-else
 				type="submit"
+				disabled
 			>
 				<Loading />
 			</button>
