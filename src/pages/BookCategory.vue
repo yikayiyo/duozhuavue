@@ -10,25 +10,12 @@
 			<p class="mt-2.5 text-footer">{{ category.description }}</p>
 		</div>
 		<div class="book-list-wrapper">
-			<div
-				class="sort-options bg-white dark:bg-black text-hsh sticky top-0 z-20"
-			>
+			<div class="sort-options bg-white dark:bg-black text-hsh sticky top-0 z-20">
 				<div
-					class="
-						sort-option
-						selected
-						h-10
-						border-b border-b-1 border-search-input
-						dark:border-darkborder
-						flex
-						items-center
-						justify-center
-					"
+					class="sort-option selected h-10 border-b border-b-1 border-search-input dark:border-darkborder flex items-center justify-center"
 					:class="showAllOptions ? 'text-load' : ''"
 				>
-					<div class="sort-option font-medium" @click="toggleShowAllOptions">
-						{{ selectedSortOption }}
-					</div>
+					<div class="sort-option font-medium" @click="toggleShowAllOptions">{{ selectedSortOption }}</div>
 					<svg
 						viewBox="0 0 24 24"
 						fill="none"
@@ -43,36 +30,15 @@
 						:style="showAllOptions ? 'transform: rotate(180deg)' : ''"
 						:class="showAllOptions ? 'text-load stroke-current' : ''"
 					>
-						<polyline points="6 9 12 15 18 9"></polyline>
+						<polyline points="6 9 12 15 18 9" />
 					</svg>
 				</div>
 				<div
-					class="
-						sort-more-options
-						absolute
-						left-0
-						right-0
-						text-footer
-						font-medium
-						flex flex-col
-						justify-center
-						bg-white
-						dark:bg-darkbg
-						border-b-0.5 border-menu
-						dark:border-darkborder
-					"
+					class="sort-more-options absolute left-0 right-0 text-footer font-medium flex flex-col justify-center bg-white dark:bg-darkbg border-b-0.5 border-menu dark:border-darkborder"
 					v-if="showAllOptions"
 				>
 					<div
-						class="
-							sort-option
-							px-6
-							py-3
-							bg-white
-							dark:bg-black
-							flex
-							justify-between
-						"
+						class="sort-option px-6 py-3 bg-white dark:bg-black flex justify-between"
 						:class="selectedSortOption === '评分优先' ? 'text-load' : ''"
 						name="rating"
 						@click="sortByRating"
@@ -91,19 +57,11 @@
 							style="width: 15px; height: 15px"
 							:class="selectedSortOption === '评分优先' ? 'stroke-current' : ''"
 						>
-							<polyline points="2 9.70728325 7.53750321 15 18 5"></polyline>
+							<polyline points="2 9.70728325 7.53750321 15 18 5" />
 						</svg>
 					</div>
 					<div
-						class="
-							sort-option
-							px-6
-							py-3
-							bg-white
-							dark:bg-black
-							flex
-							justify-between
-						"
+						class="sort-option px-6 py-3 bg-white dark:bg-black flex justify-between"
 						:class="selectedSortOption === '低价优先' ? 'text-load' : ''"
 						name="price"
 						@click="sortByPrice"
@@ -122,29 +80,17 @@
 							style="width: 15px; height: 15px"
 							:class="selectedSortOption === '低价优先' ? 'stroke-current' : ''"
 						>
-							<polyline points="2 9.70728325 7.53750321 15 18 5"></polyline>
+							<polyline points="2 9.70728325 7.53750321 15 18 5" />
 						</svg>
 					</div>
 				</div>
 			</div>
-			<book-list-item
-				v-for="book of sortedBooks"
-				:key="book.id"
-				:book="book"
-			></book-list-item>
+			<book-list-item v-for="book of sortedBooks" :key="book.id" :book="book"></book-list-item>
 			<div
-				class="
-					load-more
-					py-4
-					text-footer text-center
-					border-t-0.5 border-b-0.5 border-menu
-					dark:border-darkborder
-				"
+				class="load-more py-4 text-footer text-center border-t-0.5 border-b-0.5 border-menu dark:border-darkborder"
 				v-if="hasNextPage"
 				@click="loadMoreBooks"
-			>
-				再多来点儿
-			</div>
+			>再多来点儿</div>
 		</div>
 	</div>
 	<back-to />
@@ -159,6 +105,7 @@ import BookListItem from "../components/Home/BookListItem.vue";
 import BackTo from "../components/BackTo/BackTo.vue";
 import { computed, ref } from "@vue/reactivity";
 import { watch } from "@vue/runtime-core";
+import useLoggedInUserId from "../hooks/useLoggedInUserId";
 export default {
 	name: "BookCategory",
 	setup() {
@@ -167,10 +114,12 @@ export default {
 		const showAllOptions = ref(false);
 
 		const categoryId = route.params.categoryId;
+		const userId = useLoggedInUserId();
 		const { result, loading, error, fetchMore } = useQuery(
 			GET_BOOKS_FROM_CATEGORY,
 			{
 				categoryId,
+				userId
 			}
 		);
 
