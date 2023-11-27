@@ -9,6 +9,9 @@ export default defineConfig({
     environment: 'happy-dom'
   },
   build: {
-    target: "esnext"
+    target: 'esnext'
+  },
+  define: {
+    __VUE_OPTIONS_API__: false
   }
 })
