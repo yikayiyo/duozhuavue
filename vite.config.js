@@ -10,8 +10,5 @@ export default defineConfig({
   },
   build: {
     target: 'esnext'
-  },
-  define: {
-    __VUE_OPTIONS_API__: false
   }
 })
