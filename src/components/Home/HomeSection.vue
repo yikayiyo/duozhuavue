@@ -78,7 +78,7 @@
         </router-link>
       </div>
     </div>
-    <loading
+    <FeedSkeleton
       v-if="networkStatus === 1"
       class="loading"
     />
@@ -89,8 +89,8 @@
       {{ categoryFeedError }}
     </div>
     <div
-      class="feed-content-wrapper mt-2.5 bg-menu dark:bg-darkbg"
       v-else
+      class="feed-content-wrapper mt-2.5 bg-menu dark:bg-darkbg"
     >
       <feed
         v-for="category of categories"
@@ -135,7 +135,7 @@ import { computed, ref } from 'vue'
 import { onMounted, onUnmounted } from '@vue/runtime-core'
 import useLoggedInUserId from '../../hooks/useLoggedInUserId'
 import OcListSkeleton from '@/components/Skeleton/OcListSkeleton.vue'
-import OcListItemSkeleton from '@/components/Skeleton/OcListItemSkeleton.vue'
+import FeedSkeleton from '@/components/Skeleton/FeedSkeleton.vue'
 const {
   result: collectionsResult,
   loading: collectionLoading,

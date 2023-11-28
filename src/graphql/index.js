@@ -70,7 +70,7 @@ const authLink = setContext((_, { headers }) => {
 const persistor = new CachePersistor({
   cache,
   storage: new LocalStorageWrapper(window.localStorage),
-  debug: true,
+  debug: false,
   trigger: 'write'
 })
 

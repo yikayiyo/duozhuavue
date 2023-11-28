@@ -31,8 +31,6 @@
     <div class="oc-list-wrapper mx-3.75 flex overflow-x-auto pb-8.75 -mb-8.75">
       <OcListItemSkeleton />
       <OcListItemSkeleton />
-      <OcListItemSkeleton />
-      <OcListItemSkeleton />
     </div>
   </div>
 </template>
