@@ -1,22 +1,22 @@
 <script>
-import { ref, provide } from 'vue'
-import Wrapper from './components/Wrapper/Wrapper.vue'
+import { provide, ref } from "vue";
+import Wrapper from "./components/Wrapper/Wrapper.vue";
 export default {
   components: {
-    Wrapper
+    Wrapper,
   },
   setup() {
-    const isDark = ref(false)
+    const isDark = ref(true);
     const toggleMode = () => {
-      isDark.value = !isDark.value
-    }
-    provide('isDark', isDark)
-    provide('toggleMode', toggleMode)
+      isDark.value = !isDark.value;
+    };
+    provide("isDark", isDark);
+    provide("toggleMode", toggleMode);
     return {
-      isDark
-    }
-  }
-}
+      isDark,
+    };
+  },
+};
 </script>
 
 <template>

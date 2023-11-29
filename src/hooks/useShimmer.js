@@ -1,3 +1,5 @@
+// add animation on skeleton components
+// container should has 'relative overflow-hidden' classes
 import { ref } from 'vue'
 export default function useShimmer() {
   const shimmer = ref(

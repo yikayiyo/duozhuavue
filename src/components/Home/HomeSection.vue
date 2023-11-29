@@ -43,7 +43,7 @@
         </div>
       </router-link>
       <div
-        class="oc-list-wrapper mx-3.75 flex overflow-x-auto pb-8.75 -mb-8.75"
+        class="oc-list-wrapper mx-3.75 flex overflow-x-auto scrollbar-hidden pb-8.75 -mb-8.75"
       >
         <oc-list-item
           v-for="collection of collections"
@@ -130,10 +130,10 @@ import {
   GET_BOOKS_FROM_CATEGORY,
   GET_CATEGORY_FEED,
   GET_COLLECTIONS
-} from '../../graphql/schema'
+} from '@/graphql/schema'
 import { computed, ref } from 'vue'
 import { onMounted, onUnmounted } from '@vue/runtime-core'
-import useLoggedInUserId from '../../hooks/useLoggedInUserId'
+import useLoggedInUserId from '@/hooks/useLoggedInUserId'
 import OcListSkeleton from '@/components/Skeleton/OcListSkeleton.vue'
 import FeedSkeleton from '@/components/Skeleton/FeedSkeleton.vue'
 const {
@@ -147,7 +147,6 @@ const first = ref(1)
 const userId = useLoggedInUserId()
 const {
   result: categoryFeedResult,
-  loading: categoryFeedLoading,
   error: categoryFeedError,
   fetchMore,
   networkStatus
