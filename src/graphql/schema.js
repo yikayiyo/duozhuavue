@@ -351,3 +351,11 @@ export const CURRENT_USER = gql`
     }
   }
 `;
+
+export const GET_THEME = gql`
+  query GetTheme {
+    theme @client {
+      mode
+    }
+  }
+`;
