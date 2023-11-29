@@ -91,7 +91,8 @@ const toSignUpPage = () => {
 };
 
 onError(({ message }) => {
-  toast.info(message);
+  console.log(message);
+  toast.error(message);
 });
 // 登录成功时，跳转到主页，更新本地状态
 onDone(

@@ -1,26 +1,19 @@
-import { GET_THEME } from "@/graphql/schema";
-import { useApolloClient } from "@vue/apollo-composable";
 import { ref } from "vue";
 
+function getThemeFromStorage() {
+  const theme = localStorage.getItem("duozhuavue-theme");
+  return theme ? theme : "light";
+}
+
 export default function useDark() {
-  const { client } = useApolloClient();
-  const {
-    theme: { mode },
-  } = client.cache.readQuery({ query: GET_THEME });
-  const modeRef = ref(mode);
+  const theme = getThemeFromStorage();
+  const mode = ref(theme);
   const toggleMode = () => {
-    modeRef.value = modeRef.value === "light" ? "dark" : "light";
-    client.cache.writeQuery({
-      query: GET_THEME,
-      data: {
-        theme: {
-          mode: modeRef.value,
-        },
-      },
-    });
+    mode.value = mode.value === "light" ? "dark" : "light";
+    localStorage.setItem("duozhuavue-theme", mode.value);
   };
   return {
-    mode: modeRef,
+    mode,
     toggleMode,
   };
 }

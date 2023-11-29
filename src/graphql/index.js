@@ -6,7 +6,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { relayStylePagination } from "@apollo/client/utilities";
 import { CachePersistor, LocalStorageWrapper } from "apollo3-cache-persist";
-import { CURRENT_USER, GET_THEME } from "./schema";
+import { CURRENT_USER } from "./schema";
 // import { startIndexFromArray } from "./utils";
 
 const cache = new InMemoryCache({
@@ -37,25 +37,7 @@ const cache = new InMemoryCache({
   },
 });
 // 初始化时写入currentUser信息
-// console.log("写入空的currentUser信息");
-cache.writeQuery({
-  query: CURRENT_USER,
-  data: {
-    currentUser: {
-      id: "",
-      token: "",
-    },
-  },
-});
-
-cache.writeQuery({
-  query: GET_THEME,
-  data: {
-    theme: {
-      mode: "light",
-    },
-  },
-});
+setupUserCache();
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_API_URI,
@@ -85,27 +67,26 @@ const persistor = new CachePersistor({
 
 await persistor.restore();
 
-// await persistCache({
-// 	cache,
-// 	storage: new LocalStorageWrapper(window.localStorage),
-// })
-
 const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache,
 });
 
-// apolloClient.onClearStore(() => {
-//   // 还原store
-//   cache.writeQuery({
-//     query: CURRENT_USER,
-//     data: {
-//       currentUser: {
-//         id: "",
-//         token: "",
-//       },
-//     },
-//   });
-// });
+// 还原store
+apolloClient.onClearStore(() => {
+  setupUserCache();
+});
+
+function setupUserCache() {
+  cache.writeQuery({
+    query: CURRENT_USER,
+    data: {
+      currentUser: {
+        id: "",
+        token: "",
+      },
+    },
+  });
+}
 
 export { apolloClient, persistor };
