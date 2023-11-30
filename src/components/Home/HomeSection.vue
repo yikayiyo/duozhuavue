@@ -1,29 +1,17 @@
 <template>
-  <div
-    class="home-section-wrapper"
-    ref="scrollComponent"
-  >
+  <div class="home-section-wrapper" ref="scrollComponent">
     <OcListSkeleton v-if="collectionLoading"></OcListSkeleton>
-    <div
-      class="text-label"
-      v-else-if="collectionError"
-    >
+    <div class="text-label" v-else-if="collectionError">
       {{ collectionError }}
     </div>
-    <div
-      class="oc-wrapper"
-      v-else
-    >
-      <router-link
-        to="/open-collections"
-        class="oc-header-wrapper"
-      >
+    <div class="oc-wrapper" v-else>
+      <router-link to="/open-collections" class="oc-header-wrapper">
         <div class="oc-header flex items-center p-3.75">
           <div class="oc-header-title flex-grow">
             <h2 class="text-xl font-medium leading-hsh">书单</h2>
           </div>
           <div
-            class="oc-header-details flex items-center flex-shrink-0 text-hsh text-sold-out"
+            class="oc-header-details flex flex-shrink-0 items-center text-hsh text-sold-out"
           >
             全部书单
             <svg
@@ -43,7 +31,7 @@
         </div>
       </router-link>
       <div
-        class="oc-list-wrapper mx-3.75 flex overflow-x-auto scrollbar-hidden pb-8.75 -mb-8.75"
+        class="oc-list-wrapper scrollbar-hidden mx-3.75 -mb-8.75 flex overflow-x-auto pb-8.75"
       >
         <oc-list-item
           v-for="collection of collections"
@@ -52,9 +40,9 @@
         ></oc-list-item>
         <router-link to="/open-collections">
           <div
-            class="flex flex-col justify-center items-center w-oc-item h-oc-item rounded-oc-item text-is-active bg-red-400"
+            class="flex h-oc-item w-oc-item flex-col items-center justify-center rounded-oc-item bg-red-400 text-is-active"
           >
-            <span class="text-lg font-medium flex items-center">
+            <span class="flex items-center text-lg font-medium">
               看全部书单
               <svg
                 class="inline"
@@ -78,20 +66,11 @@
         </router-link>
       </div>
     </div>
-    <FeedSkeleton
-      v-if="networkStatus === 1"
-      class="loading"
-    />
-    <div
-      class="text-label"
-      v-else-if="categoryFeedError"
-    >
+    <FeedSkeleton v-if="categoryNetworkStatus === 1" />
+    <div class="text-label" v-else-if="categoryFeedError">
       {{ categoryFeedError }}
     </div>
-    <div
-      v-else
-      class="feed-content-wrapper mt-2.5 bg-menu dark:bg-darkbg"
-    >
+    <div v-else class="feed-content-wrapper mt-2.5 bg-menu dark:bg-darkbg">
       <feed
         v-for="category of categories"
         :key="category.id"
@@ -99,20 +78,20 @@
         :loadMoreBooks="loadMoreBooks"
       />
       <div
-        class="load-more-category feed-footer pb-15 text-footer text-center border-t-0.5 border-menu dark:border-none"
-        v-if="hasNextPage && networkStatus === 7"
+        class="load-more-category feed-footer border-t-0.5 border-menu pb-15 text-center text-footer dark:border-none"
+        v-if="hasNextPage && categoryNetworkStatus === 7"
         @click="loadMoreCategories"
       >
         加载更多分类
       </div>
       <div
-        class="load-more-category feed-footer pb-15 text-footer text-center border-t-0.5 border-menu dark:border-none"
-        v-else-if="hasNextPage && networkStatus === 3"
+        class="load-more-category feed-footer border-t-0.5 border-menu pb-15 text-center text-footer dark:border-none"
+        v-else-if="hasNextPage && categoryNetworkStatus === 3"
       >
         <loading />
       </div>
       <div
-        class="load-more-category feed-footer pb-15 text-footer text-center border-t-0.5 border-menu dark:border-none"
+        class="load-more-category feed-footer border-t-0.5 border-menu pb-15 text-center text-footer dark:border-none"
         v-else
       >
         都在这里了-0-
@@ -122,63 +101,65 @@
 </template>
 
 <script setup>
-import OcListItem from './OcListItem.vue'
-import Feed from './Feed.vue'
-import { useQuery, useResult } from '@vue/apollo-composable'
-import Loading from '../Loading/Loading.vue'
+import Loading from "@/components/Loading/Loading.vue";
+import FeedSkeleton from "@/components/Skeleton/FeedSkeleton.vue";
+import OcListSkeleton from "@/components/Skeleton/OcListSkeleton.vue";
 import {
-  GET_BOOKS_FROM_CATEGORY,
-  GET_CATEGORY_FEED,
-  GET_COLLECTIONS
-} from '@/graphql/schema'
-import { computed, ref } from 'vue'
-import { onMounted, onUnmounted } from '@vue/runtime-core'
-import useLoggedInUserId from '@/hooks/useLoggedInUserId'
-import OcListSkeleton from '@/components/Skeleton/OcListSkeleton.vue'
-import FeedSkeleton from '@/components/Skeleton/FeedSkeleton.vue'
+GET_BOOKS_FROM_CATEGORY,
+GET_CATEGORY_FEED,
+GET_COLLECTIONS,
+} from "@/graphql/schema";
+import useLoggedInUserId from "@/hooks/useLoggedInUserId";
+import { useQuery, useResult } from "@vue/apollo-composable";
+import { onMounted, onUnmounted } from "@vue/runtime-core";
+import { computed, ref } from "vue";
+import Feed from "./Feed.vue";
+import OcListItem from "./OcListItem.vue";
+//获取书单数据
 const {
   result: collectionsResult,
   loading: collectionLoading,
-  error: collectionError
-} = useQuery(GET_COLLECTIONS)
-const collections = useResult(collectionsResult, [])
-const after = ref('')
-const first = ref(1)
-const userId = useLoggedInUserId()
+  error: collectionError,
+} = useQuery(GET_COLLECTIONS);
+const collections = useResult(collectionsResult, []);
+// 获取书籍分类数据
+const after = ref("");
+const first = ref(1); // 一次加载一个分类
+const userId = useLoggedInUserId();
 const {
   result: categoryFeedResult,
   error: categoryFeedError,
   fetchMore,
-  networkStatus
+  networkStatus: categoryNetworkStatus,
 } = useQuery(
   GET_CATEGORY_FEED,
   () => ({
     after: after.value,
     first: first.value,
-    itemsAfter: '',
+    itemsAfter: "",
     itemsFirst: 3,
-    userId
+    userId,
   }),
   {
-    notifyOnNetworkStatusChange: true
-  }
-)
+    notifyOnNetworkStatusChange: true,
+  },
+);
 
 const categoryFeed = useResult(
   categoryFeedResult,
   {
     edges: [],
-    pageInfo: {}
+    pageInfo: {},
   },
-  (data) => data.categoryFeed
-)
+  (data) => data.categoryFeed,
+);
 
-const cursor = computed(() => categoryFeed.value.pageInfo.endCursor)
-const hasNextPage = computed(() => categoryFeed.value.pageInfo.hasNextPage)
+const cursor = computed(() => categoryFeed.value.pageInfo.endCursor);
+const hasNextPage = computed(() => categoryFeed.value.pageInfo.hasNextPage);
 // const categoryEdges = computed(() => categoryFeed.value.edges);
 const categories = computed(() => {
-  return categoryFeed.value.edges.map((edge) => edge.node)
-})
+  return categoryFeed.value.edges.map((edge) => edge.node);
+});
 
 const loadMoreBooks = (categoryId, itemCursor) => {
   fetchMore({
@@ -186,46 +167,38 @@ const loadMoreBooks = (categoryId, itemCursor) => {
     variables: {
       categoryId,
       after: itemCursor,
-      userId
-    }
-  })
-}
+      userId,
+    },
+  });
+};
 
 const loadMoreCategories = function () {
   if (hasNextPage.value) {
     fetchMore({
       variables: {
-        after: cursor.value
-      }
-    })
+        after: cursor.value,
+      },
+    });
   }
-}
+};
 
 // 滚动加载书籍分类
-const scrollComponent = ref(null)
+const scrollComponent = ref(null);
 
 const handleScroll = (e) => {
-  let element = scrollComponent.value
+  let element = scrollComponent.value;
   if (element.getBoundingClientRect().bottom <= window.innerHeight) {
-    loadMoreCategories()
+    loadMoreCategories();
   }
   // console.log('视口高度 window.innerHeight: ',window.innerHeight);
   // console.log('元素相对于视口的位置 element.getBoundingClientRect().bottom: ', element.getBoundingClientRect().bottom);
-}
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+  window.addEventListener("scroll", handleScroll);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
-
-<style scoped>
-.loading svg {
-  background-color: #dfa;
-  color: red;
-  fill: currentColor;
-}
-</style>

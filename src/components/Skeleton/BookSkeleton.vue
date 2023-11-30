@@ -15,7 +15,7 @@
           class="price-wrapper mt-4.25 flex h-[32px] w-40 items-center bg-gray-200 dark:bg-gray-800"
         ></div>
         <div
-          class="p-wrapper mt-3.5 h-[200px] w-80 bg-gray-200 dark:bg-gray-800"
+          class="p-wrapper mt-3.5 h-[400px] w-80 bg-gray-200 dark:bg-gray-800"
         ></div>
       </div>
     </div>

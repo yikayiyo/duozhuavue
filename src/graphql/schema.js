@@ -153,7 +153,7 @@ export const GET_BOOKS_FROM_CATEGORY = gql`
       id
       name
       description
-      items(first: 2, after: $after) {
+      items(first: 1, after: $after) {
         pageInfo {
           hasNextPage
           endCursor
@@ -348,14 +348,6 @@ export const CURRENT_USER = gql`
     currentUser @client {
       id
       token
-    }
-  }
-`;
-
-export const GET_THEME = gql`
-  query GetTheme {
-    theme @client {
-      mode
     }
   }
 `;
