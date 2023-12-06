@@ -105,12 +105,12 @@ import Loading from "@/components/Loading/Loading.vue";
 import FeedSkeleton from "@/components/Skeleton/FeedSkeleton.vue";
 import OcListSkeleton from "@/components/Skeleton/OcListSkeleton.vue";
 import {
-GET_BOOKS_FROM_CATEGORY,
-GET_CATEGORY_FEED,
-GET_COLLECTIONS,
+  GET_BOOKS_FROM_CATEGORY,
+  GET_CATEGORY_FEED,
+  GET_COLLECTIONS,
 } from "@/graphql/schema";
 import useLoggedInUserId from "@/hooks/useLoggedInUserId";
-import { useQuery, useResult } from "@vue/apollo-composable";
+import { useQuery } from "@vue/apollo-composable";
 import { onMounted, onUnmounted } from "@vue/runtime-core";
 import { computed, ref } from "vue";
 import Feed from "./Feed.vue";
@@ -121,7 +121,7 @@ const {
   loading: collectionLoading,
   error: collectionError,
 } = useQuery(GET_COLLECTIONS);
-const collections = useResult(collectionsResult, []);
+const collections = computed(() => collectionsResult.value.collections ?? []);
 // 获取书籍分类数据
 const after = ref("");
 const first = ref(1); // 一次加载一个分类
@@ -145,14 +145,7 @@ const {
   },
 );
 
-const categoryFeed = useResult(
-  categoryFeedResult,
-  {
-    edges: [],
-    pageInfo: {},
-  },
-  (data) => data.categoryFeed,
-);
+const categoryFeed = computed(() => categoryFeedResult.value?.categoryFeed, {});
 
 const cursor = computed(() => categoryFeed.value.pageInfo.endCursor);
 const hasNextPage = computed(() => categoryFeed.value.pageInfo.hasNextPage);

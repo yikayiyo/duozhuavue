@@ -1,5 +1,5 @@
 <template>
-  <loading v-if="loading" />
+  <Loading v-if="loading" />
   <div v-else-if="error" class="p-3.75">error</div>
   <div v-else class="user-wrapper text-shiwu leading-category">
     <div
@@ -208,14 +208,13 @@ import UserFooter from "@/components/NavFooter/UserFooter.vue";
 import { apolloClient, persistor } from "@/graphql";
 import { CURRENT_USER, GET_USER } from "@/graphql/schema";
 import useLoggedInUserId from "@/hooks/useLoggedInUserId";
-import { useQuery, useResult } from "@vue/apollo-composable";
+import { useQuery } from "@vue/apollo-composable";
 import { computed, inject, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
-  name: "User",
   components: {
-    UserFooter,
     Loading,
+    UserFooter,
   },
   setup() {
     const route = useRoute();
@@ -223,15 +222,18 @@ export default {
     const { result, loading, error } = useQuery(GET_USER, () => ({
       userId: userId.value,
     }));
-    const user = useResult(result, {
-      id: "",
-      name: "",
-      income: 0,
-      avatar: "",
-      purchasedBooks: [],
-      soldBooks: [],
-      bookShelf: [],
-    });
+    const user = computed(
+      () =>
+        result.value.user ?? {
+          id: "",
+          name: "",
+          income: 0,
+          avatar: "",
+          purchasedBooks: [],
+          soldBooks: [],
+          bookShelf: [],
+        },
+    );
     const currentUserId = useLoggedInUserId() || 0;
     const showInfos = computed(() => currentUserId === userId.value);
     const userIncome = computed(() => (user.value.income / 100).toFixed(2));

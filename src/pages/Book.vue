@@ -82,38 +82,41 @@
               ></div>
               <div class="book-catalog" v-html="book.catalog"></div>
             </div>
-            <div
-              class="read-more mt-3 flex items-center justify-center px-1em py-1.25 text-hsh text-load"
-            >
-              <button @click="toggleCollapsed">
-                {{ collapsed ? "查看更多" : "收起" }}
-              </button>
-              <svg
-                v-if="collapsed"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-hicon"
+            <div class="read-more-wrapper text-center">
+              <div
+                class="read-more mt-3 inline-flex px-1em py-1.25 text-center text-hsh text-load hover:cursor-pointer"
+                @click="toggleCollapsed"
               >
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-              <svg
-                v-if="!collapsed"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-hicon"
-              >
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
+                <button>
+                  {{ collapsed ? "查看更多" : "收起" }}
+                </button>
+                <svg
+                  v-if="collapsed"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-hicon"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+                <svg
+                  v-if="!collapsed"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-hicon"
+                >
+                  <polyline points="18 15 12 9 6 15" />
+                </svg>
+              </div>
             </div>
           </div>
           <div class="book-comment-wrapper">
@@ -144,11 +147,15 @@
                     transform="translate(-13 -13)"
                   />
                 </svg>
-                <div class="new-comment-text ml-1.25 text-shiwu">给书评分</div>
+                <div
+                  class="new-comment-text ml-1.25 text-shiwu hover:cursor-pointer"
+                >
+                  给书评分
+                </div>
               </div>
               <div
                 v-else
-                class="update-comment box-border flex items-center rounded-99 border-0.5 border-rating text-load dark:border-darkborder"
+                class="update-comment box-border flex items-center rounded-99 border-0.5 border-rating text-load hover:cursor-pointer dark:border"
                 @click="updateComment(myComment[0].id)"
               >
                 <span
@@ -278,8 +285,7 @@
   <cart-footer></cart-footer>
 </template>
 
-<script>
-import Loading from "@/components/Loading/Loading.vue";
+<script setup>
 import DoubanRating from "@/components/MainSection/DoubanRating.vue";
 import DuozhuavueRating from "@/components/MainSection/DuozhuavueRating.vue";
 import DuozhuayuServices from "@/components/MainSection/DuozhuayuServices.vue";
@@ -287,121 +293,86 @@ import CartFooter from "@/components/NavFooter/CartFooter.vue";
 import BookSkeleton from "@/components/Skeleton/BookSkeleton.vue";
 import { GET_BOOK } from "@/graphql/schema";
 import useLoggedInUserId from "@/hooks/useLoggedInUserId";
-import { useQuery, useResult } from "@vue/apollo-composable";
+import { useQuery } from "@vue/apollo-composable";
 import { computed, ref } from "@vue/reactivity";
 import { useRoute, useRouter } from "vue-router";
-export default {
-  name: "Book",
-  setup() {
-    //状态
-    const collapsed = ref(true);
-    //获取book信息
-    const route = useRoute();
-    const { result, loading, error } = useQuery(GET_BOOK, {
+//简介状态
+const collapsed = ref(true);
+const toggleCollapsed = () => {
+  collapsed.value = !collapsed.value;
+};
+//获取book信息
+const route = useRoute();
+const { result, loading, error } = useQuery(GET_BOOK, {
+  bookId: route.params.bookId,
+});
+const book = computed(() => result.value.book ?? {});
+
+// 计算属性
+const imageWrapperStyle = computed(() => {
+  return {
+    background: `center center / cover rgb(214, 186, 140)`,
+    filter: "blur(25px)",
+    backgroundImage: `url(${book.value.image})`,
+  };
+});
+const imageStyle = computed(() => ({
+  boxShadow: `rgb(0,0,0,20%) 0px 1px 10px`,
+}));
+const price = computed(() => {
+  return "¥" + (book.value.price / 100).toFixed(2);
+});
+const originalPrice = computed(() => {
+  return (book.value.originalPrice / 100).toFixed(2);
+});
+const bookDiscount = computed(() => {
+  const discount = ((book.value.price / book.value.originalPrice) * 10).toFixed(
+    1,
+  );
+  return `二手 ${discount} 折`;
+});
+const commentsHeaderMsg = computed(() => {
+  return book.value.comments.length + ` 条鱼友评论`;
+});
+const commentDateFormatter = function (datetime) {
+  return new Date(datetime).toLocaleString();
+};
+
+// 添加评论或更新评论
+const currentUserId = useLoggedInUserId();
+const comments = computed(() => result.value.book.comments ?? []);
+// return [] if the current user did not have any comment, else return [comment]
+const myComment = computed(() => {
+  return comments.value.filter(
+    (comment) => comment.commenter.id === currentUserId,
+  );
+});
+const router = useRouter();
+const newComment = () => {
+  if (currentUserId === "") {
+    router.push({
+      path: "/login",
+    });
+  } else {
+    router.push({
+      name: "newComment",
+      query: {
+        bookId: route.params.bookId,
+        source: "book",
+      },
+    });
+  }
+};
+
+const updateComment = (commentId) => {
+  router.push({
+    name: "comment",
+    query: {
       bookId: route.params.bookId,
-    });
-    const book = useResult(result, {}, (data) => data.book);
-
-    // 计算属性
-    const imageWrapperStyle = computed(() => {
-      return {
-        background: `center center / cover rgb(214, 186, 140)`,
-        filter: "blur(25px)",
-        backgroundImage: `url(${book.value.image})`,
-      };
-    });
-    const imageStyle = computed(() => ({
-      boxShadow: `rgb(0,0,0,20%) 0px 1px 10px`,
-    }));
-    const price = computed(() => {
-      return "¥" + (book.value.price / 100).toFixed(2);
-    });
-    const originalPrice = computed(() => {
-      return (book.value.originalPrice / 100).toFixed(2);
-    });
-    const bookDiscount = computed(() => {
-      const discount = (
-        (book.value.price / book.value.originalPrice) *
-        10
-      ).toFixed(1);
-      return `二手 ${discount} 折`;
-    });
-    const commentsHeaderMsg = computed(() => {
-      return book.value.comments.length + ` 条鱼友评论`;
-    });
-    const commentDateFormatter = function (datetime) {
-      return new Date(datetime).toLocaleString();
-    };
-
-    // 添加评论或更新评论
-    const currentUserId = useLoggedInUserId();
-    const comments = useResult(result, [], (data) => data.book.comments);
-    // return [] if the current user did not have any comment, else return [comment]
-    const myComment = computed(() => {
-      return comments.value.filter(
-        (comment) => comment.commenter.id === currentUserId,
-      );
-    });
-    const router = useRouter();
-    const newComment = () => {
-      if (currentUserId === "") {
-        router.push({
-          path: "/login",
-        });
-      } else {
-        router.push({
-          name: "newComment",
-          query: {
-            bookId: route.params.bookId,
-            source: "book",
-          },
-        });
-      }
-    };
-
-    const updateComment = (commentId) => {
-      router.push({
-        name: "comment",
-        query: {
-          bookId: route.params.bookId,
-          source: "book",
-          commentId,
-        },
-      });
-    };
-
-    return {
-      collapsed,
-      book,
-      loading,
-      error,
-      imageWrapperStyle,
-      imageStyle,
-      originalPrice,
-      price,
-      bookDiscount,
-      commentsHeaderMsg,
-      commentDateFormatter,
-      currentUserId,
-      myComment,
-      newComment,
-      updateComment,
-    };
-  },
-  components: {
-    DoubanRating,
-    DuozhuayuServices,
-    CartFooter,
-    Loading,
-    DuozhuavueRating,
-    BookSkeleton,
-  },
-
-  methods: {
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed;
+      source: "book",
+      commentId,
     },
-  },
+  });
 };
 </script>
 
